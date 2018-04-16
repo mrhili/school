@@ -11,7 +11,7 @@ use App\User;
 
 use App\TheClass;
 
-use Alert;
+use SweetAlert as Alert;
 
 class StudentController extends Controller
 {
@@ -22,7 +22,7 @@ class StudentController extends Controller
     	return view('back.users.add', compact('role', 'classes'));
     }
 
-    public function store(Student $request){
+    public function store(Student $request, Alert $alert){
     	$array = array_except( $request->toarray(), ['_token', 'password' ,'img']);
 
     	if( $request->hasFile( 'img' ) ){
@@ -39,7 +39,7 @@ class StudentController extends Controller
 
 	    if ($student) {
 
-	        alert()->success('L\'etudiant s\'est enregistrer !', 'Tres bien');
+	        Alert::success('L\'etudiant s\'est enregistrer !', 'Tres bien');
 	        return redirect()->route('students.all');
 	    }
 
