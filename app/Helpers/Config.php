@@ -17,7 +17,7 @@ class Setting {
 
 	public static function getConfig( $slug ){
 	
-		if( Config::where( 'slug', $slug )->first()->count() > 0 ){
+		if( Config::where( 'slug', $slug )->count() > 0 ){
 			return Config::where( 'slug', $slug )->first()->value;
 		}else{
 			return 'nothing';
