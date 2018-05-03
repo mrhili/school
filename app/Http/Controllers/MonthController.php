@@ -2,23 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\TheClass;
+use App\Month;
 use Illuminate\Http\Request;
 
-class TheClassController extends Controller
+class MonthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function list()
-    {
-        //
-        $classes = TheClass::get();
-
-        return view('back.classes.list', compact( 'classes' ) );
-    }
     /**
      * Display a listing of the resource.
      *
@@ -53,10 +41,10 @@ class TheClassController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\TheClass  $theClass
+     * @param  \App\Month  $month
      * @return \Illuminate\Http\Response
      */
-    public function show(TheClass $theClass)
+    public function show(Month $month)
     {
         //
     }
@@ -64,10 +52,10 @@ class TheClassController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\TheClass  $theClass
+     * @param  \App\Month  $month
      * @return \Illuminate\Http\Response
      */
-    public function edit(TheClass $theClass)
+    public function edit(Month $month)
     {
         //
     }
@@ -76,10 +64,10 @@ class TheClassController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TheClass  $theClass
+     * @param  \App\Month  $month
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TheClass $theClass)
+    public function update(Request $request, Month $month)
     {
         //
     }
@@ -87,10 +75,10 @@ class TheClassController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\TheClass  $theClass
+     * @param  \App\Month  $month
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TheClass $theClass)
+    public function destroy(Month $month)
     {
         //
     }

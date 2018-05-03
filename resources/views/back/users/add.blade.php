@@ -4,7 +4,7 @@
 
 @section('styles')
 
-
+{{-- output array min empty max id and more --}}
 
 @endsection
 
@@ -24,26 +24,92 @@ Nouveau etudient
   @slot('sectionPlain')
 
 
-  	@include('back.partials.formG', ['name' => 'name', 'type' => 'text', 'text' => 'Prénom', 'class'=>'', 'required' => true])
-  	@include('back.partials.formG', ['name' => 'last_name', 'type' => 'text', 'text' => 'Nom', 'class'=>'', 'required' => true])
+    <div class="text-center">
+      <h3 >Classement</h3>
+      <p>
+        ...
+      </p>
+    </div>
 
-  	@include('back.partials.formG', ['name' => 'gender', 'type' => 'select', 'text' => 'Genre', 'class'=>'', 'required' => true, 'array' => ArrayHolder::gender() ])
+    @include('back.partials.formG', ['name' => 'year_id', 'type' => 'select', 'selected' => Session::get('yearId'),'text' => 'Année', 'class'=>'', 'required' => true, 'array' => $years  ,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'class', 'type' => 'select','selected' => null, 'text' => 'Class', 'class'=>'', 'required' => true, 'array' => $classes,'additionalInfo' => []])
+
+    <hr />
+    <div class="text-center">
+      <h3 >Naicessaire information</h3>
+      <p>
+        ...
+      </p>
+    </div>
+
+    @include('back.partials.formG', ['name' => 'img', 'type' => 'file', 'text' => 'Image', 'class'=>'', 'required' => false ,'additionalInfo' => []])
 
 
-  	@include('back.partials.formG', ['name' => 'birth_date', 'type' => 'date', 'text' => 'Date de naissance', 'class'=>'', 'required' => true])
-  	@include('back.partials.formG', ['name' => 'birth_place', 'type' => 'text', 'text' => 'ville de naissance', 'class'=>'', 'required' => true])
 
-  	@include('back.partials.formG', ['name' => 'city', 'type' => 'text', 'text' => 'Ville', 'class'=>'', 'required' => true])
 
-  	@include('back.partials.formG', ['name' => 'zip_code', 'type' => 'text', 'text' => 'Code postal', 'class'=>'', 'required' => true])
-  	@include('back.partials.formG', ['name' => 'adress', 'type' => 'text', 'text' => 'Adress', 'class'=>'', 'required' => true])
-  	@include('back.partials.formG', ['name' => 'phone', 'type' => 'text', 'text' => 'Téléphone', 'class'=>'', 'required' => true])
-  	@include('back.partials.formG', ['name' => 'class', 'type' => 'select', 'text' => 'Class', 'class'=>'', 'required' => true, 'array' => $classes])
-  	@include('back.partials.formG', ['name' => 'email', 'type' => 'email', 'text' => 'E-mail', 'class'=>'', 'required' => true])
-  	@include('back.partials.formG', ['name' => 'password', 'type' => 'text', 'text' => 'Password', 'class'=>'', 'required' => true])
+  	@include('back.partials.formG', ['name' => 'name', 'type' => 'text', 'text' => 'Prénom', 'class'=>'', 'required' => true,'additionalInfo' => []])
+  	@include('back.partials.formG', ['name' => 'last_name', 'type' => 'text', 'text' => 'Nom', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
-  	@include('back.partials.formG', ['name' => 'img', 'type' => 'file', 'text' => 'Image', 'class'=>'', 'required' => false ])
+  	@include('back.partials.formG', ['name' => 'gender', 'type' => 'select', 'selected' => null , 'text' => 'Genre', 'class'=>'', 'required' => true, 'array' => ArrayHolder::gender() ,'additionalInfo' => []])
 
+
+  	@include('back.partials.formG', ['name' => 'birth_date', 'type' => 'date', 'text' => 'Date de naissance', 'class'=>'', 'required' => true,'additionalInfo' => []])
+  	@include('back.partials.formG', ['name' => 'birth_place', 'type' => 'text', 'text' => 'ville de naissance', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+  	@include('back.partials.formG', ['name' => 'city', 'type' => 'text', 'text' => 'Ville', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+  	@include('back.partials.formG', ['name' => 'zip_code', 'type' => 'text', 'text' => 'Code postal', 'class'=>'', 'required' => true,'additionalInfo' => []])
+  	@include('back.partials.formG', ['name' => 'adress', 'type' => 'text', 'text' => 'Adress', 'class'=>'', 'required' => true,'additionalInfo' => []])
+  	@include('back.partials.formG', ['name' => 'phone', 'type' => 'text', 'text' => 'Téléphone', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+
+    <hr />
+    <div class="text-center">
+      <h3 >Login information</h3>
+      <p>
+        ...
+      </p>
+    </div>
+
+
+  	@include('back.partials.formG', ['name' => 'email', 'type' => 'email', 'text' => 'E-mail', 'class'=>'', 'required' => true,'additionalInfo' => []])
+  	@include('back.partials.formG', ['name' => 'password', 'type' => 'text', 'text' => 'Password', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+
+    <hr />
+    <div class="text-center">
+      <h3 >Payements</h3>
+      <p>
+        ...
+      </p>
+    </div>
+
+
+    @include('back.partials.formG', ['name' => 'should_pay', 'type' => 'number', 'text' => 'Payement montielle de lecole', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+    @include('back.partials.formG', ['name' => 'saving_pay', 'type' => 'number', 'text' => 'Frais denregistrement', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+    @include('back.partials.formG', ['name' => 'assurence_pay', 'type' => 'number', 'text' => 'Frais dassurence', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+    @include('back.partials.formG', ['name' => 'transport', 'type' => 'checkbox', 'text' => 'Transport', 'class'=>'transport-check', 'required' => false, 'checked' => false,'additionalInfo' => []])
+
+    @include('back.partials.formG', ['name' => 'transport_pay', 'type' => 'number', 'text' => 'Payement montielle du transport', 'class'=>'transport-field', 'required' => false,'additionalInfo' => []])
+
+    @include('back.partials.formG', ['name' => 'add_classes', 'type' => 'checkbox', 'text' => 'Cours de soutien', 'class'=>'add-classes-check', 'required' => false, 'checked' => false,'additionalInfo' => []])
+
+    @include('back.partials.formG', ['name' => 'add_classes_pay', 'type' => 'number', 'text' => 'Payement montielle des cours de soutien', 'class'=>'add-classes-field', 'required' => false,'additionalInfo' => []])
+
+    <hr />
+    <div class="text-center">
+      <h3 >Direction</h3>
+      <p>
+        ...
+      </p>
+    </div>
+
+    @include('back.partials.formG', ['name' => 'comment', 'type' => 'textarea', 'text' => 'Comentaire', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+    @include('back.partials.formG', ['name' => 'hidden_note', 'type' => 'textarea', 'text' => 'Une note pour toi', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
   @endslot
 
@@ -72,5 +138,34 @@ Nouveau etudient
 
 @section('scripts')
 
+<script type="text/javascript">
+  
+  $('.add-classes-check').change(function() {
 
+    var addClassesField = $('.add-classes-field');
+    if(!this.checked) {
+        addClassesField.hide();
+
+    }else{
+
+        addClassesField.show();
+
+    }
+  });
+
+
+  $('.transport-check').change(function() {
+
+    var transportField = $('.transport-field');
+    if(!this.checked) {
+        transportField.hide();
+
+    }else{
+
+        transportField.show();
+
+    }
+  });
+
+</script>
 @endsection

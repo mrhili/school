@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use Session;
+
 class ConfigServiceProvider extends ServiceProvider
 {
     /**
@@ -14,6 +16,8 @@ class ConfigServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+
+
     }
 
     /**

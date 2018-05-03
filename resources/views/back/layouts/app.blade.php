@@ -77,6 +77,8 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="hold-transition skin-blue sidebar-mini">
+
+
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -351,6 +353,7 @@ desired effect
     <div class="tab-content">
       <!-- Home tab content -->
       <div class="tab-pane active" id="control-sidebar-home-tab">
+
         <h3 class="control-sidebar-heading">Recent Activity</h3>
         <ul class="control-sidebar-menu">
           <li>
@@ -393,6 +396,26 @@ desired effect
       <!-- /.tab-pane -->
       <!-- Settings tab content -->
       <div class="tab-pane" id="control-sidebar-settings-tab">
+
+        <h3 class="control-sidebar-heading">Année selectioné</h3>
+
+        @foreach($years as $y => $year)
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="#" class="change-year" id="year-{{ $y }}">
+              <i class="menu-icon fa fa-birthday-cake {{ $y == Session::get('yearId') ? 'bg-green' : 'bg-red' }}"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">{{ $years[$y] }}</h4>
+                <p>{{ $y == Session::get('yearId') ? 'V - cet anée est selectionée' : 'X - selectionne cet année' }}</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+        @endforeach
+
+
         <form method="post">
           <h3 class="control-sidebar-heading">General Settings</h3>
 
@@ -454,9 +477,20 @@ desired effect
 <!-- AdminLTE App -->
 <script src="{!! asset('adminl/dist/js/adminlte.min.js') !!}"></script>
 
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
+<script src="{!! asset('application/js/common.js') !!}"></script>
+
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+<script type="text/javascript">
+      window.yearId = {{ Session::get('yearId') }};
+      window.yearName = {{ Session::get('yearName') }};
+</script>
 
 
 @yield('scripts')

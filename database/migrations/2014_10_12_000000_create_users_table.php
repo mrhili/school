@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name')->nullable();
             $table->boolean('gender')->nullable();
             $table->date('birth_date')->nullable();
-            $table->date('birth_place')->nullable();
+            $table->string('birth_place')->nullable();
             $table->string('city')->nullable(); 
             $table->string('zip_code')->nullable();
             $table->string('adress')->nullable();
@@ -29,7 +29,12 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('img')->nullable();
             $table->smallInteger('role')->default(0);
+            /* student */
 
+            $table->boolean('transport')->default(false);
+            $table->boolean('additional_classes')->default(false);
+
+            $table->boolean('fill_payment')->default(false);
 
             /* parent */
             $table->string('profession')->nullable();

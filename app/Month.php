@@ -4,19 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TheClass extends Model
+class Month extends Model
 {
     //
 
-
     protected $fillable = [
-        'name','min','max', 'full'
+        'name'
     ];
-
+    
     public function payments()
     {
         return $this->hasMany('App\StudentsPayment');
     }
 
-    
 }

@@ -67,7 +67,7 @@ class UsersTableSeeder extends Seeder
         'remember_token' => str_random(10),
         ]);
 
-
+/*
         DB::table('users')->insert([
             'id' => 6,
             'name' => 'student',
@@ -77,7 +77,7 @@ class UsersTableSeeder extends Seeder
             'role' => 1,
         'remember_token' => str_random(10),
         ]);
-
+*/
         DB::table('users')->insert([
             'id' => 7,
             'name' => 'user',

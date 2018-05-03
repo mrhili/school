@@ -12,44 +12,128 @@
 
                     @if( $type == 'number' )
 
+                        @php
+                            $primary = ['class' => 'form-control '. $class, 'required' => $required ];
 
-                        {!! Form::number($name, null, ['class' => 'form-control '. $class, 'required' => $required ]) !!}
+
+
+                            $output = array_merge($primary,$additionalInfo);
+
+                        @endphp
+
+
+                        {!! Form::number($name, null, $output ) !!}
 
                     @elseif( $type == 'text' )
 
+                        @php
+                            $primary = ['class' => 'form-control '. $class, 'required' => $required ];
 
-                        {!! Form::text($name, null, ['class' => 'form-control '. $class, 'required' => $required ]) !!}
+
+
+                            $output = array_merge($primary,$additionalInfo);
+
+                        @endphp
+
+
+                        {!! Form::text($name, null, $output) !!}
 
                     @elseif( $type == 'tel' )
+                        @php
+                            $primary = ['class' => 'form-control '. $class, 'required' => $required ];
 
 
-                        {!! Form::tel($name, null, ['class' => 'form-control '. $class, 'required' => $required ]) !!}
+
+                            $output = array_merge($primary,$additionalInfo);
+
+                        @endphp
+
+
+                        {!! Form::tel($name, null, $output) !!}
 
 
 
                     @elseif( $type == 'email' )
 
+                        @php
+                            $primary = ['class' => 'form-control '. $class, 'required' => $required ];
 
-                        {!! Form::email($name, null, ['class' => 'form-control '. $class, 'required' => $required ]) !!}
+
+
+                            $output = array_merge($primary,$additionalInfo);
+
+                        @endphp
+
+
+                        {!! Form::email($name, null, $output) !!}
 
                     @elseif( $type == 'date' )
 
+                        @php
+                            $primary = ['class' => 'form-control '. $class, 'required' => $required ];
 
-                        {!! Form::date($name, null, ['class' => 'form-control '. $class, 'required' => $required ]) !!}
+
+
+                            $output = array_merge($primary,$additionalInfo);
+
+                        @endphp
+
+
+                        {!! Form::date($name, null, $output) !!}
 
 
                     @elseif( $type == 'textarea' )
 
 
-                        {!! Form::textarea($name, null, ['class' => 'form-control '. $class, 'required' => $required ]) !!}
+                        @php
+                            $primary = ['class' => 'form-control '. $class, 'required' => $required ];
+
+
+
+                            $output = array_merge($primary,$additionalInfo);
+
+                        @endphp
+
+                        {!! Form::textarea($name, null, $output) !!}
+
+                    @elseif( $type == 'checkbox' )
+
+                        @php
+                            $primary = ['class' => $class, 'required' => $required ];
+
+
+
+                            $output = array_merge($primary,$additionalInfo);
+
+                        @endphp
+
+                        {!! Form::checkbox( $name , null , $checked, $output) !!}
 
                     @elseif($type == 'select')
 
-                        {!! Form::select($name, $array, null , [ 'class' => 'form-control'.$class, 'required' => $required ]) !!}
+                        @php
+                            $primary = ['class' => 'form-control '. $class, 'required' => $required ];
+
+
+
+                            $output = array_merge($primary,$additionalInfo);
+
+                        @endphp
+
+                        {!! Form::select($name, $array, $selected , $output ) !!}
 
                     @elseif( $type == 'file' )
 
-                    	{!! Form::file($name, null , ['class' => 'form-control ']) !!}
+                        @php
+                            $primary = ['class' => 'form-control '. $class ];
+
+
+
+                            $output = array_merge($primary,$additionalInfo);
+
+                        @endphp
+
+                    	{!! Form::file($name, null , $output) !!}
 
                         <div class="text-center">
 

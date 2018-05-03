@@ -1,15 +1,5 @@
 @extends('back.layouts.app')
 
-
-
-
-
-
-
-
-
-
-
 @section('styles')
 
 
@@ -22,6 +12,7 @@
 
       <!-- Small boxes (Stat box) -->
       <div class="row">
+      <h1 style="text-center">{{ Session::get('yearName') }}</h1>
       <a href="{{ route('students.add') }}">
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
@@ -139,6 +130,31 @@
       <!-- /.row -->
 
 
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>6</h3>
+              <p>Classes</p>
+
+              <p><a href="{{ route('classes.list') }}">Lister les classses </a></p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="" class="small-box-footer">Ajouter un master maintenent <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+
+
+      </div>
+      <!-- /.row -->
+
+
 
 
 
@@ -147,14 +163,70 @@
 
   @slot('titlePlain')
 
-The Main Configuration Of the web application
+Outils
 
   @endslot
 
 
   @slot('sectionPlain')
 
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
 
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>H</h3>
+              <p>Historique</p>
+
+              <p>...</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="{{ route('histories.master') }}" class="small-box-footer">Historique <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>A</h3>
+              <p>Application Configuration</p>
+
+              <p>...</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="{{ route('configs.index') }}" class="small-box-footer">Application Configuration <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>S</h3>
+              <p>School Configuration</p>
+
+              <p>...</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="{{ route('configs.index') }}" class="small-box-footer">School Configuration <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+
+
+      </div>
+      <!-- /.row -->
 
   @endslot
 
@@ -181,5 +253,4 @@ The Main Configuration Of the web application
 @section('scripts')
 
 
-</script>
 @endsection

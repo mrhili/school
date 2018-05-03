@@ -232,7 +232,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'SweetAlert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 
 
 
@@ -241,8 +241,14 @@ return [
 
         'CommonPics' => App\Helpers\Common\Pics::class,
         'ArrayHolder' => App\Helpers\Common\Holder::class,
+        'Timing' => App\Helpers\Common\Timing::class,
+        'Application' => App\Helpers\Common\Application::class,
+        'Relation' => App\Helpers\Common\Relation::class,
+        'Math' => App\Helpers\Common\Math::class,
 
-        'GetSetting' => App\Helpers\Config\Setting::class
+        'GetSetting' => App\Helpers\Config\Setting::class,
+        
+
 
     ],
 

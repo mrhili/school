@@ -148,7 +148,15 @@ The Main Configuration Of the web application
 
   @slot('footerPlain')
 
-            @include('back.components.button')
+            @component('back.components.button')
+
+              @slot('value')
+
+                enregistrer
+
+              @endslot
+
+            @endcomponent
 
   @endslot
 

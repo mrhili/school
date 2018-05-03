@@ -13,7 +13,10 @@ class DatabaseSeeder extends Seeder
     {
          
         $this->call(ConfigSeeder::class);
+        $this->call(CatHistorySeed::class);
         $this->call(TheClass::class);
+        $this->call(Month::class);
+        $this->call(Year::class);
         $this->call(UsersTableSeeder::class);
     }
 }

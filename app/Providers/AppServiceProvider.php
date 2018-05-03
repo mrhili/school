@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Year;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,6 +15,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+    $years = Year::pluck('name', 'id');
+
+        view()->share(compact('years'));
+
+        
     }
 
     /**

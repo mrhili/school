@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UsersClass extends Migration
+class CategoryHistoryColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class UsersClass extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            /* student */
-            $table->integer('class')->unsigned()->nullable();
-            $table->foreign('class')
+        Schema::table('histories', function (Blueprint $table) {
+            //
+            $table->integer('categoy_history_id')->unsigned()->index();
+            $table->foreign('categoy_history_id')
               ->references('id')
-              ->on('the_classes')
+              ->on('history_categories')
               ->onDelete('cascade');
         });
     }
@@ -30,8 +30,9 @@ class UsersClass extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('histories', function (Blueprint $table) {
             //
+            $table->dropForeign(['categoy_history_id']);
         });
     }
 }
