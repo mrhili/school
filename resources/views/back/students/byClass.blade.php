@@ -30,6 +30,7 @@ The Main Configuration Of the web application
     <h4>Pour bien comprendre le tableau</h4>
     <a class="btn btn-danger btn-xs">Nombre de paiment quil doit en dirham à l'école</a>
     <a class="btn btn-success btn-xs">Il ne doit rien a lécole</a>
+    <a class="btn btn-warning btn-xs">L'école doit quelque monai pour un éleve</a>
     <br />
     <br />
 
@@ -70,7 +71,10 @@ The Main Configuration Of the web application
                   <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Ajouter un payment sur l'etudiant: <span id='nomcompletmodal'></span></h4>
               </div>
+              <form id="form">
               <div class="modal-body">
+
+
 
                   {{ csrf_field() }}
 
@@ -79,7 +83,7 @@ The Main Configuration Of the web application
 
                   @include('back.partials.formG', ['name' => 'comment', 'type' => 'textarea', 'text' => 'Comment', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'commentfield'] ])
 
-                  @include('back.partials.formG', ['name' => 'hidden_note', 'type' => 'textarea', 'text' => 'Une Note Secret pour toi', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'hiddennotefield'] ])
+                  @include('back.partials.formG', ['name' => 'hidden_note', 'type' => 'textarea', 'text' => 'Une Note Secret pour toi', 'class'=>'', 'required' => false, 'additionalInfo' => ['id' =>  'hiddennotefield'] ])
 
                   {{--hoofield array user or exterior--}}
 
@@ -87,7 +91,7 @@ The Main Configuration Of the web application
 
                   {{-- users array --}}
 
-                  @include('back.partials.formG', ['name' => 'users', 'type' => 'select', 'selected' => null,'text' => 'Les gens déja enregistrer', 'class'=>'hidden', 'required' => true, 'array' => $users  ,'additionalInfo' => ['id' => 'usersfield']])
+                  @include('back.partials.formG', ['name' => 'users', 'type' => 'select', 'selected' => null,'text' => 'Les gens déja enregistrer', 'class'=>'hidden', 'required' => false, 'array' => $users  ,'additionalInfo' => ['id' => 'usersfield']])
 
                   {{-- info G151515 if exterior --}}
 
@@ -98,9 +102,10 @@ The Main Configuration Of the web application
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-                <button type="button" id="send-formpayment" class="btn btn-success">Save changes</button>
+                <input type="cancel" class="btn btn-danger" value="Cancel" />
+                <input type="submit" id="send-formpayment" class="btn btn-success" value="Save changes" />
               </div>
+              </form>
             </div>
             <!-- /.modal-content -->
           </div>
@@ -146,8 +151,13 @@ The Main Configuration Of the web application
 @section('scripts')
 
 <script src="{!! asset('axios/axios.min.js') !!}"></script>
+<script src="{!! asset('validate/jquery.validate.min.js') !!}"></script>
 <script type="text/javascript">
 
+    
+          var id, idOf, ad, statu_value, payment, month, comment, hoofield, users, user, exteriorinfo, exteriorname, exteriornamefield, exteriorinfos;
+          var year = {{ Session::get('yearId') }};
+          var theclass = {{ $class->id }};
 
 
 
@@ -159,116 +169,6 @@ $(function() {
         processing: true,
         serverSide: true,
         fnInitComplete: function(oSettings, json) {
-
-
-
-
-
-
-
-    
-          var id, idOf, ad, statu_value, payment, month, comment, hoofield, users, user, exteriorinfo, exteriorname, exteriornamefield, exteriorinfos;
-          var year = {{ Session::get('yearId') }};
-          var theclass = {{ $class->id }};
-
-          $('.btn-pay').click(function(){
-
-
-
-            hoofield = $('#hoofield');
-            user = $('#usersfield');
-            exteriorinfos = $('#exteriorinfofield');
-            exteriornamefield = $('#exteriornamefield');
-
-            hoofield.change(function() {
-
-                user.toggleClass('hidden');
-                exteriorinfos.toggleClass('hidden');
-                exteriornamefield.toggleClass('hidden');
-
-            });
-
-
-
-
-            id = $(this).attr('data-id');
-            idOf = $(this).attr('id');
-            month = $(this).attr('data-month');
-
-
-            $('#modalpayment').modal('show');
-
-            var sendformpayment = $('#send-formpayment');
-
-            sendformpayment.attr('disabled', false);
-
-            sendformpayment.click(function(){
-
-              sendformpayment.attr('disabled', true);
-              
-              payment = $('#paymentfield').val();
-              
-              comment = $('#commentfield').val();
-              hidden_note = $('#hiddennotefield').val();
-              hoo = $('#hoofield').val();
-
-              users = $('#usersfield').val();
-              exteriorinfo = $('#exteriorinfofield').val();
-              exteriorname = $('#exteriornamefield').val();
-
-              axios.post('/add-payment-student/'+id+'/'+payment+'/'+month+'/'+year+'/'+theclass,{
-                headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                comment: comment,
-                hidden_note: hidden_note,
-                hoo: hoo,
-                by_user: users,
-                by_exterior_name: exteriorname,
-                by_exterior_info: exteriorinfo,
-
-              })
-                .then(function (response) {
-                  sendformpayment.attr('disabled', false);
-                  $('#modalpayment').modal('hide');
-                  
-                  var returnedArray = response.data;
-                  console.log(returnedArray);
-                  var selectedButton = $('#'+idOf);
-
-                  selectedButton.text(returnedArray['money']);
-                  selectedButton.removeClass('btn-success btn-danger');
-                  selectedButton.addClass('btn-'+returnedArray['class']);
-
-                })
-                .catch(function (error) {
-                  sendformpayment.attr('disabled', false);
-                  alert(error);
-                  console.log( error );
-                });
-            });
-
-
-
-          });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     },
         initComplete: function(settings, json) {
 
@@ -376,8 +276,106 @@ $(function() {
 $( document ).ready(function() {
 
     
-alert('mouah');
+$("#by-class-table").on("click", ".btn-pay", function(){
+   // your code goes here
+            $('#form').validate();
 
+
+            hoofield = $('#hoofield');
+            user = $('#usersfield');
+            exteriorinfos = $('#exteriorinfofield');
+            exteriornamefield = $('#exteriornamefield');
+
+            hoofield.change(function() {
+
+                user.toggleClass('hidden');
+                user.attr('required', !user.attr('required') );
+
+                exteriorinfos.toggleClass('hidden');
+                exteriorinfos.attr('required', !exteriorinfos.attr('required') );
+
+                exteriornamefield.toggleClass('hidden');
+                exteriornamefield.attr('required', !exteriornamefield.attr('required') );
+
+                $('#form').validate();
+
+            });
+
+
+
+
+            id = $(this).attr('data-id');
+            idOf = $(this).attr('id');
+            month = $(this).attr('data-month');
+
+
+            $('#modalpayment').modal('show');
+
+
+
+});
+
+
+
+
+/*
+var sendformpayment = $('#send-formpayment');
+
+sendformpayment.on("click", function(){
+
+
+
+
+            sendformpayment.attr('disabled', false);
+
+
+
+              sendformpayment.attr('disabled', true);
+              
+              payment = $('#paymentfield').val();
+              
+              comment = $('#commentfield').val();
+              hidden_note = $('#hiddennotefield').val();
+              hoo = $('#hoofield').val();
+
+              users = $('#usersfield').val();
+              exteriorinfo = $('#exteriorinfofield').val();
+              exteriorname = $('#exteriornamefield').val();
+
+              axios.post('/add-payment-student/'+id+'/'+payment+'/'+month+'/'+year+'/'+theclass,{
+                headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                comment: comment,
+                hidden_note: hidden_note,
+                hoo: hoo,
+                by_user: users,
+                by_exterior_name: exteriorname,
+                by_exterior_info: exteriorinfo,
+
+              })
+                .then(function (response) {
+                  sendformpayment.attr('disabled', false);
+                  $('#modalpayment').modal('hide');
+                  
+                  var returnedArray = response.data;
+                  console.log(returnedArray);
+                  var selectedButton = $('#'+idOf);
+
+                  selectedButton.text(returnedArray['money']);
+                  selectedButton.removeClass('btn-success btn-danger');
+                  selectedButton.addClass('btn-'+returnedArray['class']);
+
+                })
+                .catch(function (error) {
+                  sendformpayment.attr('disabled', false);
+                  alert(error);
+                  console.log( error );
+                });
+
+
+  }); 
+*/
 });
 
 

@@ -59,12 +59,12 @@ Route::group(['middleware' => ['admin']], function () {
 
 	Route::get('/add-parent', 'StudentController@add')->name('parents.add');
 	Route::get('/add-teatcher', 'TeatcherController@add')->name('teatchers.add');
-	Route::get('/add-sectaria', 'SecretariaController@add')->name('secretarias.add');
+	Route::get('/add-secretaria', 'SecretariaController@add')->name('secretarias.add');
 
 	Route::post('/store-student', 'StudentController@store')->name('students.store');
 	Route::post('/store-parent', 'StudentController@store')->name('parents.store');
 	Route::post('/store-teatcher', 'TeatcherController@store')->name('teatchers.store');
-	Route::post('/store-sectaria', 'SecretariaController@store')->name('secretarias.store');
+	Route::post('/store-secretaria', 'SecretariaController@store')->name('secretarias.store');
 
 	Route::get('/etudients', 'StudentController@all')->name('students.all');
 	//(Request $request, $id, $payment, $month, $year, $class, $infoArray = [])

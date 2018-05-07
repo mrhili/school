@@ -102,14 +102,6 @@ class StudentsPaymentController extends Controller
         
         $month = $student->payments()->where('month_id', $month )->where('year_id', $year )->where('the_class_id', $class )->first();
 
-        $old_payment = $month->payment;
-
-        $whatPayed = $month->payment + $payment;
-
-
-        $totalShouldPay = $month->should_pay + $month->add_classes_pay + $month->transport_pay;
-
-        $moneyArray = Math::countMoney( $whatPayed , $totalShouldPay );
 
 
         $creation = [
@@ -142,37 +134,59 @@ class StudentsPaymentController extends Controller
 
         }
 
-        $month->payment = $moneyArray['money'];
+        $old_payment = $month->payment;
 
-        $month->payment_complete = $moneyArray['paiment'];
+        $totalShouldPay = $month->should_pay + $month->add_classes_pay + $month->transport_pay;
+
+        $whatPayed = $month->payment + $payment;
+
+        //$whatPayed  - $totalShouldPay
+
+        $moneyArray = Math::countMoney( $whatPayed , $totalShouldPay );
+
+        $month->payment = $whatPayed;
+
+        $month->payment_complete = $moneyArray['payment'];
 
         $month->save();
 
 
         $complet;
-        $devrait;
 
-        $devrait = $totalShouldPay - $whatPayed;
 
-        if( $moneyArray['paiment']) {
-            $complet = 'complet';
+        if( $moneyArray['payment']) {
+            $complet = 'complet il doit rien ( '. $moneyArray['money'] .' dh )';
             $creation['class'] = 'success';
         }else{
 
             
 
-            $complet = 'incomplet il devrait payé <strong>'.$devrait. ' dh </strong>';
+            $complet = 'incomplet il devrait payé <strong>'.$moneyArray['money']. ' dh </strong>';
 
             $creation['class'] = 'info';
         }
 
+        $month;
+
+        if( $month_id == 13) {
+
+            $month = 'pour  <strong> les frais denregisrement</strong>';
+            
+        }elseif( $month_id == 14){
+
+            $month = 'pour le mois <strong> les frais dassurance </strong>';
+
+        }else{
+
+            $month = 'pour le mois <strong>'. $month_id. '</strong>';
+
+        }
+
 
 //Le payement de 105dh a etait effectué par okokokok qui porte le numero de la carte okokokok sur letudiant Venus Mccoy Moody pour le mois {"id":2,"user_id":8,"year_id":1,"the_class_id":6,"month_id":2,"should_pay":95,"transport_pay":0,"add_classes_pay":0,"payment":105,"payment_complete":false,"created_at":"2018-04-30 14:38:45","updated_at":"2018-04-30 14:41:17"} pour lannée2018/2019maintenent le payment est incomplet il devrait payé -115 dh
-        $creation['info'] = 'Le payement de <strong>'. $payment .' dh </strong> a etait effectué par '.$hoo.' sur letudiant <strong>'.$student->name.' '. $student->last_name. '</strong> pour le mois <strong>'. $month_id. '</strong> pour lannée <strong>'.Year::find($year)->name . '</strong>, maintenent le payment est '. $complet.' parsequil doit payé en total <strong>'. $devrait . ' dh </strong> et il avait payé avant un montant de <strong>'.$old_payment.' dh</strong> .'  ;
+        $creation['info'] = 'Le payement de <strong>'. $payment .' dh </strong> a etait effectué par '.$hoo.' sur letudiant <strong>'.$student->name.' '. $student->last_name. '</strong> '. $month .' pour lannée <strong>'.Year::find($year)->name . '</strong>, maintenent le payment est '. $complet.' et il avait payé avant un montant de <strong>'.$old_payment.' dh</strong> .'  ;
 
         History::create( $creation );
-
-
 
         return response()->json($moneyArray);
 

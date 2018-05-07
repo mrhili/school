@@ -147,26 +147,26 @@ class Math {
 
         $array = [];
 
-        if( $min < $max ){
+        $array['money'] = $min - $max;
+
+        $array['payment'] = true;
+
+        if( $array['money'] < 0 ){
 
             $array['class'] = 'danger';
+            $array['payment'] = false;
 
-        }else{
+        }
+        elseif( $array['money'] > 0 ){
+
+            $array['class'] = 'warning';
+
+        }
+        else{
 
             $array['class'] = 'success';
+            
         }
-
-        if( $min < $max ){
-
-            $array['paiment'] = false;
-
-        }else{
-
-            $array['paiment'] = true;
-
-        }
-
-        $array['money'] = $max - $min;
 
         return $array;
 
