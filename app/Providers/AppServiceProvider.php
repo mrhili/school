@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
         //
     $years = Year::pluck('name', 'id');
 
-        view()->share(compact('years'));
+    view()->share(compact('years'));
 
         
     }
