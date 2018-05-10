@@ -119,7 +119,7 @@ class StudentController extends Controller
                 'hidden_note' => $request->hidden_note,
                 'by-admin' => Auth::id(),
 
-                'categoy_history_id' => 2,
+                'category_history_id' => 2,
                 'class' => 'success'
 
                 //'id_link' => $request->id_link,

@@ -19,7 +19,7 @@ class History extends Model
 
     'hidden_note',
 
-    'categoy_history_id',
+    'category_history_id',
 
     'by-admin',
 
@@ -39,6 +39,6 @@ class History extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\HistoryCategory');
+        return $this->belongsTo('App\HistoryCategory', 'category_history_id');
     }
 }

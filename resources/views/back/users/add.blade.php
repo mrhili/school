@@ -111,6 +111,62 @@ Nouveau etudient
 
     @include('back.partials.formG', ['name' => 'hidden_note', 'type' => 'textarea', 'text' => 'Une note pour toi', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
+
+
+    <hr />
+    <div class="text-center">
+      <h3 >Informatio sur parent 1</h3>
+      <p>
+        ...
+      </p>
+    </div>
+
+    @include('back.partials.formG', ['name' => 'imgpaent', 'type' => 'file', 'text' => 'Image Parent 1', 'class'=>'', 'required' => false ,'additionalInfo' => []])
+
+
+
+
+    @include('back.partials.formG', ['name' => 'nameparent', 'type' => 'text', 'text' => 'Prénom Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'last_nameparent', 'type' => 'text', 'text' => 'Nom Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+    @include('back.partials.formG', ['name' => 'genderparent', 'type' => 'select', 'selected' => null , 'text' => 'Genre Parent 1', 'class'=>'', 'required' => true, 'array' => ArrayHolder::gender() ,'additionalInfo' => []])
+
+
+    @include('back.partials.formG', ['name' => 'birth_dateparent', 'type' => 'date', 'text' => 'Date de naissance Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'birth_placeparent', 'type' => 'text', 'text' => 'ville de naissance Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+    @include('back.partials.formG', ['name' => 'cityparent', 'type' => 'text', 'text' => 'Ville Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+    @include('back.partials.formG', ['name' => 'zip_codeparent', 'type' => 'text', 'text' => 'Code postal Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'adressparent', 'type' => 'text', 'text' => 'Adress', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'phone1parent', 'type' => 'text', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'phone2parent', 'type' => 'text', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+   @include('back.partials.formG', ['name' => 'phone3parent', 'type' => 'text', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'fixparent', 'type' => 'text', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+    <hr />
+    <div class="text-center">
+      <h3 >Relation entre parent1 et éléve</h3>
+      <p>
+        ...
+      </p>
+    </div>
+
+    @include('back.partials.formG', ['name' => 'class', 'type' => 'select','selected' => null, 'text' => 'Class', 'class'=>'', 'required' => true, 'array' => $classes,'additionalInfo' => []])
+
+    <hr />
+    <div class="text-center">
+      <h3 >Parent Login information</h3>
+      <p>
+        ...
+      </p>
+    </div>
+
+
+    @include('back.partials.formG', ['name' => 'emailpaent', 'type' => 'email', 'text' => 'E-mail Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'passwordparent', 'type' => 'text', 'text' => 'Password Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+
   @endslot
 
 
@@ -166,6 +222,8 @@ Nouveau etudient
 
     }
   });
+
+
 
 </script>
 @endsection

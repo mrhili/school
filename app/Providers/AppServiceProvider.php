@@ -15,9 +15,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-    $years = Year::pluck('name', 'id');
+    //$years = Year::pluck('name', 'id');
 
-    view()->share(compact('years'));
+    //view()->share(compact('years'));
 
         
     }

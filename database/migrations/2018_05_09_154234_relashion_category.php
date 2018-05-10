@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CategoryHistoryColumn extends Migration
+class RelashionCategory extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CategoryHistoryColumn extends Migration
      */
     public function up()
     {
-        Schema::table('histories', function (Blueprint $table) {
+        Schema::table('relashionships', function (Blueprint $table) {
             //
-            $table->integer('category_history_id')->unsigned()->index();
-            $table->foreign('category_history_id')
+            $table->integer('categoryship_id')->unsigned()->index();
+            $table->foreign('categoryship_id')
               ->references('id')
-              ->on('history_categories')
+              ->on('categoryships')
               ->onDelete('cascade');
+
+            $table->timestamps();            
         });
     }
 
@@ -30,9 +32,9 @@ class CategoryHistoryColumn extends Migration
      */
     public function down()
     {
-        Schema::table('histories', function (Blueprint $table) {
+        Schema::table('relashionships', function (Blueprint $table) {
             //
-            $table->dropForeign(['category_history_id']);
+            $table->dropForeign(['categoryship_id']);
         });
     }
 }

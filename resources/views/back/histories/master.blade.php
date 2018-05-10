@@ -44,13 +44,15 @@
 
 	        }
 
+	        $admin = \App\Helpers\Common\Relation::byModel($history->category->model, $history->id_link );
+
 	        @endphp
 
 	        <i class="fa fa-envelope {{ $bgColor }}"></i>
 	        <div class="timeline-item">
 	            <span class="time"><i class="fa fa-clock-o"></i> {{$history->created_at }}</span>
 
-	            <h3 class="timeline-header"><a href="#" class="text-{{ $history->class }}">admin</a> {{  'name of categori history'  }}</h3>
+	            <h3 class="timeline-header"><a href="#" class="text-{{ $history->class }}">{{ $admin->name . ' ' . $admin->last_name }}</a> a éffectué un {{ $history->category->name }}</h3>
 
 	            <div class="timeline-body">
 	                {!! $history->info !!}
@@ -59,7 +61,7 @@
 	            </div>
 
 	            <div class="timeline-footer">
-	                <a class="btn btn-{{ $history->class }} btn-xs btn-modal">Voire + d'information</a>
+	                <a class="btn btn-{{ $history->class }} btn-xs btn-modal">Voire la note privé</a>
 		            <div class="text-modal hidden">
 		                {{ $history->hidden_note }}
 		            </div>
@@ -85,7 +87,7 @@
                 <h4 class="modal-title">Default Modal</h4>
               </div>
               <div class="modal-body">
-                <p>One fine body&hellip;</p>
+                <p class="modal-text"></p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
@@ -139,6 +141,8 @@ The Main Configuration Of the web application
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.btn-modal').click(function(){
+			var text = $(this).next().text();
+			$('.modal-text').text( text );
 			$('#modal').modal('show');
 		});
 	});

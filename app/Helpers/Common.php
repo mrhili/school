@@ -251,6 +251,13 @@ class Relation {
 
     }
 
+    public static function byModel($model, $id){
+
+        $model_name = 'App\\'.$model;
+        return $model_name::where('id', $id)->first();
+
+    }
+
 }
 
 class Application{

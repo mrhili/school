@@ -8,6 +8,8 @@ class HistoryCategory extends Model
 {
     //
 
+    protected $table = 'history_categories';
+
     protected $fillable = [
 
                 'name',
@@ -19,6 +21,7 @@ class HistoryCategory extends Model
 
     public function histories()
     {
-        return $this->hasMany('App\History');
+        return $this->hasMany('App\History', 'category_history_id');
     }
+
 }
