@@ -18,5 +18,13 @@ class TheClass extends Model
         return $this->hasMany('App\StudentsPayment');
     }
 
+    public function subjects()
+    {
+        return $this->belongsToMany('App\Subject')->withPivot('parameter');;
+    }
+
+    //foreach($s->the_classes as $t){echo $t->pivot->parameter;  }
+
+
     
 }

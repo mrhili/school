@@ -1,0 +1,24 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Subjectclass extends Model
+{
+    //
+    protected $table = "subject_the_class";
+
+    protected $fillable = [
+		"subject_id",
+		"the_class_id"
+
+
+    ];
+
+    public function testyearsubclasses()
+    {
+        return $this->hasMany('App\Testyearsubclass');
+    }
+
+}

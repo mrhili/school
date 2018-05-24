@@ -29,6 +29,8 @@ class History extends Model
 
     'by-exterior-info',
 
+    'payment'
+
     ];
 
 

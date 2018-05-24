@@ -14,8 +14,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+
     protected $fillable = [
-        'name', 'email', 'password','last_name','gender','birth_date','birth_place','city','zip_code','adress','phone','img','role','transport','additional_classes','fill_payment','profession','family_situation','cv', 'the_class_id'
+        'name', 'email', 'password','last_name','gender','birth_date','birth_place','city','zip_code','adress','phone','img','role','transport','additional_classes','fill_payment','profession','family_situation','cv', 'the_class_id', 'cin', 'phone', 'phone2', 'phone3', 'fix', 'cnss', 'cnss_id'
     ];
 
     /**
@@ -37,6 +38,24 @@ class User extends Authenticatable
         return $this->hasMany('App\History');
     }
 
+    public function relashionshipsStudentsParent()
+    {
+        return $this->belongsToMany('App\User', 'relashionships','parent_id', 'student_id');
+    }
 
+    public function relashionshipsParentsStudent()
+    {
+        return $this->belongsToMany('App\User', 'relashionships','student_id', 'parent_id');
+    }
+
+    public function userpayments()
+    {
+        return $this->hasMany('App\Userspayment');
+    }
+
+    public function testyearsubclasses()
+    {
+        return $this->hasMany('App\Testyearsubclass', 'teatcher_id');
+    }
 
 }

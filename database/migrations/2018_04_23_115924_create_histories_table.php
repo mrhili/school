@@ -42,6 +42,14 @@ class CreateHistoriesTable extends Migration
 
             $table->string('by-exterior-info')->nullable();
 
+            $table->integer('payment')->nullable();
+
+            $table->integer('category_history_id')->unsigned()->index();
+            $table->foreign('category_history_id')
+              ->references('id')
+              ->on('history_categories')
+              ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

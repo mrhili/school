@@ -16,7 +16,6 @@ class CreateCategoryshipsTable extends Migration
         Schema::create('categoryships', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-
             $table->timestamps();
         });
     }

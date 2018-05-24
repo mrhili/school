@@ -27,6 +27,12 @@ class CreateRelashionshipsTable extends Migration
               ->on('users')
               ->onDelete('cascade'); 
 
+            $table->integer('categoryship_id')->unsigned()->index();
+            $table->foreign('categoryship_id')
+              ->references('id')
+              ->on('categoryships')
+              ->onDelete('cascade'); 
+
             $table->timestamps();
         });
     }

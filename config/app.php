@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
 
+
         /*
          * Application Service Providers...
          */
@@ -232,9 +233,13 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 
 
+
+
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
         //HELPERS
 
@@ -247,6 +252,8 @@ return [
         'Math' => App\Helpers\Common\Math::class,
 
         'GetSetting' => App\Helpers\Config\Setting::class,
+
+
         
 
 

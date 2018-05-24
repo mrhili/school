@@ -14,7 +14,9 @@ class HistoryCategory extends Model
 
                 'name',
 
-            'model'
+            'model',
+            'icon',
+            'kind'
 
             
     ];

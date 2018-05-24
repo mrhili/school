@@ -17,4 +17,9 @@ class Year extends Model
         return $this->hasMany('App\StudentsPayment');
     }
 
+    public function testyearsubclasses()
+    {
+        return $this->hasMany('App\Testyearsubclass');
+    }
+
 }

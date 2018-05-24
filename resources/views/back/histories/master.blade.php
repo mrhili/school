@@ -48,7 +48,7 @@
 
 	        @endphp
 
-	        <i class="fa fa-envelope {{ $bgColor }}"></i>
+	        <i class="fa fa-{{ $history->category->icon }} {{ $bgColor }}"></i>
 	        <div class="timeline-item">
 	            <span class="time"><i class="fa fa-clock-o"></i> {{$history->created_at }}</span>
 

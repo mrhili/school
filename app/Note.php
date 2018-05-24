@@ -1,0 +1,23 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Note extends Model
+{
+    //
+
+    protected $fillable = [
+    	"testyearsubclass_id",
+    	"year_id",
+    	"the_class_id",
+    	"subject_id",
+    	"subject_the_class_id",
+    	"teatcher_id",
+    	"student_id",
+    	"seen",
+    	"note",
+    	'done_minutes'
+    ];
+}

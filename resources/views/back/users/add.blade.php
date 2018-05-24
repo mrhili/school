@@ -1,3 +1,9 @@
+@php
+
+  $years =\App\Year::pluck('name', 'id');
+
+@endphp
+
 @extends('back.layouts.app')
 
 
@@ -22,6 +28,8 @@ Nouveau etudient
 
 
   @slot('sectionPlain')
+
+    {{ csrf_field() }}
 
 
     <div class="text-center">
@@ -95,6 +103,8 @@ Nouveau etudient
 
     @include('back.partials.formG', ['name' => 'transport_pay', 'type' => 'number', 'text' => 'Payement montielle du transport', 'class'=>'transport-field', 'required' => false,'additionalInfo' => []])
 
+    @include('back.partials.formG', ['name' => 'trans_assurence_pay', 'type' => 'number', 'text' => 'Assurence du transport', 'class'=>'transport-field', 'required' => false,'additionalInfo' => []])
+
     @include('back.partials.formG', ['name' => 'add_classes', 'type' => 'checkbox', 'text' => 'Cours de soutien', 'class'=>'add-classes-check', 'required' => false, 'checked' => false,'additionalInfo' => []])
 
     @include('back.partials.formG', ['name' => 'add_classes_pay', 'type' => 'number', 'text' => 'Payement montielle des cours de soutien', 'class'=>'add-classes-field', 'required' => false,'additionalInfo' => []])
@@ -135,13 +145,26 @@ Nouveau etudient
     @include('back.partials.formG', ['name' => 'birth_dateparent', 'type' => 'date', 'text' => 'Date de naissance Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'birth_placeparent', 'type' => 'text', 'text' => 'ville de naissance Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
+
+
+    @include('back.partials.formG', ['name' => 'cinparent', 'type' => 'text', 'text' => 'CIN du Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'professionparent', 'type' => 'text', 'text' => 'Profession du Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+
+
+
+    @include('back.partials.formG', ['name' => 'family_situationparent', 'type' => 'checkbox', 'text' => 'La situation familiale du Parent 1, Marié?', 'class'=>'', 'required' => false, 'checked' => false,'additionalInfo' => []])
+
+
+
+
+
     @include('back.partials.formG', ['name' => 'cityparent', 'type' => 'text', 'text' => 'Ville Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
     @include('back.partials.formG', ['name' => 'zip_codeparent', 'type' => 'text', 'text' => 'Code postal Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'adressparent', 'type' => 'text', 'text' => 'Adress', 'class'=>'', 'required' => true,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'phone1parent', 'type' => 'text', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'phone2parent', 'type' => 'text', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-   @include('back.partials.formG', ['name' => 'phone3parent', 'type' => 'text', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'phone2parent', 'type' => 'text', 'text' => 'Téléphone Parent 2', 'class'=>'', 'required' => true,'additionalInfo' => []])
+   @include('back.partials.formG', ['name' => 'phone3parent', 'type' => 'text', 'text' => 'Téléphone Parent 3', 'class'=>'', 'required' => true,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'fixparent', 'type' => 'text', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
     <hr />
@@ -152,7 +175,7 @@ Nouveau etudient
       </p>
     </div>
 
-    @include('back.partials.formG', ['name' => 'class', 'type' => 'select','selected' => null, 'text' => 'Class', 'class'=>'', 'required' => true, 'array' => $classes,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'categoryship', 'type' => 'select','selected' => null, 'text' => 'Relation entre parent et éléve', 'class'=>'', 'required' => true, 'array' => $categoryships ,'additionalInfo' => []])
 
     <hr />
     <div class="text-center">
@@ -163,7 +186,7 @@ Nouveau etudient
     </div>
 
 
-    @include('back.partials.formG', ['name' => 'emailpaent', 'type' => 'email', 'text' => 'E-mail Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'emailparent', 'type' => 'email', 'text' => 'E-mail Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'passwordparent', 'type' => 'text', 'text' => 'Password Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
 

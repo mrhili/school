@@ -16,81 +16,7 @@ use Math;
 
 class StudentsPaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\StudentsPayment  $studentsPayment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(StudentsPayment $studentsPayment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\StudentsPayment  $studentsPayment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(StudentsPayment $studentsPayment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\StudentsPayment  $studentsPayment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, StudentsPayment $studentsPayment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\StudentsPayment  $studentsPayment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(StudentsPayment $studentsPayment)
-    {
-        //
-    }
 
     public function addPayment(Request $request, $id, $payment, $month, $year, $class)
     {
@@ -102,8 +28,6 @@ class StudentsPaymentController extends Controller
         
         $month = $student->payments()->where('month_id', $month )->where('year_id', $year )->where('the_class_id', $class )->first();
 
-
-
         $creation = [
 
             'id_link' => $id,
@@ -113,7 +37,7 @@ class StudentsPaymentController extends Controller
             'hidden_note' => $request->hidden_note,
             'by-admin' => Auth::id(),
 
-            'categoy_history_id' => 1,
+            'category_history_id' => 1,
 
             //'id_link' => $request->id_link,
 
@@ -174,7 +98,11 @@ class StudentsPaymentController extends Controller
             
         }elseif( $month_id == 14){
 
-            $month = 'pour le mois <strong> les frais dassurance </strong>';
+            $month = 'pour <strong> les frais dassurance </strong>';
+
+        }elseif( $month_id == 15){
+
+            $month = 'pour <strong> les frais dassurance de transport </strong>';
 
         }else{
 
@@ -185,6 +113,8 @@ class StudentsPaymentController extends Controller
 
 //Le payement de 105dh a etait effectué par okokokok qui porte le numero de la carte okokokok sur letudiant Venus Mccoy Moody pour le mois {"id":2,"user_id":8,"year_id":1,"the_class_id":6,"month_id":2,"should_pay":95,"transport_pay":0,"add_classes_pay":0,"payment":105,"payment_complete":false,"created_at":"2018-04-30 14:38:45","updated_at":"2018-04-30 14:41:17"} pour lannée2018/2019maintenent le payment est incomplet il devrait payé -115 dh
         $creation['info'] = 'Le payement de <strong>'. $payment .' dh </strong> a etait effectué par '.$hoo.' sur letudiant <strong>'.$student->name.' '. $student->last_name. '</strong> '. $month .' pour lannée <strong>'.Year::find($year)->name . '</strong>, maintenent le payment est '. $complet.' et il avait payé avant un montant de <strong>'.$old_payment.' dh</strong> .'  ;
+
+        $creation['payment'] = $payment;
 
         History::create( $creation );
 

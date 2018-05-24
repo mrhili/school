@@ -63,5 +63,9 @@ class Month extends Seeder
             'name' => 'Assurance'
         ]);
 
+        DB::table('months')->insert([
+            'name' => 'Assurance trasport'
+        ]);
+
     }
 }

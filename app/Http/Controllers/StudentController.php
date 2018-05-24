@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Student;
+use App\Http\Requests\UserRequest;
 
 use CommonPics;
 
@@ -12,7 +12,12 @@ use App\{
     Year,
     TheClass,
     StudentsPayment,
-    History
+    History,
+    Categoryship,
+    Relashionship,
+    Testyearsubclass,
+    Subjectclass,
+    Test
 };
 
 use Yajra\Datatables\Datatables;
@@ -31,12 +36,41 @@ use Application;
 
 use Relation;
 
+use ArrayHolder;
+
 class StudentController extends Controller
 {
     //
 
+    public function home(){
+
+        $user = Auth::user();
+
+        $the_class_id = $user->payments()->where('year_id', Session::get('yearId')  )->first()->the_class_id ;
+
+        $class = TheClass::find( $the_class_id );
+
+        $ids = Subjectclass::where('the_class_id', $the_class_id)->pluck('id')->toArray();
+//->
+        $mytests = Testyearsubclass::whereIn('subject_the_class_id', $ids )->where('publish', true)->get();
+        
+        return view('back.students.home',compact('mytests'));
+    }
+
     public function all(){
-        return 'lo';
+        $students = User::where('role', 1)->get();
+        return view('back.students.all', compact('students'));
+    }
+
+    public function show($id){
+        $student = User::find($id);
+        if($student->role == 1){
+
+            return view('back.students.student',compact('student'));
+        }else{
+            return back();
+        }
+        
     }
 
     public function add(){
@@ -44,27 +78,27 @@ class StudentController extends Controller
         
 
     	$classes = TheClass::pluck('name', 'id');
+        $categoryships = Categoryship::pluck('name', 'id');
     	$role = 1;
 
-    	return view('back.users.add', compact('role', 'classes'));
+    	return view('back.users.add', compact('role', 'classes', 'categoryships'));
     }
 
     public function addStudentHistory($id, $comment, $hidden_note){
 
-
-
-        
     }
 
-    public function store(Student $request){
+    public function store(UserRequest $request){
 
 
 
-    	$array = array_except( $request->toarray(), ['_token', 'password' ,'img', 'year_id', 'should_pay', 'transport_pay', 'add_class_pay','transport', 'add_classes', 'saving_pay', 'assurence_pay']);
+    	$array = array_except( $request->toarray(), ['_token', 'password' ,'img', 'year_id', 'should_pay', 'transport_pay', 'add_class_pay','transport', 'add_classes', 'saving_pay', 'tars_assurence_pay','assurence_pay', 'imgparent', 'nameparent', 'last_nameparent', 'genderparent', 'birth_dateparent', 'birth_placeparent', 'cityparent', 'zip_codeparent', 'adressparent', 'phone1parent', 'phone2parent', 'phone3parent' , 'fixparent', 'emailparent', 'passwordparent', 'categoryship', 'cinparent', 'professionparent', 'family_situationparent']);
+
+        $arrayParent = [];
 
     	if( $request->hasFile( 'img' ) ){
 
-    		$imgName = CommonPics::storeFile( $request->img , $dir = 'profils' );
+    		$imgName = CommonPics::storeFile( $request->img , 'profils' );
 
     		$array["img"] = $imgName;
 
@@ -92,6 +126,7 @@ class StudentController extends Controller
         $array['the_class_id'] = $request->class;
 
     	$student = User::create($array);
+
         
 	    if ($student) {
 
@@ -101,8 +136,9 @@ class StudentController extends Controller
 
             $transport_pay = ( $request->transport_pay ? $request->transport_pay : 0 );
             $add_class_pay = ( $request->add_class_pay ? $request->add_class_pay : 0 );
+            $trans_assurence_pay = ( $request->trans_assurence_pay ? $request->trans_assurence_pay : 0 );
 
-            Relation::fillStudentsPayment($student->id, $request->year_id , $request->class, $request->should_pay, $transport_pay, $add_class_pay, $request->saving_pay ,$request->assurence_pay );
+            Relation::fillStudentsPayment($student->id, $request->year_id , $request->class, $request->should_pay, $transport_pay, $add_class_pay, $request->saving_pay ,$request->assurence_pay ,$trans_assurence_pay );
 
 
             $student->fill_payment = true;
@@ -128,14 +164,14 @@ class StudentController extends Controller
 
             $transSentence;
             if( $request->transport ){
-                $transSentence = '<strong>avec le transport</strong> sous ladress  <strong>'. $request->adress .'</strong>  avec un montant décider de <strong>'. $request->transport_pay .' dh</strong> par mois ';
+                $transSentence = '<strong>avec le transport</strong> sous ladress  <strong>'. $request->adress .'</strong>  avec un montant décider de <strong>'. $request->transport_pay .' dh</strong> par mois et avec une assurence de trasport décider de <strong>'. $request->trans_assurence_pay .' dh</strong>.';
             }else{
                 $transSentence = '<strong>sans transport</strong> est sont adress est '. $request->adress;
             }
 
             $addCoursesSentence;
             if( $request->transport ){
-                $addCoursesSentence = '<strong>avec les cours suplementaires</strong> et avec un montant décider de <strong>'. $request->add_class_pay .' dh </strong> par mois ';
+                $addCoursesSentence = '<strong>avec les cours suplementaires</strong> et avec un montant décider de <strong>'. $trans_assurence_pay .' dh </strong> par mois ';
             }else{
                 $addCoursesSentence = '<strong>sans les cours suplementaires</strong>';
             }
@@ -147,9 +183,100 @@ class StudentController extends Controller
 
             History::create($creation);
 
-	    	//Alert::success('Success Title', 'Success Message');
+            /*Parent variable creation*/
 
-	        return redirect()->route('students.all');
+            if( $request->hasFile( 'imgparent' ) ){
+
+                $imgNameParent = CommonPics::storeFile( $request->imgparent , 'profils' );
+
+                $arrayParent["img"] = $imgNameParent;
+
+            }
+
+            $arrayParent['name'] = $request->nameparent;
+            $arrayParent['last_name'] = $request->last_nameparent;
+            $arrayParent['gender'] = $request->genderparent;
+            $arrayParent['birth_date'] = $request->birth_dateparent;
+            $arrayParent['birth_place'] = $request->birth_placeparent;
+            $arrayParent['city'] = $request->cityparent;
+            $arrayParent['zip_code'] = $request->zip_codeparent;
+            $arrayParent['adress'] = $request->adressparent;
+            $arrayParent['phone'] = $request->phone1parent;
+            $arrayParent['phone2'] = $request->phone2parent;
+            $arrayParent['phone3'] = $request->phone3parent;
+            $arrayParent['fix'] = $request->fixparent;
+
+            $arrayParent['cin'] = $request->cinparent;
+            $arrayParent['profession'] = $request->professionparent;
+            $arrayParent['role'] = 2;
+
+            $maried;
+
+            if( $request->family_situationparent ){
+
+                $arrayParent["family_situation"] = true;
+                $maried = "Marié";
+
+            }else{
+                $arrayParent["family_situation"] = false;
+                $maried = "Célibataire";
+            }
+
+            $arrayParent['email'] = $request->emailparent;
+            $arrayParent['password'] = $request->passwordparent;
+
+            $parent = User::create($arrayParent);
+
+            if( $parent ){
+
+                $relationship = Relashionship::create([
+
+                'student_id' => $student->id,
+                'parent_id' => $parent->id,
+                'categoryship_id' => $request->categoryship
+                    ]);
+
+                if( $relationship){
+
+            $creationHistoryParent = [
+
+                'id_link' => $parent->id,
+                'comment' => $request->comment, 
+                'hidden_note' => $request->hidden_note,
+                'by-admin' => Auth::id(),
+
+                'category_history_id' => 3,
+                'class' => 'success'
+
+            ];
+
+            $creationHistoryParent['info'] = "Le parent <strong>".$parent->name." ".$parent->last_name."</strong> a etait crée avec succes et il est relation en genre <strong>".$relationship->category->name ."</strong> avec létudiant <strong>".$student->name." ".$student->last_name."</strong> qui port le <strong>id = ".$student->id."</strong> 
+            est ses information personelle sont  => genre = <strong>". ArrayHolder::gender( $parent->gender) ."</strong>, Numero de la carte = <strong>".$parent->cin."</strong>, habite à <strong>".$parent->city."</strong>, code postal = <strong>".$parent->zip_code."</strong>, son adress est <strong>".$parent->adress."</strong>, son telephone 1  = <strong>".$parent->phone1."</strong>, telephone 2  = <strong>".$parent->phone2."</strong>, telephone 3  = <strong>".$parent->phone3."</strong>, telephone fix = <strong>".$parent->fix."</strong>, sa profession est <strong>".$parent->profession."</strong>, sa cituation familiale est <strong>".$maried."</strong> .";
+
+                }
+
+            History::create($creationHistoryParent);
+
+
+
+            //Alert::success('Success Title', 'Success Message');
+
+            return redirect()->route('students.all');
+
+            }
+
+
+            
+
+
+
+
+
+
+
+
+
+
 	    }
 
     }
