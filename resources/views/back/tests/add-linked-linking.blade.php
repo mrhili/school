@@ -44,6 +44,11 @@
                   @include('back.partials.formG', ['name' => 'publish', 'type' => 'checkbox', 'text' => 'Publier le test maintenent pour les éléve', 'class'=>'transport-check', 'required' => true, 'checked' => true,'additionalInfo' => ['id' =>  'publishfield']])
                   </div>
 
+                  <div class="col-xs-12">
+
+                  @include('back.partials.formG', ['name' => 'navigation', 'type' => 'checkbox', 'text' => 'Laisser l'etudiant chercher sur intenet ?, 'class'=>'transport-check', 'required' => true, 'checked' => true,'additionalInfo' => ['id' =>  'publishfield']])
+                  </div>
+
 
                   <div class="col-xs-12">
 

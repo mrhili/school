@@ -28,7 +28,7 @@ class CreateSubjectTheClassTable extends Migration
               ->on('the_classes')
               ->onDelete('cascade'); 
 
-            $table->integer('parameter');
+            $table->tinyInteger('parameter')->unsigned();
 
             $table->timestamps();
         });

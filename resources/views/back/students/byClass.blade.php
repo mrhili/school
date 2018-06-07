@@ -44,6 +44,7 @@ The Main Configuration Of the web application
 
                 <th>Frais d'enregistement</th>
                 <th>Frais d'assurence</th>
+                <th>Frais d'assurence transport</th>
 
                 <th>septembre</th>
                 <th>octobre</th>
@@ -217,6 +218,7 @@ $(function() {
             { data: 'nomcomplet', name: '' },
             { data: 'saving', name: '' },
             { data: 'assurence', name: '' },
+            { data: 'assurence_trans', name: '' },
             { data: 'septembre', name: '' },
             { data: 'octobre', name: '' },
             { data: 'novembre', name: '' },

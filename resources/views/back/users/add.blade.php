@@ -69,6 +69,8 @@ Nouveau etudient
   	@include('back.partials.formG', ['name' => 'zip_code', 'type' => 'text', 'text' => 'Code postal', 'class'=>'', 'required' => true,'additionalInfo' => []])
   	@include('back.partials.formG', ['name' => 'adress', 'type' => 'text', 'text' => 'Adress', 'class'=>'', 'required' => true,'additionalInfo' => []])
   	@include('back.partials.formG', ['name' => 'phone', 'type' => 'text', 'text' => 'Téléphone', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'whatsapp', 'type' => 'text', 'text' => 'Whatsapp', 'class'=>'', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'facebook_link', 'type' => 'text', 'text' => 'Facebook', 'class'=>'', 'required' => false,'additionalInfo' => []])
 
 
     <hr />
@@ -116,6 +118,8 @@ Nouveau etudient
         ...
       </p>
     </div>
+
+    @include('back.partials.formG', ['name' => 'num', 'type' => 'number', 'text' => 'Numero denregistrement', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
     @include('back.partials.formG', ['name' => 'comment', 'type' => 'textarea', 'text' => 'Comentaire', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
@@ -166,6 +170,7 @@ Nouveau etudient
     @include('back.partials.formG', ['name' => 'phone2parent', 'type' => 'text', 'text' => 'Téléphone Parent 2', 'class'=>'', 'required' => true,'additionalInfo' => []])
    @include('back.partials.formG', ['name' => 'phone3parent', 'type' => 'text', 'text' => 'Téléphone Parent 3', 'class'=>'', 'required' => true,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'fixparent', 'type' => 'text', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'whatsappparent', 'type' => 'text', 'text' => 'Whatsapp', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
     <hr />
     <div class="text-center">

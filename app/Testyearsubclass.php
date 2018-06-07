@@ -9,7 +9,7 @@ class Testyearsubclass extends Model
     //
 
     protected $fillable = [
-        'subject_the_class_id', 'the_class_id', 'subject_id' ,'test_id','year_id', 'publish', 'teatcher_id'
+        'subject_the_class_id', 'the_class_id', 'subject_id' ,'test_id','year_id', 'publish', 'teatcher_id', 'navigation'
     ];
 
 
@@ -33,6 +33,10 @@ class Testyearsubclass extends Model
         return $this->belongsTo('App\User', 'teatcher_id');
     }
 
+    public function notes()
+    {
+        return $this->hasMany('App\Note', 'testyearsubclass_id');
+    }
     
 
 }

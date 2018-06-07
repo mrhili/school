@@ -107,6 +107,7 @@
           </div>
         </div>
 
+
         <!-- ./col -->
       </div>
       <!-- /.row -->
@@ -180,7 +181,7 @@
             <div class="icon">
               <i class="fa fa-list-ol"></i>
             </div>
-            <a href="{{ route('subjects.add') }}" class="small-box-footer">Ajouter une matiére maintenent <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('subjects.list') }}" class="small-box-footer">Ajouter une matiére maintenent <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <div class="col-lg-3 col-xs-6">
@@ -193,13 +194,69 @@
             <div class="icon">
               <i class="fa fa-file"></i>
             </div>
-            <a href="{{ route('tests.add') }}" class="small-box-footer">Ajouter un test maintenent <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('tests.language') }}" class="small-box-footer">Ajouter un test maintenent <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{ $fournitures}}</h3>
+              <p><a href="{{ route('fournitures.list') }}">Fournitures</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('fournitures.list') }}" class="small-box-footer">Ajouter un test maintenent <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{ $rooms }}</h3>
+              <p><a href="{{ route('rooms.list') }}">Rooms</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('rooms.list') }}" class="small-box-footer">Ajouter un room maintenent <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{ $roomtypes }}</h3>
+              <p><a href="{{ route('roomtypes.list') }}">Room types</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('roomtypes.list') }}" class="small-box-footer">Ajouter un room maintenent <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{ $etages }}</h3>
+              <p><a href="{{ route('etages.list') }}">Etages</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('etages.list') }}" class="small-box-footer">Ajouter un room maintenent <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 
 
       </div>
       <!-- /.row -->
+
 
 
 

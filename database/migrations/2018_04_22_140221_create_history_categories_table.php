@@ -24,6 +24,8 @@ class CreateHistoryCategoriesTable extends Migration
 
             $table->tinyInteger('kind');
 
+            $table->tinyInteger('role');
+
             $table->timestamps();
         });
     }

@@ -151,12 +151,13 @@ var options = {
     };
 $answers = $('#answers');
 $answers.formRender(options);
+$answers.append('<input type="text" class="hidden" name="done_minutes" id="timing" />');
+$timing = $('#timing');
 
 
   $("#countdown")
   .countdown("{{ $date }}", function(event) {
 
-    
     $('#hours').text(
       event.strftime('%H heurs')
     );
@@ -166,9 +167,19 @@ $answers.formRender(options);
     $('#seconds').text(
       event.strftime('%S seconds')
     );
-  }).on('finish.countdown', function(){
+
+  }).on('update.countdown', function(){
+
+    $timing.val( Number($timing.val()) + 1 );
+    
+  })
+  .on('finish.countdown', function(){
     $("#get-note").submit();
   });
+
+  $(window).blur(function() {
+    $("#get-note").submit();
+   });
 
 });
 

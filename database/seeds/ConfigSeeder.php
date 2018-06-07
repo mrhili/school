@@ -156,6 +156,14 @@ class ConfigSeeder extends Seeder
             'type' => 'file',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
+
+        DB::table('configs')->insert([
+            'slug' => 'test-language',
+            'nameSetting' => 'Test Language',
+            'value' => 'ar-TN',
+            'type' => 'text',
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
         
     }
 }

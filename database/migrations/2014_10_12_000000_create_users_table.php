@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             /*common*/
             $table->increments('id');
+            $table->integer('num')->nullable()->unique()->unsigned();
             $table->string('name');
             $table->string('last_name')->nullable();
             $table->boolean('gender')->nullable();
@@ -28,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('phone2')->nullable();
             $table->string('phone3')->nullable();
             $table->string('fix')->nullable();
+            $table->string('whatsapp')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('img')->nullable();

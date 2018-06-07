@@ -57,6 +57,8 @@ class CreateTestyearsubclassesTable extends Migration
 
             $table->boolean('publish')->default(false);
 
+            $table->boolean('navigator')->default(true);
+
             $table->timestamps();
         });
     }

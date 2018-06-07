@@ -17,7 +17,9 @@ use App\{
     Relashionship,
     Testyearsubclass,
     Subjectclass,
-    Test
+    Test,
+    Note,
+    Fournituration
 };
 
 use Yajra\Datatables\Datatables;
@@ -38,6 +40,8 @@ use Relation;
 
 use ArrayHolder;
 
+use Hash;
+
 class StudentController extends Controller
 {
     //
@@ -55,6 +59,14 @@ class StudentController extends Controller
         $mytests = Testyearsubclass::whereIn('subject_the_class_id', $ids )->where('publish', true)->get();
         
         return view('back.students.home',compact('mytests'));
+    }
+
+    public function profile(User $student){
+        $year = Session::get('yearId');
+        $notes = Note::where('student_id' , $student->id )->where('year_id' , $year )->count();
+        $fournitures = Fournituration::where('student_id' , $student->id )->where('year_id' , $year )->count();
+        return view('back.students.profile', compact('student', 'notes', 'fournitures'));
+
     }
 
     public function all(){
@@ -92,7 +104,7 @@ class StudentController extends Controller
 
 
 
-    	$array = array_except( $request->toarray(), ['_token', 'password' ,'img', 'year_id', 'should_pay', 'transport_pay', 'add_class_pay','transport', 'add_classes', 'saving_pay', 'tars_assurence_pay','assurence_pay', 'imgparent', 'nameparent', 'last_nameparent', 'genderparent', 'birth_dateparent', 'birth_placeparent', 'cityparent', 'zip_codeparent', 'adressparent', 'phone1parent', 'phone2parent', 'phone3parent' , 'fixparent', 'emailparent', 'passwordparent', 'categoryship', 'cinparent', 'professionparent', 'family_situationparent']);
+    	$array = array_except( $request->toarray(), ['_token', 'password' ,'img', 'year_id', 'should_pay', 'transport_pay', 'add_class_pay','transport', 'add_classes', 'saving_pay', 'tars_assurence_pay','assurence_pay', 'imgparent', 'nameparent', 'last_nameparent', 'genderparent', 'birth_dateparent', 'birth_placeparent', 'cityparent', 'zip_codeparent', 'adressparent', 'phone1parent', 'phone2parent', 'phone3parent' , 'whatsappparent',  'fixparent', 'emailparent', 'passwordparent', 'categoryship', 'cinparent', 'professionparent', 'family_situationparent']);
 
         $arrayParent = [];
 
@@ -140,6 +152,8 @@ class StudentController extends Controller
 
             Relation::fillStudentsPayment($student->id, $request->year_id , $request->class, $request->should_pay, $transport_pay, $add_class_pay, $request->saving_pay ,$request->assurence_pay ,$trans_assurence_pay );
 
+
+            Relation::fillFournituration( $student->id , $request->year_id , $request->class   );
 
             $student->fill_payment = true;
 
@@ -223,7 +237,7 @@ class StudentController extends Controller
             }
 
             $arrayParent['email'] = $request->emailparent;
-            $arrayParent['password'] = $request->passwordparent;
+            $arrayParent['password'] = Hash::make($request->passwordparent);
 
             $parent = User::create($arrayParent);
 
@@ -337,6 +351,22 @@ class StudentController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id, 'data-month' => 14, 'id' => $model->id.'-14' ], null);
         })
+        ->editColumn('assurence_trans', function( $model ) use($year, $theclass){
+
+            $moneyArray = Application::fillMonthButton($model, 15 ,$year, $theclass->id );
+
+
+
+            $label = $moneyArray['money'];
+            $class = $moneyArray['class'];
+
+            
+
+            return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id, 'data-month' => 15, 'id' => $model->id.'-15' ], null);
+        })
+
+
+
         ->editColumn('septembre', function( $model ) use($year, $theclass){
 
             $moneyArray = Application::fillMonthButton($model, 9 ,$year, $theclass->id );

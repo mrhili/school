@@ -20,11 +20,19 @@ class TheClass extends Model
 
     public function subjects()
     {
-        return $this->belongsToMany('App\Subject')->withPivot('parameter');;
+        return $this->belongsToMany('App\Subject')->withPivot('parameter');
+    }
+
+    public function fournitures()
+    {
+        return $this->belongsToMany('App\Fourniture');
+    }
+
+    public function students()
+    {
+        return $this->hasMany('App\User');
     }
 
     //foreach($s->the_classes as $t){echo $t->pivot->parameter;  }
 
-
-    
 }

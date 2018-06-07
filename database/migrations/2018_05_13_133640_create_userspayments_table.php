@@ -34,8 +34,8 @@ class CreateUserspaymentsTable extends Migration
               ->on('months')
               ->onDelete('cascade');
 
-            $table->integer('should_be_payed')->default(0);
-            $table->integer('cnss_payment')->default(0);
+            $table->integer('should_be_payed')->default(0)->unsigned();
+            $table->integer('cnss_payment')->default(0)->unsigned();
 
             $table->integer('payment')->default(0);
 

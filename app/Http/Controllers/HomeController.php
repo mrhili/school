@@ -3,14 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\TheClass;
-use App\Subject;
-use App\StudentsPayment;
-use App\Test;
+use App\{
+    User,
+    TheClass,
+    Subject,
+    StudentsPayment,
+    Test,
+    Fourniture,
+    Room,
+    Objct,
+    Observation,
+    Course,
+    Etage,
+    Roomtype
+};
 use Application;
 use Auth;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {
@@ -38,6 +46,10 @@ class HomeController extends Controller
 
             return redirect()->route('students.home');
 
+        }else if( $user->role == 2 ){
+
+            return redirect()->route('parents.home');
+
         }
 
         $students = User::where('role', 1 )->count();
@@ -49,14 +61,17 @@ class HomeController extends Controller
         $classes = TheClass::count();
         $subjects = Subject::count();
         $tests = Test::count();
-
-        Alert::alert('Title', 'Message', 'Type');
+        $fournitures = Fourniture::count();
+        $rooms = Room::count();
+        
+        $roomtypes = Roomtype::count();
+        $etages = Etage::count();
 
 
 
         //$monthsBD =  Application::fillBarMonthsBD() ;
 
-        return view('home', compact('students', 'parents', 'teatchers','secretarias','admins','masters', 'classes', 'subjects', 'tests', '' ));
+        return view('home', compact('students', 'parents', 'teatchers','secretarias','admins','masters', 'classes', 'subjects', 'tests','fournitures','rooms', 'roomtypes', 'etages' ));
     }
 
     public function monthsBD()

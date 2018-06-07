@@ -8,11 +8,62 @@
 
 @section('content')
 
-  @foreach($mytests as $test)
+<h1 style="text-center">{{ Session::get('yearName') }}</h1>
 
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          <h1 style="text-center">{{ Session::get('yearName') }}</h1>
+              <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                  <div class="inner">
+                    <h3>Mes notes</h3>
+                    <p>...</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-graduation-cap"></i>
+                  </div>
+                  <a href="{{ route('notes.my-notes') }}" class="small-box-footer"> Mes notes<i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+          <!-- ./col -->
+
+              <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                  <div class="inner">
+                    <h3>Mes fournitures</h3>
+                    <p>...</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-graduation-cap"></i>
+                  </div>
+                  <a href="{{ route('fournitures.my-fournitures') }}" class="small-box-footer"> Mes fournitures<i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+          <!-- ./col -->
+          </div>
+        <!-- /.row -->
+
+@component('back.components.plain')
+
+  @slot('titlePlain')
+
+Examins
+
+  @endslot
+
+
+  @slot('sectionPlain')
+
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+<div class="col-xs-12">
+        <h3>Mes tests</h3>
+          
+
+  @forelse($mytests as $test)
+
+
 
               <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
@@ -28,20 +79,21 @@
                 </div>
               </div>
           <!-- ./col -->
-        </div>
+
+  @empty
+
+          <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-check"></i> Alert!</h4>
+            Il ya pas de test maintenent.
+          </div>
+
+  @endforelse
+
+</div>
+
+          </div>
         <!-- /.row -->
-  @endforeach
-
-@component('back.components.plain')
-
-  @slot('titlePlain')
-
-Outils
-
-  @endslot
-
-
-  @slot('sectionPlain')
 
       <div class="overlay spin-months-bd">
               En attendent que le chart des benifits et deficites se charge

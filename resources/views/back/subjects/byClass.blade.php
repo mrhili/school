@@ -90,9 +90,9 @@
             </div>
             <div class="box-footer no-padding">
               <ul class="nav nav-stacked">
-                <li><a href="{{ route('tests.add-linked',['class_id' => $class->id,'subject_id' => $subject->id  ]) }}">Click pour ajouter un test <span class="pull-right badge bg-aqua">+</span></a></li>
+                <li><a href="{{ route('tests.language-linked',[$class->id,$subject->id]) }}">Click pour ajouter un test <span class="pull-right badge bg-aqua">+</span></a></li>
 
-                <li><a href="{{ route('tests.add-linked-linking',['class_id' => $class->id,'subject_id' => $subject->id  ]) }}">Clicker ici pour linker un test <span class="pull-right badge bg-green">X</span></a></li>
+                <li><a href="{{ route('tests.add-linked-linking',[$class->id,$subject->id]) }}">Clicker ici pour linker un test <span class="pull-right badge bg-green">X</span></a></li>
               </ul>
             </div>
           </div>
@@ -181,11 +181,12 @@ var comment, hidden_note, name;
 
               })
                 .then(function (response) {
+                  $("#subjectfield option[value='"+ subject +"']").remove();
                   console.log( response );
                   addSubject.attr('disabled', false);
 
                   var returnedArray = response.data;
-                  subjects.append('<div class="col-md-4"><!--Widget:userwidgetstyle1--><div class="box box-widget widget-user-2"><!--Addthebgcolortotheheaderusinganyofthebg-*classes--><div class="widget-user-header bg-yellow"><div class="widget-user-image"><img class="img-circle" src="../dist/img/user7-128x128.jpg" alt="UserAvatar"></div><!--/.widget-user-image--><h3 class="widget-user-username">'+ returnedArray['name']+'</h3><h5 class="widget-user-desc">Coéfficient: '+ returnedArray['parameter']+'</h5></div><div class="box-footer no-padding"><ul class="nav nav-stacked"><li><a href="'+window.index+'/add-test-linked/'+the_class+'/'+returnedArray['id']+'">Click pour ajouter un test<span class="pull-right badge bg-aqua">+</span></a></li><li><a href="'+window.index+'/add-test-linked-linking/'+the_class+'/'+returnedArray['id']+'">Clicker ici pour linker un test <span class="pull-right badge bg-green">X</span></a></li></ul></div></div><!--/.widget-user--></div>');
+                  subjects.append('<div class="col-md-4"><!--Widget:userwidgetstyle1--><div class="box box-widget widget-user-2"><!--Addthebgcolortotheheaderusinganyofthebg-*classes--><div class="widget-user-header bg-yellow"><div class="widget-user-image"><img class="img-circle" src="../dist/img/user7-128x128.jpg" alt="UserAvatar"></div><!--/.widget-user-image--><h3 class="widget-user-username">'+ returnedArray['name']+'</h3><h5 class="widget-user-desc">Coéfficient: '+ returnedArray['parameter']+'</h5></div><div class="box-footer no-padding"><ul class="nav nav-stacked"><li><a href="'+window.index+'/test-language-linked/'+the_class+'/'+returnedArray['id']+'">Click pour ajouter un test<span class="pull-right badge bg-aqua">+</span></a></li><li><a href="'+window.index+'/add-test-linked-linking/'+the_class+'/'+returnedArray['id']+'">Clicker ici pour linker un test <span class="pull-right badge bg-green">X</span></a></li></ul></div></div><!--/.widget-user--></div>');
 
                 })
                 .catch(function (error) {

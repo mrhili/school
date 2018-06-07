@@ -13,8 +13,12 @@ use App\{
 use Illuminate\Http\Request;
 use Session;
 use Auth;
+use GetSetting;
 class TestController extends Controller
 {
+    public function language(){
+        return view('back.tests.language');
+    }
 
     public function passTest(Test $test, Subjectclass $subjectclass ){
 
@@ -58,7 +62,7 @@ class TestController extends Controller
                     'student_id' => Auth::id() ,
                     'note' => 0,
                     'seen' => false,
-                    'done_minutes' => $test->time_minutes
+                    'done_minutes' => "02:00"
                 ]);
 
             $adate= date("Y/m/d H:i:s");
@@ -78,7 +82,7 @@ class TestController extends Controller
 
     public function getNote(Request $request, Test $test, Note $note){
         
-        $student_answers = array_except($request->all(), ['_token']);
+        $student_answers = array_except($request->all(), ['_token','done_minutes']);
         $answers = json_decode($test->answers, true);
         $notes = json_decode($test->notes, true);
         //dd($student_answers , '------------', $answers , '------------', $notes );
@@ -93,17 +97,31 @@ class TestController extends Controller
             }
 
         }
+        $note->note = $final_note;
+
+        $minutes = $request->done_minutes / 60;
+        $minutes = (int)$minutes;
+        $seconds = $request->done_minutes % 60;
+
+        if( $minutes < 10){
+
+            $minutes = "0".$minutes;
+
+        }
+
+        if( $seconds < 10){
+
+            $seconds = "0".$seconds;
+
+        }
+
+        $note->done_minutes = $minutes.":".$seconds;
 
 
-/*
-            $note->note = $final_note;
-            $note->done_minutes = $request->done_minutes;
-            $note->test_passed_fine = true;
-            $note->save();
-*/
-            return redirect()->route('notes.my-notes');
+        $note->test_passed_fine = true;
+        $note->save();
 
-        return 'Submit';
+        return redirect()->route('notes.my-notes');
 
     }
 
@@ -114,9 +132,14 @@ class TestController extends Controller
 
     }
 
-    public function add(){
+    public function add($language = null){
 
-        return view('back.tests.add');
+        if( $language == null ){
+
+            $language = GetSetting::getConfig('test-language');
+        }
+
+        return view('back.tests.add', compact('language'));
     }
 
     public function store(Request $request ){
@@ -127,10 +150,20 @@ class TestController extends Controller
 
     }
 
-    public function addLinked($class_id,  $subject_id){
+    public function languageLinked($class_id,  $subject_id){
+        return view('back.tests.language-linked', compact('class_id', 'subject_id'));
+    }
+
+    public function addLinked($class_id,  $subject_id, $language = null){
+
+        if( $language == null ){
+
+            $language = GetSetting::getConfig('test-language');
+        }
+
         $class = TheClass::find($class_id);
         $subject = Subject::find($subject_id);
-        return view('back.tests.add-linked',compact('subject', 'class'));
+        return view('back.tests.add-linked',compact('subject', 'class','language'));
     }
 
     public function storeLinked(Request $request, $class_id,  $subject_id ){
@@ -155,6 +188,17 @@ class TestController extends Controller
 
                 }
 
+                $navigation
+                if( $request->navigation ){
+
+                    $navigation = true;
+
+                }else{
+
+                    $navigation = false;
+
+                }
+
                 Testyearsubclass::create([
                     'year_id' => Session::get('yearId'),
                     'test_id' => $test->id,
@@ -162,7 +206,8 @@ class TestController extends Controller
                     'subject_id' => $subject_id,
                     'the_class_id' => $class_id,
                     'teatcher_id' => Auth::id(),
-                    'publish' => $publish
+                    'publish' => $publish,
+                    'navigation' => $navigation
 
                     ]);
 
@@ -205,6 +250,17 @@ class TestController extends Controller
 
         }
 
+        $navigation
+        if( $request->navigation ){
+
+            $navigation = true;
+
+        }else{
+
+            $navigation = false;
+
+        }
+
 
         Testyearsubclass::create([
             'year_id' => Session::get('yearId'),
@@ -213,7 +269,8 @@ class TestController extends Controller
             'the_class_id' => $class_id,
             'subject_the_class_id' => $subject_class->id,
             'teatcher_id' => Auth::id(),
-            'publish' => $publish
+            'publish' => $publish,
+            'navigation' => $navigation
         ]);
         return response()->json(['id' => $test->id, 'name' => $test->title ]);
     }

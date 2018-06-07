@@ -109,7 +109,7 @@
               <!-- The user image in the navbar-->
               {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'user-image'] ) !!}
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">{{ 'USER NAME' }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->

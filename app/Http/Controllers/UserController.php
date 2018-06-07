@@ -47,7 +47,7 @@ class UserController extends Controller
     public function store(UserRequest $request){
 
 
-    	$array = array_except( $request->toarray(), ['_token', 'password' ,'img','cv', 'family_situation', 'should_be_payed', 'cnss', 'cnss_payment']);
+    	$array = array_except( $request->all(), ['_token', 'password' ,'img','cv', 'family_situation', 'should_be_payed', 'cnss', 'cnss_payment']);
 
 
     	if( $request->hasFile( 'img' ) ){

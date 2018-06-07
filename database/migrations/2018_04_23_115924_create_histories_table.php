@@ -16,7 +16,7 @@ class CreateHistoriesTable extends Migration
         Schema::create('histories', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('id_link');
+            $table->integer('id_link')->unsigned();
 
             $table->string('class');
 

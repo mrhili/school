@@ -12,7 +12,9 @@ use App\{
     StudentsPayment,
     Userspayment,
     History,
-    HistoryCategory
+    HistoryCategory,
+    Fournituration,
+    TheClass
 
 };
 
@@ -182,6 +184,46 @@ class Holder {
         }
     }
 
+    public static function backgroundColors( ){
+
+        $backgrounds = [
+            'primary',
+            'info',
+            'success',
+            'warning',
+            'danger',
+            'gray',
+            'navy',
+            'teal',
+            'purple',
+            'orange',
+            'maroon',
+            'black'
+        ];
+
+        
+        return $backgrounds[array_rand($backgrounds)];
+
+    }
+
+    public static function states( $item = null ){
+
+        $states = [
+            'Toute neuf',
+            'Trés bonne',
+            'bonne',
+            'moyenne',
+            'Pas mal',
+            'à changer'
+        ];
+
+        if( $item == null){
+            return $states;
+        }elseif( $item ){
+            return $states[$item];
+        }
+    }
+
 }
 
 class Math {
@@ -242,9 +284,42 @@ class Timing {
 
 
 class Relation {
-/*            $table->integer('should_pay')->default(350);
-            $table->integer('transport_pay')->default(350);
-            $table->integer('add_classes_pay')->default(350);*/
+
+    public static function fillStudentsFournituration( $fourniture, $year , $class  ){
+
+        $the_class = TheClass::find( $class);
+
+        
+        foreach ($the_class->students as $student) {
+            # code...
+            Fournituration::create([
+                'student_id' => $student->id,
+                'year_id' => $year,
+                'the_class_id' => $the_class->id,
+                'fourniture_id' => $fourniture
+            ]);
+        }
+
+
+    }
+
+    public static function fillFournituration( $student , $year , $class  ){
+
+        $the_class = TheClass::find( $class);
+
+        
+        foreach ($the_class->fournitures as $fourniture) {
+            # code...
+            Fournituration::create([
+                'student_id' => $student,
+                'year_id' => $year,
+                'the_class_id' => $the_class->id,
+                'fourniture_id' => $fourniture->id
+            ]);
+        }
+
+
+    }
     public static function fillStudentsPayment( $student , $year , $class , $shouldPay = 0,$transportPay = 0,$addClassesPay = 0, $addSavingPay = 0,$addAssurencePay = 0, $addTransAssurencePay  ){
 
         $months = Month::findMany([1, 2, 3, 4, 5, 6, 9, 10, 11, 12]);
@@ -338,6 +413,110 @@ class Relation {
 }
 
 class Application{
+
+    public static function fillRejectedButton($model){
+
+        $array = [];
+
+        //dd($model);
+
+        $rejected = $model->rejected;
+
+        if( $rejected ){
+
+            //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+            $array[ 'icon' ] = 'V';
+            $array[ 'class' ] = 'success';
+
+        }else{
+
+            //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+            $array[ 'icon' ] = 'X';
+            $array[ 'class' ] = 'danger';
+
+        }
+
+
+        return $array;
+    }
+
+    public static function fillConfirmedButton($model){
+
+        $array = [];
+
+        //dd($model);
+
+        $confirmed = $model->confirmed;
+
+        if( $confirmed ){
+
+            //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+            $array[ 'icon' ] = 'V';
+            $array[ 'class' ] = 'success';
+
+        }else{
+
+            //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+            $array[ 'icon' ] = 'X';
+            $array[ 'class' ] = 'danger';
+
+        }
+
+
+        return $array;
+    }
+
+    public static function fillExistButton($model){
+
+        $existArray = [];
+
+        //dd($model);
+
+        $exist = $model->exist;
+
+        if( $exist ){
+
+            //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+            $existArray[ 'icon' ] = 'V';
+            $existArray[ 'class' ] = 'success';
+
+        }else{
+
+            //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+            $existArray[ 'icon' ] = 'X';
+            $existArray[ 'class' ] = 'danger';
+
+        }
+
+        $confirmed = $model->confirmed;
+        $rejected = $model->rejected;
+        $required = $model->fourniture->required;
+
+        if( $exist && $confirmed && !$rejected){
+
+            $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">confirmé de puis ladministration</p>';
+
+        }elseif( $exist && !$confirmed){
+
+            $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">pas encore confirmé de puis ladministration</p>';
+
+        }elseif( !$exist && $required){
+
+            $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">Tu doit porter cette fourniture emidatement</p>';
+
+        }elseif( !$model->exist && !$required){
+
+            $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">Cette fourniture est optional</p>';
+
+        }else{
+            $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">Tu doit contacter ladministration apropos de cette fourniture</p>';
+        }
+
+
+
+
+        return $existArray;
+    }
 
     public static function fillMonthButton($model, $monthId, $year , $class){
 

@@ -83,10 +83,6 @@ class SubjectController extends Controller
 
     }
 
-    public function add(){
-        return redirect()->route('subjects.list');
-    }
-
     /**
      * Store a newly created resource in storage.
      *

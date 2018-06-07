@@ -21,7 +21,7 @@ class CreateTestsTable extends Migration
             $table->json('notes')->nullable();
             $table->json('answers')->nullable();
             $table->boolean('ready')->default(false);
-            $table->integer('time_minutes')->default(60);
+            $table->integer('time_minutes')->default(60)->unsigned();
             $table->timestamps();
         });
     }

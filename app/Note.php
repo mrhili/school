@@ -20,4 +20,14 @@ class Note extends Model
     	"note",
     	'done_minutes'
     ];
+
+    public function testyearsubclass()
+    {
+        return $this->belongsTo('App\Testyearsubclass', 'testyearsubclass_id');
+    }
+    
+    public function subject()
+    {
+        return $this->belongsTo('App\Subject');
+    }
 }

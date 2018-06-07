@@ -16,7 +16,7 @@ class User extends Authenticatable
      */
 
     protected $fillable = [
-        'name', 'email', 'password','last_name','gender','birth_date','birth_place','city','zip_code','adress','phone','img','role','transport','additional_classes','fill_payment','profession','family_situation','cv', 'the_class_id', 'cin', 'phone', 'phone2', 'phone3', 'fix', 'cnss', 'cnss_id'
+        'name', 'email', 'password','last_name','gender','birth_date','birth_place','city','zip_code','adress','phone','img','role','transport','additional_classes','fill_payment','profession','family_situation','cv', 'the_class_id', 'cin', 'phone', 'phone2', 'phone3', 'fix', 'whatsapp', 'cnss', 'cnss_id'
     ];
 
     /**
@@ -56,6 +56,16 @@ class User extends Authenticatable
     public function testyearsubclasses()
     {
         return $this->hasMany('App\Testyearsubclass', 'teatcher_id');
+    }
+
+    public function the_class()
+    {
+        return $this->belongsTo('App\TheClass');
+    }
+
+    public function fourniturations()
+    {
+        return $this->hasMany('App\Fournituration');
     }
 
 }

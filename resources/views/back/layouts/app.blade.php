@@ -172,7 +172,7 @@ desired effect
 
 <script src="{!! asset('application/js/common.js') !!}"></script>
 
-<script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+<script src="{!! asset('sa2/sweetalert2.all.js') !!}"></script>
 @include('sweetalert::alert')
 
 

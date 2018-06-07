@@ -88,6 +88,8 @@ Nouveau etudient
     @include('back.partials.formG', ['name' => 'phone2', 'type' => 'text', 'text' => 'Téléphone 2', 'class'=>'', 'required' => false,'additionalInfo' => []])
    @include('back.partials.formG', ['name' => 'phone3', 'type' => 'text', 'text' => 'Téléphone 3', 'class'=>'', 'required' => false,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'fix', 'type' => 'text', 'text' => 'Fix ', 'class'=>'', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'whatsapp', 'type' => 'text', 'text' => 'Whatsapp', 'class'=>'', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'facebook_link', 'type' => 'text', 'text' => 'Facebook', 'class'=>'', 'required' => false,'additionalInfo' => []])
 
     <hr />
     <div class="text-center">

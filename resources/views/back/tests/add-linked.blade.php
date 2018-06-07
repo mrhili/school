@@ -45,11 +45,7 @@ Nouveau etudient
 
     @include('back.partials.formG', ['name' => 'publish', 'type' => 'checkbox', 'text' => 'Publier le test maintenent pour les éléve', 'class'=>'transport-check', 'required' => true, 'checked' => true,'additionalInfo' => []])
 
-<ul id="language-selector" class="list-inline text-center">
-  <li><a href="#" class="lang btn btn-xs btn-info" id="en-US">English</a></li>
-  <li><a href="#" class="lang btn btn-xs btn-info" id="fr-FR">Francais</a></li>
-  <li><a href="#" class="lang btn btn-xs btn-info" id="ar-TN">العربية</a></li>
-</ul>
+    @include('back.partials.formG', ['name' => 'navigation', 'type' => 'checkbox', 'text' => 'Laisser l'etudiant chercher sur intenet ?, 'class'=>'transport-check', 'required' => true, 'checked' => true,'additionalInfo' => ['id' =>  'publishfield']])
   	<div id="editor"></div>
 
   	<a href="#" class="btn  btn-lg btn-block btn-success" id="confimation">Confirmer le test</a>
@@ -194,7 +190,7 @@ var values = $('#values');
 var editor = $('#editor');
   var options = {
       i18n: {
-        locale: 'ar-TN'
+        locale: '{{ $language }}'
       },
       disableFields: ['hidden','file', 'button'],
 
@@ -221,11 +217,6 @@ var fb = editor.formBuilder(options);
 var jsonfield = $('#jsonfield');
 var notesfield = $('#notesfield');
 
-
-  $('.lang').click(function() {
-    var lang = this.id;
-    fb.actions.setLang(lang);
-  });
 
 
 

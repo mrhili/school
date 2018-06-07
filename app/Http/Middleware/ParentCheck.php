@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
-class Parent
+class ParentCheck
 {
     /**
      * Handle an incoming request.

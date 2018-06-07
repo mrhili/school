@@ -51,6 +51,12 @@ class Kernel extends HttpKernel
 
         ],
 
+        'parent' => [
+            \Illuminate\Auth\Middleware\Authenticate::class,
+            \App\Http\Middleware\ParentCheck::class,
+
+        ],
+
         'teatcher' => [
             \Illuminate\Auth\Middleware\Authenticate::class,
             \App\Http\Middleware\Teatcher::class,
