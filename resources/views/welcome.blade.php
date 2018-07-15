@@ -1,4 +1,4 @@
-<!doctype html>
+{{-- <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
@@ -93,3 +93,32 @@
         </div>
     </body>
 </html>
+--}}
+
+@extends('back.layouts.topnav')
+
+@section('content')
+
+
+
+      <div class="error-page">
+        <h2 class="headline text-yellow"> Fatima Azzahrae School</h2>
+
+        <div class="error-content">
+          <h3><i class="fa fa-warning text-yellow"></i> Fatima Azzahrae School.</h3>
+
+          <p>
+            We could not find the page you were looking for.
+            Meanwhile, you may  or try using the search form.
+            <br />
+            
+          </p>
+
+          <a class="btn btn-primmary" href="{{ route('login') }}">Login</a>
+        </div>
+        <!-- /.error-content -->
+      </div>
+      <!-- /.error-page -->
+
+
+@endsection

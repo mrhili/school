@@ -11,11 +11,16 @@ use App\{
     Test,
     Fourniture,
     Room,
-    Objct,
     Observation,
     Course,
     Etage,
-    Roomtype
+    Roomtype,
+    Objctype,
+    Objct,
+    Calling,
+    Meetingtype,
+    Meeting,
+    Meetingpopulating
 };
 use Application;
 use Auth;
@@ -63,15 +68,29 @@ class HomeController extends Controller
         $tests = Test::count();
         $fournitures = Fourniture::count();
         $rooms = Room::count();
-        
+        $courses = Course::all()->count();
+
+
         $roomtypes = Roomtype::count();
-        $etages = Etage::count();
+        $etages = Room::count();
+
+        $objctypes = Objctype::count();
+        $objcts = Objct::count();
+
+        $observations = Observation::count();
+        $callings = Calling::count();
+
+        $meetingtypes = Meetingtype::count();
+        $meetings = Meeting::count();
+
+        $mymeetings= Meetingpopulating::where('invited_id', Auth::id() )->count();
+
+        $meetingsCreatedbyme = Meetingpopulating::where('creator_id', Auth::id() )->count();
 
 
 
-        //$monthsBD =  Application::fillBarMonthsBD() ;
 
-        return view('home', compact('students', 'parents', 'teatchers','secretarias','admins','masters', 'classes', 'subjects', 'tests','fournitures','rooms', 'roomtypes', 'etages' ));
+        return view('home', compact('students', 'parents', 'teatchers','secretarias','admins','masters', 'classes', 'subjects', 'tests','fournitures','rooms', 'roomtypes', 'etages', 'objctypes', 'objcts', 'observations', 'callings', 'meetingtypes', 'meetings', 'mymeetings', 'meetingsCreatedbyme', 'courses'));
     }
 
     public function monthsBD()

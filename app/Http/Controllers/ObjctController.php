@@ -78,15 +78,15 @@ class ObjctController extends Controller
 
         $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name ;
         $creation['info'] .='</strong> a ajouté un object qui porte le nom <strong>'.$obj->name;
-         $creation['info'] .= '  </strong> en type <strong>'. $objctype->name ;
+        $creation['info'] .= '  </strong> en type <strong>'. $objctype->name ;
          $creation['info'] .= '</strong> et qui est dans la chambre <strong> N'. $room->name; 
          $creation['info'] .='</strong> son etat est <strong>'. $obj->state;
-        $creation['info'] .= '</strong> '. $desciption .' .'  ;
+        $creation['info'] .= '</strong> '. $description .' .'  ;
 
         History::create( $creation );
 
-        if( $roomtype ){
-            return response()->json(['id' => $obj->id, 'name' => $obj->name, 'desciption' => $obj->desciption, 'objctype' => $objctype->name, 'state' => ArrayHolder::states( $obj->state ), 'room' => $room->name ]);
+        if( $obj ){
+            return response()->json(['id' => $obj->id, 'name' => $obj->name, 'description' => $obj->description, 'objctype' => $objctype->name, 'state' => ArrayHolder::states( $obj->state ), 'room' => $room->name ]);
         }
         
 

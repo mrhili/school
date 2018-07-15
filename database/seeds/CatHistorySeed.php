@@ -13,6 +13,8 @@ class CatHistorySeed extends Seeder
     {
         //kind 0- defficit / 1- normal / 2 - benifits
 
+        //role -> what role can see this history
+
         DB::table('history_categories')->insert([
             'name' => 'Payement d\'un éleve ( + avec un benefits):',
             'model' => 'User',
@@ -207,6 +209,27 @@ class CatHistorySeed extends Seeder
             'kind' => 1,
             'role' => 1
         ]);//24
+        DB::table('history_categories')->insert([
+            'name' => 'Un cours a était ajouté:',
+            'model' => 'Course',
+            'icon' => 'book',
+            'kind' => 1,
+            'role' => 1
+        ]);//25
+        DB::table('history_categories')->insert([
+            'name' => 'Un subcour a etait crée est ajouté a un coure:',
+            'model' => 'Subcourse',
+            'icon' => 'book',
+            'kind' => 1,
+            'role' => 1
+        ]);//26
+        DB::table('history_categories')->insert([
+            'name' => 'Un subcour a etait linké a un coure:',
+            'model' => 'Subcourse',
+            'icon' => 'book',
+            'kind' => 1,
+            'role' => 1
+        ]);//27
 
 
     }

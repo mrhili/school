@@ -15,6 +15,35 @@ class CreateObservationsTable extends Migration
     {
         Schema::create('observations', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('observer_id')->unsigned()->index();
+            $table->foreign('observer_id')
+              ->references('id')
+              ->on('users')
+              ->onDelete('cascade'); 
+
+            $table->integer('observed_id')->unsigned()->index();
+            $table->foreign('observed_id')
+              ->references('id')
+              ->on('users')
+              ->onDelete('cascade');
+
+            $table->integer('year_id')->unsigned()->index();
+            $table->foreign('year_id')
+              ->references('id')
+              ->on('years')
+              ->onDelete('cascade');
+
+            $table->string('title');
+
+            $table->text('observation')->nullable();
+
+            $table->tinyInteger('type');
+
+            $table->boolean('seen')->default(false);
+
+            $table->boolean('reported')->default(false);
+
             $table->timestamps();
         });
     }

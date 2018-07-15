@@ -188,7 +188,7 @@ class TestController extends Controller
 
                 }
 
-                $navigation
+                $navigation;
                 if( $request->navigation ){
 
                     $navigation = true;
@@ -250,7 +250,7 @@ class TestController extends Controller
 
         }
 
-        $navigation
+        $navigation;
         if( $request->navigation ){
 
             $navigation = true;

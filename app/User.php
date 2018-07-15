@@ -58,6 +58,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Testyearsubclass', 'teatcher_id');
     }
 
+    public function maker()
+    {
+        return $this->hasMany('App\Courseyearsubclass', 'teatcher_id');
+    }
+
     public function the_class()
     {
         return $this->belongsTo('App\TheClass');
@@ -67,5 +72,80 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Fournituration');
     }
+
+
+    public function byme()
+    {
+        return $this->belongsToMany('App\User', 'observations','observer_id', 'observed_id')
+        ->withPivot('id')
+        ->withPivot('title')
+        ->withPivot('observation')
+        ->withPivot('type')
+        ->withPivot('seen')
+        ->withPivot('reported')
+        ;
+    }
+
+    public function aboutme()
+    {
+        return $this->belongsToMany('App\User', 'observations','observed_id', 'observer_id' )
+        ->withPivot('id')
+        ->withPivot('title')
+        ->withPivot('observation')
+        ->withPivot('type')
+        ->withPivot('seen')
+        ->withPivot('reported')
+        ;
+    }
+
+    public function calls()
+    {
+        return $this->belongsToMany('App\User', 'callings','caller_id', 'parent_id')
+            ->withPivot('id')
+            ->withPivot('object')
+            ->withPivot('time1')
+            ->withPivot('time2')
+            ->withPivot('time3')
+            ->withPivot('seen')
+            ->withPivot('agree')
+            ->withPivot('timeChoosenComming')
+            ->withPivot('otherTimeComming')
+            ->withPivot('disagrement')
+            ->withPivot('year_id')
+            ->withPivot('terminated')
+            ->withPivot('result')
+        ;
+    }
+
+    public function tocome()
+    {
+        return $this->belongsToMany('App\User', 'callings','parent_id', 'caller_id' )
+            ->withPivot('id')
+            ->withPivot('object')
+            ->withPivot('time1')
+            ->withPivot('time2')
+            ->withPivot('time3')
+            ->withPivot('seen')
+            ->withPivot('agree')
+            ->withPivot('timeChoosenComming')
+            ->withPivot('otherTimeComming')
+            ->withPivot('disagrement')
+            ->withPivot('year_id')
+            ->withPivot('terminated')
+            ->withPivot('result')
+        ;
+    }
+
+    public function meetings_created()
+    {
+        return $this->hasMany('App\Meetingpopulating', 'creator_id' );
+    }
+
+    public function meetings_invited()
+    {
+        return $this->hasMany('App\Meetingpopulating', 'invited_id' );
+    }
+
+
 
 }

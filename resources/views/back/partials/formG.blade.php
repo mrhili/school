@@ -24,6 +24,22 @@
 
                         {!! Form::number($name, null, $output ) !!}
 
+                    @elseif( $type == 'url' )
+
+                        @php
+                            $primary = ['class' => 'form-control '. $class, 'required' => $required ];
+
+
+
+                            $output = array_merge($primary,$additionalInfo);
+
+                        @endphp
+
+
+                        {!! Form::url($name, null, $output) !!}
+
+                    
+
                     @elseif( $type == 'text' )
 
                         @php
@@ -80,6 +96,22 @@
 
 
                         {!! Form::date($name, null, $output) !!}
+
+                    @elseif( $type == 'datetime-local' )
+
+                        @php
+                            $primary = ['class' => 'form-control '. $class, 'required' => $required ];
+
+
+
+                            $output = array_merge($primary,$additionalInfo);
+
+                        @endphp
+
+                        {{ Form::input('dateTime-local', $name, null, $output) }}
+
+
+
 
 
                     @elseif( $type == 'textarea' )

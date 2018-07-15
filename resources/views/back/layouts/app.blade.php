@@ -134,6 +134,8 @@ desired effect
 
 <!-- jQuery 3 -->
 <script src="{!! asset('adminl/bower_components/jquery/dist/jquery.min.js') !!}"></script>
+
+@yield('beforeBootstrap')
 <!-- Bootstrap 3.3.7 -->
 <script src="{!! asset('adminl/bower_components/bootstrap/dist/js/bootstrap.min.js') !!}"></script>
 

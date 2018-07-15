@@ -21,4 +21,9 @@ class Subjectclass extends Model
         return $this->hasMany('App\Testyearsubclass');
     }
 
+    public function cousepopuating()
+    {
+        return $this->hasMany('App\Courseyearsubclass');
+    }
+
 }

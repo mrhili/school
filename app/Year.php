@@ -22,4 +22,9 @@ class Year extends Model
         return $this->hasMany('App\Testyearsubclass');
     }
 
+    public function coursepopulating()
+    {
+        return $this->hasMany('App\Courseyearsubclass');
+    }
+
 }

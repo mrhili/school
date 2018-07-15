@@ -168,7 +168,6 @@ return [
          * Package Service Providers...
          */
 
-
         /*
          * Application Service Providers...
          */
@@ -183,6 +182,11 @@ return [
         //HELPERS
         App\Providers\CommonServiceProvider::class,
         App\Providers\ConfigServiceProvider::class
+
+
+
+
+
 
 
     ],
@@ -240,6 +244,8 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
         'PDF' => Barryvdh\DomPDF\Facade::class,
+
+        'Carbon' => 'Carbon\Carbon',
 
         //HELPERS
 

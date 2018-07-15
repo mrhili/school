@@ -8,44 +8,58 @@
 
 @section('content')
 
+<h1 class="text-center">{{ Session::get('yearName') }}</h1>
 
-@if(Auth::check())
+<h2 class="text-center">Personelle</h2>
+<div class="row">
 
-    @if(Auth::user()->role == 1)
 
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
+
 
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-yellow">
+          <div class="small-box bg-green">
             <div class="inner">
-              <h3>{{ $mytests}}</h3>
-              <p><a href="{{ route('tests.mytests') }}">My tests</a></p>
+              <h3>{{ $observations }}</h3>
+              <p><a href="{{ route('observations.my-obs') }}">Observations</a></p>
             </div>
             <div class="icon">
-              <i class="fa fa-list-ol"></i>
+              <i class="fa fa-file"></i>
             </div>
-            
+            <a href="{{ route('observations.write') }}" class="small-box-footer">Voire observations <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{ $mymeetings }}</h3>
+              <p><a href="{{ route('meetings.mine') }}">MyMeetings</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="" class="small-box-footer">Voire observations <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 
 
 
-      </div>
-      <!-- /.row -->
 
-    @endif
 
-@endif
+</div>
 
+<hr>
+<h2 class="text-center">Les gens</h2>
       <!-- Small boxes (Stat box) -->
       <div class="row">
-      <h1 style="text-center">{{ Session::get('yearName') }}</h1>
+
 
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-aqua">
+              <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
                 <div class="inner">
                   <h3>{{ $students }}</h3>
 
@@ -62,7 +76,7 @@
 
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-green">
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>{{ $parents }}</h3>
 
@@ -79,7 +93,7 @@
 
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-yellow">
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>{{ $teatchers }}</h3>
 
@@ -94,7 +108,7 @@
 
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-red">
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>{{ $secretarias }}</h3>
 
@@ -121,7 +135,7 @@
 
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-red">
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>{{ $admins }}</h3>
 
@@ -136,7 +150,7 @@
 
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-yellow">
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>{{ $masters }}</h3>
 
@@ -153,13 +167,14 @@
       </div>
       <!-- /.row -->
 
-
+<hr>
+<h2 class="text-center">Dashboard</h2>
       <!-- Small boxes (Stat box) -->
       <div class="row">
 
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-yellow">
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>{{ $classes}}</h3>
               <p><a href="{{ route('classes.list') }}">Classes</a></p>
@@ -173,7 +188,7 @@
 
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-green">
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>{{ $subjects}}</h3>
               <p><a href="{{ route('subjects.list') }}">Subjects</a></p>
@@ -186,7 +201,7 @@
         </div>
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-green">
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>{{ $tests}}</h3>
               <p><a href="{{ route('tests.index') }}">Tests</a></p>
@@ -199,7 +214,7 @@
         </div>
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-green">
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>{{ $fournitures}}</h3>
               <p><a href="{{ route('fournitures.list') }}">Fournitures</a></p>
@@ -210,38 +225,9 @@
             <a href="{{ route('fournitures.list') }}" class="small-box-footer">Ajouter un test maintenent <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>{{ $rooms }}</h3>
-              <p><a href="{{ route('rooms.list') }}">Rooms</a></p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-file"></i>
-            </div>
-            <a href="{{ route('rooms.list') }}" class="small-box-footer">Ajouter un room maintenent <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>{{ $roomtypes }}</h3>
-              <p><a href="{{ route('roomtypes.list') }}">Room types</a></p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-file"></i>
-            </div>
-            <a href="{{ route('roomtypes.list') }}" class="small-box-footer">Ajouter un room maintenent <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>{{ $etages }}</h3>
               <p><a href="{{ route('etages.list') }}">Etages</a></p>
@@ -252,6 +238,138 @@
             <a href="{{ route('etages.list') }}" class="small-box-footer">Ajouter un room maintenent <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <div class="inner">
+              <h3>{{ $roomtypes }}</h3>
+              <p><a href="{{ route('roomtypes.list') }}">Room types</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('roomtypes.list') }}" class="small-box-footer">Ajouter un room maintenent <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <div class="inner">
+              <h3>{{ $rooms }}</h3>
+              <p><a href="{{ route('rooms.list') }}">Rooms</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('rooms.list') }}" class="small-box-footer">Ajouter un room maintenent <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+
+
+
+
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <div class="inner">
+              <h3>{{ $objctypes }}</h3>
+              <p><a href="{{ route('etages.list') }}">Type dobjet</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('objctypes.list') }}" class="small-box-footer">Ajouter un room maintenent <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <div class="inner">
+              <h3>{{ $objcts }}</h3>
+              <p><a href="{{ route('etages.list') }}">Obejcts</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('objcts.list') }}" class="small-box-footer">Ajouter un room maintenent <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <a class="inner" href="{{ route('callings.all') }}">
+              <h3>{{ $callings }}</h3>
+              <p>Callings</p>
+            </a>
+            <div class="icon">
+              <i class="fa fa-phone"></i>
+            </div>
+            <a href="{{ route('callings.new') }}" class="small-box-footer">Voire observations <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <a class="inner" href="{{ route('meetingtypes.list') }}">
+              <h3>{{ $meetingtypes }}</h3>
+              <p>Meetingttypes</p>
+            </a>
+            <div class="icon">
+              <i class="fa fa-phone"></i>
+            </div>
+            <a href="{{ route('meetingtypes.list') }}" class="small-box-footer">Voire observations <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <a class="inner" href="{{ route('meetings.list') }}">
+              <h3>{{ $meetings }}</h3>
+              <p>Meetings</p>
+            </a>
+            <div class="icon">
+              <i class="fa fa-phone"></i>
+            </div>
+            <a href="{{ route('meetings.list') }}" class="small-box-footer">Voire observations <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <a class="inner" href="{{ route('meetingpopulatings.managelist') }}">
+              <h3>{{ $meetingsCreatedbyme }}</h3>
+              <p>Manage meeting</p>
+            </a>
+            <div class="icon">
+              <i class="fa fa-phone"></i>
+            </div>
+            <a href="{{ route('meetingpopulatings.managelist') }}" class="small-box-footer">Voire observations <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <a class="inner" href="{{ route('courses.list') }}">
+              <h3>{{ $courses }}</h3>
+              <p>Courses</p>
+            </a>
+            <div class="icon">
+              <i class="fa fa-phone"></i>
+            </div>
+            <a href="{{ route('courses.list') }}" class="small-box-footer">Voire observations <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        
+
+
 
 
       </div>
@@ -285,7 +403,7 @@ Outils
 
 
 
-      
+
 
   @endslot
 
@@ -310,7 +428,7 @@ Outils
 
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-yellow">
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>H</h3>
               <p><a href="{{ route('classes.list') }}">Historique</a></p>
@@ -328,7 +446,7 @@ Outils
 
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-yellow">
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>A</h3>
               <p><a href="{{ route('classes.list') }}">Application Configuration</a></p>
@@ -344,7 +462,7 @@ Outils
 
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-yellow">
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>S</h3>
               <p><a href="{{ route('classes.list') }}">School Configuration</a></p>

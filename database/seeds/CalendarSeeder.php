@@ -12,12 +12,15 @@ class CalendarSeeder extends Seeder
     public function run()
     {
         //
+        /*
           $data = [
          ['title'=>'Finacial forum', 'start_date'=>'2017-10-12', 'end_date'=>'2017-09-15'],
          ['title'=>'Devtalk', 'start_date'=>'2017-10-13', 'end_date'=>'2017-09-25'],
          ['title'=>'Super Event', 'start_date'=>'2017-09-23', 'end_date'=>'2017-09-24'],
          ['title'=>'wtf event', 'start_date'=>'2017-09-19', 'end_date'=>'2017-09-27'],
         ];
-        \DB::table('calendars')->insert($data);        
+        \DB::table('calendars')->insert($data); 
+
+        */       
     }
 }

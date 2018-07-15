@@ -14,11 +14,17 @@ use App\{
     History,
     HistoryCategory,
     Fournituration,
-    TheClass
+    TheClass,
+    Meetingtype,
+    Meeting,
+    Meetingpopulating,
+    PivotCoursub
 
 };
 
 use Session;
+use Carbon;
+use Auth;
 //TODO
 /*
 Add the Transport field to students
@@ -85,7 +91,7 @@ class FormFields {
 
 		    if( array_key_exists ( $item , $arr ) ){
 
-		        return $arr[ $item ]; 
+		        return $arr[ $item ];
 
 			}else{
 
@@ -106,6 +112,21 @@ class FormFields {
 
 class Holder {
 
+    public static function teaserTypes( $item = null ){
+
+        $teaserTypes = [
+            'Teaser text',
+            'Teaser video'
+        ];
+
+        if( $item === null){
+            return $teaserTypes;
+        }else{
+            return $teaserTypes[$item];
+        }
+
+    }
+
     public static function gender( $item = null ){
 
         $genderTypes = [
@@ -113,9 +134,9 @@ class Holder {
             'Masculin'
         ];
 
-        if( $item == null){
+        if( $item === null){
             return $genderTypes;
-        }elseif( $item ){
+        }else{
             return $genderTypes[$item];
         }
 
@@ -140,9 +161,9 @@ class Holder {
             'Décembre'
         ];
 
-        if( $item == null){
+        if( $item === null){
             return $months;
-        }elseif( $item ){
+        }else{
             return $months[$item];
         }
 
@@ -160,9 +181,9 @@ class Holder {
             'Master'
         ];
 
-        if( $item == null){
+        if( $item === null){
             return $rolesTypes;
-        }elseif( $item ){
+        }else{
             return $rolesTypes[$item];
         }
 
@@ -177,9 +198,9 @@ class Holder {
             'Cart de credit'
         ];
 
-        if( $item == null){
+        if( $item === null){
             return $paymentMethods;
-        }elseif( $item ){
+        }else{
             return $paymentMethods[$item];
         }
     }
@@ -201,7 +222,7 @@ class Holder {
             'black'
         ];
 
-        
+
         return $backgrounds[array_rand($backgrounds)];
 
     }
@@ -217,10 +238,25 @@ class Holder {
             'à changer'
         ];
 
-        if( $item == null){
+        if( $item === null){
             return $states;
-        }elseif( $item ){
+        }else{
             return $states[$item];
+        }
+    }
+
+    public static function observation_types( $item = null ){
+
+        $types = [
+            'Bonne',
+            'Entre les deux',
+            'Mauvaise'
+        ];
+
+        if( $item === null){
+            return $types;
+        }else{
+            return $types[$item];
         }
     }
 
@@ -251,7 +287,7 @@ class Math {
         else{
 
             $array['class'] = 'success';
-            
+
         }
 
         return $array;
@@ -285,21 +321,170 @@ class Timing {
 
 class Relation {
 
-    public static function fillStudentsFournituration( $fourniture, $year , $class  ){
 
-        $the_class = TheClass::find( $class);
+    public static function linkSubcourse2Course($course){
 
-        
-        foreach ($the_class->students as $student) {
-            # code...
-            Fournituration::create([
-                'student_id' => $student->id,
-                'year_id' => $year,
-                'the_class_id' => $the_class->id,
-                'fourniture_id' => $fourniture
-            ]);
+        $sorting = $course->subcourses()->pluck('sorting')->toArray();
+
+        sort($sorting);
+
+        $end = end($sorting);
+
+        $course->subcourses()->attach($subcourse->id, ['sorting' => ++$end ]);
+
+        return $end;
+
+    }
+
+
+
+
+
+    public static function linkSubcourse2CourseAfter($course,$subcourse, $id){
+
+        $beforeItem = PivotCoursub::where('course_id', $course->id)->where('subcourse_id', $id)->first();
+
+        $sortOfBefore = $beforeItem->sorting;
+
+        $sorting = $course->subcourses()->pluck('sorting')->toArray();
+
+        sort($sorting);
+
+        $baster = $sortOfBefore +1;
+        $baster2 = false;
+
+        foreach ($sorting as $sort) {
+            
+            if( $sort ==  $baster){
+
+                $toChange = PivotCoursub::where('course_id', $course->id)->where('subcourse_id', $id)->where('sorting', $baster)->first();
+
+                if( $toChange ){
+
+                    if( $baster2 == false ){ 
+
+                        $course->subcourses()->attach($subcourse->id, ['sorting' => $baster ]);
+
+                        $baster2 = true;
+
+                    }
+
+                    $toChange->sorting = ++$baster;
+                    $toChange->save();
+
+                    continue;
+                }
+
+
+            }
+
+            if( $baster2 ){
+
+                $toChange = PivotCoursub::where('course_id', $course->id)->where('sorting', $baster)->first();
+
+                $toChange->sorting = ++$baster;
+                $toChange->save();
+
+            }
+
+
         }
 
+        return $sortOfBefore;
+
+    }
+
+
+
+
+
+
+
+
+//Relation::linkSubcourse2CourseBefore($course, $newsubcourse ,$subcourse->id);
+
+    public static function linkSubcourse2CourseBefore($course,$subcourse, $id){
+
+        $beforeItem = PivotCoursub::where('course_id', $course->id)->where('subcourse_id', $id)->first();
+
+        $sortOfBefore = $beforeItem->sorting;
+
+        $sorting = $course->subcourses()->pluck('sorting')->toArray();
+
+        sort($sorting);
+
+        $baster = $sortOfBefore;
+        $baster2 = false;
+
+        foreach ($sorting as $sort) {
+            
+            if( $sort ==  $baster){
+
+                $toChange = PivotCoursub::where('course_id', $course->id)->where('subcourse_id', $id)->where('sorting', $baster)->first();
+
+                if( $toChange ){
+
+                    if( $baster2 == false ){ 
+
+                        $course->subcourses()->attach($subcourse->id, ['sorting' => $baster ]);
+
+                        $baster2 = true;
+
+                    }
+
+                    $toChange->sorting = ++$baster;
+                    $toChange->save();
+
+                    continue;
+                }
+
+
+            }
+
+            if( $baster2 ){
+
+                $toChange = PivotCoursub::where('course_id', $course->id)->where('sorting', $baster)->first();
+
+                $toChange->sorting = ++$baster;
+                $toChange->save();
+
+            }
+
+
+        }
+
+        return $sortOfBefore;
+
+    }
+
+
+    public static function fillPopulateMeeting($meeting_id){
+
+        $meeting = Meeting::find( $meeting_id );
+
+        $meetingtype = Meetingtype::find( $meeting->meetingtype_id );
+
+        $loop = json_decode( $meetingtype->roles , true);
+
+        foreach ($loop as $role) {
+        # code...
+            $people = User::where('role', $role )->pluck('id')->toArray();
+
+            //dd($people);
+
+            foreach ($people as $invited_id) {
+            # code...
+
+                Meetingpopulating::create([
+                    'meeting_id' =>  $meeting->id,
+                    'creator_id' => Auth::id(),
+                    'invited_id' => $invited_id
+                ]);
+
+            }
+
+
+        }
 
     }
 
@@ -307,7 +492,7 @@ class Relation {
 
         $the_class = TheClass::find( $class);
 
-        
+
         foreach ($the_class->fournitures as $fourniture) {
             # code...
             Fournituration::create([
@@ -400,7 +585,7 @@ class Relation {
             ]);
 
         }
-        
+
     }
 
     public static function byModel($model, $id){
@@ -414,6 +599,79 @@ class Relation {
 
 class Application{
 
+    public static function fillPresentButton($model){
+
+        $array = [];
+
+        //dd($model);
+
+        $present = $model->present;
+
+        if( (bool) $present ){
+
+            //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+            $array[ 'icon' ] = 'V';
+            $array[ 'class' ] = 'success';
+
+        }else{
+
+            //$existArray[ 'icon' ] = '';
+            $array[ 'icon' ] = 'X';
+            $array[ 'class' ] = 'danger';
+
+        }
+
+
+        return $array;
+    }
+
+
+    public static function formatDate4Html($date1){
+
+          $d1 = new Carbon( $date1  );
+          $date1 =  $d1->format('Y-m-d h:i');
+          $ex = explode(" ",$date1);
+          return implode("T",$ex);
+    }
+
+    public static function fillTerminatedButtonCalling($model){
+
+        $array = [];
+
+
+        //dd($model);
+
+        $terminated = $model->terminated;
+        $result = $model->result;
+
+        if( (bool) $terminated ){
+
+            //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+            $array[ 'icon' ] = 'Términer';
+            $array[ 'class' ] = 'success';
+
+            if( $result == '' || $result == null ){
+
+                $array[ 'icon' ] .= 'Un résultat doit etre ecrit le plus vite possible';
+
+            }
+
+
+        }else{
+
+            //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+            $array[ 'icon' ] = 'Pas encore términer';
+            $array[ 'class' ] = 'danger';
+
+
+
+
+        }
+
+
+        return $array;
+    }
+
     public static function fillRejectedButton($model){
 
         $array = [];
@@ -422,7 +680,7 @@ class Application{
 
         $rejected = $model->rejected;
 
-        if( $rejected ){
+        if( (bool) $rejected ){
 
             //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
             $array[ 'icon' ] = 'V';
@@ -448,7 +706,7 @@ class Application{
 
         $confirmed = $model->confirmed;
 
-        if( $confirmed ){
+        if( (bool) $confirmed ){
 
             //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
             $array[ 'icon' ] = 'V';
@@ -466,6 +724,33 @@ class Application{
         return $array;
     }
 
+    public static function fillReportedButton($model){
+
+        $array = [];
+
+
+        //dd($model);
+
+        $reported = $model->reported;
+
+        if( (bool) $reported ){
+
+            //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+            $array[ 'icon' ] = 'Deja reporté';
+            $array[ 'class' ] = 'success';
+
+        }else{
+
+            //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+            $array[ 'icon' ] = 'Reporter maintenent';
+            $array[ 'class' ] = 'info';
+
+        }
+
+
+        return $array;
+    }
+
     public static function fillExistButton($model){
 
         $existArray = [];
@@ -474,7 +759,7 @@ class Application{
 
         $exist = $model->exist;
 
-        if( $exist ){
+        if( (bool) $exist ){
 
             //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
             $existArray[ 'icon' ] = 'V';
@@ -488,11 +773,11 @@ class Application{
 
         }
 
-        $confirmed = $model->confirmed;
-        $rejected = $model->rejected;
-        $required = $model->fourniture->required;
+        $confirmed = (bool) $model->confirmed;
+        $rejected = (bool) $model->rejected;
+        $required = (bool) $model->fourniture->required;
 
-        if( $exist && $confirmed && !$rejected){
+        if(  $exist &&  $confirmed && !$rejected){
 
             $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">confirmé de puis ladministration</p>';
 
@@ -580,7 +865,7 @@ class Application{
 
         $months = Month::findMany([1, 2, 3, 4, 5, 6, 7, 8 ]);
 
-        
+
         foreach ($months as $month) {
             # code...
 

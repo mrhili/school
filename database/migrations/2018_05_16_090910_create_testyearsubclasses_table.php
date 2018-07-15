@@ -20,7 +20,7 @@ class CreateTestyearsubclassesTable extends Migration
             $table->foreign('subject_the_class_id')
               ->references('id')
               ->on('subject_the_class')
-              ->onDelete('set null'); 
+              ->onDelete('set null');
 
             $table->integer('subject_id')->unsigned()->index()->nullable();
             $table->foreign('subject_id')
@@ -39,7 +39,7 @@ class CreateTestyearsubclassesTable extends Migration
             $table->foreign('test_id')
               ->references('id')
               ->on('tests')
-              ->onDelete('set null'); 
+              ->onDelete('set null');
 
             $table->integer('year_id')->unsigned()->index()->nullable();
             $table->foreign('year_id')

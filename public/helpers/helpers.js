@@ -17,3 +17,7 @@ function randombgcolor(){
 	return backgroundcolors[Math.floor(Math.random()*backgroundcolors.length)];
 }
 
+/*function toString(value) {
+  return value.toString();
+}*/
+

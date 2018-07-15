@@ -17,9 +17,10 @@ class CreateCalendarsTable extends Migration
             $table->increments('id');
 
             $table->string('title');
-            $table->date('start_date');
-            $table->date('end_date');
-
+            $table->time('start_date');
+            $table->time('end_date');
+            $table->boolean('is_all_day');
+            $table->string('background_color');
             $table->timestamps();
         });
     }
