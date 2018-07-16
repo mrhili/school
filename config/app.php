@@ -183,7 +183,8 @@ return [
 
         //HELPERS
         App\Providers\CommonServiceProvider::class,
-        App\Providers\ConfigServiceProvider::class
+        App\Providers\ConfigServiceProvider::class,
+        App\Providers\SchoolconfigServiceProvider::class,
 
 
 
@@ -262,7 +263,7 @@ return [
         'GetSetting' => App\Helpers\Config\Setting::class,
 
 
-        
+
 
 
     ],

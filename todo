@@ -59,3 +59,9 @@ rewrite id when replacing
 --------------------
 
 Loca middleware :   'ar' => 'ar_AR', TO CHANGE
+
+-----------------------
+
+school configurations
+
+if the master put some config that make easy for entring fields

@@ -12,7 +12,16 @@
 */
 
 
-
+/* $rolesTypes = [
+     'users',
+     'students',
+     'parents',
+     'teatchers',
+     'secretarias',
+     'admins',
+     'masters'
+ ];
+ */
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,13 +54,18 @@ Route::name('language')->get('language', 'HomeController@getLanguage');
 
 Route::group(['middleware' => ['user']], function () {
 
+  Route::get('/profile', 'HomeController@profile')->name('profile');
+
+
 	Route::get('/home', 'HomeController@index')->name('home');
 
-	Route::get('/user-profile/{user}', 'StudentController@userProfile')->name('users.profile');
+
 
 });
 
 Route::group(['middleware' => ['student']], function () {
+
+  Route::get('/my-profile-as-student', 'StudentController@myProfile')->name('users.profile');
 	//
 
 	Route::get('/my-meetings', 'MeetingpopulatingController@mine')->name('meetings.mine');
@@ -89,6 +103,8 @@ Route::group(['middleware' => ['student']], function () {
 
 Route::group(['middleware' => ['parent']], function () {
 
+  Route::get('/my-profile-as-parent', 'ParentController@profile')->name('parents.profile');
+
 	Route::get('/parent-home', 'ParentController@home')->name('parents.home');
 
 	Route::get('/student-profile/{student}', 'StudentController@profile')->name('students.profile');
@@ -99,28 +115,30 @@ Route::group(['middleware' => ['parent']], function () {
 
     Route::get('/child-fournitures/{child}', 'FourniturationController@childFournitures')->name('fournitures.child-fournitures');
     Route::get('/data-child-fournitures/{child}', 'FourniturationController@dataChildFournitures')->name('fournitures.data-child-fournitures');
- 
+
 });
 
 Route::group(['middleware' => ['teatcher']], function () {
+
+  Route::get('/my-profile-as-teatcher', 'TeatcherController@profile')->name('teatchers.profile');
 
 	Route::get('/courses', 'CourseController@list')->name('courses.list');
 	Route::post('/store-course', 'CourseController@store')->name('courses.store');
 	//ading and linking sub course
 	Route::get('/add-subcourse/{course}', 'SubcourseController@addSubCourse2Course')->name('subcourses.add-link');
 	Route::post('/add-subcourse/{course}', 'SubcourseController@storeSubCourse2Course')->name('subcourses.store-link');
-	Route::put('/link-subcourse/{course}/{subcourse}', 'SubcourseController@linkSubCourse2Course')->name('subcourses.link-course');	
+	Route::put('/link-subcourse/{course}/{subcourse}', 'SubcourseController@linkSubCourse2Course')->name('subcourses.link-course');
 
 //Before
 	Route::post('/add-subcourse-before/{course}/{subcourse}', 'SubcourseController@storeSubCourse2CourseBefore')->name('subcourses.store-link-before');
-	Route::put('/link-subcourse-before/{course}/{subcourse}/{subcourseBefore}', 'SubcourseController@linkSubCourse2CourseBefore')->name('subcourses.link-course-before');	
+	Route::put('/link-subcourse-before/{course}/{subcourse}/{subcourseBefore}', 'SubcourseController@linkSubCourse2CourseBefore')->name('subcourses.link-course-before');
 //After
 	Route::post('/add-subcourse-after/{course}/{subcourse}', 'SubcourseController@storeSubCourse2CourseAfter')->name('subcourses.store-link-after');
-	Route::put('/link-subcourse-after/{course}/{subcourse}/{subcourseAfter}', 'SubcourseController@linkSubCourse2CourseAfter')->name('subcourses.link-course-after');	
+	Route::put('/link-subcourse-after/{course}/{subcourse}/{subcourseAfter}', 'SubcourseController@linkSubCourse2CourseAfter')->name('subcourses.link-course-after');
 //Repace
 
 	Route::post('/replace-subcourse/{course}/{subcourse}', 'SubcourseController@storeSubCourse2CourseAndDetachSubcourse')->name('subcourses.replace-new');
-	Route::put('/replace-link-subcourse/{course}/{subcourse}/{detach}', 'SubcourseController@linkSubCourse2CourseAndDetachSubcourse')->name('subcourses.replace-link');	
+	Route::put('/replace-link-subcourse/{course}/{subcourse}/{detach}', 'SubcourseController@linkSubCourse2CourseAndDetachSubcourse')->name('subcourses.replace-link');
 
 
 //Delete
@@ -151,6 +169,8 @@ Route::group(['middleware' => ['teatcher']], function () {
 });
 
 Route::group(['middleware' => ['secretaria']], function () {
+
+  Route::get('/my-profile-as-secretaria', 'SecretariaController@profile')->name('secretarias.profile');
 
 	Route::get('/meeting-list-management', 'MeetingpopulatingController@managelist')->name('meetingpopulatings.managelist');
 	Route::get('/meeting-management/{meetingpopulating}', 'MeetingpopulatingController@manage')->name('meetingpopulatings.manage');
@@ -230,15 +250,21 @@ Route::group(['middleware' => ['secretaria']], function () {
 
 Route::group(['middleware' => ['admin']], function () {
 
+  Route::get('/my-profile-as-admin', 'AdminController@profile')->name('admins.profile');
+
 	Route::get('/months-bd', 'HomeController@monthsBD')->name('home.months-bd');
 
 });
 
 Route::group(['middleware' => ['master']], function () {
 
+  Route::get('/my-profile-as-master', 'MasterController@profile')->name('masters.profile');
+
 	Route::get('/add-user/{role?}', 'UserController@add')->name('users.add');
 
 	Route::post('/store-user', 'UserController@store')->name('users.store');
+
+    Route::get('/school-configs', 'SchoolconfigController@index')->name('schoolconfigs.index');
 
     Route::get('/configs', 'ConfigController@index')->name('configs.index');
 

@@ -169,6 +169,26 @@ class Holder {
 
     }
 
+    public static function roles_routing( $item = null ){
+
+        $rolesTypes = [
+            'users',
+            'students',
+            'parents',
+            'teatchers',
+            'secretarias',
+            'admins',
+            'masters'
+        ];
+
+        if( $item === null){
+            return $rolesTypes;
+        }else{
+            return $rolesTypes[$item];
+        }
+
+    }
+
     public static function roles( $item = null ){
 
         $rolesTypes = [
@@ -354,14 +374,14 @@ class Relation {
         $baster2 = false;
 
         foreach ($sorting as $sort) {
-            
+
             if( $sort ==  $baster){
 
                 $toChange = PivotCoursub::where('course_id', $course->id)->where('subcourse_id', $id)->where('sorting', $baster)->first();
 
                 if( $toChange ){
 
-                    if( $baster2 == false ){ 
+                    if( $baster2 == false ){
 
                         $course->subcourses()->attach($subcourse->id, ['sorting' => $baster ]);
 
@@ -417,14 +437,14 @@ class Relation {
         $baster2 = false;
 
         foreach ($sorting as $sort) {
-            
+
             if( $sort ==  $baster){
 
                 $toChange = PivotCoursub::where('course_id', $course->id)->where('subcourse_id', $id)->where('sorting', $baster)->first();
 
                 if( $toChange ){
 
-                    if( $baster2 == false ){ 
+                    if( $baster2 == false ){
 
                         $course->subcourses()->attach($subcourse->id, ['sorting' => $baster ]);
 

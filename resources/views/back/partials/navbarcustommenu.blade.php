@@ -103,7 +103,7 @@
               <!-- The user image in the navbar-->
               {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'user-image'] ) !!}
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{{ 'USER NAME' }}</span>
+              <span class="hidden-xs">{{ Auth::user()->name }} {{ Auth::user()->last_name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -111,8 +111,8 @@
                 {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'img-circle'] ) !!}
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  {{ Auth::user()->name }} {{ Auth::user()->last_name }}
+                  <small>{{ ArrayHolder::roles(  Auth::user()->role  )}}</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -137,7 +137,7 @@
                 <div class="row">
                 @forelse(config('app.locales') as $locale)
 
-                
+
                   @if($locale != session('locale'))
                       <div class="col-xs-4 text-center">
                         <a href="{{ route('language', $locale) }}">{{ session('locale') }}</a>
@@ -154,7 +154,7 @@
 
 
 
-                  
+
                 </div>
 
                 <!-- /.row -->
@@ -162,7 +162,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{ route('profile') }}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="{{ route('logout') }}" id="logoutbutton" class="btn btn-default btn-flat">Sign out</a>

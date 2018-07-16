@@ -4,6 +4,10 @@
 
 @endphp
 
+@section('title')
+L'ajout dun etudiant
+@endsection
+
 @extends('back.layouts.app')
 
 
@@ -114,13 +118,13 @@ Nouveau etudient
 
     @include('back.partials.formG', ['name' => 'assurence_pay', 'type' => 'number', 'text' => 'Frais dassurence', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
-    @include('back.partials.formG', ['name' => 'transport', 'type' => 'checkbox', 'text' => 'Transport', 'class'=>'transport-check', 'required' => false, 'checked' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'transport', 'type' => 'checkbox', 'text' => 'Transport', 'class'=>'transport-check', 'required' => false, 'checked' => true,'additionalInfo' => []])
 
     @include('back.partials.formG', ['name' => 'transport_pay', 'type' => 'number', 'text' => 'Payement montielle du transport', 'class'=>'transport-field', 'required' => false,'additionalInfo' => []])
 
     @include('back.partials.formG', ['name' => 'trans_assurence_pay', 'type' => 'number', 'text' => 'Assurence du transport', 'class'=>'transport-field', 'required' => false,'additionalInfo' => []])
 
-    @include('back.partials.formG', ['name' => 'add_classes', 'type' => 'checkbox', 'text' => 'Cours de soutien', 'class'=>'add-classes-check', 'required' => false, 'checked' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'add_classes', 'type' => 'checkbox', 'text' => 'Cours de soutien', 'class'=>'add-classes-check', 'required' => false, 'checked' => true,'additionalInfo' => []])
 
     @include('back.partials.formG', ['name' => 'add_classes_pay', 'type' => 'number', 'text' => 'Payement montielle des cours de soutien', 'class'=>'add-classes-field', 'required' => false,'additionalInfo' => []])
 

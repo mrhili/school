@@ -7,4 +7,8 @@ use Illuminate\Http\Request;
 class MasterController extends Controller
 {
     //
+    public function profile(){
+      return 'you arrivr';
+
+    }
 }

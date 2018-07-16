@@ -27,6 +27,7 @@ use Auth;
 
 use App;
 use Session;
+use ArrayHolder;
 
 class HomeController extends Controller
 {
@@ -39,6 +40,14 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function profile(){
+      $user = Auth::user();
+
+      return redirect()->route(  ArrayHolder::roles_routing($user->role).'.profile');
+
+    }
+
 
     /**
      * Show the application dashboard.

@@ -57,8 +57,13 @@ class StudentController extends Controller
         $ids = Subjectclass::where('the_class_id', $the_class_id)->pluck('id')->toArray();
 //->
         $mytests = Testyearsubclass::whereIn('subject_the_class_id', $ids )->where('publish', true)->get();
-        
+
         return view('back.students.home',compact('mytests'));
+    }
+
+    public function myProfile(){
+        return 'myprofile';
+
     }
 
     public function profile(User $student){
@@ -82,12 +87,12 @@ class StudentController extends Controller
         }else{
             return back();
         }
-        
+
     }
 
     public function add(){
 
-        
+
 
     	$classes = TheClass::pluck('name', 'id');
         $categoryships = Categoryship::pluck('name', 'id');
@@ -139,7 +144,7 @@ class StudentController extends Controller
 
     	$student = User::create($array);
 
-        
+
 	    if ($student) {
 
             /*            $table->integer('should_pay')->default(350);
@@ -165,7 +170,7 @@ class StudentController extends Controller
             $creation = [
 
                 'id_link' => $student->id,
-                'comment' => $request->comment, 
+                'comment' => $request->comment,
                 'hidden_note' => $request->hidden_note,
                 'by-admin' => Auth::id(),
 
@@ -255,7 +260,7 @@ class StudentController extends Controller
             $creationHistoryParent = [
 
                 'id_link' => $parent->id,
-                'comment' => $request->comment, 
+                'comment' => $request->comment,
                 'hidden_note' => $request->hidden_note,
                 'by-admin' => Auth::id(),
 
@@ -264,7 +269,7 @@ class StudentController extends Controller
 
             ];
 
-            $creationHistoryParent['info'] = "Le parent <strong>".$parent->name." ".$parent->last_name."</strong> a etait crée avec succes et il est relation en genre <strong>".$relationship->category->name ."</strong> avec létudiant <strong>".$student->name." ".$student->last_name."</strong> qui port le <strong>id = ".$student->id."</strong> 
+            $creationHistoryParent['info'] = "Le parent <strong>".$parent->name." ".$parent->last_name."</strong> a etait crée avec succes et il est relation en genre <strong>".$relationship->category->name ."</strong> avec létudiant <strong>".$student->name." ".$student->last_name."</strong> qui port le <strong>id = ".$student->id."</strong>
             est ses information personelle sont  => genre = <strong>". ArrayHolder::gender( $parent->gender) ."</strong>, Numero de la carte = <strong>".$parent->cin."</strong>, habite à <strong>".$parent->city."</strong>, code postal = <strong>".$parent->zip_code."</strong>, son adress est <strong>".$parent->adress."</strong>, son telephone 1  = <strong>".$parent->phone1."</strong>, telephone 2  = <strong>".$parent->phone2."</strong>, telephone 3  = <strong>".$parent->phone3."</strong>, telephone fix = <strong>".$parent->fix."</strong>, sa profession est <strong>".$parent->profession."</strong>, sa cituation familiale est <strong>".$maried."</strong> .";
 
                 }
@@ -280,7 +285,7 @@ class StudentController extends Controller
             }
 
 
-            
+
 
 
 
@@ -319,7 +324,7 @@ class StudentController extends Controller
 
         ->editColumn('nomcomplet', function( $model ){
 
-            
+
 
          return $model->name . ' '. $model->last_name;
 
@@ -334,7 +339,7 @@ class StudentController extends Controller
             $label = $moneyArray['money'];
             $class = $moneyArray['class'];
 
-            
+
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id, 'data-month' => 13, 'id' => $model->id.'-13' ], null);
         })
@@ -347,7 +352,7 @@ class StudentController extends Controller
             $label = $moneyArray['money'];
             $class = $moneyArray['class'];
 
-            
+
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id, 'data-month' => 14, 'id' => $model->id.'-14' ], null);
         })
@@ -360,7 +365,7 @@ class StudentController extends Controller
             $label = $moneyArray['money'];
             $class = $moneyArray['class'];
 
-            
+
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id, 'data-month' => 15, 'id' => $model->id.'-15' ], null);
         })
@@ -376,12 +381,12 @@ class StudentController extends Controller
             $label = $moneyArray['money'];
             $class = $moneyArray['class'];
 
-            
+
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id, 'data-month' => 9, 'id' => $model->id.'-9' ], null);
         })
 
-        ->editColumn('octobre', function( $model ) use($year, $theclass){ 
+        ->editColumn('octobre', function( $model ) use($year, $theclass){
 
             $moneyArray = Application::fillMonthButton($model, 10,$year, $theclass->id );
 
@@ -392,7 +397,7 @@ class StudentController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id, 'data-month' => 10, 'id' => $model->id.'-10' ], null);
             })
-        ->editColumn('novembre', function( $model ) use($year, $theclass){ 
+        ->editColumn('novembre', function( $model ) use($year, $theclass){
 
             $moneyArray = Application::fillMonthButton($model, 11,$year, $theclass->id );
 
@@ -403,7 +408,7 @@ class StudentController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id , 'data-month' => 11 , 'id' => $model->id.'-11' ], null);
             })
-        ->editColumn('decembre', function( $model ) use($year, $theclass){  
+        ->editColumn('decembre', function( $model ) use($year, $theclass){
 
             $moneyArray = Application::fillMonthButton($model, 12,$year, $theclass->id );
 
@@ -414,7 +419,7 @@ class StudentController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id , 'data-month' => 12, 'id' => $model->id.'-12' ], null);
             })
-        ->editColumn('janvier', function( $model ) use($year, $theclass){ 
+        ->editColumn('janvier', function( $model ) use($year, $theclass){
 
             $moneyArray = Application::fillMonthButton($model, 1,$year, $theclass->id );
 
@@ -425,7 +430,7 @@ class StudentController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id ,'data-month' => 1, 'id' => $model->id.'-1' ], null);
             })
-        ->editColumn('fevrier', function( $model ) use($year, $theclass){ 
+        ->editColumn('fevrier', function( $model ) use($year, $theclass){
 
             $moneyArray = Application::fillMonthButton($model, 2,$year, $theclass->id );
 
@@ -436,7 +441,7 @@ class StudentController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id ,'data-month' => 2, 'id' => $model->id.'-2' ], null);
             })
-        ->editColumn('mars', function( $model ) use($year, $theclass){  
+        ->editColumn('mars', function( $model ) use($year, $theclass){
 
             $moneyArray = Application::fillMonthButton($model, 3,$year, $theclass->id );
 
@@ -445,7 +450,7 @@ class StudentController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id ,'data-month' => 3, 'id' => $model->id.'-3' ], null);
             })
-        ->editColumn('avril', function( $model ) use($year, $theclass){  
+        ->editColumn('avril', function( $model ) use($year, $theclass){
             $moneyArray = Application::fillMonthButton($model, 4,$year, $theclass->id );
 
 
@@ -455,7 +460,7 @@ class StudentController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id ,'data-month' => 4, 'id' => $model->id.'-4' ], null);
             })
-        ->editColumn('mai', function( $model ) use($year, $theclass){ 
+        ->editColumn('mai', function( $model ) use($year, $theclass){
 
             $moneyArray = Application::fillMonthButton($model, 5,$year, $theclass->id );
 
@@ -466,7 +471,7 @@ class StudentController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id ,'data-month' => 5, 'id' => $model->id.'-5' ], null);
             })
-        ->editColumn('juin', function( $model ) use($year, $theclass){ 
+        ->editColumn('juin', function( $model ) use($year, $theclass){
 
             $moneyArray = Application::fillMonthButton($model, 6,$year, $theclass->id );
 
