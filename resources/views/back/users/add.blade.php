@@ -14,6 +14,19 @@
 
 @endsection
 
+@section('page_header')
+L'ajout dun etudiant
+@endsection
+
+@section('page_header_desc')
+L'ajout dun etudiant
+@endsection
+
+@section('breadcrumb')
+  <li><a href="{{ route('home')  }}"><i class="fa fa-dashboard"></i> dashboard</a></li>
+  <li class="active"> L'ajout dun etudiant</li>
+@endsection
+
 @section('content')
 
 {!! Form::open(['route' => 'students.store', 'files' => true, 'method' => 'post' ,'class' => 'form-horizontal']) !!}
@@ -223,7 +236,7 @@ Nouveau etudient
 @section('scripts')
 
 <script type="text/javascript">
-  
+
   $('.add-classes-check').change(function() {
 
     var addClassesField = $('.add-classes-field');
