@@ -115,7 +115,7 @@ class StudentController extends Controller
 
     	if( $request->hasFile( 'img' ) ){
 
-    		$imgName = CommonPics::storeFile( $request->img , 'profils' );
+    		$imgName = CommonPics::storeFile( $request->img , 'students' );
 
     		$array["img"] = $imgName;
 
@@ -206,7 +206,7 @@ class StudentController extends Controller
 
             if( $request->hasFile( 'imgparent' ) ){
 
-                $imgNameParent = CommonPics::storeFile( $request->imgparent , 'profils' );
+                $imgNameParent = CommonPics::storeFile( $request->imgparent , 'parents' );
 
                 $arrayParent["img"] = $imgNameParent;
 

@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Config;
 use App\Schoolconfig;
-use Illuminate\Http\Request;
 use App\Helpers\Common\Pics;
 use File;
 
@@ -24,7 +22,7 @@ class SchoolconfigController extends Controller
         //
         $configs = Schoolconfig::all();
 
-        return view('back.schoolconfig.index', compact('configs'));
+        return view('back.schoolconfigs.index', compact('configs'));
     }
 
     /**

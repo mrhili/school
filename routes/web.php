@@ -65,7 +65,7 @@ Route::group(['middleware' => ['user']], function () {
 
 Route::group(['middleware' => ['student']], function () {
 
-  Route::get('/my-profile-as-student', 'StudentController@myProfile')->name('users.profile');
+  Route::get('/my-profile-as-student', 'StudentController@myProfile')->name('students.profile');
 	//
 
 	Route::get('/my-meetings', 'MeetingpopulatingController@mine')->name('meetings.mine');
@@ -107,7 +107,7 @@ Route::group(['middleware' => ['parent']], function () {
 
 	Route::get('/parent-home', 'ParentController@home')->name('parents.home');
 
-	Route::get('/student-profile/{student}', 'StudentController@profile')->name('students.profile');
+	Route::get('/student-profile/{student}', 'StudentController@hisProfile')->name('students.a-profile');
 
 
     Route::get('/child-notes/{child}', 'NoteController@childNotes')->name('notes.child-notes');
@@ -268,9 +268,17 @@ Route::group(['middleware' => ['master']], function () {
 
     Route::get('/configs', 'ConfigController@index')->name('configs.index');
 
+    Route::post('/school-configs/store', 'SchoolconfigController@store')->name('schoolconfigs.store');
+
+    Route::post('/schoolconfigs/store', 'SchoolconfigController@store')->name('schoolconfigs.store');
+
     Route::post('/configs/store', 'ConfigController@store')->name('configs.store');
 
+    Route::get('/schoolconfigs/add', 'SchoolconfigController@add')->name('schoolconfigs.add');
+
     Route::get('/configs/add', 'ConfigController@add')->name('configs.add');
+
+    Route::post('/schoolconfigs/store-config', 'SchoolconfigController@storeConfig')->name('schoolconfigs.store-config');
 
     Route::post('/configs/store-config', 'ConfigController@storeConfig')->name('configs.store-config');
 

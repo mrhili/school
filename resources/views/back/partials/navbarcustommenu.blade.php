@@ -97,6 +97,79 @@
             </ul>
           </li>
           <!-- User Account Menu -->
+          @guest
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'user-image'] ) !!}
+              </a>
+
+              <ul class="dropdown-menu">
+                <!-- The user image in the menu -->
+                <li class="user-header">
+                  {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'img-circle'] ) !!}
+
+                  <p>
+                    name
+                    <small>..</small>
+                  </p>
+                </li>
+                <!-- Menu Body -->
+
+                <li class="user-body">
+                  <div class="row">
+                    <div class="col-xs-4 text-center">
+                      <a href="#">Followers</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                      <a href="#">Sales</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                      <a href="#">Friends</a>
+                    </div>
+
+
+
+
+                  </div>
+
+                  <div class="row">
+                  @forelse(config('app.locales') as $locale)
+
+
+                    @if($locale != session('locale'))
+                        <div class="col-xs-4 text-center">
+                          <a href="{{ route('language', $locale) }}">{{ session('locale') }}</a>
+                        </div>
+                    @endif
+
+                  @empty
+
+                  <div class="col-xs-4 text-center">
+                      There is no language
+                    </div>
+
+                  @endforelse
+
+
+
+
+                  </div>
+
+                  <!-- /.row -->
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+
+                </li>
+              </ul>
+
+
+            </li>
+          @else
+
+
+
+
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -173,6 +246,12 @@
               </li>
             </ul>
           </li>
+
+
+
+        @endguest
+
+
           <!-- Control Sidebar Toggle Button -->
           <li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>

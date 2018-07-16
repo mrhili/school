@@ -465,14 +465,14 @@ Outils
           <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
               <h3>S</h3>
-              <p><a href="{{ route('classes.list') }}">School Configuration</a></p>
+              <p><a href="{{ route('schoolconfigs.index') }}">School Configuration</a></p>
 
               <p>...</p>
             </div>
             <div class="icon">
               <i class="fa fa-cogs"></i>
             </div>
-            <a href="{{ route('configs.index') }}" class="small-box-footer">School Configuration <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('schoolconfigs.add') }}" class="small-box-footer">School Configuration <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 

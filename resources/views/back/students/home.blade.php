@@ -26,6 +26,19 @@
                 </div>
               </div>
           <!-- ./col -->
+              <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                  <div class="inner">
+                    <h3>Mon profile</h3>
+                    <p>...</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-graduation-cap"></i>
+                  </div>
+                  <a href="{{ route('students.profile') }}" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
 
               <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
@@ -59,7 +72,7 @@ Examins
         <div class="row">
 <div class="col-xs-12">
         <h3>Mes tests</h3>
-          
+
 
   @forelse($mytests as $test)
 
@@ -106,7 +119,7 @@ Examins
 
 
 
-      
+
 
   @endslot
 
