@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'School'),
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'fr',
 
     /*
     |--------------------------------------------------------------------------
@@ -103,6 +103,8 @@ return [
     | will not be safe. Please do this before deploying an application!
     |
     */
+
+    'locales' => ['fr_FR' => 'Français', 'ar' => 'العربية', 'en' => 'English'],
 
     'key' => env('APP_KEY'),
 

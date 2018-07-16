@@ -25,6 +25,9 @@ use App\{
 use Application;
 use Auth;
 
+use App;
+use Session;
+
 class HomeController extends Controller
 {
     /**
@@ -97,5 +100,24 @@ class HomeController extends Controller
     {
 
         return response()->json( Application::fillBarMonthsBD() );
+    }
+
+
+
+
+    public function language(String $locale)
+    {
+        //App::setLocale($locale);
+        Session::put('locale', $locale);
+        return redirect()->back();
+        /*
+        $locale = in_array($locale, config('app.locales')) ? $locale : config('app.fallback_locale');
+        session(['locale' => $locale]);
+        return back();
+        */
+    }
+    public function getLanguage()
+    {
+        App::getLocale();
     }
 }

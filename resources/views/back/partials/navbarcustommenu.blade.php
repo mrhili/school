@@ -116,6 +116,7 @@
                 </p>
               </li>
               <!-- Menu Body -->
+
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
@@ -127,7 +128,35 @@
                   <div class="col-xs-4 text-center">
                     <a href="#">Friends</a>
                   </div>
+
+
+
+
                 </div>
+
+                <div class="row">
+                @forelse(config('app.locales') as $locale)
+
+                
+                  @if($locale != session('locale'))
+                      <div class="col-xs-4 text-center">
+                        <a href="{{ route('language', $locale) }}">{{ session('locale') }}</a>
+                      </div>
+                  @endif
+
+                @empty
+
+                <div class="col-xs-4 text-center">
+                    There is no language
+                  </div>
+
+                @endforelse
+
+
+
+                  
+                </div>
+
                 <!-- /.row -->
               </li>
               <!-- Menu Footer-->

@@ -39,6 +39,10 @@ Route::delete('/cal-dest/{cal}', 'CalendarController@destroy')->name('calendars.
 
 
 
+
+Route::name('language')->get('language/{lang}', 'HomeController@language');
+Route::name('language')->get('language', 'HomeController@getLanguage');
+
 Route::group(['middleware' => ['user']], function () {
 
 	Route::get('/home', 'HomeController@index')->name('home');
