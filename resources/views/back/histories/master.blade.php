@@ -146,7 +146,7 @@ The Main Configuration Of the web application
 			$('#modal').modal('show');
 		});
 	});
-	
+
 </script>
 
 @endsection

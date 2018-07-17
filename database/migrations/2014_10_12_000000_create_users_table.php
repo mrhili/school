@@ -19,10 +19,13 @@ class CreateUsersTable extends Migration
             $table->integer('num')->nullable()->unique()->unsigned();
             $table->string('name');
             $table->string('last_name')->nullable();
+            $table->string('arabic_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('arabic_last_name')->nullable();
             $table->boolean('gender')->nullable();
             $table->date('birth_date')->nullable();
             $table->string('birth_place')->nullable();
-            $table->string('city')->nullable(); 
+            $table->string('city')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('adress')->nullable();
             $table->string('phone')->nullable();

@@ -109,7 +109,23 @@ class StudentController extends Controller
 
 
 
-    	$array = array_except( $request->toarray(), ['_token', 'password' ,'img', 'year_id', 'should_pay', 'transport_pay', 'add_class_pay','transport', 'add_classes', 'saving_pay', 'tars_assurence_pay','assurence_pay', 'imgparent', 'nameparent', 'last_nameparent', 'genderparent', 'birth_dateparent', 'birth_placeparent', 'cityparent', 'zip_codeparent', 'adressparent', 'phone1parent', 'phone2parent', 'phone3parent' , 'whatsappparent',  'fixparent', 'emailparent', 'passwordparent', 'categoryship', 'cinparent', 'professionparent', 'family_situationparent']);
+    	$array = array_except( $request->toarray(), [
+        '_token',
+         'password' ,
+         'img',
+          'year_id', 'should_pay', 'transport_pay', 'add_class_pay','transport',
+           'add_classes', 'saving_pay', 'tars_assurence_pay',
+           'assurence_pay',
+            'imgparent', 'nameparent',
+             'last_nameparent', 'genderparent',
+             'birth_dateparent',
+             'birth_placeparent', 'cityparent',
+              'zip_codeparent', 'adressparent',
+              'phone1parent', 'phone2parent',
+              'phone3parent' , 'whatsappparent',  'fixparent',
+               'emailparent', 'passwordparent', 'categoryship',
+                'cinparent',
+               'professionparent', 'family_situationparent']);
 
         $arrayParent = [];
 
@@ -214,6 +230,8 @@ class StudentController extends Controller
 
             $arrayParent['name'] = $request->nameparent;
             $arrayParent['last_name'] = $request->last_nameparent;
+            $arrayParent['arabic_name'] = $request->arabic_nameparent;
+            $arrayParent['arabic_last_name'] = $request->arabic_last_nameparent;
             $arrayParent['gender'] = $request->genderparent;
             $arrayParent['birth_date'] = $request->birth_dateparent;
             $arrayParent['birth_place'] = $request->birth_placeparent;

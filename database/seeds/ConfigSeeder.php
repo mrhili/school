@@ -32,6 +32,14 @@ class ConfigSeeder extends Seeder
         ]);
 
         DB::table('configs')->insert([
+            'slug' => 'licence',
+            'nameSetting' => 'licence',
+            'value' => '49/50',
+            'type' => 'text',
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('configs')->insert([
             'slug' => 'company',
             'nameSetting' => 'company',
             'value' => 'Descktop company',
@@ -46,6 +54,14 @@ class ConfigSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
+        DB::table('configs')->insert([
+            'slug' => 'fix-number',
+            'nameSetting' => 'fix number',
+            'value' => '+212 06 06 06 06 06',
+            'type' => 'tel',
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+
 
 
 
@@ -54,6 +70,14 @@ class ConfigSeeder extends Seeder
             'nameSetting' => 'adress',
             'value' => 'Canada',
             'type' => 'textarea',
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('configs')->insert([
+            'slug' => 'city',
+            'nameSetting' => 'city',
+            'value' => 'Canada',
+            'type' => 'text',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
@@ -164,6 +188,6 @@ class ConfigSeeder extends Seeder
             'type' => 'text',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
-        
+
     }
 }

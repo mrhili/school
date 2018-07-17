@@ -52,7 +52,7 @@ class UserController extends Controller
 
     	if( $request->hasFile( 'img' ) ){
 
-    		$imgName = CommonPics::storeFile( $request->img , 'profils' );
+    		$imgName = CommonPics::storeFile( $request->img , ArrayHolder::roles_routing( $request->role ) );
 
     		$array["img"] = $imgName;
 
@@ -93,7 +93,7 @@ class UserController extends Controller
 
     	$user = User::create($array);
 
-        
+
 	    if ($user) {
 
             /*            $table->integer('should_pay')->default(350);
@@ -117,7 +117,7 @@ class UserController extends Controller
             $creation = [
 
                 'id_link' => $user->id,
-                'comment' => $request->comment, 
+                'comment' => $request->comment,
                 'hidden_note' => $request->hidden_note,
                 'by-admin' => Auth::id(),
 
@@ -185,7 +185,7 @@ class UserController extends Controller
 
         ->editColumn('nomcomplet', function( $model ){
 
-            
+
 
          return $model->name . ' '. $model->last_name;
 
@@ -200,12 +200,12 @@ class UserController extends Controller
             $label = $moneyArray['money'];
             $class = $moneyArray['class'];
 
-            
+
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id, 'data-month' => 9, 'id' => $model->id.'-9' ], null);
         })
 
-        ->editColumn('octobre', function( $model ) use($year){ 
+        ->editColumn('octobre', function( $model ) use($year){
 
             $moneyArray = Application::fillMonthButtonUser($model, 10,$year );
 
@@ -216,7 +216,7 @@ class UserController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id, 'data-month' => 10, 'id' => $model->id.'-10' ], null);
             })
-        ->editColumn('novembre', function( $model ) use($year){ 
+        ->editColumn('novembre', function( $model ) use($year){
 
             $moneyArray = Application::fillMonthButtonUser($model, 11,$year );
 
@@ -227,7 +227,7 @@ class UserController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id , 'data-month' => 11 , 'id' => $model->id.'-11' ], null);
             })
-        ->editColumn('decembre', function( $model ) use($year){  
+        ->editColumn('decembre', function( $model ) use($year){
 
             $moneyArray = Application::fillMonthButtonUser($model, 12,$year );
 
@@ -238,7 +238,7 @@ class UserController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id , 'data-month' => 12, 'id' => $model->id.'-12' ], null);
             })
-        ->editColumn('janvier', function( $model ) use($year){ 
+        ->editColumn('janvier', function( $model ) use($year){
 
             $moneyArray = Application::fillMonthButtonUser($model, 1,$year );
 
@@ -249,7 +249,7 @@ class UserController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id ,'data-month' => 1, 'id' => $model->id.'-1' ], null);
             })
-        ->editColumn('fevrier', function( $model ) use($year){ 
+        ->editColumn('fevrier', function( $model ) use($year){
 
             $moneyArray = Application::fillMonthButtonUser($model, 2,$year );
 
@@ -260,7 +260,7 @@ class UserController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id ,'data-month' => 2, 'id' => $model->id.'-2' ], null);
             })
-        ->editColumn('mars', function( $model ) use($year){  
+        ->editColumn('mars', function( $model ) use($year){
 
             $moneyArray = Application::fillMonthButtonUser($model, 3,$year );
 
@@ -269,7 +269,7 @@ class UserController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id ,'data-month' => 3, 'id' => $model->id.'-3' ], null);
             })
-        ->editColumn('avril', function( $model ) use($year){  
+        ->editColumn('avril', function( $model ) use($year){
             $moneyArray = Application::fillMonthButtonUser($model, 4,$year );
 
 
@@ -279,7 +279,7 @@ class UserController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id ,'data-month' => 4, 'id' => $model->id.'-4' ], null);
             })
-        ->editColumn('mai', function( $model ) use($year){ 
+        ->editColumn('mai', function( $model ) use($year){
 
             $moneyArray = Application::fillMonthButtonUser($model, 5,$year );
 
@@ -290,7 +290,7 @@ class UserController extends Controller
 
             return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle btn-pay', 'data-toggle'=>'modal', 'data-target'=>'#modal-default', 'data-id' => $model->id ,'data-month' => 5, 'id' => $model->id.'-5' ], null);
             })
-        ->editColumn('juin', function( $model ) use($year){ 
+        ->editColumn('juin', function( $model ) use($year){
 
             $moneyArray = Application::fillMonthButtonUser($model, 6,$year );
 

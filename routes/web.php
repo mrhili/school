@@ -34,6 +34,8 @@ return $model_name::find(1)->name;
 
 Route::get('/testtest/', 'TestController@test');
 
+Route::get('/testprintable', 'TestoController@printable');
+
 Auth::routes();
 
 Route::get('/get-rep-cal', 'CalendarrepeateController@getRepeated')->name('calendarrepeates.get-json');
@@ -47,6 +49,8 @@ Route::get('/cal-show/{cal}', 'CalendarController@show')->name('calendars.show')
 Route::delete('/cal-dest/{cal}', 'CalendarController@destroy')->name('calendars.destroy');
 
 
+Route::get('demos/loaddata','HistoryController@loadData');
+Route::post('demos/loaddata','HistoryController@loadDataAjax' );
 
 
 Route::name('language')->get('language/{lang}', 'HomeController@language');

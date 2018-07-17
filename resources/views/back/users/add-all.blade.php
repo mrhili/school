@@ -60,6 +60,8 @@ Nouveau etudient
 
   	@include('back.partials.formG', ['name' => 'name', 'type' => 'text', 'text' => 'Prénom', 'class'=>'', 'required' => true,'additionalInfo' => []])
   	@include('back.partials.formG', ['name' => 'last_name', 'type' => 'text', 'text' => 'Nom', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'arabic_name', 'type' => 'text', 'text' => 'Arabic Prénom', 'class'=>'', 'required' => true,'additionalInfo' => []])
+  	@include('back.partials.formG', ['name' => 'arabic_last_name', 'type' => 'text', 'text' => 'Arabic Nom', 'class'=>'', 'required' => true,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'cin', 'type' => 'text', 'text' => 'CIN', 'class'=>'', 'required' => true,'additionalInfo' => []])
   	@include('back.partials.formG', ['name' => 'gender', 'type' => 'select', 'selected' => null , 'text' => 'Genre', 'class'=>'', 'required' => true, 'array' => ArrayHolder::gender() ,'additionalInfo' => []])
 
@@ -72,7 +74,7 @@ Nouveau etudient
   	@include('back.partials.formG', ['name' => 'zip_code', 'type' => 'text', 'text' => 'Code postal', 'class'=>'', 'required' => true,'additionalInfo' => []])
   	@include('back.partials.formG', ['name' => 'adress', 'type' => 'text', 'text' => 'Adress', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
-    
+
     @include('back.partials.formG', ['name' => 'profession', 'type' => 'text', 'text' => 'Profession du Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
     @include('back.partials.formG', ['name' => 'family_situation', 'type' => 'checkbox', 'text' => 'La situation familiale, Marié?', 'class'=>'', 'required' => false, 'checked' => false,'additionalInfo' => []])
@@ -174,7 +176,7 @@ Nouveau etudient
 @section('scripts')
 
 <script type="text/javascript">
-  
+
   $('.cnss-check').change(function() {
 
     var cnssField = $('.cnss-field');

@@ -8,7 +8,7 @@ use App\Config;
 class Setting {
     /**
      * @param int $user_id User-id
-     * 
+     *
      * @return string
      */
     public static function get_username() {
@@ -16,7 +16,7 @@ class Setting {
     }
 
 	public static function getConfig( $slug ){
-	
+
 		if( Config::where( 'slug', $slug )->count() > 0 ){
 			return Config::where( 'slug', $slug )->first()->value;
 		}else{

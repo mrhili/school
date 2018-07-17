@@ -8,7 +8,7 @@ class MasterController extends Controller
 {
     //
     public function profile(){
-      return 'you arrivr';
+      return view('back.masters.my-profile');
 
     }
 }
