@@ -16,28 +16,10 @@
   {{ GetSetting::getConfig( 'fix-number' ) }}<br />
     </p>
 
-    <h1 class="text-center">Fiche D’inscription N PP yearname</h1>
-    <h2 class="text-center">Partie éleve</h2>
-
-
+    <h1 class="text-center">Contrat de travail N PP yearname</h1>
+    <h2 class="text-center">Genre de trail: Genre de trail</h2>
   </div>
-  <hr />
-  <div class="col-xs-12">
-    <h2 class="text-center">Classement</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Année</th> <th>Class</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Mark</td> <td>Otto</td>
-        </tr>
 
-      </tbody>
-    </table>
-  </div>
 
 
   <hr />
@@ -126,10 +108,13 @@
               <th>Paiement montielle</th> <td>Paiement montielle</td>
             </tr>
             <tr>
-              <th>Frais d'enregistrement</th> <td>Frais d'enregistrement</td>
+              <th>Avec cnss</th> <td>Oui / non</td>
             </tr>
             <tr>
-              <th>Frais d’assuence</th> <td>Frais d’assuence</td>
+              <th>prix cnss montielle</th> <td>prix cnss montielle</td>
+            </tr>
+            <tr>
+              <th>cnss id</th> <td>X6548464654</td>
             </tr>
 
             

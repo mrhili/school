@@ -17,28 +17,10 @@
     </p>
 
     <h1 class="text-center">Fiche D’inscription N PP yearname</h1>
-    <h2 class="text-center">Partie éleve</h2>
+    <h2 class="text-center">Partie parent</h2>
 
 
   </div>
-  <hr />
-  <div class="col-xs-12">
-    <h2 class="text-center">Classement</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Année</th> <th>Class</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Mark</td> <td>Otto</td>
-        </tr>
-
-      </tbody>
-    </table>
-  </div>
-
 
   <hr />
   <div class="col-xs-12">
@@ -73,12 +55,48 @@
             <tr>
               <th>Ville de naissance</th> <td>Ville de naissance</td>
             </tr>
+            <tr>
+              <th>CIN</th> <td>CIN</td>
+            </tr>
             
           </tbody>
 
         </table>
 
     </div>
+
+    <div class="col-xs-6">
+      
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <th>Profession</th> <td>Profession</td>
+            </tr>
+            <tr>
+              <th>Situation familiale</th> <td>Situation familiale</td>
+            </tr>
+            <tr>
+              <th>Téléphone 1</th> <td>Téléphone 1</td>
+            </tr>
+            <tr>
+              <th>Téléphone 2</th> <td>Téléphone 2</td>
+            </tr>
+            <tr>
+              <th>Téléphone 3</th> <td>Téléphone 3</td>
+            </tr>
+            <tr>
+              <th>Téléphone 4</th> <td>Téléphone 4</td>
+            </tr>
+            <tr>
+              <th>Relation avec éléve</th> <td>Relation avec éléve</td>
+            </tr>
+            
+          </tbody>
+
+        </table>
+
+    </div>
+
 
     <div class="col-xs-6">
       
@@ -108,74 +126,6 @@
 
 
   </div>
-
-
-  <hr />
-  <div class="col-xs-12">
-    <h2 class="text-center">Payement</h2>
-
-
-
-
-
-    <div class="col-xs-6">
-
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-              <th>Paiement montielle</th> <td>Paiement montielle</td>
-            </tr>
-            <tr>
-              <th>Frais d'enregistrement</th> <td>Frais d'enregistrement</td>
-            </tr>
-            <tr>
-              <th>Frais d’assuence</th> <td>Frais d’assuence</td>
-            </tr>
-
-            
-          </tbody>
-
-        </table>
-
-    </div>
-
-
-    <div class="col-xs-6">
-
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-              <th>Avec transport</th> <td>Oui / non</td>
-            </tr>
-            <tr>
-              <th>Frais transport</th> <td>Frais transport</td>
-            </tr>
-            
-          </tbody>
-
-        </table>
-
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-              <th>Avec course de soutien</th> <td>Oui / non</td>
-            </tr>
-            <tr>
-              <th>Frais des cours</th> <td>Frais transport</td>
-            </tr>
-            
-          </tbody>
-
-        </table>
-
-    </div>
-
-
-
-
-
-  </div>
-
 
 
 

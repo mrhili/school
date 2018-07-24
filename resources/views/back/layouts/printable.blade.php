@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>{{ GetSetting::getConfig('site-name') }} | @yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
@@ -17,7 +17,11 @@
 
   <link rel="stylesheet" href="{!! asset('harjita/herjita.css') !!}" type="text/css" media="print" charset="utf-8">
 
-
+  <style>
+  .page-break {
+      page-break-after: always;
+  }
+  </style>
 </head>
 
 <body>

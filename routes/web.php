@@ -35,6 +35,9 @@ return $model_name::find(1)->name;
 Route::get('/testtest/', 'TestController@test');
 
 Route::get('/testprintable', 'TestoController@printable');
+Route::get('/testprintable-parent', 'TestoController@printableParent');
+Route::get('/testprintable-worker', 'TestoController@printableWorker')->name('printables.worker');
+Route::get('/testprintable-sheet-worker', 'TestoController@printableSheetWorker')->name('printables.sheet-worker');
 
 Auth::routes();
 
