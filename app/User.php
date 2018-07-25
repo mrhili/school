@@ -40,12 +40,12 @@ class User extends Authenticatable
 
     public function relashionshipsStudentsParent()
     {
-        return $this->belongsToMany('App\User', 'relashionships','parent_id', 'student_id');
+        return $this->belongsToMany('App\User', 'relashionships','parent_id', 'student_id')->withPivot('categoryship_id');
     }
 
     public function relashionshipsParentsStudent()
     {
-        return $this->belongsToMany('App\User', 'relashionships','student_id', 'parent_id');
+        return $this->belongsToMany('App\User', 'relashionships','student_id', 'parent_id')->withPivot('categoryship_id');
     }
 
     public function userpayments()

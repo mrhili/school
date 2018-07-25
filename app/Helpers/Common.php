@@ -127,6 +127,9 @@ class Holder {
 
     }
 
+
+
+
     public static function gender( $item = null ){
 
         $genderTypes = [
@@ -544,7 +547,10 @@ class Relation {
 
         }
 
+        // frais denreg
+
         $saving = Month::find(13);
+
 
         StudentsPayment::create([
             'user_id' => $student,
@@ -556,6 +562,7 @@ class Relation {
             'add_classes_pay' => 0,
         ]);
 
+        // frais assurenc
 
         $assurence = Month::find(14);
 
@@ -569,6 +576,8 @@ class Relation {
             'transport_pay' => 0,
             'add_classes_pay' => 0,
         ]);
+
+        // frais trans asurence
 
         $trans_assurence = Month::find(15);
 
@@ -618,6 +627,33 @@ class Relation {
 }
 
 class Application{
+
+/*
+public static function states( $item = null ){
+
+    $states = [
+        'Toute neuf',
+        'Trés bonne',
+        'bonne',
+        'moyenne',
+        'Pas mal',
+        'à changer'
+    ];
+
+    if( $item === null){
+        return $states;
+    }else{
+        return $states[$item];
+    }
+}
+*/
+    public static function family_situation( $item = null ){
+      if( $item ){
+          return 'marié';
+      }else{
+          return 'célibataire';
+      }
+    }
 
     public static function fillPresentButton($model){
 

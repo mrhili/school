@@ -39,6 +39,8 @@ Route::get('/testprintable-parent', 'TestoController@printableParent');
 Route::get('/testprintable-worker', 'TestoController@printableWorker')->name('printables.worker');
 Route::get('/testprintable-sheet-worker', 'TestoController@printableSheetWorker')->name('printables.sheet-worker');
 
+
+
 Auth::routes();
 
 Route::get('/get-rep-cal', 'CalendarrepeateController@getRepeated')->name('calendarrepeates.get-json');
@@ -72,7 +74,7 @@ Route::group(['middleware' => ['user']], function () {
 
 Route::group(['middleware' => ['student']], function () {
 
-  Route::get('/my-profile-as-student', 'StudentController@myProfile')->name('students.profile');
+  Route::get('/my-profileggggggg', 'StudentController@myProfile')->name('students.profile');
 	//
 
 	Route::get('/my-meetings', 'MeetingpopulatingController@mine')->name('meetings.mine');
@@ -176,6 +178,10 @@ Route::group(['middleware' => ['teatcher']], function () {
 });
 
 Route::group(['middleware' => ['secretaria']], function () {
+
+  Route::get('/printable-sheet-new-student-with-parent/{student}/{parent}', 'PrintableController@printableSheeNewStudentWithParent')->name('printables.new-student-with-parent');
+
+  Route::get('/printable-sheet-new-worker/{worker}', 'PrintableController@printableSheeNewWorker')->name('printables.new-worker');
 
   Route::get('/my-profile-as-secretaria', 'SecretariaController@profile')->name('secretarias.profile');
 

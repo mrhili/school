@@ -153,7 +153,7 @@ class UserController extends Controller
 
             //Alert::success('Success Title', 'Success Message');
 
-            return 'lo';
+            return redirect()->route('printables.new-worker', $user->id );
 
             }
 

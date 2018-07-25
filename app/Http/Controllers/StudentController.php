@@ -116,7 +116,8 @@ class StudentController extends Controller
           'year_id', 'should_pay', 'transport_pay', 'add_class_pay','transport',
            'add_classes', 'saving_pay', 'tars_assurence_pay',
            'assurence_pay',
-            'imgparent', 'nameparent',
+            'imgparent',
+             'nameparent',
              'last_nameparent', 'genderparent',
              'birth_dateparent',
              'birth_placeparent', 'cityparent',
@@ -298,7 +299,7 @@ class StudentController extends Controller
 
             //Alert::success('Success Title', 'Success Message');
 
-            return redirect()->route('students.all');
+              return redirect()->route('printables.new-student-with-parent',[ $student->id, $parent->id]  );
 
             }
 

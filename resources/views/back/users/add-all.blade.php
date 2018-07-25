@@ -129,7 +129,7 @@ Nouveau etudient
 
 
     @include('back.partials.formG', ['name' => 'should_be_payed', 'type' => 'number', 'text' => 'Il doit chaque mois', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'cnss', 'type' => 'checkbox', 'text' => 'Cnss', 'class'=>'cnss-check', 'required' => false, 'checked' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'cnss', 'type' => 'checkbox', 'text' => 'Cnss', 'class'=>'cnss-check', 'required' => false, 'checked' => true,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'cnss_payment', 'type' => 'number', 'text' => 'Payement montielle du Cnss', 'class'=>'cnss-field', 'required' => false,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'cnss_id', 'type' => 'text', 'text' => 'Cnss Id', 'class'=>'cnss-field', 'required' => false,'additionalInfo' => []])
 

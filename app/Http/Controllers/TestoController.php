@@ -34,7 +34,7 @@ class TestoController extends Controller
     public function printablesheetWorker(){
 
     	$pdf = PDF::loadView('back.testos.printable_worker');
-		return $pdf->download('worker.pdf');
+		  return $pdf->download('worker.pdf');
 /*
       $users = User::where('role', 6)->first();
 
@@ -42,5 +42,5 @@ class TestoController extends Controller
 */
     }
 
-    
+
 }

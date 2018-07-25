@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('last_name')->nullable();
             $table->string('arabic_name')->nullable();
-            $table->string('last_name')->nullable();
             $table->string('arabic_last_name')->nullable();
             $table->boolean('gender')->nullable();
             $table->date('birth_date')->nullable();
