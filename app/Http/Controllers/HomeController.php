@@ -41,6 +41,15 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    public function myProfile(){
+      $user = Auth::user();
+
+      
+
+      return redirect()->route(  ArrayHolder::roles_routing($user->role).'.my-profile');
+
+    }
+
     public function profile(){
       $user = Auth::user();
 

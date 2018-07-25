@@ -64,6 +64,10 @@ Route::name('language')->get('language', 'HomeController@getLanguage');
 Route::group(['middleware' => ['user']], function () {
 
   Route::get('/profile', 'HomeController@profile')->name('profile');
+  Route::get('/my-profile', 'HomeController@myProfile')->name('my-profile');
+  Route::get('/my-profile-as-user', 'UserController@myProfile')->name('users.my-profile');
+
+  Route::get('/my-profile-as-master', 'MasterController@myProfile')->name('masters.my-profile');
 
 
 	Route::get('/home', 'HomeController@index')->name('home');
@@ -74,7 +78,7 @@ Route::group(['middleware' => ['user']], function () {
 
 Route::group(['middleware' => ['student']], function () {
 
-  Route::get('/my-profileggggggg', 'StudentController@myProfile')->name('students.profile');
+  Route::get('/my-profile-as-student', 'StudentController@myProfile')->name('students.my-profile');
 	//
 
 	Route::get('/my-meetings', 'MeetingpopulatingController@mine')->name('meetings.mine');
@@ -271,7 +275,7 @@ Route::group(['middleware' => ['admin']], function () {
 
 Route::group(['middleware' => ['master']], function () {
 
-  Route::get('/my-profile-as-master', 'MasterController@profile')->name('masters.profile');
+  //Route::get('/my-profile-as-master', 'MasterController@profile')->name('masters.profile');
 
 	Route::get('/add-user/{role?}', 'UserController@add')->name('users.add');
 

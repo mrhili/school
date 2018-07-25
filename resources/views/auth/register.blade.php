@@ -12,7 +12,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form class="" method="POST" action="{{ route('login') }}">
+    <form class="" method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
 
       <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -57,14 +57,23 @@
       <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
 
 
-            <input id="password-confirm" type="password" class="form-control" name="password-confirm" placeholder="password confirmation" required>
+            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="password confirmation" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 
-        
-        
+
+
 
       </div>
+      <div class="row">
+        <div class="col-xs-8">
 
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+        </div>
+        <!-- /.col -->
+      </div>
     </form>
 
     <div class="social-auth-links text-center">

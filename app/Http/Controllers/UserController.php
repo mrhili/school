@@ -36,6 +36,13 @@ use Relation;
 class UserController extends Controller
 {
     //
+
+    public function myProfile(){
+
+      return view('back.users.my-profile');
+    }
+
+
     public function add($role = null){
 
     	return view('back.users.add-all',compact('role'));

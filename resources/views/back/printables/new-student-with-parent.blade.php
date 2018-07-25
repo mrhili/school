@@ -50,7 +50,7 @@
         <table class="table table-striped">
           <tbody>
             <tr>
-              <th>Image</th> <td><img src="{{ GetSetting::ifImg( 'logo' ) }}" alt="..." height="100px" width="auto"  class="block"></td>
+              <th>Image</th> <td><img src="{{ CommonPics::ifImg( 'students',  $student->img ) }}" alt="..." height="100px" width="auto"  class="block"></td>
             </tr>
             <tr>
               <th>Nom</th> <td>{{ $student->last_name }}</td>
@@ -214,7 +214,7 @@
             <table class="table table-striped">
               <tbody>
                 <tr>
-                  <th>Image</th> <td><img src="{{ GetSetting::ifImg( 'logo' ) }}" alt="..." height="100px" width="auto"  class="block"></td>
+                  <th>Image</th> <td><img src="{{ CommonPics::ifImg( 'parents',  $parent->img ) }}" alt="..." height="100px" width="auto"  class="block"></td>
                 </tr>
                 <tr>
                   <th>Ville de naissance</th> <td>{{ $parent->cin }}</td>
