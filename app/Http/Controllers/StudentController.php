@@ -62,8 +62,15 @@ class StudentController extends Controller
     }
 
     public function myProfile(){
-        return 'myprofile';
+        $year = Session::get('yearId');
+        $notes = Note::where('student_id' , Auth::user()->id )->where('year_id' , $year )->count();
+        $fournitures = Fournituration::where('student_id' , Auth::user()->id )->where('year_id' , $year )->count();
 
+        /****************/
+
+        $passInfo = true;
+        /*****************/
+        return view('back.students.my-profile',compact('notes', 'fournitures', 'passInfo'));
     }
 
     public function profile(User $student){

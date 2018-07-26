@@ -7,14 +7,10 @@
 <section class="container">
 <div class="row">
   <div class="text-center col-xs-12">
-    <img src="{{ GetSetting::ifImg( 'logo' ) }}" alt="..." height="100px" width="auto"  class="block">
-    <p class="">
-      <b>{{ GetSetting::getConfig( 'name' ) }}</b><br />
-  {{ GetSetting::getConfig( 'adress' ) }}<br />
-  Numéro et date de la licence {{ GetSetting::getConfig( 'licence' ) }}<br />
-  {{ GetSetting::getConfig( 'city' ) }}<br />
-  {{ GetSetting::getConfig( 'fix-number' ) }}<br />
-    </p>
+
+    @component('back.components.entity')
+
+    @endcomponent
 
     <h1 class="text-center">Fiche D’inscription {{--N PP--}} {{ Session::get('yearName') }}</h1>
     <h2 class="text-center">Partie éleve</h2>

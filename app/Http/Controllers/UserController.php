@@ -33,9 +33,19 @@ use Application;
 
 use Relation;
 
+
 class UserController extends Controller
 {
     //
+
+    public function changeInfo(Request $request, User $user){
+
+      $user->fill( $request->all() )->save();
+
+      alert()->success('Success','Les informations son changer avec succes');
+
+      return redirect()->back()->withInput();
+    }
 
     public function myProfile(){
 

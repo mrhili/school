@@ -44,8 +44,6 @@ class HomeController extends Controller
     public function myProfile(){
       $user = Auth::user();
 
-      
-
       return redirect()->route(  ArrayHolder::roles_routing($user->role).'.my-profile');
 
     }

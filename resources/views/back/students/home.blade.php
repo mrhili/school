@@ -36,7 +36,7 @@
                   <div class="icon">
                     <i class="fa fa-graduation-cap"></i>
                   </div>
-                  <a href="{{ route('students.profile') }}" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+                  <a href="{{ route('students.my-profile') }}" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
 

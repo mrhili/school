@@ -25,20 +25,20 @@ The Main Configuration Of the web application
 
                   @foreach($childs as $child)
                     <li>
-                      <a class="users-list-name" href="{{ route( 'students.profile',$child->id ) }}">
+                      <a class="users-list-name" href="">
                         <img src="dist/img/user1-128x128.jpg" alt="{{ $child->name }} {{ $child->last_name }} Image">
                       </a>
-                      
-                      <a class="users-list-name" href="{{ route( 'students.profile',$child->id ) }}">{{ $child->name }} {{ $child->last_name }}</a>
+
+                      <a class="users-list-name" href="">{{ $child->name }} {{ $child->last_name }}</a>
 
 
-                      
-                      
+
+
                           <a href=""><span class="users-list-date">...</span></a>
-                      
+
                     </li>
                   @endforeach
-                  
+
   @endslot
 
 
@@ -76,7 +76,7 @@ Outils
 
 
 
-      
+
 
   @endslot
 
