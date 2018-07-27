@@ -6,7 +6,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'img-circle'] ) !!}
+          {!! Html::image(CommonPics::ifImg( ArrayHolder::roles_routing( Auth::user()->role ) ,  Auth::user()->img ),'User Image', ['class' => 'img-circle'] ) !!}
         </div>
         <div class="pull-left info">
           @if(Auth::check())

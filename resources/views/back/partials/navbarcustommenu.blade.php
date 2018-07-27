@@ -16,7 +16,13 @@
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'img-circle'] ) !!}
+                        @guest
+                          {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'img-circle'] ) !!}
+                        @else
+                          {!! Html::image(CommonPics::ifImg( ArrayHolder::roles_routing( Auth::user()->role ) ,  Auth::user()->img ),'User Image', ['class' => 'img-circle'] ) !!}
+                        @endguest
+
+
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -101,12 +107,14 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'user-image'] ) !!}
+
               </a>
 
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
                 <li class="user-header">
                   {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'img-circle'] ) !!}
+
 
                   <p>
                     name
@@ -174,6 +182,7 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
+              {!! Html::image(CommonPics::ifImg( ArrayHolder::roles_routing( Auth::user()->role ) ,  Auth::user()->img ),'User Image', ['class' => 'user-image'] ) !!}
               {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'user-image'] ) !!}
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">{{ Auth::user()->name }} {{ Auth::user()->last_name }}</span>
@@ -181,8 +190,8 @@
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'img-circle'] ) !!}
 
+                {!! Html::image(CommonPics::ifImg( ArrayHolder::roles_routing( Auth::user()->role ) ,  Auth::user()->img ),'User Image', ['class' => 'img-circle'] ) !!}
                 <p>
                   {{ Auth::user()->name }} {{ Auth::user()->last_name }}
                   <small>{{ ArrayHolder::roles(  Auth::user()->role  )}}</small>

@@ -6,9 +6,87 @@
 
 @endsection
 
+
+@section('page_header')
+  Dashboard
+@endsection
+
+@section('page_header_desc')
+  année selectioné: {{ Session::get('yearName') }}</small></h1>
+@endsection
+
+@section('breadcrumb')
+  <ol class="breadcrumb">
+    <li><a href="{{ route('index') }}"><i class="fa fa-dashboard"></i> Acceuill</a></li>
+    <li class="active"><a href="{{ route('index') }}">Dashboard</a></li>
+  </ol>
+@endsection
+
+
+
 @section('content')
 
-<h1 style="text-center">{{ Session::get('yearName') }}</h1>
+
+  @component('back.components.dashboard_head')
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">3,200</h5>
+        <span class="description-text">Test passé</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">3,200</h5>
+        <span class="description-text">Exercice passé</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">3,200</h5>
+        <span class="description-text">Cours absenté</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">3,200</h5>
+        <span class="description-text">Action fait</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">3,200</h5>
+        <span class="description-text">Meeting arrivé</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">3,200</h5>
+        <span class="description-text">Note posé</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">3,200</h5>
+        <span class="description-text">Observation collécté</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">3,200</h5>
+        <span class="description-text">Année vecu</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+  @endcomponent
+
+
 
         <!-- Small boxes (Stat box) -->
         <div class="row">
@@ -26,19 +104,7 @@
                 </div>
               </div>
           <!-- ./col -->
-              <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-aqua">
-                  <div class="inner">
-                    <h3>Mon profile</h3>
-                    <p>...</p>
-                  </div>
-                  <div class="icon">
-                    <i class="fa fa-graduation-cap"></i>
-                  </div>
-                  <a href="{{ route('students.my-profile') }}" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-              </div>
+
 
               <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
@@ -56,6 +122,48 @@
           <!-- ./col -->
           </div>
         <!-- /.row -->
+
+@component('back.components.plain')
+
+  @slot('titlePlain')
+
+    Parents
+
+  @endslot
+
+
+  @slot('sectionPlain')
+
+
+                      <ul class="users-list clearfix">
+                        @foreach(Auth::user()->relashionshipsParentsStudent as $parent)
+                        <li>
+                          {!! Html::image(CommonPics::ifImg( 'parents' ,  $parent->img ),'User Image', ['class' => ''] ) !!}
+                          <a class="users-list-name" href="#">{{ $parent->name }} {{ $parent->last_name }}</a>
+                          <span class="users-list-date">relationship</span>
+                        </li>
+                        @endforeach
+
+                      </ul>
+
+
+
+
+
+  @endslot
+  @slot('footerPlain')
+
+
+
+  @endslot
+
+
+
+
+
+@endcomponent
+
+
 
 @component('back.components.plain')
 

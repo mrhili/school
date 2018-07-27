@@ -45,7 +45,7 @@
         <table class="table table-striped">
           <tbody>
             <tr>
-              <th>Image</th> <td><img src="{{ GetSetting::ifImg( 'logo' ) }}" alt="..." height="100px" width="auto"  class="block"></td>
+              <th>Image</th> <td><img src="{{ CommonPics::ifImg( ArrayHolder::roles_routing( $worker->role ),  $worker->img ) }}" alt="..." height="100px" width="auto"  class="block"></td>
             </tr>
             <tr>
               <th>Nom</th> <td>{{ $worker->cin }}</td>

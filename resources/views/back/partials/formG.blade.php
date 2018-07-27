@@ -1,4 +1,7 @@
+@if(empty($value))
+    @php $value = null; @endphp
 
+@endif
 
 
 
@@ -22,7 +25,7 @@
                         @endphp
 
 
-                        {!! Form::number($name, null, $output ) !!}
+                        {!! Form::number($name, $value, $output ) !!}
 
                     @elseif( $type == 'url' )
 
@@ -38,7 +41,7 @@
 
                         {!! Form::url($name, null, $output) !!}
 
-                    
+
 
                     @elseif( $type == 'text' )
 
@@ -174,14 +177,14 @@
 
                         </div>
 
-                        
+
 
                     @endif
 
 
                   </div>
                 </div>
-                        
+
 
                     @if ($errors->has($name))
                         <span class="help-block">
@@ -192,8 +195,6 @@
 
                     @if( $type == 'file' )
 
-                        
+
 
                     @endif
-
-
