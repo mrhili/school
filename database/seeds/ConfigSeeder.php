@@ -81,6 +81,14 @@ class ConfigSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
+        DB::table('configs')->insert([
+            'slug' => 'zip_code',
+            'nameSetting' => 'zip code',
+            'value' => '14052',
+            'type' => 'text',
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+
 
         DB::table('configs')->insert([
             'slug' => 'email',

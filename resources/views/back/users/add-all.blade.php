@@ -86,12 +86,12 @@ Nouveau etudient
     @include('back.partials.formG', ['name' => 'city', 'type' => 'text', 'text' => 'Ville', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
 
-    @include('back.partials.formG', ['name' => 'phone', 'type' => 'text', 'text' => 'Téléphone  1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'phone2', 'type' => 'text', 'text' => 'Téléphone 2', 'class'=>'', 'required' => false,'additionalInfo' => []])
-   @include('back.partials.formG', ['name' => 'phone3', 'type' => 'text', 'text' => 'Téléphone 3', 'class'=>'', 'required' => false,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'fix', 'type' => 'text', 'text' => 'Fix ', 'class'=>'', 'required' => false,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'whatsapp', 'type' => 'text', 'text' => 'Whatsapp', 'class'=>'', 'required' => false,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'facebook_link', 'type' => 'text', 'text' => 'Facebook', 'class'=>'', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'phone', 'type' => 'tel', 'text' => 'Téléphone  1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'phone2', 'type' => 'tel', 'text' => 'Téléphone 2', 'class'=>'', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'phone3', 'type' => 'tel', 'text' => 'Téléphone 3', 'class'=>'', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'fix', 'type' => 'tel', 'text' => 'Fix ', 'class'=>'', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'whatsapp', 'type' => 'tel', 'text' => 'Whatsapp', 'class'=>'', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'facebook', 'type' => 'url', 'text' => 'Facebook', 'class'=>'', 'required' => false,'additionalInfo' => []])
 
     <hr />
     <div class="text-center">

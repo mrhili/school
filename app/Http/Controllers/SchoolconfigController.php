@@ -33,7 +33,7 @@ class SchoolconfigController extends Controller
     public function add()
     {
         //
-        return view('back.Schoolconfig.add');
+        return view('back.schoolconfigs.add');
     }
 
 

@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('phone2')->nullable();
             $table->string('phone3')->nullable();
             $table->string('fix')->nullable();
+            $table->string('facebook')->nullable();
             $table->string('whatsapp')->nullable();
             $table->string('email')->unique();
             $table->string('password');

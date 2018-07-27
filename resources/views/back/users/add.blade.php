@@ -88,9 +88,9 @@ Nouveau etudient
 
   	@include('back.partials.formG', ['name' => 'zip_code', 'type' => 'text', 'text' => 'Code postal', 'class'=>'', 'required' => true,'additionalInfo' => []])
   	@include('back.partials.formG', ['name' => 'adress', 'type' => 'text', 'text' => 'Adress', 'class'=>'', 'required' => true,'additionalInfo' => []])
-  	@include('back.partials.formG', ['name' => 'phone', 'type' => 'text', 'text' => 'Téléphone', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'whatsapp', 'type' => 'text', 'text' => 'Whatsapp', 'class'=>'', 'required' => false,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'facebook_link', 'type' => 'text', 'text' => 'Facebook', 'class'=>'', 'required' => false,'additionalInfo' => []])
+  	@include('back.partials.formG', ['name' => 'phone', 'type' => 'tel', 'text' => 'Téléphone', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'whatsapp', 'type' => 'tel', 'text' => 'Whatsapp', 'class'=>'', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'facebook', 'type' => 'text', 'text' => 'Facebook Link', 'class'=>'', 'required' => false,'additionalInfo' => []])
 
 
     <hr />
@@ -155,7 +155,7 @@ Nouveau etudient
       </p>
     </div>
 
-    @include('back.partials.formG', ['name' => 'imgpaent', 'type' => 'file', 'text' => 'Image Parent 1', 'class'=>'', 'required' => false ,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'imgparent', 'type' => 'file', 'text' => 'Image Parent 1', 'class'=>'', 'required' => false ,'additionalInfo' => []])
 
 
 
@@ -188,11 +188,13 @@ Nouveau etudient
 
     @include('back.partials.formG', ['name' => 'zip_codeparent', 'type' => 'text', 'text' => 'Code postal Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'adressparent', 'type' => 'text', 'text' => 'Adress', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'phone1parent', 'type' => 'text', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'phone2parent', 'type' => 'text', 'text' => 'Téléphone Parent 2', 'class'=>'', 'required' => true,'additionalInfo' => []])
-   @include('back.partials.formG', ['name' => 'phone3parent', 'type' => 'text', 'text' => 'Téléphone Parent 3', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'fixparent', 'type' => 'text', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'whatsappparent', 'type' => 'text', 'text' => 'Whatsapp', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'phone1parent', 'type' => 'tel', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'phone2parent', 'type' => 'tel', 'text' => 'Téléphone Parent 2', 'class'=>'', 'required' => true,'additionalInfo' => []])
+   @include('back.partials.formG', ['name' => 'phone3parent', 'type' => 'tel', 'text' => 'Téléphone Parent 3', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'fixparent', 'type' => 'tel', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'whatsappparent', 'type' => 'tel', 'text' => 'Whatsapp', 'class'=>'', 'required' => true,'additionalInfo' => []])
+      @include('back.partials.formG', ['name' => 'facebookparent', 'type' => 'text', 'text' => 'Facebook Link', 'class'=>'', 'required' => false,'additionalInfo' => []])
+
 
     <hr />
     <div class="text-center">

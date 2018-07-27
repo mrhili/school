@@ -130,7 +130,7 @@ class StudentController extends Controller
              'birth_placeparent', 'cityparent',
               'zip_codeparent', 'adressparent',
               'phone1parent', 'phone2parent',
-              'phone3parent' , 'whatsappparent',  'fixparent',
+              'phone3parent' , 'whatsappparent','facebookparent',  'fixparent',
                'emailparent', 'passwordparent', 'categoryship',
                 'cinparent',
                'professionparent', 'family_situationparent']);
@@ -250,6 +250,8 @@ class StudentController extends Controller
             $arrayParent['phone2'] = $request->phone2parent;
             $arrayParent['phone3'] = $request->phone3parent;
             $arrayParent['fix'] = $request->fixparent;
+            $arrayParent['whatsapp'] = $request->whatsappparent;
+            $arrayParent['facebook'] = $request->facebookparent;
 
             $arrayParent['cin'] = $request->cinparent;
             $arrayParent['profession'] = $request->professionparent;

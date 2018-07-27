@@ -183,13 +183,15 @@ Route::group(['middleware' => ['teatcher']], function () {
 });
 
 Route::group(['middleware' => ['secretaria']], function () {
-  Route::name('secretarias.my-profile')->get('/my-profile-as-secretaria', 'SecretariaController@myProfile');
+  Route::get('/my-profile-as-secretaria', 'SecretariaController@myProfile')->name('secretarias.my-profile');
+
+  //Route::name('secretarias.my-profile')->get('/my-profile-as-secretaria', 'SecretariaController@myProfile');
 
   Route::get('/printable-sheet-new-student-with-parent/{student}/{parent}', 'PrintableController@printableSheeNewStudentWithParent')->name('printables.new-student-with-parent');
 
   Route::get('/printable-sheet-new-worker/{worker}', 'PrintableController@printableSheeNewWorker')->name('printables.new-worker');
 
-  Route::get('/my-profile-as-secretaria', 'SecretariaController@profile')->name('secretarias.profile');
+
 
 	Route::get('/meeting-list-management', 'MeetingpopulatingController@managelist')->name('meetingpopulatings.managelist');
 	Route::get('/meeting-management/{meetingpopulating}', 'MeetingpopulatingController@manage')->name('meetingpopulatings.manage');
@@ -267,9 +269,13 @@ Route::group(['middleware' => ['secretaria']], function () {
 
 });
 
+// you will replace the section above
+//require __DIR__.'/webroutes/secretaria.routes.php';
+
+
 Route::group(['middleware' => ['admin']], function () {
 
-  Route::get('/my-profile-as-admin', 'AdminController@profile')->name('admins.profile');
+  Route::get('/my-profile-as-admin', 'AdminController@myProfile')->name('admins.my-profile');
 
 	Route::get('/months-bd', 'HomeController@monthsBD')->name('home.months-bd');
 

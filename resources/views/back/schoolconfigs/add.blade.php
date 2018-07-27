@@ -68,13 +68,12 @@ The Main Configuration Of the web application
             $required = true;
 
             $class = 'form-control';
-
           @endphp
 
 
         @include('back.partials.formGopen', compact('name', 'required', 'textLabel'))
 
-          {!! Form::select($name, App\Helpers\Config\Holder::configTypes() , [ 'class' => $class ], App\Helpers\Config\Holder::configTypes(0)) !!}
+          {!! Form::select($name, App\Helpers\Config\Holder::configTypes() , [ 'class' => $class ]) !!}
 
         @include('back.partials.formGend')
 
@@ -125,7 +124,11 @@ The Main Configuration Of the web application
 
   @slot('footerPlain')
 
-            @include('back.components.button')
+            @component('back.components.button')
+              @slot('value')
+value
+              @endslot
+            @endcomponent
 
   @endslot
 
