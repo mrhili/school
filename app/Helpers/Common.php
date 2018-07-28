@@ -14,6 +14,7 @@ use App\{
     History,
     HistoryCategory,
     Fournituration,
+    Fourniture,
     TheClass,
     Meetingtype,
     Meeting,
@@ -507,6 +508,23 @@ class Relation {
             }
 
 
+        }
+
+    }
+
+
+    public static function fillStudentsFournituration( TheClass $the_class, Fourniture $fourniture  ){
+
+        $year = Session::get('yearId');
+
+        foreach ($the_class->students as $student) {
+            # code...
+            Fournituration::create([
+                'student_id' => $student->id,
+                'year_id' => $year,
+                'the_class_id' => $the_class->id,
+                'fourniture_id' => $fourniture->id
+            ]);
         }
 
     }

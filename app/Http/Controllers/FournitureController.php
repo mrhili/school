@@ -48,8 +48,8 @@ class FournitureController extends Controller
         $creation = [
 
             'id_link' => $fourniture->id,
-            'comment' => $request->comment, 
-            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh 
+            'comment' => $request->comment,
+            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
             'info' => 'just talk',
             'hidden_note' => $request->hidden_note,
             'by-admin' => $admin->id,
@@ -78,12 +78,12 @@ class FournitureController extends Controller
         if( $fourniture ){
             return response()->json(['id' => $fourniture->id, 'name' => $fourniture->name, 'additional_info' => $fourniture->additional_info ,'for' => $fourniture->for,'required' => $fourniture->required,'name' => $fourniture->average_price ]);
         }
-        
 
-        
+
+
 
         //return response()->json([ 'parameter' => $request->parameter ]);
-    } 
+    }
 
 
 
@@ -119,8 +119,8 @@ class FournitureController extends Controller
         $creation = [
 
             'id_link' => $fourniture->id,
-            'comment' => $request->comment, 
-            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh 
+            'comment' => $request->comment,
+            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
             'info' => 'just talk',
             'hidden_note' => $request->hidden_note,
             'by-admin' => $admin->id,
@@ -135,9 +135,7 @@ class FournitureController extends Controller
 
         History::create( $creation );
 
-        $year = Session::get('yearId');
-
-        Relation::fillStudentsFournituration( $fourniture->id , $year , $the_class->id  );
+        Relation::fillStudentsFournituration( $the_class, $fourniture  );
 
 
 

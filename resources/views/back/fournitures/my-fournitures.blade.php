@@ -34,6 +34,7 @@ The Main Configuration Of the web application
         <thead>
             <tr>
                 <th>nom de fourniture</th>
+                <th>prix dans le marché</th>
                 <th>plus d'information</th>
                 <th>pour</th>
                 <th>importante</th>
@@ -105,6 +106,7 @@ $(function() {
         columns: [
 
         	{ data: 'name', name: '' },
+          { data: 'average_price', name: '' },
           { data: 'additional_info', name: '' },
           { data: 'for', name: '' },
           { data: 'required', name: '' },
@@ -118,7 +120,7 @@ $(function() {
 </script>
 
 <script type="text/javascript">
-  
+
 $( document ).ready(function() {
 
   $("#table").on("click", ".btn-exist", function(){

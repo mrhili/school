@@ -1,98 +1,180 @@
 @extends('back.layouts.app')
 
 @section('styles')
+  Dashboard
+@endsection
 
-
+@section('styles')
 
 @endsection
+
+
+
+@section('page_header')
+  Dashboard
+@endsection
+
+@section('page_header_desc')
+  année selectioné: {{ Session::get('yearName') }}
+@endsection
+
+@section('breadcrumb')
+  <ol class="breadcrumb">
+    <li><a href="{{ route('index') }}"><i class="fa fa-dashboard"></i> Acceuill</a></li>
+    <li class="active"><a href="{{ route('home') }}">Dashboard</a></li>
+  </ol>
+@endsection
+
+
 
 @section('content')
 
 
 
-@component('back.components.plain')
-
-  @slot('titlePlain')
-
-The Main Configuration Of the web application
-
-  @endslot
-
-
-  @slot('sectionPlain')
-
-                  <ul class="users-list clearfix">
-
-                  @foreach($childs as $child)
-                    <li>
-                      <a class="users-list-name" href="">
-                        <img src="dist/img/user1-128x128.jpg" alt="{{ $child->name }} {{ $child->last_name }} Image">
-                      </a>
-
-                      <a class="users-list-name" href="">{{ $child->name }} {{ $child->last_name }}</a>
+  @component('back.components.dashboard_head')
 
 
 
-
-                          <a href=""><span class="users-list-date">...</span></a>
-
-                    </li>
-                  @endforeach
-
-  @endslot
-
-
-  @slot('footerPlain')
-
-
-
-  @endslot
-
-
-@endcomponent
-
-
-
-
-@component('back.components.plain')
-
-  @slot('titlePlain')
-
-Outils
-
-  @endslot
-
-
-  @slot('sectionPlain')
-
-      <div class="overlay spin-months-bd">
-              En attendent que le chart des benifits et deficites se charge
-              <i class="fa fa-refresh fa-spin"></i>
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">3,200</h5>
+        <span class="description-text">Action fait</span>
       </div>
-
-      <div class="chart" id="bar-chart" style="height: 300px;"></div>
-
-
-
-
-
-
-
-  @endslot
-
-
-
-  @slot('footerPlain')
-
-
-
-  @endslot
-
+      <!-- /.description-block -->
+    </div>
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">3,200</h5>
+        <span class="description-text">Meeting arrivé</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">3,200</h5>
+        <span class="description-text">Observation collécté</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+  @endcomponent
 
 
+  <!-- Small boxes (Stat box) -->
+  <div class="row">
 
 
-@endcomponent
+
+
+
+
+  </div>
+
+
+@foreach($childs as $child)
+
+
+
+
+
+
+
+
+  @component('back.components.plain')
+
+    @slot('titlePlain')
+
+  Informations a propos le l'enfant: <b>{{ $child->name }} {{ $child->last_name }}</b>
+
+    @endslot
+
+
+    @slot('sectionPlain')
+
+                    <ul class="users-list clearfix">
+
+
+                      <li class="fix-users-li">
+                        <a class="users-list-name" href="">
+                          {!! Html::image(CommonPics::ifImg( 'students' ,  $child->img ),'User Image', ['class' => ''] ) !!}
+                        </a>
+
+                        <a class="users-list-name" href="">...</a>
+
+
+
+
+                            <a href=""><span class="users-list-date">...</span></a>
+
+                      </li>
+
+                    </ul>
+
+                    <hr />
+
+                    <div class="row">
+
+
+                      <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+                          <div class="inner">
+                            <h3>Ses fournitures</h3>
+                            <p>...</p>
+                          </div>
+                          <div class="icon">
+                            <i class="fa fa-graduation-cap"></i>
+                          </div>
+                          <a href="{{ route('fournitures.child-fournitures', $child->id) }}" class="small-box-footer"> Mes fournitures<i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                      </div>
+
+                    </div>
+
+    @endslot
+
+
+    @slot('footerPlain')
+
+
+
+    @endslot
+
+
+  @endcomponent
+
+
+
+
+
+
+
+
+
+
+@endforeach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -122,25 +204,7 @@ Outils
     "use strict";
 
 
-axios.get('/months-bd/')
-                .then(function (response) {
-                  //BAR CHART
-                  var bar = new Morris.Bar({
-                    element: 'bar-chart',
-                    resize: true,
-                    data: response.data ,
-                    barColors: ['#00a65a', '#f56954'],
-                    xkey: 'y',
-                    ykeys: ['a', 'b'],
-                    labels: ['Bennefits', 'Deficits'],
-                    hideHover: 'auto'
-                  });
-                  $('.spin-months-bd').hide();
-                })
-                .catch(function (error) {
-                  alert(error);
-                  console.log( error );
-                });
+
 
 
 

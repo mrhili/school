@@ -1,6 +1,11 @@
 @extends('back.layouts.app')
 
 @section('styles')
+  Dashboard
+@endsection
+
+
+@section('styles')
 
 
 
@@ -12,13 +17,13 @@
 @endsection
 
 @section('page_header_desc')
-  année selectioné: {{ Session::get('yearName') }}</small></h1>
+  année selectioné: {{ Session::get('yearName') }} / année scolaire: {{ Auth::user()->the_class->name }}
 @endsection
 
 @section('breadcrumb')
   <ol class="breadcrumb">
     <li><a href="{{ route('index') }}"><i class="fa fa-dashboard"></i> Acceuill</a></li>
-    <li class="active"><a href="{{ route('index') }}">Dashboard</a></li>
+    <li class="active"><a href="{{ route('home') }}">Dashboard</a></li>
   </ol>
 @endsection
 
@@ -90,9 +95,27 @@
 
         <!-- Small boxes (Stat box) -->
         <div class="row">
+
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+              <div class="inner">
+                <h3>Mes fournitures</h3>
+                <p>...</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-graduation-cap"></i>
+              </div>
+              <a href="{{ route('fournitures.my-fournitures') }}" class="small-box-footer"> Mes fournitures<i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+
+
+
               <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-aqua">
+                <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
                   <div class="inner">
                     <h3>Mes notes</h3>
                     <p>...</p>
@@ -106,20 +129,7 @@
           <!-- ./col -->
 
 
-              <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-aqua">
-                  <div class="inner">
-                    <h3>Mes fournitures</h3>
-                    <p>...</p>
-                  </div>
-                  <div class="icon">
-                    <i class="fa fa-graduation-cap"></i>
-                  </div>
-                  <a href="{{ route('fournitures.my-fournitures') }}" class="small-box-footer"> Mes fournitures<i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-              </div>
-          <!-- ./col -->
+
           </div>
         <!-- /.row -->
 
@@ -128,6 +138,47 @@
   @slot('titlePlain')
 
     Parents
+
+  @endslot
+
+
+  @slot('sectionPlain')
+
+
+                      <ul class="users-list clearfix">
+                        @foreach(Auth::user()->relashionshipsParentsStudent as $parent)
+                        <li>
+                          {!! Html::image(CommonPics::ifImg( 'parents' ,  $parent->img ),'User Image', ['class' => ''] ) !!}
+                          <a class="users-list-name" href="#">{{ $parent->name }} {{ $parent->last_name }}</a>
+                          <span class="users-list-date">relationship</span>
+                        </li>
+                        @endforeach
+
+                      </ul>
+
+
+
+
+
+  @endslot
+  @slot('footerPlain')
+
+
+
+  @endslot
+
+
+
+
+
+@endcomponent
+
+
+@component('back.components.plain')
+
+  @slot('titlePlain')
+
+    Les maitres
 
   @endslot
 
@@ -249,56 +300,6 @@ Examins
 
         <!-- Small boxes (Stat box) -->
       <div class="row">
-
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>H</h3>
-              <p><a href="{{ route('classes.list') }}">Historique</a></p>
-
-              <p>...</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-history"></i>
-            </div>
-            <a href="{{ route('histories.master') }}" class="small-box-footer">Historique <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-
-
-
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>A</h3>
-              <p><a href="{{ route('classes.list') }}">Application Configuration</a></p>
-
-              <p>...</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-cog"></i>
-            </div>
-            <a href="{{ route('configs.index') }}" class="small-box-footer">Application Configuration <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>S</h3>
-              <p><a href="{{ route('classes.list') }}">School Configuration</a></p>
-
-              <p>...</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-cogs"></i>
-            </div>
-            <a href="{{ route('configs.index') }}" class="small-box-footer">School Configuration <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
 
 
 

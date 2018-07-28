@@ -35,7 +35,7 @@ class FourniturationController extends Controller
             { data: 'confirmed', name: '' },
             { data: 'rejected', name: '' }
         */
-        return Datatables::of( 
+        return Datatables::of(
                 Fournituration::where('year_id' , $year )->where('the_class_id' , $class->id )->get()
             )
         ->editColumn('name', function( $model ){
@@ -79,24 +79,29 @@ class FourniturationController extends Controller
 
     }
 
-    public function childFournitures( $child )
+    public function childFournitures( User $child )
     {
         //
         return view('back.fournitures.child-fournitures', compact('child'));
     }
 
-    public function dataChildFournitures(  $child )
+    public function dataChildFournitures(User $child )
     {
         //
         $year = Session::get('yearId');
 
-return Datatables::of( Fournituration::where('student_id' , Auth::id() )->where('year_id' , $year )
+return Datatables::of( Fournituration::where('student_id' , $child->id )->where('year_id' , $year )
 
         ->orderBy('created_at', 'desc')->get() )
 
         ->editColumn('name', function( $model ){
 
             return $model->fourniture->name;
+
+        })
+        ->editColumn('average_price', function( $model ){
+
+            return $model->fourniture->average_price;
 
         })
         ->editColumn('additional_info', function( $model ){
@@ -165,6 +170,11 @@ return Datatables::of( Fournituration::where('student_id' , Auth::id() )->where(
         ->editColumn('name', function( $model ){
 
             return $model->fourniture->name;
+
+        })
+        ->editColumn('average_price', function( $model ){
+
+            return $model->fourniture->average_price;
 
         })
         ->editColumn('additional_info', function( $model ){
