@@ -66,12 +66,15 @@ The Main Configuration Of the web application
                 </div>
                 <!-- /.info-box-content -->
               </div>
-    
+
         </div>
 
 @endforeach
 
 <hr />
+
+
+
 
 <h3>Subjects</h3>
 
@@ -93,7 +96,7 @@ The Main Configuration Of the web application
                 </div>
                 <!-- /.info-box-content -->
               </div>
-    
+
         </div>
 
 @endforeach
@@ -120,7 +123,7 @@ The Main Configuration Of the web application
                 </div>
                 <!-- /.info-box-content -->
               </div>
-    
+
         </div>
 
 @endforeach

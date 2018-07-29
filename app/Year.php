@@ -9,7 +9,7 @@ class Year extends Model
     //
 
     protected $fillable = [
-        'name','name','name','name','name','name','name','name','name','name','name',
+        'name'
     ];
 
     public function payments()
@@ -25,6 +25,11 @@ class Year extends Model
     public function coursepopulating()
     {
         return $this->hasMany('App\Courseyearsubclass');
+    }
+
+    public function teatchifications()
+    {
+        return $this->hasMany('App\Teatchification');
     }
 
 }

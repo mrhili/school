@@ -2,84 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Teatchification;
 use Illuminate\Http\Request;
+
+use App\{
+  User,
+  Teatchification,
+  The_class,
+  Subject,
+  Subjectclass,
+  History
+};
+
+use Session;
 
 class TeatchificationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+  public function link()
+  {
+    // code...
+    $teatchifications = Teatchification::all();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    $teatchifications = Teatchification::all();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Teatchification  $teatchification
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Teatchification $teatchification)
-    {
-        //
-    }
+    $deselect =  Teatchification::pluck('subject_the_class_id')->toArray();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Teatchification  $teatchification
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Teatchification $teatchification)
-    {
-        //
-    }
+    $selection = Subjectclass::whereNotIn('id', $deselect)->get()->toArray();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Teatchification  $teatchification
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Teatchification $teatchification)
-    {
-        //
-    }
+    $teatchers = User::where('role', 3)->pluck('name', 'id')->toArray();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Teatchification  $teatchification
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Teatchification $teatchification)
-    {
-        //
-    }
+    return view('back.teatchifications.link',compact('teatchifications', 'selection', 'teatchers'));
+  }
+
 }

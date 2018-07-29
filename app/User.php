@@ -158,6 +158,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Meetingpopulating', 'invited_id' );
     }
 
+    public function teatchifications()
+    {
+        return $this->hasMany('App\Teatchification');
+    }
+
 
 
 }

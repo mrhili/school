@@ -176,6 +176,20 @@
           <!-- small box -->
           <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
             <div class="inner">
+              <h3>A number</h3>
+              <p><a href="{{ route('teatcherifications.link') }}">...</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-list-ol"></i>
+            </div>
+            <a href="" class="small-box-footer">Management des teatchers et etudes<i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <div class="inner">
               <h3>{{ $classes}}</h3>
               <p><a href="{{ route('classes.list') }}">Classes</a></p>
             </div>

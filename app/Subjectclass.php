@@ -12,8 +12,6 @@ class Subjectclass extends Model
     protected $fillable = [
 		"subject_id",
 		"the_class_id"
-
-
     ];
 
     public function testyearsubclasses()
@@ -24,6 +22,11 @@ class Subjectclass extends Model
     public function cousepopuating()
     {
         return $this->hasMany('App\Courseyearsubclass');
+    }
+
+    public function teatchifications()
+    {
+        return $this->hasMany('App\Teatchification');
     }
 
 }

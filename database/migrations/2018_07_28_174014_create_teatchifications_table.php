@@ -15,6 +15,28 @@ class CreateTeatchificationsTable extends Migration
     {
         Schema::create('teatchifications', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('subject_the_class_id')->unsigned()->index();
+            $table->foreign('subject_the_class_id')
+              ->references('id')
+              ->on('subject_the_class')
+              ->onDelete('cascade');
+
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')
+              ->references('id')
+              ->on('users')
+              ->onDelete('cascade');
+
+              $table->integer('year_id')->unsigned()->index();
+              $table->foreign('year_id')
+                ->references('id')
+                ->on('years')
+                ->onDelete('cascade');
+
+
+
+
             $table->timestamps();
         });
     }
