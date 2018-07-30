@@ -25,7 +25,7 @@ class TeatchificationController extends Controller
 
     $year = Session::get('yearId');
 
-    $teatchifications = Teatchification::where('year_id', $year )->get();
+    $teatchifications = Teatchification::where('year_id', $year )->paginate(1);
 
     $teatchers = User::where('role', 3 )->pluck('name', 'id')->toArray();
 

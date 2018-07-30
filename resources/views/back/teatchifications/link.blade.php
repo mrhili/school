@@ -31,7 +31,7 @@ L'année selectionée est {{ Session::get('yearId') }}
                 sbject-form
               @endslot
 
-              <form id="form">
+              <form id="form" class="form-horizontal">
 
 
                   <div class="col-xs-12">
@@ -54,36 +54,67 @@ L'année selectionée est {{ Session::get('yearId') }}
                   @include('back.partials.formG', ['name' => 'hidden_note', 'type' => 'textarea', 'text' => 'Une Note Secret pour toi', 'class'=>'', 'required' => false, 'additionalInfo' => ['id' =>  'hiddennotefield'] ])
                   </div>
 
+                  <hr />
                   <div class="col-xs-12">
+                  <div class="form-group">
 
-                      <button  type="button" class="btn btn-primary" id="add" >Enregistrer</button>
-                  </div>
+
+                        <button  type="button" class="btn btn-primary pull-right" id="add" >Enregistrer</button>
+
+                    </div>
+                    </div>
 
               </form>
 
             @endcomponent
 
 
+@component('back.components.plain')
+  @slot('titlePlain')
+    Les items
+  @endslot
+
+  @slot('footerPlain')
+
+    <div class="col-xs-12 text-center">
+      {{ $teatchifications->links() }}
+    </div>
+
+  @endslot
+
+  @forelse( $teatchifications as $teatchification  )
+    @include('back.partials.user_widget', [
+       'img' =>  Html::image( 'images/config/'. GetSetting::getConfig('no-image') ,'No-Image', ['class' => 'img-circle'] ) ,
+       'h3' =>   $teatchification->subject_class->the_class->name  .'=>'.  $teatchification->subject_class->subject->name  ,
+       'desc' =>   $teatchification->teatcher->name,
+       'array_of_links' => [
+         ['text' => 'suprimer','link' => '#','class' => 'delete','data-id' => $teatchification->id ]
+       ]
+     ])
+
+  @empty
+
+    <div class="alert alert-warning" role="alert">Vide</div>
+
+  @endforelse
 
 
+@endcomponent
 
-<div class="row" id="items">
+@component('back.components.plain')
+  @slot('titlePlain')
+    Les nouveau items
+  @endslot
+
+  <div id="new-items">
+
+    <div id="alert-empty" class="alert alert-warning" role="alert">Vide</div>
+
+  </div>
 
 
-    @foreach( $teatchifications as $teatchification  )
-      @include('back.partials.user_widget', [
-         'img' =>  Html::image( 'images/config/'. GetSetting::getConfig('no-image') ,'No-Image', ['class' => 'img-circle'] ) ,
-         'h3' =>   $teatchification->subject_class->the_class->name  .'=>'.  $teatchification->subject_class->subject->name  ,
-         'desc' =>   $teatchification->teatcher->name,
-         'array_of_links' => [
-           ['text' => 'suprimer','link' => '#','class' => 'delete','data-id' => $teatchification->id ]
-         ]
-       ])
+@endcomponent
 
-
-    @endforeach
-
-</div>
 
 @endsection
 
@@ -98,7 +129,8 @@ L'année selectionée est {{ Session::get('yearId') }}
 <script type="text/javascript">
 
 var add = $('#add');
-var items = $('#items');
+var alertempty = $('#alert-empty');
+var newitems = $('#new-items');
 var teatcher = $('#teatcher');
 var subject = $('#subject');
 var schoolLink = "{{ route('index') }}";
@@ -141,7 +173,9 @@ var comment, hidden_note, name;
 
                         add.attr('disabled', false);
 
-                        items.append('\
+                        alertempty.hide();
+
+                        newitems.append('\
                         <div class="col-md-4">\
                           <div class="box box-widget widget-user-2">\
                             <div class="widget-user-header bg-'+ randombgcolor() +'">\

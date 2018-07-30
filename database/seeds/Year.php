@@ -18,7 +18,7 @@ class Year extends Seeder
             'max' => 2018
         ]);
         DB::table('years')->insert([
-            'name' => '2017/2018',
+            'name' => '2018/2019',
             'min' => 2018,
             'max' => 2019
         ]);

@@ -1,3 +1,10 @@
+@if(empty( $footerPlain ))
+  @php $footerPlain = ''; @endphp
+@endif
+@if(empty( $sectionPlain ))
+  @php $sectionPlain = ''; @endphp
+@endif
+
 
       <!-- Default box -->
       <div class="box">

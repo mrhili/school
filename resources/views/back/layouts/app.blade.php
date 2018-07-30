@@ -2,6 +2,7 @@
 
   $years =\App\Year::pluck('name', 'id');
 
+
 @endphp
 
 <!DOCTYPE html>

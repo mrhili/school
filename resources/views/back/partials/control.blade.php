@@ -59,11 +59,11 @@
         @foreach( $years as $y => $year)
         <ul class="control-sidebar-menu">
           <li>
-            <a href="#" class="change-year" id="year-{{ $y }}">
+            <a href="#" class="change-year" id="year-{{ $y }}" data-id="{{ $y }}">
               <i class="menu-icon fa fa-birthday-cake {{ $y == Session::get('yearId') ? 'bg-green' : 'bg-red' }}"></i>
 
               <div class="menu-info">
-                <h4 class="control-sidebar-subheading">{{ $years[$y] }}</h4>
+                <h4 class="control-sidebar-subheading">{{ $year }}</h4>
                 <p>{{ $y == Session::get('yearId') ? 'V - cet anée est selectionée' : 'X - selectionne cet année' }}</p>
               </div>
             </a>
