@@ -6,6 +6,21 @@
 
 @endsection
 
+@section('page_header')
+  Master Dashboard
+@endsection
+
+@section('page_header_desc')
+  année selectioné: {{ Session::get('yearName') }}
+@endsection
+
+@section('breadcrumb')
+  <ol class="breadcrumb">
+    <li><a href="{{ route('index') }}"><i class="fa fa-dashboard"></i> Acceuill</a></li>
+    <li class="active"><a href="{{ route('home') }}">Dashboard</a></li>
+  </ol>
+@endsection
+
 @section('content')
 
 <h1 class="text-center">{{ Session::get('yearName') }}</h1>
@@ -56,7 +71,6 @@
       <!-- Small boxes (Stat box) -->
       <div class="row">
 
-
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
@@ -100,7 +114,7 @@
               <p><a href="{{ route('users.add', 3) }}" class="text-white">Professeurs</a></p>
             </div>
             <div class="icon">
-              <i class="fa fa-pencil"></i>
+              <i class="fa fa-pen"></i>
             </div>
             <a href="#" class="small-box-footer">Ajouter un parent maintenent <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -182,7 +196,7 @@
             <div class="icon">
               <i class="fa fa-list-ol"></i>
             </div>
-            <a href="" class="small-box-footer">Management des teatchers et etudes<i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('teatcherifications.link') }}" class="small-box-footer">Management des teatchers et etudes<i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 

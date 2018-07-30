@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/link-teatcher-subcourse-class', 'TeatchificationController@link')->name('teatcherifications.link');
-Route::put('/store-link-teatcher-subcourse-class/{teatcher}/{subject_the_class_id}', 'TeatchificationControlle@storeLink')->name('teatcherifications.store-link');
+Route::put('/store-link-teatcher-subcourse-class/{teatcher}/{subject_the_class_id}', 'TeatchificationController@storeLink')->name('teatcherifications.store-link');
 
 
 Route::get('/my-profile-as-teatcher', 'TeatcherController@myProfile')->name('teatchers.my-profile');

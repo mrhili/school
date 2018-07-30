@@ -1,8 +1,3 @@
-@php
-
-  $years =\App\Year::pluck('name', 'id');
-
-@endphp
 
 @extends('back.layouts.app')
 
@@ -205,7 +200,7 @@ var notesfield = $('#notesfield');
 function func(e){
     var items;
     e.preventDefault();
-  
+
   values.empty();
     chovalues = [];
     var json = fb.actions.getData('json');
@@ -221,7 +216,7 @@ function func(e){
           return i;
 
       }
-      
+
   });
 
   values.append('<div class="form-group col-xs-12"><label class="col-sm-2">Total Notes collecté</label><div class="col-sm-10"><h3 id="total"></h3></div></div>');
@@ -233,12 +228,12 @@ function func(e){
   var save = $('#save');
   var valueClasses = $('.value');
   var valuefields = $('.value');
-    function updateField() {    
+    function updateField() {
       items = 0;
-      
+
       $.each(valuefields, function($field) {
         if (valuefields[$field].value.length > 0) { items += Number( valuefields[$field].value ); }
-      });    
+      });
       total.text(items);
     }
 

@@ -15,18 +15,24 @@ class CreateSubjectTheClassTable extends Migration
     {
         Schema::create('subject_the_class', function (Blueprint $table) {
             $table->increments('id');
-            
+
             $table->integer('subject_id')->unsigned()->index();
             $table->foreign('subject_id')
               ->references('id')
               ->on('subjects')
-              ->onDelete('cascade'); 
+              ->onDelete('cascade');
 
             $table->integer('the_class_id')->unsigned()->index();
             $table->foreign('the_class_id')
               ->references('id')
               ->on('the_classes')
-              ->onDelete('cascade'); 
+              ->onDelete('cascade');
+
+              $table->integer('year_id')->unsigned()->index();
+              $table->foreign('year_id')
+                ->references('id')
+                ->on('years')
+                ->onDelete('cascade');
 
             $table->tinyInteger('parameter')->unsigned();
 

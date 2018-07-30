@@ -1,8 +1,4 @@
-@php
 
-  $years =\App\Year::pluck('name', 'id');
-
-@endphp
 
 @section('title')
 L'ajout dun etudiant
@@ -14,8 +10,7 @@ L'ajout dun etudiant
 
 @section('styles')
 
-{{-- output array min empty max id and more
-<link rel="stylesheet" href="https://unpkg.com/hartija---css-print-framework@1.0.0/print.css" type="text/css" media="print" charset="utf-8"> --}}
+
 @endsection
 
 @section('page_header')
@@ -23,10 +18,11 @@ L'ajout dun etudiant
 @endsection
 
 @section('page_header_desc')
-L'ajout dun etudiant
+L'année selectionée est {{ Session::get('yearId') }}
 @endsection
 
 @section('breadcrumb')
+  <li><a href="{{ route('index')  }}"><i class="fa fa-dashboard"></i> Index</a></li>
   <li><a href="{{ route('home')  }}"><i class="fa fa-dashboard"></i> dashboard</a></li>
   <li class="active"> L'ajout dun etudiant</li>
 @endsection
@@ -56,7 +52,6 @@ Nouveau etudient
       </p>
     </div>
 
-    @include('back.partials.formG', ['name' => 'year_id', 'type' => 'select', 'selected' => Session::get('yearId'),'text' => 'Année', 'class'=>'', 'required' => true, 'array' => $years  ,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'class', 'type' => 'select','selected' => null, 'text' => 'Class', 'class'=>'', 'required' => true, 'array' => $classes,'additionalInfo' => []])
 
     <hr />
@@ -103,7 +98,7 @@ Nouveau etudient
 
 
   	@include('back.partials.formG', ['name' => 'email', 'type' => 'email', 'text' => 'E-mail', 'class'=>'', 'required' => true,'additionalInfo' => []])
-  	@include('back.partials.formG', ['name' => 'password', 'type' => 'text', 'text' => 'Password', 'class'=>'', 'required' => true,'additionalInfo' => []])
+  	@include('back.partials.formG', ['name' => 'password', 'type' => 'text', 'text' => 'Password', 'class'=>'', 'required' => true,'value' => str_random(6) ,'additionalInfo' => [  ]])
 
 
     <hr />
@@ -215,8 +210,8 @@ Nouveau etudient
     </div>
 
 
-    @include('back.partials.formG', ['name' => 'emailparent', 'type' => 'email', 'text' => 'E-mail Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'passwordparent', 'type' => 'text', 'text' => 'Password Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'emailparent', 'type' => 'email', 'text' => 'E-mail Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => [  ]])
+    @include('back.partials.formG', ['name' => 'passwordparent', 'type' => 'text', 'text' => 'Password Parent 1', 'class'=>'', 'required' => true,'value' => str_random(6),'additionalInfo' => [  ]])
 
 
   @endslot

@@ -1,8 +1,4 @@
-@php
 
-  $years =\App\Year::pluck('name', 'id');
-
-@endphp
 
 @extends('back.layouts.app')
 
@@ -116,7 +112,7 @@ Nouveau etudient
 
 
   	@include('back.partials.formG', ['name' => 'email', 'type' => 'email', 'text' => 'E-mail', 'class'=>'', 'required' => true,'additionalInfo' => []])
-  	@include('back.partials.formG', ['name' => 'password', 'type' => 'text', 'text' => 'Password', 'class'=>'', 'required' => true,'additionalInfo' => []])
+  	@include('back.partials.formG', ['name' => 'password', 'type' => 'text', 'text' => 'Password', 'class'=>'', 'required' => true, 'value' => str_random(6) ,'additionalInfo' => []])
 
 
     <hr />

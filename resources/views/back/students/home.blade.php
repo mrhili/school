@@ -7,13 +7,11 @@
 
 @section('styles')
 
-
-
 @endsection
 
 
 @section('page_header')
-  Dashboard
+  Etudiant Dashboard
 @endsection
 
 @section('page_header_desc')
@@ -187,11 +185,11 @@
 
 
                       <ul class="users-list clearfix">
-                        @foreach(Auth::user()->relashionshipsParentsStudent as $parent)
+                        @foreach( $teatchifications as $teatchification)
                         <li>
-                          {!! Html::image(CommonPics::ifImg( 'parents' ,  $parent->img ),'User Image', ['class' => ''] ) !!}
-                          <a class="users-list-name" href="#">{{ $parent->name }} {{ $parent->last_name }}</a>
-                          <span class="users-list-date">relationship</span>
+                          {!! Html::image(CommonPics::ifImg( 'teatchers' ,  $teatchification->teatcher->img ),'User Image', ['class' => ''] ) !!}
+                          <a class="users-list-name" href="#">{{ $teatchification->teatcher }} {{ $teatchification->teatcher->last_name }}</a>
+                          <span class="users-list-date">...</span>
                         </li>
                         @endforeach
 

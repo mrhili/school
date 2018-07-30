@@ -24,8 +24,26 @@ class SetYear
 
         }else{
 
-            $year = Year::where('min', date("Y") )->first();
+          $thisYear = date("Y");
+          $year;
 
+          if( date('n') < 8 ){
+
+            $year = Year::firstOrCreate(['max' => $thisYear ], [
+              'max' => $thisYear ,
+              'min' => ($thisYear-1) ,
+              'name' => ($thisYear-1).'/'.$thisYear
+            ]);
+
+          }else{
+
+            $year = Year::firstOrCreate(['min' => $thisYear ], [
+              'min' => $thisYear ,
+              'max' => ($thisYear+1) ,
+              'name' => $thisYear.'/'.($thisYear+1)
+            ]);
+
+          }
             Session::put('yearName', $year->name );
             Session::put('yearId', $year->id );
         }

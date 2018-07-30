@@ -9,7 +9,7 @@ class Year extends Model
     //
 
     protected $fillable = [
-        'name'
+        'name', 'min', 'max'
     ];
 
     public function payments()
@@ -30,6 +30,11 @@ class Year extends Model
     public function teatchifications()
     {
         return $this->hasMany('App\Teatchification');
+    }
+
+    public function subject_class()
+    {
+        return $this->hasMany('App\Subjectclass');
     }
 
 }

@@ -39,7 +39,7 @@
                         @endphp
 
 
-                        {!! Form::url($name, null, $output) !!}
+                        {!! Form::url($name, $value, $output) !!}
 
 
 
@@ -55,7 +55,7 @@
                         @endphp
 
 
-                        {!! Form::text($name, null, $output) !!}
+                        {!! Form::text($name, $value, $output) !!}
 
                     @elseif( $type == 'tel' )
                         @php
@@ -68,7 +68,7 @@
                         @endphp
 
 
-                        {!! Form::tel($name, null, $output) !!}
+                        {!! Form::tel($name, $value, $output) !!}
 
 
 
@@ -84,7 +84,7 @@
                         @endphp
 
 
-                        {!! Form::email($name, null, $output) !!}
+                        {!! Form::email($name, $value, $output) !!}
 
                     @elseif( $type == 'date' )
 
@@ -98,7 +98,7 @@
                         @endphp
 
 
-                        {!! Form::date($name, null, $output) !!}
+                        {!! Form::date($name, $value, $output) !!}
 
                     @elseif( $type == 'datetime-local' )
 
@@ -111,7 +111,7 @@
 
                         @endphp
 
-                        {{ Form::input('dateTime-local', $name, null, $output) }}
+                        {{ Form::input('dateTime-local', $name, $value, $output) }}
 
 
 
@@ -129,7 +129,7 @@
 
                         @endphp
 
-                        {!! Form::textarea($name, null, $output) !!}
+                        {!! Form::textarea($name, $value, $output) !!}
 
                     @elseif( $type == 'checkbox' )
 
@@ -142,7 +142,7 @@
 
                         @endphp
 
-                        {!! Form::checkbox( $name , null , $checked, $output) !!}
+                        {!! Form::checkbox( $name , $value , $checked, $output) !!}
 
                     @elseif($type == 'select')
 

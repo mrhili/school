@@ -19,6 +19,11 @@ class Subject extends Model
         return $this->hasMany('App\Note');
     }
 
+    public function classes()
+    {
+        return $this->belongsToMany('App\TheClass')->withPivot('parameter');
+    }
+
     //foreach($s->the_classes as $t){echo $t->pivot->parameter;  }
 
 }

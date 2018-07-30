@@ -42,15 +42,17 @@ class SubjectController extends Controller
 
         $subject = Subject::find( $subject_id );
 
-        $pivot = $the_class->subjects()->attach( $subject_id, ['parameter' => $request->parameter ]);
+        $year = Session::get('yearId');
+
+        $pivot = $the_class->subjects()->attach( $subject_id, ['parameter' => $request->parameter, 'year_id' => $year  ]);
 
         $admin = User::find( Auth::id() );
 
         $creation = [
 
             'id_link' => $subject->id,
-            'comment' => $request->comment, 
-            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh 
+            'comment' => $request->comment,
+            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
             'info' => 'just talk',
             'hidden_note' => $request->hidden_note,
             'by-admin' => $admin->id,
@@ -100,8 +102,8 @@ class SubjectController extends Controller
         $creation = [
 
             'id_link' => $subject->id,
-            'comment' => $request->comment, 
-            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh 
+            'comment' => $request->comment,
+            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
             'info' => 'just talk',
             'hidden_note' => $request->hidden_note,
             'by-admin' => $admin->id,
@@ -121,78 +123,12 @@ class SubjectController extends Controller
         if( $subject ){
             return response()->json(['id' => $subject->id, 'name' => $subject->name ]);
         }
-        
 
-        
+
+
 
         //return response()->json([ 'parameter' => $request->parameter ]);
-    } 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
 
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subject $subject)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subject $subject)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Subject $subject)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Subject $subject)
-    {
-        //
-    }
 }

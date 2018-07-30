@@ -14,6 +14,7 @@
         </div>
         <div class="box-body">
           {{ $sectionPlain }}
+          {{ $slot }}
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

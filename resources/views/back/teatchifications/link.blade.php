@@ -1,139 +1,93 @@
 
-
-
-
+@section('title')
+Linker un maitre
+@endsection
 
 @extends('back.layouts.app')
 
 
-@section('styles')
 
+@section('page_header')
+Linker un maitre
+@endsection
 
+@section('page_header_desc')
+L'année selectionée est {{ Session::get('yearId') }}
+@endsection
 
+@section('breadcrumb')
+  <li><a href="{{ route('index')  }}"><i class="fa fa-dashboard"></i> Index</a></li>
+  <li><a href="{{ route('home')  }}"><i class="fa fa-dashboard"></i> dashboard</a></li>
+  <li class="active"> Linker un maitre</li>
 @endsection
 
 @section('content')
 
+            @component('back.components.collapsed')
+              @slot('heading')
+                Linker un maitre
+              @endslot
+              @slot('id')
+                sbject-form
+              @endslot
+
+              <form id="form">
 
 
-            <div class="box box-default collapsed-box">
-              <div class="box-header with-border">
-                <h3 class="box-title">Ajouter un type de chambre</h3>
+                  <div class="col-xs-12">
+                    @include('back.partials.formG', ['name' => 'teatcher', 'type' => 'select', 'selected' => null ,'text' => 'Maitres', 'class'=>'', 'required' => true, 'array' => $teatchers  ,'additionalInfo' => [ 'id' => 'teatcher']])
 
-                <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                  </button>
-                </div>
-                <!-- /.box-tools -->
-
-              </div>
-              <!-- /.box-header -->
-            <div class="box-body" id="sbject-form">
-
-                  <form id="form">
-
-                      <div class="form-group col-xs-12">
-                      {{ csrf_field() }}
-                      </div>
-
-                      <div class="col-xs-12">
-
-                      @include('back.partials.formG', ['name' => 'name', 'type' => 'text', 'text' => 'Type de chambre', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'namefield'] ])
-                      </div>
+                  </div>
 
 
-                      <div class="col-xs-12">
-
-                      @include('back.partials.formG', ['name' => 'comment', 'type' => 'textarea', 'text' => 'Comment', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'commentfield'] ])
-                      </div>
-
-                      <div class="col-xs-12">
-
-                      @include('back.partials.formG', ['name' => 'hidden_note', 'type' => 'textarea', 'text' => 'Une Note Secret pour toi', 'class'=>'', 'required' => false, 'additionalInfo' => ['id' =>  'hiddennotefield'] ])
-                      </div>
-
-                      <div class="col-xs-12">
-
-                          <button  type="button" class="btn btn-primary" id="add" >Enregistrer</button>
-                      </div>
-
-                  </form>
+                  <div class="col-xs-12">
+                    @include('back.partials.formG', ['name' => 'subject_class', 'type' => 'select', 'selected' => null,'text' => 'Class => Matiére', 'class'=>'', 'required' => true, 'array' => $selection  ,'additionalInfo' => [ 'id' => 'subject' ]])
+                  </div>
 
 
+                  <div class="col-xs-12">
+                  @include('back.partials.formG', ['name' => 'comment', 'type' => 'textarea', 'text' => 'Comment', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'commentfield'] ])
+                  </div>
 
-            </div>
-            <!-- /.box-body -->
-          </div>
+                  <div class="col-xs-12">
+
+                  @include('back.partials.formG', ['name' => 'hidden_note', 'type' => 'textarea', 'text' => 'Une Note Secret pour toi', 'class'=>'', 'required' => false, 'additionalInfo' => ['id' =>  'hiddennotefield'] ])
+                  </div>
+
+                  <div class="col-xs-12">
+
+                      <button  type="button" class="btn btn-primary" id="add" >Enregistrer</button>
+                  </div>
+
+              </form>
+
+            @endcomponent
 
 
 
 
-<div class="row" id="roomtypes">
+
+<div class="row" id="items">
 
 
     @foreach( $teatchifications as $teatchification  )
+      @include('back.partials.user_widget', [
+         'img' =>  Html::image( 'images/config/'. GetSetting::getConfig('no-image') ,'No-Image', ['class' => 'img-circle'] ) ,
+         'h3' =>   $teatchification->subject_class->the_class->name  .'=>'.  $teatchification->subject_class->subject->name  ,
+         'desc' =>   $teatchification->teatcher->name,
+         'array_of_links' => [
+           ['text' => 'suprimer','link' => '#','class' => 'delete','data-id' => $teatchification->id ]
+         ]
+       ])
 
-
-        <div class="col-md-4">
-          <!-- Widget: user widget style 1 -->
-          <div class="box box-widget widget-user-2">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-{{ ArrayHolder::backgroundColors()  }}">
-              <div class="widget-user-image">
-                {!! Html::image( 'images/config/'. GetSetting::getConfig('no-image') ,'No-Image', ['class' => 'img-circle'] ) !!}
-              </div>
-              <!-- /.widget-user-image -->
-              <h3 class="widget-user-username">{{ $teatchification->name }}</h3>
-              <h5 class="widget-user-desc">...</h5>
-            </div>
-            <div class="box-footer no-padding">
-              <ul class="nav nav-stacked">
-                <li><a href="#">Projects <span class="pull-right badge bg-blue">31</span></a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- /.widget-user -->
-        </div>
 
     @endforeach
 
 </div>
 
-
-
-
-@component('back.components.plain')
-
-  @slot('titlePlain')
-
-The Main Configuration Of the web application
-
-  @endslot
-
-
-  @slot('sectionPlain')
-
-
-  @endslot
-
-
-  @slot('footerPlain')
-
-
-
-  @endslot
-
-
-@endcomponent
-
-
 @endsection
 
-@section('datatableScript')
 
-
-
-@endsection
 
 @section('scripts')
 
@@ -144,54 +98,63 @@ The Main Configuration Of the web application
 <script type="text/javascript">
 
 var add = $('#add');
-var roomtypes = $('#roomtypes');
+var items = $('#items');
+var teatcher = $('#teatcher');
+var subject = $('#subject');
 var schoolLink = "{{ route('index') }}";
 var imgLink = "{{ 'images/config/'. GetSetting::getConfig('no-image') }}";
 var comment, hidden_note, name;
-
-var roomtype_names = JSON.parse('{!! $teatchification_names !!}');
-
-
-
 
           add.on("click", function(e){
 
             add.attr('disabled', true);
 
-
-
             if( $('#form').valid() ){
-
-
 
               comment = $('#commentfield').val();
               hidden_note = $('#hiddennotefield').val();
-              namefield = $('#namefield').val();
-              if( $.inArray(  namefield , roomtype_names ) == -1 ){
+              teatcher_id = teatcher.val();
+              subject_id = subject.val();
 
-
-
-
-
-                    axios.post('/store-roomtype',{
+                    axios.put('/store-link-teatcher-subcourse-class/'+ teatcher_id +'/'+ subject_id,{
                         headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         comment: comment,
-                        hidden_note: hidden_note,
-                        namefield: namefield
+                        hidden_note: hidden_note
 
                     })
                         .then(function (response) {
+
+                          swal({
+                            position: 'top-end',
+                            type: 'success',
+                            title: 'Le maitre à etait bien linké, Hamdoullah',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
+
                         console.log( response );
                         var returnedArray = response.data;
-                        roomtype_names.push( returnedArray['name'] );
+
+                        $("#subject option[value='"+returnedArray['id']+"']").remove();
 
                         add.attr('disabled', false);
 
-
-
-                        roomtypes.append('<div class="col-md-4"><!--Widget:userwidgetstyle1--><div class="box box-widget widget-user-2"><!--Addthebgcolortotheheaderusinganyofthebg-*classes--><div class="widget-user-header bg-'+ randombgcolor() +'"><div class="widget-user-image"><img class="img-circle" src="'+schoolLink+'/'+imgLink+'" alt="UserAvatar"></div><!--/.widget-user-image--><h3 class="widget-user-username">'+ returnedArray['name']+'</h3><h5 class="widget-user-desc">...</h5></div><div class="box-footer no-padding"><ul class="nav nav-stacked"><li><a href="#">Projects<span class="pull-right badge bg-blue">31</span></a></li></ul></div></div><!--/.widget-user--></div>');
+                        items.append('\
+                        <div class="col-md-4">\
+                          <div class="box box-widget widget-user-2">\
+                            <div class="widget-user-header bg-'+ randombgcolor() +'">\
+                              <div class="widget-user-image">\
+                                <img class="img-circle" src="'+schoolLink+'/'+imgLink+'" alt="UserAvatar">\
+                              </div>\
+                                <h3 class="widget-user-username">'+ returnedArray['class']+' => '+ returnedArray['subject']+'</h3>\
+                                <h5 class="widget-user-desc">'+ returnedArray['teatcher']+'</h5>\
+                            </div>\
+                            <div class="box-footer no-padding">\
+                            </div>\
+                          </div>\
+                        </div>');
 
                         })
                         .catch(function (error) {
@@ -200,23 +163,11 @@ var roomtype_names = JSON.parse('{!! $teatchification_names !!}');
                         console.log( error );
                         });
 
-
-
-                }else{
-                    add.attr('disabled', false);
-                        swal({
-                        type: 'error',
-                        title: 'type de chambre deja existe',
-                        text: 'Entre un autre nombre',
-                        footer: '<a href>Why do I have this issue?</a>',
-                        });
-
-                }
-
+              }else{
+                add.attr('disabled', false);
               }
 
             });
-
 
 </script>
 @endsection

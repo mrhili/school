@@ -19,7 +19,8 @@ use App\{
     Subjectclass,
     Test,
     Note,
-    Fournituration
+    Fournituration,
+    Teatchification
 };
 
 use Yajra\Datatables\Datatables;
@@ -50,15 +51,20 @@ class StudentController extends Controller
 
         $user = Auth::user();
 
+        $year = Session::get('yearId');
+
         $the_class_id = $user->payments()->where('year_id', Session::get('yearId')  )->first()->the_class_id ;
 
         $class = TheClass::find( $the_class_id );
 
-        $ids = Subjectclass::where('the_class_id', $the_class_id)->pluck('id')->toArray();
+        $ids = Subjectclass::where('year_id', $year)->where('the_class_id', $the_class_id)->pluck('id')->toArray();
+
+        $teatchifications =  Tetchification::whereIn('subject_the_class_id', $ids)->distinct('user_id')->toArray();
+
 //->
         $mytests = Testyearsubclass::whereIn('subject_the_class_id', $ids )->where('publish', true)->get();
 
-        return view('back.students.home',compact('mytests'));
+        return view('back.students.home',compact('mytests', 'teatchifications'));
     }
 
     public function myProfile(){
@@ -116,13 +122,15 @@ class StudentController extends Controller
 
     public function store(UserRequest $request){
 
-
+      $year = Session::get('yearId');
 
     	$array = array_except( $request->toarray(), [
         '_token',
          'password' ,
-         'img',
-          'year_id', 'should_pay', 'transport_pay', 'add_class_pay','transport',
+         'img', 'should_pay',
+         'transport_pay',
+          'add_class_pay',
+          'transport',
            'add_classes', 'saving_pay', 'tars_assurence_pay',
            'assurence_pay',
             'imgparent',
@@ -181,10 +189,10 @@ class StudentController extends Controller
             $add_class_pay = ( $request->add_class_pay ? $request->add_class_pay : 0 );
             $trans_assurence_pay = ( $request->trans_assurence_pay ? $request->trans_assurence_pay : 0 );
 
-            Relation::fillStudentsPayment($student->id, $request->year_id , $request->class, $request->should_pay, $transport_pay, $add_class_pay, $request->saving_pay ,$request->assurence_pay ,$trans_assurence_pay );
+            Relation::fillStudentsPayment($student->id, $year , $request->class, $request->should_pay, $transport_pay, $add_class_pay, $request->saving_pay ,$request->assurence_pay ,$trans_assurence_pay );
 
 
-            Relation::fillFournituration( $student->id , $request->year_id , $request->class   );
+            Relation::fillFournituration( $student->id , $year , $request->class   );
 
             $student->fill_payment = true;
 
@@ -223,7 +231,12 @@ class StudentController extends Controller
 
 
 
-            $creation['info'] = "Un nouveau éléve c'est enregistrer dans la class <strong>". TheClass::find( $request->class )->name ."</strong>  qui port le nom complet de: <strong>". $student->last_name." ". $student->name ."</strong> avec un montant d'enregistrement <strong>". $request->saving_pay ." dh</strong> et d'assurence:  <strong>". $request->assurence_pay ." dh</strong> et ". $transSentence ."   et ". $addCoursesSentence ." et le montant qui doit payé pour lécole c'est <strong>". $request->should_pay ." dh</strong> par mois est cela c'est fait dans l'année <strong>".Year::find( $request->year_id )->name . "</strong> .";
+            $creation['info'] = "Un nouveau éléve c'est enregistrer dans la class <strong>". TheClass::find( $request->class )->name ."</strong>
+            qui port le nom complet de: <strong>". $student->last_name." ". $student->name ."</strong>
+            avec un montant d'enregistrement <strong>". $request->saving_pay ." dh</strong>
+            et d'assurence:  <strong>". $request->assurence_pay ." dh</strong> et ". $transSentence ."   et ". $addCoursesSentence ."
+            et le montant qui doit payé pour lécole c'est <strong>". $request->should_pay ." dh</strong> par mois
+            est cela c'est fait dans l'année <strong>". Year::find( $year )->name . "</strong> .";
 
 
             History::create($creation);

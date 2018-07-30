@@ -230,6 +230,13 @@ class CatHistorySeed extends Seeder
             'kind' => 1,
             'role' => 1
         ]);//27
+        DB::table('history_categories')->insert([
+            'name' => 'Un subcour a etait linké a un coure:',
+            'model' => 'Teatchification',
+            'icon' => 'pen',
+            'kind' => 1,
+            'role' => 1
+        ]);//28
 
 
     }

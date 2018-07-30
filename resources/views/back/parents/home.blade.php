@@ -1,17 +1,11 @@
 @extends('back.layouts.app')
 
 @section('styles')
-  Dashboard
-@endsection
-
-@section('styles')
 
 @endsection
-
-
 
 @section('page_header')
-  Dashboard
+  Parent Dashboard
 @endsection
 
 @section('page_header_desc')
