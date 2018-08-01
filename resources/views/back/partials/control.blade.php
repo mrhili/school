@@ -52,9 +52,7 @@
       <!-- Settings tab content -->
       <div class="tab-pane" id="control-sidebar-settings-tab">
 
-        <h3 class="control-sidebar-heading">Année selectioné</h3>
-
-
+        <h3 class="control-sidebar-heading">Année selectioné:</h3>
 
         @foreach( $years as $y => $year)
         <ul class="control-sidebar-menu">

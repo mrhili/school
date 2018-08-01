@@ -73,6 +73,20 @@
 
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <h3>{{ $users }}</h3>
+                  <p><a href="{{ route('users.userlist') }}">Users</a></p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-file"></i>
+                </div>
+                <a href="{{ route('users.userlist') }}" class="small-box-footer">Voire observations <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
               <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
                 <div class="inner">
                   <h3>{{ $students }}</h3>

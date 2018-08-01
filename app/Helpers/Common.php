@@ -19,7 +19,9 @@ use App\{
     Meetingtype,
     Meeting,
     Meetingpopulating,
-    PivotCoursub
+    PivotCoursub,
+    Subjectclass,
+    Teatchification
 
 };
 
@@ -344,6 +346,31 @@ class Timing {
 
 
 class Relation {
+
+  public function isParent(User $parent, User $student){
+    $parents = User::find( $student->id )->relashionshipsParentsStudent->pluck(['id'])->toArray();
+    return in_array($parent->id, $parents);
+  }
+
+  public static function studentsFromTeatcher($year_id, User $teatcher){
+
+    $subject_classesArray = $teatcher->teatchifications->where('year_id', $year_id)->pluck('subject_the_class_id')->toArray();
+
+    $classes = SubjectClass::whereIn('id', $subject_classesArray )->where('year_id',$year_id)->distinct()->get(['the_class_id'])->pluck('the_class_id'
+)->toArray();
+
+    return User::whereIn('the_class_id', $classes )->get();
+
+  }
+
+
+    public static function uniqueTeatchificationFromstudent($year_id, User $student){
+
+      $ids = Subjectclass::where('year_id', $year_id)->where('the_class_id', $student->the_class_id )->pluck('id')->toArray();
+
+      return  Teatchification::where('year_id', $year_id)->whereIn('subject_the_class_id', $ids)->distinct()->get(['user_id']) ;
+
+    }
 
 
     public static function linkSubcourse2Course($course){
@@ -824,16 +851,12 @@ public static function states( $item = null ){
 
         return $array;
     }
+/****************/
 
-    public static function fillExistButton($model){
 
-        $existArray = [];
 
-        //dd($model);
 
-        $exist = $model->exist;
 
-        if( (bool) $exist ){
 
             //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
             $existArray[ 'icon' ] = 'V';
@@ -844,38 +867,89 @@ public static function states( $item = null ){
             //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
             $existArray[ 'icon' ] = 'X';
             $existArray[ 'class' ] = 'danger';
+        $existArray[ 'exist' ] = false;
+        $existArray[ 'class' ] = 'danger';
 
+            $existArray[ 'exist' ] = true;
+            $existArray[ 'class' ] = 'info';
+          }else{
+
+            $existArray[ 'icon' ] = 'Il nexist pas dans lecole';
+            $existArray[ 'class' ] = 'default';
+
+          }
         }
 
-        $confirmed = (bool) $model->confirmed;
         $rejected = (bool) $model->rejected;
         $required = (bool) $model->fourniture->required;
 
-        if(  $exist &&  $confirmed && !$rejected){
-
-            $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">confirmé de puis ladministration</p>';
-
-        }elseif( $exist && !$confirmed){
-
-            $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">pas encore confirmé de puis ladministration</p>';
-
-        }elseif( !$exist && $required){
-
-            $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">Tu doit porter cette fourniture emidatement</p>';
-
-        }elseif( !$model->exist && !$required){
-
-            $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">Cette fourniture est optional</p>';
-
-        }else{
-            $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">Tu doit contacter ladministration apropos de cette fourniture</p>';
-        }
-
-
-
-
         return $existArray;
     }
+
+
+/******************/
+
+
+public static function fillExistButton($model){
+
+    $existArray = [];
+
+    //dd($model);
+
+    $exist = $model->exist;
+
+    if( (bool) $exist ){
+
+        //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+        $existArray[ 'icon' ] = 'V';
+        $existArray[ 'class' ] = 'success';
+
+    }else{
+
+        //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+        $existArray[ 'icon' ] = 'X';
+        $existArray[ 'class' ] = 'danger';
+
+    }
+
+    $confirmed = (bool) $model->confirmed;
+    $rejected = (bool) $model->rejected;
+    $required = (bool) $model->fourniture->required;
+
+    if(  $exist &&  $confirmed && !$rejected){
+
+        $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">confirmé de puis ladministration</p>';
+
+    }elseif( $exist && !$confirmed){
+
+        $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">pas encore confirmé de puis ladministration</p>';
+
+    }elseif( !$exist && $required){
+
+        $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">Tu doit porter cette fourniture emidatement</p>';
+
+    }elseif( !$model->exist && !$required){
+
+        $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">Cette fourniture est optional</p>';
+
+    }else{
+        $existArray[ 'statu' ] = '<p id="statu-'.$model->id.'">Tu doit contacter ladministration apropos de cette fourniture</p>';
+    }
+
+
+
+
+    return $existArray;
+}
+
+
+/*********************/
+
+
+
+
+
+
 
     public static function fillMonthButton($model, $monthId, $year , $class){
 

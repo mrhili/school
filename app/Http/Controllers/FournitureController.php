@@ -6,14 +6,54 @@ use App\Fourniture;
 use App\User;
 use App\History;
 use Illuminate\Http\Request;
-use App\TheClass;
+use App\{
+  TheClass,
+  Demande
+};
 use Auth;
 use Relation;
 use Session;
 
 class FournitureController extends Controller
 {
+    //{student}/{fourniture}/{howmany}
+    public function demande(Request $request, User $student, Fourniture $fourniture, $howmany){
+      $totalmoney = $howmany * $fourniture->average_price;
 
+      $demande = Demande::create([
+        'parent_id' => Auth::id(),
+        'student_id' => $student->id,
+        'howmany' => $howmany,
+        'totalmoney' => $totalmoney,
+        'message' => $request->message
+      ]);
+
+      if( $demande ){
+
+        $creation = [
+
+            'id_link' => $demande->id,
+            'info' => 'just talk',
+            'hidden_note' => $request->hidden_note,
+            'by-admin' => $Auth::id(),
+            'comment' => 'Cette fonction et faite par un parent',
+            'category_history_id' => 29,
+            'class' => 'info',
+
+            ];
+
+          $creation['info'] = 'Le parent : <strong>'.$parent->name .' '.
+          $parent->last_name .'</strong> a demander '.$howmany.' fourniture qui porte le nom <strong>'.
+          $fourniture->name.' </strong> la charge sera' . $totalmoney . ' </strong>.'  ;
+
+          History::create( $creation );
+
+          return response()->json(['id' => $fourniture->id, 'name' => $fourniture->name, 'average_price' => $fourniture->average_price, 'howmany' => $howmany ,'totalmoney' => $totalmoney ]);
+      }
+
+
+
+    }
 
     public function list(){
 
@@ -38,7 +78,8 @@ class FournitureController extends Controller
             'additional_info' => $request->additional_info,
             'for' => $request->forfield,
             'required' => $request->required,
-            'average_price' => $request->average_price
+            'average_price' => $request->average_price,
+            'got' => $request->got
 
             ] );
 
@@ -71,12 +112,13 @@ class FournitureController extends Controller
         $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a ajouté une fourniture qui porte le nom <strong>'.$request->name.' </strong> avec les informations suivantes <strong>'.$request->additional_info.' </strong>
         et cette fourniture  <strong>'.$necessary.' </strong>
         pour <strong>'.$request->for.' </strong>
+        Il ya dans les ecole <strong>'.$request->got.' piece</strong>
         peut etre son prix est  <strong>'.$request->average_price.' </strong> .'  ;
 
         History::create( $creation );
 
         if( $fourniture ){
-            return response()->json(['id' => $fourniture->id, 'name' => $fourniture->name, 'additional_info' => $fourniture->additional_info ,'for' => $fourniture->for,'required' => $fourniture->required,'name' => $fourniture->average_price ]);
+            return response()->json(['id' => $fourniture->id, 'id' => $fourniture->got,'name' => $fourniture->name, 'additional_info' => $fourniture->additional_info ,'for' => $fourniture->for,'required' => $fourniture->required,'name' => $fourniture->average_price ]);
         }
 
 

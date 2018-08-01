@@ -1,10 +1,8 @@
 <?php
-Route::get('/my-profile-as-parent', 'ParentController@myProfile')->name('parents.my-profile');
-//Route::get('/my-profile-as-parent', 'ParentController@profile')->name('parents.profile');
+  Route::get('/my-profile-as-parent', 'ParentController@myProfile')->name('parents.my-profile');
+  Route::get('/student-dashboard/{student}', 'StudentController@dashboard')->name('students.dashboard');
 
-Route::get('/parent-home', 'ParentController@home')->name('parents.home');
-
-Route::get('/student-profile/{student}', 'StudentController@hisProfile')->name('students.a-profile');
+  Route::get('/parent-home', 'ParentController@home')->name('parents.home');
 
 
   Route::get('/child-notes/{child}', 'NoteController@childNotes')->name('notes.child-notes');
@@ -12,3 +10,6 @@ Route::get('/student-profile/{student}', 'StudentController@hisProfile')->name('
 
   Route::get('/child-fournitures/{child}', 'FourniturationController@childFournitures')->name('fournitures.child-fournitures');
   Route::get('/data-child-fournitures/{child}', 'FourniturationController@dataChildFournitures')->name('fournitures.data-child-fournitures');
+
+
+  Route::get('/fourniture-demande/{student}/{fourniture}/{howmany}', 'FournitureController@demande')->name('fournitures.demande');

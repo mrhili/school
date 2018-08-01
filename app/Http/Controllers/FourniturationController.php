@@ -139,6 +139,23 @@ return Datatables::of( Fournituration::where('student_id' , $child->id )->where(
             return $buttonArray['statu'];
 
         })
+
+        ->editColumn('got', function( $model )use($child){
+
+            $buttonArray = Application::fillGotButton($model->fourniture, Auth::user(), $child );
+
+            $icon = $buttonArray['icon'];
+            $class = $buttonArray['class'];
+
+            if( ! $buttonArray['exist'] ){
+              return link_to('#', $icon, ['class' => 'btn btn-'. $class .' btn-circle btn-no-demande', 'data-id' => $model->fourniture->id, 'id' => 'got-'.$model->fourniture->got  ], null);
+            }
+
+            return link_to('#', $icon, ['class' => 'btn btn-'. $class .' btn-circle btn-demande', 'data-toggle'=>'modal', 'data-target'=>'#modal', 'data-id' => $model->fourniture->id, 'id' => 'got-'.$model->fourniture->got  ], null);
+
+        })
+
+
         ->rawColumns(['exist', 'statu'])
 
         ->make(true);

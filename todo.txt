@@ -1,3 +1,5 @@
+when creating fourniture if you got that then you should required price
+selling syteme from demande sytem :p
 
 
 +public_html
@@ -79,3 +81,7 @@ if the master put some config that make easy for entring fields
 -----------------------------
 Numero denregistrement
 You should put the last number of saving for kids an put it to the dashboard
+
+
+----------------
+You should let the parents demande books to by from the system

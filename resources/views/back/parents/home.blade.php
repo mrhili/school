@@ -20,7 +20,6 @@
 @endsection
 
 
-
 @section('content')
 
 
@@ -66,13 +65,6 @@
 
 @foreach($childs as $child)
 
-
-
-
-
-
-
-
   @component('back.components.plain')
 
     @slot('titlePlain')
@@ -88,16 +80,12 @@
 
 
                       <li class="fix-users-li">
-                        <a class="users-list-name" href="">
+                        <a class="users-list-name" href="{{ route('students.profile', $child->id) }}">
                           {!! Html::image(CommonPics::ifImg( 'students' ,  $child->img ),'User Image', ['class' => ''] ) !!}
                         </a>
 
-                        <a class="users-list-name" href="">...</a>
-
-
-
-
-                            <a href=""><span class="users-list-date">...</span></a>
+                        <a class="users-list-name" href="{{ route('students.profile', $child->id) }}">{{ $child->name }} {{ $child->las_name }}</a>
+                        <a href=""><span class="users-list-date">...</span></a>
 
                       </li>
 
@@ -121,6 +109,43 @@
                           <a href="{{ route('fournitures.child-fournitures', $child->id) }}" class="small-box-footer"> Mes fournitures<i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                       </div>
+
+                    </div>
+
+                    <hr />
+
+                    <div class="row">
+
+                      <h3 class="text-center">Ses maitres</h3>
+                      <div class="col-xs-4">
+                        @php
+                        $teatchifications =  Relation::uniqueTeatchificationFromstudent($year, $child);
+
+                        @endphp
+
+                        @foreach ($teatchifications as $teatchification)
+
+                          @component('back.components.user-block')
+                            @slot('link'){{ route('teatchers.profile', $teatchification->teatcher->id) }}@endslot
+
+                            @slot('img')
+                              {!! Html::image(CommonPics::ifImg( 'teatchers' ,  $teatchification->teatcher->img ),'User Image', ['class' => 'img-circle img-bordered-sm'] ) !!}
+                            @endslot
+
+                            @slot('name')
+                                  {{ $teatchification->teatcher->name }} {{ $teatchification->teatcher->last_name }}
+                            @endslot
+
+                          @endcomponent
+
+                        @endforeach
+
+
+                      </div>
+
+
+
+
 
                     </div>
 

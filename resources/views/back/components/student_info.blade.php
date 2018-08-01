@@ -8,6 +8,6 @@
 
 <strong><i class="fa fa-book margin-r-5"></i> Class</strong>
 
-<p class="text-muted">{{  Auth::user()->the_class->name }}</p>
+<p class="text-muted">{{  $user->the_class->name }}</p>
 
 <hr>

@@ -2,8 +2,6 @@
 
 @section('styles')
 
-
-
 @endsection
 
 @section('content')
@@ -15,17 +13,15 @@
             <div class="box-body box-profile">
 
 
-              @component('back.components.idcard')
+              @component('back.components.idcard', ['user' => $user])
                 @slot('placement')
-                    students
+                    users
                 @endslot
               @endcomponent
 
               <ul class="list-group list-group-unbordered">
 
-                {{--<li class="list-group-item">
-                  <b><a href="{{ route('fournitures.my-fournitures') }}">Fournitures</a></b> <a class="pull-right">{{ $fournitures }}</a>
-                </li>--}}
+
 
               </ul>
 
@@ -43,15 +39,15 @@
             <!-- /.box-header -->
             <div class="box-body">
 
-              @if(Auth::user()->role == 1)
-                @component('back.components.student_info')
+              @if($user->role == 1)
+                @component('back.components.student_info', ['user' => $user])
 
                 @endcomponent
               @endif
 
               @if($passInfo)
 
-                @component('back.components.private_info')
+                @component('back.components.private_info', ['user' => $user] )
 
                 @endcomponent
 
@@ -303,9 +299,14 @@
 
               <div class="tab-pane" id="settings">
 
-                @component('back.components.change_info')
+                @if ($passChangeInfo)
+                  @component('back.components.change_info')
 
-                @endcomponent
+                  @endcomponent
+                @endif
+
+
+
               </div>
               <!-- /.tab-pane -->
             </div>

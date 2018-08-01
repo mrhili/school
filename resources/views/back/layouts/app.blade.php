@@ -174,13 +174,13 @@ desired effect
 <script src="{!! asset('adminl/dist/js/adminlte.min.js') !!}"></script>
 
 
-
+<script src="{!! asset('sa2/sweetalert2.all.js') !!}"></script>
 
 
 
 <script src="{!! asset('application/js/common.js') !!}"></script>
 
-<script src="{!! asset('sa2/sweetalert2.all.js') !!}"></script>
+
 @include('sweetalert::alert')
 
 

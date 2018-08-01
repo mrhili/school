@@ -2,6 +2,8 @@
 
     {{ csrf_field() }}
 
+
+
     @include('back.partials.formG', ['name' => 'city', 'type' => 'text', 'text' => 'Ville', 'class'=>'', 'required' => false,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'zip_code', 'type' => 'text', 'text' => 'Zip Code', 'class'=>'', 'required' => false,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'adress', 'type' => 'text', 'text' => 'Adress', 'class'=>'', 'required' => false,'additionalInfo' => []])

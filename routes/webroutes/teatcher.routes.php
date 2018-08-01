@@ -1,9 +1,11 @@
 <?php
 
+Route::get('/data-students-by-teatcher/{teatcher}', 'StudentController@dataByTeatcher')->name('students.by-teatcher');
+
 Route::get('/link-teatcher-subcourse-class', 'TeatchificationController@link')->name('teatcherifications.link');
 Route::put('/store-link-teatcher-subcourse-class/{teatcher}/{subject_the_class_id}', 'TeatchificationController@storeLink')->name('teatcherifications.store-link');
 
-
+Route::get('/teatcher-home', 'TeatcherController@home')->name('teatchers.home');
 Route::get('/my-profile-as-teatcher', 'TeatcherController@myProfile')->name('teatchers.my-profile');
 Route::get('/teatcher-profile/{teatcher}', 'TeatcherController@profile')->name('teatchers.profile');
 

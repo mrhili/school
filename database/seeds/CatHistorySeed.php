@@ -237,6 +237,13 @@ class CatHistorySeed extends Seeder
             'kind' => 1,
             'role' => 1
         ]);//28
+        DB::table('history_categories')->insert([
+            'name' => 'Une demande a etait effectué:',
+            'model' => 'Demande',
+            'icon' => 'angle-double-right',
+            'kind' => 1,
+            'role' => 2
+        ]);//29
 
 
     }

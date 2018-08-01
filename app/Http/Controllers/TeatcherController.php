@@ -4,19 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Relation;
+
+use Session;
+
+use Auth;
+
 class TeatcherController extends Controller
 {
     //
-    public function myProfile(){
+    public function home(){
 
-
-        /****************/
-
-        $passInfo = true;
-        /*****************/
-        return view('back.teatchers.my-profile',compact('passInfo'));
+        return view('back.teatchers.home' );
     }
 
+    public function myProfile(){
+
+        /****************/
+        $passInfo = true;
+        /*****************/
+        $user = Auth::user();
+        return view('back.teatchers.my-profile',compact('passInfo', 'user'));
+    }
 
     public function add(){
 

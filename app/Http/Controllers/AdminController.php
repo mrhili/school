@@ -7,11 +7,16 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     //
+    public function home(){
+        return view('back.admins.home');
+    }
+
     public function myProfile(){
         /****************/
 
         $passInfo = true;
         /*****************/
-        return view('back.secretarias.my-profile',compact('passInfo'));
+        $user = Auth::user();
+        return view('back.admins.my-profile',compact('passInfo', 'user'));
     }
 }

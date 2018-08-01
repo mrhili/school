@@ -40,6 +40,8 @@ The Main Configuration Of the web application
                 <th>importante</th>
                 <th>exist</th>
                 <th>statu</th>
+
+                <th>demander</th>
             </tr>
         </thead>
     </table>
@@ -50,26 +52,70 @@ The Main Configuration Of the web application
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   @endslot
 
 
-  @slot('footerPlain')
 
 
 
-  @endslot
+
+
+  <div class="modal fade" id="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Default Modal</h4>
+        </div>
+        <form id="form">
+        <div class="modal-body">
+
+
+            <div class="form-group col-xs-12">
+            {{ csrf_field() }}
+            </div>
+            <div class="col-xs-12">
+
+            @include('back.partials.formG', ['name' => 'homany', 'type' => 'number', 'text' => 'Combien ?', 'class'=>' to-validate', 'required' => true, 'additionalInfo' => ['id' =>  'paymentfield'] ])
+            </div>
+            <div class="col-xs-12">
+
+            @include('back.partials.formG', ['name' => 'message', 'type' => 'textarea', 'text' => 'Message', 'class'=>' to-validate', 'required' => false, 'additionalInfo' => ['id' =>  'messagefield'] ])
+            </div>
+
+            <div class="col-xs-12">
+
+            @include('back.partials.formG', ['name' => 'hidden_note', 'type' => 'textarea', 'text' => 'Une Note Secret pour toi', 'class'=>' to-validate', 'required' => false, 'additionalInfo' => ['id' =>  'hiddennotefield'] ])
+            </div>
+            <div class="col-xs-12">
+            {{--hoofield array user or exterior--}}
+
+            </div>
+
+
+            <div class="clearfix"></div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <button id="send-demande" type="button" class="btn btn-primary">Demander</button>
+
+        </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+
+
+
+
+
+
 
 
 @endcomponent
@@ -111,8 +157,8 @@ $(function() {
           { data: 'for', name: '' },
           { data: 'required', name: '' },
           { data: 'exist', name: '' },
-          { data: 'statu', name: '' }
-
+          { data: 'statu', name: '' },
+          { data: 'got', name: '' }
         ]
     });
 });
@@ -130,6 +176,8 @@ $( document ).ready(function() {
               $button = $(this)
 
               id = $button.attr('data-id');
+
+
 
               $button.attr('disabled',true);
 
@@ -164,7 +212,89 @@ $( document ).ready(function() {
                   });
 
 
+
   });
+/*****************************/
+
+
+
+var child =  '{{ $child->id }}';
+
+
+
+
+$("#table").on("click", ".btn-demande", function(){
+   // your code goes here
+
+            id = $(this).attr('data-id');
+
+            window.founiture = id;
+
+            $('#modal').modal('show');
+
+});
+
+var send-demande = $('#send-demande');
+
+
+
+send-demande.on("click", function(e){
+
+
+
+if( $('#form').valid() ){
+
+              send-demande.attr('disabled', true);
+
+              howmany = $('#howmanyfield').val();
+              message = $('#messagefield').val();
+              hidden_note = $('#hiddennotefield').val();
+
+              axios.post('/fourniture-demande/'+child+'/'+ window.founiture +'/'+ howmany,{
+                headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                message: message,
+                hidden_note: hidden_note
+
+              })
+                .then(function (response) {
+                  send-demande.attr('disabled', false);
+                  $('#modal').modal('hide');
+
+                  var returnedArray = response.data;
+                  console.log(returnedArray);
+
+                  swal(
+                    'La demande a etait effectué',
+                    'attend la confirmation de ' +returnedArray['howmany'] +'piece de '+ returnedArray['fourniture']
+                     + 'qui coute chacun '+ returnedArray['average_price']
+                      +' dh donc tu doit payé : ' + returnedArray['totalmoney'] + dh,
+                    'success'
+                  )
+
+                })
+                .catch(function (error) {
+                  send-demande.attr('disabled', false);
+                  swal(
+                    'La demande netait pas effectué',
+                    error,
+                    'error'
+                  )
+                  console.log( error );
+                });
+
+}
+
+
+
+
+
+
+
+
+
+
 
 });
 

@@ -38,9 +38,40 @@ class UserController extends Controller
 {
     //
 
-    public function changeInfo(Request $request, User $user){
+    public function userlist(){
+      return view('back.users.userlist');
+    }
 
-      $user->fill( $request->all() )->save();
+    public function userlistdata(){
+      return Datatables::of(User::where('role', 0 )->get(['id', 'name', 'email']) )
+
+      ->editColumn('name', function( $model ){
+
+
+
+         return link_to_route('users.profile', $model->name, [ $model->id ], ['class' => 'btn btn-info btn-circle', 'target' => '_blank']);
+
+   })
+     ->make(true);
+    }
+
+
+
+    public function home(){
+
+      return view('back.users.home');
+    }
+
+    public function changeInfo(Request $request, User $user){
+      $infoUser = array_except( $request->all(),['family_situation']);
+        if( $request->family_situation ){
+
+            $infoUser["family_situation"] = true;
+
+        }else{
+            $infoUser["family_situation"] = false;
+        }
+      $user->fill( $infoUser )->save();
 
       alert()->success('Success','Les informations son changer avec succes');
 
@@ -48,8 +79,41 @@ class UserController extends Controller
     }
 
     public function myProfile(){
+        $year = Session::get('yearId');
 
-      return view('back.users.my-profile');
+
+        /****************/
+
+        $passInfo = true;
+        $passChangeInfo = true;
+        /*****************/
+
+        $user = Auth::user();
+
+        return view('back.users.profile',compact('passInfo', 'user', 'passChangeInfo'));
+    }
+    public function profile(User $user){
+
+      $year = Session::get('yearId');
+
+      /****************/
+      $passInfo = false;
+      $passChangeInfo= false;
+      if( Auth::check() ){
+
+        if( Auth::user()->role > 4 ){
+
+          $passInfo = true;
+          $passChangeInfo = true;
+
+        }
+
+      }
+
+
+      /*****************/
+
+      return view('back.users.profile', compact('passInfo', 'user', 'passChangeInfo'));
     }
 
 

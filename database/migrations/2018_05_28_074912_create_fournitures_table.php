@@ -20,6 +20,7 @@ class CreateFournituresTable extends Migration
             $table->string('for')->nullable();
             $table->boolean('required');
             $table->float('average_price')->nullable();
+            $table->smallInteger('got')->default(0)->unsigned();
             $table->timestamps();
         });
     }

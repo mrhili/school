@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\{
+  User
+};
 use Auth;
+
+use Session;
 
 class ParentController extends Controller
 {
@@ -16,7 +20,8 @@ class ParentController extends Controller
 
         $passInfo = true;
         /*****************/
-        return view('back.parents.my-profile',compact('passInfo'));
+        $user = Auth::user();
+        return view('back.parents.my-profile',compact('passInfo', 'user'));
     }
 
     public function all(){
@@ -30,8 +35,9 @@ class ParentController extends Controller
 
         $childs = $user->relashionshipsStudentsParent;
 
-        return view('back.parents.home',compact('childs'));
-    }
+        $year = Session::get('yearId');
 
+        return view('back.parents.home',compact('childs', 'year'));
+    }
 
 }

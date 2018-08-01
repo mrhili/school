@@ -47,21 +47,41 @@ class StudentController extends Controller
 {
     //
 
+    public function dashboard(User $student){
+
+
+      if( Auth::user()->role == 2 ){
+
+        if ( ! Relation::hisParent(Auth::id() , $student) ){
+
+          return back();
+
+        }
+
+      }
+
+      $year = Session::get('yearId');
+
+      $teatchifications = Relation::uniqueTeatchificationFromstudent($year, $student);
+
+      $ids = Subjectclass::where('year_id', $year)->where('the_class_id', $student->the_class_id )->pluck('id')->toArray();
+
+      $mytests = Testyearsubclass::whereIn('subject_the_class_id', $ids )->where('publish', true)->get();
+
+      return view('back.students.dashboard',compact('mytests', 'teatchifications', 'student'));
+
+    }
+
     public function home(){
 
         $user = Auth::user();
 
         $year = Session::get('yearId');
 
-        $the_class_id = $user->payments()->where('year_id', Session::get('yearId')  )->first()->the_class_id ;
+        $teatchifications = Relation::uniqueTeatchificationFromstudent($year, $user);
 
-        $class = TheClass::find( $the_class_id );
+        $ids = Subjectclass::where('year_id', $year)->where('the_class_id', $user->the_class_id )->pluck('id')->toArray();
 
-        $ids = Subjectclass::where('year_id', $year)->where('the_class_id', $the_class_id)->pluck('id')->toArray();
-
-        $teatchifications =  Tetchification::whereIn('subject_the_class_id', $ids)->distinct('user_id')->toArray();
-
-//->
         $mytests = Testyearsubclass::whereIn('subject_the_class_id', $ids )->where('publish', true)->get();
 
         return view('back.students.home',compact('mytests', 'teatchifications'));
@@ -71,19 +91,42 @@ class StudentController extends Controller
         $year = Session::get('yearId');
         $notes = Note::where('student_id' , Auth::user()->id )->where('year_id' , $year )->count();
         $fournitures = Fournituration::where('student_id' , Auth::user()->id )->where('year_id' , $year )->count();
-
+        $user = Auth::user();
         /****************/
 
         $passInfo = true;
         /*****************/
-        return view('back.students.my-profile',compact('notes', 'fournitures', 'passInfo'));
+        return view('back.students.my-profile',compact('notes', 'fournitures', 'passInfo', 'user'));
     }
 
     public function profile(User $student){
-        $year = Session::get('yearId');
-        $notes = Note::where('student_id' , $student->id )->where('year_id' , $year )->count();
-        $fournitures = Fournituration::where('student_id' , $student->id )->where('year_id' , $year )->count();
-        return view('back.students.profile', compact('student', 'notes', 'fournitures'));
+
+      $user = $student;
+
+      $year = Session::get('yearId');
+
+      $notes = Note::where('student_id' , $student->id )->where('year_id' , $year )->count();
+      $fournitures = Fournituration::where('student_id' , $student->id )->where('year_id' , $year )->count();
+
+      /****************/
+      $passInfo = false;
+      $passChangeInfo = false;
+      if( Auth::check() ){
+
+        if( Auth::user()->role > 4 ){
+
+          $passInfo = true;
+          $passChangeInfo = true;
+
+        }
+
+      }
+
+
+      /*****************/
+
+      return view('back.students.profile', compact('passInfo', 'user', 'passChangeInfo', 'notes', 'fournitures'));
+
 
     }
 
@@ -328,17 +371,6 @@ class StudentController extends Controller
             }
 
 
-
-
-
-
-
-
-
-
-
-
-
 	    }
 
     }
@@ -536,6 +568,37 @@ class StudentController extends Controller
         })
 
         ->make(true);
+
+    }
+
+    public function dataByTeatcher( User $teatcher){
+      $year = Session::get('yearId');
+
+      return Datatables::of(
+        Relation::studentsFromTeatcher($year, $teatcher)
+         )
+
+         ->editColumn('img', function( $model ){
+
+           //return link_to_route( 'students.profile' , $model->name.' '.$model->last_name, [ $model->id ], ['class' => 'btn btn-danger btn-circle']);
+           return '<img src="'. CommonPics::ifImg( 'teatchers' ,  $model->img ) .'" class="img-responsive img-circle" width="150" height="150" />';
+         })
+
+      ->editColumn('namecomplet', function( $model ){
+
+        return link_to_route( 'students.profile' ,$model->name.' '.$model->last_name, [ $model->id ], ['class' => 'btn btn-danger btn-circle']);
+
+     })
+
+     ->editColumn('dashboard', function( $model ){
+
+       return link_to_route( 'students.dashboard' ,'Dashboard', [ $model->id ], ['class' => 'btn btn-danger btn-circle']);
+
+    })
+
+      ->rawColumns(['img', 'nomcomplete', 'dashboard'])
+
+      ->make(true);
 
     }
 

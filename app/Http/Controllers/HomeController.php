@@ -66,16 +66,10 @@ class HomeController extends Controller
 
         $user = Auth::user();
 
-        if( $user->role == 1 ){
-
-            return redirect()->route('students.home');
-
-        }else if( $user->role == 2 ){
-
-            return redirect()->route('parents.home');
-
+        if( $user->role != 6 ){
+            return redirect()->route(  ArrayHolder::roles_routing($user->role).'.home');
         }
-
+        $users = User::where('role', 0 )->count();
         $students = User::where('role', 1 )->count();
         $parents = User::where('role', 2 )->count();
         $teatchers = User::where('role', 3 )->count();
@@ -109,7 +103,10 @@ class HomeController extends Controller
 
 
 
-        return view('home', compact('students', 'parents', 'teatchers','secretarias','admins','masters', 'classes', 'subjects', 'tests','fournitures','rooms', 'roomtypes', 'etages', 'objctypes', 'objcts', 'observations', 'callings', 'meetingtypes', 'meetings', 'mymeetings', 'meetingsCreatedbyme', 'courses'));
+        return view('home', compact('users','students', 'parents', 'teatchers','secretarias','admins',
+        'masters', 'classes', 'subjects', 'tests','fournitures','rooms', 'roomtypes',
+         'etages', 'objctypes', 'objcts', 'observations', 'callings', 'meetingtypes',
+          'meetings', 'mymeetings', 'meetingsCreatedbyme', 'courses'));
     }
 
     public function monthsBD()

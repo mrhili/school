@@ -14,7 +14,7 @@
 
 @section('content')
 
-            
+
 
             <div class="box box-default collapsed-box">
               <div class="box-header with-border">
@@ -50,7 +50,7 @@
 
                       @include('back.partials.formG', ['name' => 'for', 'type' => 'text', 'text' => 'lutilisation de la fourniture', 'class'=>'', 'required' => 'false', 'additionalInfo' => ['id' =>  'forfield'] ])
                       </div>
-                      
+
                       <div class="col-xs-12">
 
                       @include('back.partials.formG', ['name' => 'required', 'type' => 'checkbox', 'text' => 'Importante ?', 'class'=>'', 'required' => true, 'checked' => true ,'additionalInfo' => [ 'id' => 'requiredfield']])
@@ -58,6 +58,11 @@
                       <div class="col-xs-12">
 
                       @include('back.partials.formG', ['name' => 'average_price', 'type' => 'number', 'text' => 'Le prix de cette fourniture dans le marché', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'pricefield'] ])
+                      </div>
+
+                      <div class="col-xs-12">
+
+                      @include('back.partials.formG', ['name' => 'got', 'type' => 'number', 'text' => 'Combien il ya lecole', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'gotfield'] ])
                       </div>
 
                       <div class="col-xs-12">
@@ -105,6 +110,7 @@
               <h5 class="widget-user-desc">prix: {{ $fourniture->average_price }}</h5>
               <h5 class="widget-user-desc">pour: {{ $fourniture->for }}</h5>
               <h5 class="widget-user-desc">{{ ($fourniture->required? 'nécessaire': 'pas trop nécessaire' ) }}</h5>
+              <h5 class="widget-user-desc">Il yas : {{ $fourniture->got }}</h5>
               <p class="widget-user-desc">info: {{ $fourniture->additional_info }}</p>
             </div>
             <div class="box-footer no-padding">
@@ -134,7 +140,7 @@ The Main Configuration Of the web application
 
   @slot('sectionPlain')
 
-                  
+
   @endslot
 
 
@@ -187,6 +193,7 @@ var comment, hidden_note, name;
               forfield = $('#forfield').val();
               required = $('#requiredfield').is(":checked");
               average_price = $('#pricefield').val();
+              got = $('#gotfield').val();
 
               axios.post('/store-fourniture',{
                 headers: {
@@ -198,13 +205,14 @@ var comment, hidden_note, name;
                 additional_info: additional_info,
                 forfield: forfield,
                 required: required,
-                average_price: average_price
+                average_price: average_price,
+                got:got
 
               })
                 .then(function (response) {
                   console.log( response );
                   addSubject.attr('disabled', false);
-                  
+
                   var returnedArray = response.data;
 
                   var necessary;
@@ -216,7 +224,7 @@ var comment, hidden_note, name;
                     necessary = 'pas trop necessaire';
                   }
 
-                  subjects.append('<div class="col-md-4"><!--Widget:userwidgetstyle1--><div class="box box-widget widget-user-2"><!--Addthebgcolortotheheaderusinganyofthebg-*classes--><div class="widget-user-header bg-'+ randombgcolor() +'"><div class="widget-user-image"><img class="img-circle" src="'+schoolLink+'/'+imgLink+'" alt="UserAvatar"></div><!--/.widget-user-image--><h3 class="widget-user-username">'+ returnedArray['name']+'</h3><h5 class="widget-user-desc">prix: '+ returnedArray['average_price']+'</h5><h5 class="widget-user-desc">pour: '+ returnedArray['for']+'</h5><h5 class="widget-user-desc">'+ necessary+'</h5><p class="widget-user-desc">info: '+ returnedArray['additional_info']+'</p></div><div class="box-footer no-padding"><ul class="nav nav-stacked"><li><a href="#">Projects<span class="pull-right badge bg-blue">31</span></a></li></ul></div></div><!--/.widget-user--></div>');
+                  subjects.append('<div class="col-md-4"><!--Widget:userwidgetstyle1--><div class="box box-widget widget-user-2"><!--Addthebgcolortotheheaderusinganyofthebg-*classes--><div class="widget-user-header bg-'+ randombgcolor() +'"><div class="widget-user-image"><img class="img-circle" src="'+schoolLink+'/'+imgLink+'" alt="UserAvatar"></div><!--/.widget-user-image--><h3 class="widget-user-username">'+ returnedArray['name']+'</h3><h5 class="widget-user-desc">prix: '+ returnedArray['average_price']+'</h5><h5 class="widget-user-desc">pour: '+ returnedArray['for']+'</h5><h5 class="widget-user-desc">Il ya: '+ returnedArray['got']+'</h5><h5 class="widget-user-desc">'+ necessary+'</h5><p class="widget-user-desc">info: '+ returnedArray['additional_info']+'</p></div><div class="box-footer no-padding"><ul class="nav nav-stacked"><li><a href="#">Projects<span class="pull-right badge bg-blue">31</span></a></li></ul></div></div><!--/.widget-user--></div>');
 
                 })
                 .catch(function (error) {
