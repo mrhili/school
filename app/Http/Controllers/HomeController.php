@@ -20,7 +20,8 @@ use App\{
     Calling,
     Meetingtype,
     Meeting,
-    Meetingpopulating
+    Meetingpopulating,
+    Demandefourniture
 };
 use Application;
 use Auth;
@@ -100,13 +101,13 @@ class HomeController extends Controller
 
         $meetingsCreatedbyme = Meetingpopulating::where('creator_id', Auth::id() )->count();
 
-
+        $demandefournitures = Demandefourniture::count();
 
 
         return view('home', compact('users','students', 'parents', 'teatchers','secretarias','admins',
         'masters', 'classes', 'subjects', 'tests','fournitures','rooms', 'roomtypes',
          'etages', 'objctypes', 'objcts', 'observations', 'callings', 'meetingtypes',
-          'meetings', 'mymeetings', 'meetingsCreatedbyme', 'courses'));
+          'meetings', 'mymeetings', 'meetingsCreatedbyme', 'courses', 'demandefournitures'));
     }
 
     public function monthsBD()

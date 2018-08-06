@@ -26,4 +26,9 @@ class Teatchification extends Model
     	return $this->belongsTo('App\Subjectclass', 'subject_the_class_id');
 
     }
+
+    public function calendars()
+    {
+        return $this->belongsToMany('App\Calendar')->withPivot('year_id');
+    }
 }

@@ -163,6 +163,16 @@ class User extends Authenticatable
         return $this->hasMany('App\Teatchification');
     }
 
+    public function myFournitureDemandes()
+    {
+        return $this->hasMany('App\Demandefourniture', 'parent_id');
+    }
+
+    public function fournitureDemandesForMe()
+    {
+        return $this->hasMany('App\Demandefourniture', 'student_id');
+    }
+
 
 
 }

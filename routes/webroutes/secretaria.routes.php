@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*PERSONELLE*/
 Route::get('/my-profile-as-secretaria', 'SecretariaController@myProfile')->name('secretarias.my-profile');
 
@@ -11,6 +13,11 @@ Route::get('/printable-sheet-new-student-with-parent/{student}/{parent}', 'Print
 
 Route::get('/printable-sheet-new-worker/{worker}', 'PrintableController@printableSheeNewWorker')->name('printables.new-worker');
 
+/**********************************Claendar teatchifications****************************************/
+
+Route::get('/management-calendar-teatchifcation/{class}', 'CalendarteatchificationController@managebyclass')->name('calendarteatchifications.manage-byclass');
+Route::get('/data-management-calendar-teatchifcation/{class}', 'CalendarteatchificationController@dataManagebyclass')->name('calendarteatchifications.data-manage-byclass');
+Route::post('/store-management-calendar-teatchifcation/{teatchification}', 'CalendarteatchificationController@store')->name('calendarteatchifications.store');
 
 
 /*****Meetings******/
@@ -72,7 +79,11 @@ Route::post('/link-fourniture-class/{class}/{fourniture_id}', 'FournitureControl
 
 Route::get('/fournitures', 'FournitureController@list')->name('fournitures.list');
 Route::post('/store-fourniture', 'FournitureController@store')->name('fournitures.store');
+/********************Demande Fourniture******************************/
 
+Route::get('/demandefourniture-list', 'DemandefournitureController@list')->name('demandefournitures.list');
+Route::put('/accepte-demande-fourniture/{demande}', 'DemandefournitureController@accept')->name('demandefournitures.accept');
+Route::get('/demandefourniture-load', 'DemandefournitureController@loadDataAjax')->name('demandefournitures.loaddata');
 
 /****************ROOMS*************/
 Route::get('/rooms', 'RoomController@list')->name('rooms.list');

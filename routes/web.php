@@ -44,7 +44,6 @@ Route::get('/testprintable-sheet-worker', 'TestoController@printableSheetWorker'
 
 Auth::routes();
 
-Route::get('/get-rep-cal', 'CalendarrepeateController@getRepeated')->name('calendarrepeates.get-json');
 Route::get('/cal-test', 'CalendarController@test')->name('cal');
 Route::get('/cal-test2', 'CalendarController@test2')->name('cal2');
 Route::get('/cal-index', 'CalendarController@index')->name('calendars.index');

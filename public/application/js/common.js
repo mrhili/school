@@ -1,16 +1,16 @@
 $(document).ready(function(){
 /*************************Clean string and keep just digits*********/
-	function justNum(string){
 
-			cleanId = string.replace(/[^0-9]/gi, '');
-			cleanId = parseInt(cleanId, 10);
-
-			return cleanId;
-
-	}
 /*******************************************/
 
+function justNum(string){
 
+		cleanId = string.replace(/[^0-9]/gi, '');
+		cleanId = parseInt(cleanId, 10);
+
+		return cleanId;
+
+}
 
 /**********************************CHANGE YEAR*********/
 

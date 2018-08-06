@@ -1,4 +1,4 @@
-<?php
+²²²²²²²²²²²²²<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -38,7 +38,7 @@ class CreateDemandefournituresTable extends Migration
 
             $table->text('message')->nullable();
 
-            $table->smallInteger('totalmoney')->unsigned();
+            $table->float('totalmoney')->unsigned();
             $table->boolean('done')->default(false);
 
 

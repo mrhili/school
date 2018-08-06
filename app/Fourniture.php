@@ -22,6 +22,11 @@ class Fourniture extends Model
         return $this->hasMany('App\Fournituration');
     }
 
+    public function demandes()
+    {
+        return $this->hasMany('App\Demandefourniture');
+    }
+
 
 
 

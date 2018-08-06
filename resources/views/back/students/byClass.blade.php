@@ -190,7 +190,7 @@ The Main Configuration Of the web application
 <script src="{!! asset('validate/jquery.validate.min.js') !!}"></script>
 <script type="text/javascript">
 
-    
+
           var id, idOf, ad, statu_value, payment, month, comment, hoofield, users, user, exteriorinfo, exteriorname, exteriornamefield, exteriorinfos;
           var year = {{ Session::get('yearId') }};
           var theclass = {{ $class->id }};
@@ -238,10 +238,10 @@ $(function() {
 </script>
 
 <script type="text/javascript">
-  
+
 $( document ).ready(function() {
 
-    
+
 $("#by-class-table").on("click", ".btn-pay", function(){
    // your code goes here
 
@@ -289,16 +289,14 @@ sendformpayment.on("click", function(e){
 
 if( $('#form').valid() ){
 
-              sendformpayment.attr('disabled', false);
-
 
 
               sendformpayment.attr('disabled', true);
-              
+
               payment = $('#paymentfield').val();
 
 
-              
+
               comment = $('#commentfield').val();
               hidden_note = $('#hiddennotefield').val();
               hoo = $('#hoofield').val();
@@ -322,7 +320,7 @@ if( $('#form').valid() ){
                 .then(function (response) {
                   sendformpayment.attr('disabled', false);
                   $('#modalpayment').modal('hide');
-                  
+
                   var returnedArray = response.data;
                   console.log(returnedArray);
                   var selectedButton = $('#'+idOf);
@@ -340,7 +338,7 @@ if( $('#form').valid() ){
 
 }
 
-  }); 
+  });
 
 });
 

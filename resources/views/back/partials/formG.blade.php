@@ -11,9 +11,21 @@
                   <div class="col-sm-10">
 
 
+                    @if( $type == 'color' )
+
+                        @php
+                            $primary = ['class' => 'form-control '. $class, 'required' => $required ];
 
 
-                    @if( $type == 'number' )
+
+                            $output = array_merge($primary,$additionalInfo);
+
+                        @endphp
+
+
+                        {!! Form::color($name, $value, $output ) !!}
+
+                    @elseif( $type == 'number' )
 
                         @php
                             $primary = ['class' => 'form-control '. $class, 'required' => $required ];

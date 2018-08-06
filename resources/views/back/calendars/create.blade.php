@@ -4,73 +4,125 @@
 
 
 
-    <link rel="stylesheet" href="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.min.css') !!}">
-      <link rel="stylesheet" href="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.print.min.css') !!}" media="print">
+
 @endsection
 
 @section('content')
 
-            <form action="{{ route('calendars.store') }}" method="POST">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                <div class="form-group">
-                     <label for="title">TITLE</label>
-                     <input type="text" name="title" class="form-control" value=""/>
-                </div>
-                    <div class="form-group">
-                     <label for="start">START</label>
-                     <input type="datetime-local" name="start_date" class="form-control" value=""/>
-                </div>
-                    <div class="form-group">
-                     <label for="end">END</label>
-                     <input type="datetime-local" name="end_date" class="form-control" value=""/>
-                </div>
-                    <div class="form-group">
-                     <label for="is_all_day">IS_ALL_DAY</label>
-                     <input type="text" name="is_all_day" class="form-control" value="0"/>
-                </div>
-                    <div class="form-group">
-                     <label for="background_color">BACKGROUND_COLOR</label>
-                     <input type="color" name="background_color" class="form-control" value=""/>
-                </div>
+  {!! Form::open(['route' => 'calendars.store', 'method' => 'post' ,'class' => 'form-horizontal']) !!}
 
+  @component('back.components.plain')
 
+    @slot('titlePlain')
 
-            <a class="btn btn-default" href="{{ route('calendars.index') }}">Back</a>
-            <button class="btn btn-primary" type="submit" >Create</button>
-            </form>
+  Nouveau etudient
+
+    @endslot
+
+    {{ csrf_field() }}
+
+    @include('back.partials.formG', ['name' => 'role', 'type' => 'select', 'selected' => $role , 'text' => 'Genre', 'class'=>'', 'required' => true, 'array' => array_except(ArrayHolder::roles(), [0,1, 2]) ,'additionalInfo' => [], 'placeholder' => 'selectionne un role' ])
+
+    <hr />
+
+    @include('back.partials.formG', ['name' => 'title', 'type' => 'text', 'text' => 'Titre devenement', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'start_date', 'type' => 'datetime-local', 'text' => 'Debut devenement', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'end_date', 'type' => 'datetime-local', 'text' => 'Fin devenement', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'background_color', 'type' => 'color', 'text' => 'Couleur devenement', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'is_all_day', 'type' => 'checkbox', 'text' => 'joure complet', 'class'=>'is_all_day', 'required' => false, 'checked' => false,'additionalInfo' => ['id' => 'is_all_day']])
+
+    <hr />
+    @include('back.partials.formG', ['name' => 'holiday', 'type' => 'checkbox', 'text' => 'Vacance', 'class'=>'holiday', 'required' => false, 'checked' => false,'additionalInfo' => [ 'id' => 'holiday' ]])
 
 
+    @include('back.partials.formG', ['name' => 'repeated', 'type' => 'checkbox', 'text' => 'Repeté', 'class'=>'repeated', 'required' => false, 'checked' => false,'additionalInfo' => [ 'id' => 'repeated']])
+    @include('back.partials.formG', ['name' => 'repeated_type', 'type' => 'select','selected' => null, 'text' => 'Type répétition', 'class'=>'repeated_type', 'required' => false, 'array' => ArrayHolder::repeatedTypes(),'additionalInfo' => [ 'id' => 'repeated_type' ]])
+    @include('back.partials.formG', ['name' => 'end_repeated_date', 'type' => 'datetime-local', 'text' => 'Fin de devenement repeté', 'class'=>'end_repeated_date', 'required' => false,'additionalInfo' => [ 'id' => 'end_repeated_date']])
+
+    @slot('footerPlain')
+
+    @component('back.components.button')
+
+      @slot('value')
+
+        Enregistrer
+
+      @endslot
+
+    @endcomponent
+
+    @endslot
 
 
+  @endcomponent
 
 
 @endsection
 
-@section('datatableScript')
-
-
-
-@endsection
 
 @section('scripts')
 
-<script src="{!! asset('adminl/bower_components/jquery-ui/jquery-ui.min.js') !!}"></script>
-<script src="{!! asset('adminl/bower_components/moment/moment.js') !!}"></script>
-<script src="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.min.js"') !!}"></script>
+  <script src="{!! asset('adminl/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') !!}"></script>
+  <script src="{!! asset('adminl/bower_components/fastclick/lib/fastclick.js') !!}"></script>
 
+<script type="text/javascript">
 
-<script src="{!! asset('adminl/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') !!}"></script>
-<script src="{!! asset('adminl/bower_components/fastclick/lib/fastclick.js') !!}"></script>
-
-<!-- SlimScroll -->
-<script src="{!! asset('adminl/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') !!}"></script>
-
-
-<!-- FastClick -->
-<script src="{!! asset('adminl/bower_components/fastclick/lib/fastclick.js') !!}"></script>
+$(document).ready(function(){
 
 
 
+  var repeated = $('#repeated');
+  var holiday = $('#holiday');
+  var repeatedtype = $('#repeated_type');
+  var isallday = $('#is_all_day');
+  var endrepeateddate = $('#end_repeated_date');
+  var selectedOpRepType =$(".repeatedtype option:selected");
+  repeatedtype.hide();
+endrepeateddate.hide();
 
+
+
+    holiday.change(function() {
+
+
+      if(this.checked) {
+
+          repeated.hide().prop('checked', false);
+          isallday.prop('checked', true);
+          repeatedtype.hide();
+
+          selectedOpRepType.removeAttr("selected");
+          endrepeateddate.hide().val('');
+
+      }else{
+
+          repeated.show();
+
+      }
+    });
+
+
+    repeated.change(function() {
+
+      if(this.checked) {
+        repeatedtype.show();
+        endrepeateddate.show();
+
+      }else{
+
+          repeatedtype.hide();
+          endrepeateddate.hide();
+
+      }
+    });
+
+
+
+});
+
+
+
+
+</script>
 @endsection

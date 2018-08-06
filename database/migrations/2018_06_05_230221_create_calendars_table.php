@@ -17,10 +17,18 @@ class CreateCalendarsTable extends Migration
             $table->increments('id');
 
             $table->string('title');
-            $table->time('start_date');
-            $table->time('end_date');
+            $table->string('url');
+            $table->datetime('start_date');
+            $table->datetime('end_date');
             $table->boolean('is_all_day');
             $table->string('background_color');
+            $table->boolean('repeated')->default(false);
+            $table->boolean('holiday')->default(false);
+            //dayly//weeakly//monthly
+            $table->tinyInteger('repeated_type')->default(0)->unsigned();
+            $table->tinyInteger('role');
+
+            $table->datetime('end_repeated_date')->nullable();
             $table->timestamps();
         });
     }

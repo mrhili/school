@@ -77,7 +77,7 @@ The Main Configuration Of the web application
             </div>
             <div class="col-xs-12">
 
-            @include('back.partials.formG', ['name' => 'homany', 'type' => 'number', 'text' => 'Combien ?', 'class'=>' to-validate', 'required' => true, 'additionalInfo' => ['id' =>  'paymentfield'] ])
+            @include('back.partials.formG', ['name' => 'homany', 'type' => 'number', 'text' => 'Combien ?', 'class'=>' to-validate', 'required' => true, 'additionalInfo' => ['id' =>  'howmanyfield'] ])
             </div>
             <div class="col-xs-12">
 
@@ -141,7 +141,9 @@ The Main Configuration Of the web application
 @endsection
 
 @section('scripts')
+
 <script src="{!! asset('axios/axios.min.js') !!}"></script>
+<script src="{!! asset('validate/jquery.validate.min.js') !!}"></script>
 <script type="text/javascript">
 
 $(function() {
@@ -225,26 +227,61 @@ var child =  '{{ $child->id }}';
 
 $("#table").on("click", ".btn-demande", function(){
    // your code goes here
+   function justNum(string){
 
-            id = $(this).attr('data-id');
+ 			cleanId = string.replace(/[^0-9]/gi, '');
+ 			cleanId = parseInt(cleanId, 10);
+
+ 			return cleanId;
+
+ 	}
+            $this = $(this);
+
+            id = $this.attr('data-id');
 
             window.founiture = id;
 
-            $('#modal').modal('show');
+            $howmanyfield = $('#howmanyfield');
+
+            $howmanyfield.attr('min', 1);
+            maxhowmany = Number(  justNum(  $this.text()  ) );
+            $howmanyfield.attr('max', maxhowmany  );
+
+            window.maxhowmany = maxhowmany;
+
+            //$('#modal').modal('show');
 
 });
 
-var send-demande = $('#send-demande');
+
+
+$('#howmanyfield').keyup(function() {
+
+  if(  Number ($(this).val() ) > window.maxhowmany ){
+      $(this).val( window.maxhowmany );
+      swal({
+        position: 'top-end',
+        type: 'error',
+        title: 'Tu peux pas demander plus que : ' + window.maxhowmany,
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+  }
+
+});
+
+var senddemande = $('#send-demande');
 
 
 
-send-demande.on("click", function(e){
+senddemande.on("click", function(e){
 
 
 
 if( $('#form').valid() ){
 
-              send-demande.attr('disabled', true);
+              senddemande.attr('disabled', true);
 
               howmany = $('#howmanyfield').val();
               message = $('#messagefield').val();
@@ -259,7 +296,7 @@ if( $('#form').valid() ){
 
               })
                 .then(function (response) {
-                  send-demande.attr('disabled', false);
+                  senddemande.attr('disabled', false);
                   $('#modal').modal('hide');
 
                   var returnedArray = response.data;
@@ -267,15 +304,14 @@ if( $('#form').valid() ){
 
                   swal(
                     'La demande a etait effectué',
-                    'attend la confirmation de ' +returnedArray['howmany'] +'piece de '+ returnedArray['fourniture']
-                     + 'qui coute chacun '+ returnedArray['average_price']
-                      +' dh donc tu doit payé : ' + returnedArray['totalmoney'] + dh,
+                    returnedArray['howmany'] +'piece de '+ returnedArray['name']
+                      +', tu doit payé : ' + returnedArray['totalmoney'] + 'dh',
                     'success'
                   )
 
                 })
                 .catch(function (error) {
-                  send-demande.attr('disabled', false);
+                  senddemande.attr('disabled', false);
                   swal(
                     'La demande netait pas effectué',
                     error,
@@ -289,11 +325,7 @@ if( $('#form').valid() ){
 
 
 
-
-
-
-
-
+});
 
 
 });

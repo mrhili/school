@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTeatchificationsTable extends Migration
+class CreateCalendarTeatchificationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,19 @@ class CreateTeatchificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('teatchifications', function (Blueprint $table) {
+        Schema::create('calendar_teatchification', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('subject_the_class_id')->unsigned()->index();
-            $table->foreign('subject_the_class_id')
+            $table->integer('teatchification_id')->unsigned()->index();
+            $table->foreign('teatchification_id')
               ->references('id')
-              ->on('subject_the_class')
+              ->on('teatchifications')
               ->onDelete('cascade');
 
-            $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')
+            $table->integer('calendar_id')->unsigned()->index();
+            $table->foreign('calendar_id')
               ->references('id')
-              ->on('users')
+              ->on('calendars')
               ->onDelete('cascade');
 
               $table->integer('year_id')->unsigned()->index();
@@ -33,6 +33,7 @@ class CreateTeatchificationsTable extends Migration
                 ->references('id')
                 ->on('years')
                 ->onDelete('cascade');
+
 
             $table->timestamps();
         });
@@ -45,6 +46,6 @@ class CreateTeatchificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teatchifications');
+        Schema::dropIfExists('calendar_teatchification');
     }
 }

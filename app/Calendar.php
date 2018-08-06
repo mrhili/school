@@ -14,11 +14,11 @@ use MaddHatter\LaravelFullcalendar\Event;
 class Calendar extends Model
 {
 
-	protected $dates = ['start_date', 'end_date'];
+    protected $fillable = ['url','title','start_date','end_date',
+     'is_all_day', 'background_color', 'repeated', 'holiday', 'repeated_type', 'end_repeated_date', 'role'
+   ];
 
-    protected $fillable = ['title','start_date','end_date', 'is_all_day', 'background_color'];
 
-	
 
    /**
      * Get the event's title
@@ -75,6 +75,12 @@ class Calendar extends Model
         return [
             'color' => $this->background_color,
         ];
+    }
+
+
+    public function teatchifications()
+    {
+        return $this->belongsToMany('App\Teatchification')->withPivot('year_id');
     }
 
 

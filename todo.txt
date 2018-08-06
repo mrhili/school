@@ -1,6 +1,8 @@
+The perfect view = /link-teatcher-subcourse-class  /  teatchifications\link.blade i guess
+
 when creating fourniture if you got that then you should required price
 selling syteme from demande sytem :p
-
+you should limit demande to not be higher than what is there
 
 +public_html
 +school

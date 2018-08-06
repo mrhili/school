@@ -12,4 +12,4 @@
   Route::get('/data-child-fournitures/{child}', 'FourniturationController@dataChildFournitures')->name('fournitures.data-child-fournitures');
 
 
-  Route::get('/fourniture-demande/{student}/{fourniture}/{howmany}', 'FournitureController@demande')->name('fournitures.demande');
+  Route::post('/fourniture-demande/{student}/{fourniture}/{howmany}', 'FournitureController@demande')->name('fournitures.demande');

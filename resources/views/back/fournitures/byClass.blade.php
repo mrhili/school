@@ -110,7 +110,7 @@ Eleves et founitures
 
   @slot('sectionPlain')
 
-                  
+
 
     <div class="table-responsive no-padding">
 
@@ -215,7 +215,7 @@ $(document).ready(function(){
               fourniture = $('#fourniturefield').val();
 
 
-  
+
 ///link-fourniture-class/{class}/{fourniture_id}
               axios.post('/link-fourniture-class/'+ the_class +'/'+ fourniture,{
                 headers: {
@@ -242,7 +242,7 @@ $(document).ready(function(){
                     necessary = 'pas trop necessaire';
                   }
 
-                  
+
                   fournitures.append('<div class="col-md-4"><!--Widget:userwidgetstyle1--><div class="box box-widget widget-user-2"><!--Addthebgcolortotheheaderusinganyofthebg-*classes--><div class="widget-user-header bg-'+ randombgcolor() +'"><div class="widget-user-image"><img class="img-circle" src="'+schoolLink+'/'+imgLink+'" alt="UserAvatar"></div><!--/.widget-user-image--><h3 class="widget-user-username">'+ returnedArray['name']+'</h3><h5 class="widget-user-desc">prix: '+ returnedArray['average_price']+'</h5><h5 class="widget-user-desc">pour: '+ returnedArray['for']+'</h5><h5 class="widget-user-desc">'+ necessary+'</h5><p class="widget-user-desc">info: '+ returnedArray['additional_info']+'</p></div><div class="box-footer no-padding"><ul class="nav nav-stacked"><li><a href="#">Projects<span class="pull-right badge bg-blue">31</span></a></li></ul></div></div><!--/.widget-user--></div>');
 
                 })

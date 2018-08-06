@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\History;
 use Illuminate\Http\Request;
-
+use Relation;
 class HistoryController extends Controller
 {
 
@@ -44,7 +44,7 @@ class HistoryController extends Controller
 
                 }
 
-                $admin = \App\Helpers\Common\Relation::byModel($history->category->model, $history->id_link );
+                $admin = Relation::byModel($history->category->model, $history->id_link );
 
                 $output .='<li>
           	        <i class="fa fa-'.$history->category->icon.' '.$bgColor.'"></i>

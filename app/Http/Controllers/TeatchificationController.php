@@ -75,7 +75,7 @@ class TeatchificationController extends Controller
 
         ];
 
-    $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a linker le maitre <strong>'.$teatcher->name.' </strong> au subject qui porte le nom' . $subject_the_class_id->subject->name . ' au class ' . $subject_the_class_id->the_class->name . '  </strong>.'  ;
+    $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a linker le maitre <strong>'.$teatcher->name.' </strong> au matiere qui porte le nom' . $subject_the_class_id->subject->name . ' au class ' . $subject_the_class_id->the_class->name . '  </strong>.'  ;
 
     History::create( $creation );
 

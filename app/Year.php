@@ -37,4 +37,9 @@ class Year extends Model
         return $this->hasMany('App\Subjectclass');
     }
 
+    public function calendar_teatchification()
+    {
+        return $this->hasMany('App\Calendarteatchification');
+    }
+
 }

@@ -1,5 +1,5 @@
 @if(empty( $id ))
-  @php $id = ''; @endphp
+  @php $id = 'table'; @endphp
 @endif
 
 @if(empty( $class ))

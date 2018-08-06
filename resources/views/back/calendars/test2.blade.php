@@ -86,8 +86,8 @@
         <!-- /.col -->
 
 
-	
-	
+
+
 
 
 
@@ -110,21 +110,19 @@
 <script src="{!! asset('adminl/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') !!}"></script>
 <script src="{!! asset('adminl/bower_components/fastclick/lib/fastclick.js') !!}"></script>
 
-<!-- SlimScroll -->
-<script src="{!! asset('adminl/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') !!}"></script>
-
-
-<!-- FastClick -->
-<script src="{!! asset('adminl/bower_components/fastclick/lib/fastclick.js') !!}"></script>
-
 <script src="{!! asset('axios/axios.min.js') !!}"></script>
 <script src="{!! asset('validate/jquery.validate.min.js') !!}"></script>
 {!! $calendar->script() !!}
 
 <script type="text/javascript">
+
+
+</script>
+{#
+<script type="text/javascript">
 $(document).ready(function(){
 
-      axios.get('/get-rep-cal').then(function(response){
+      axios.get('').then(function(response){
         var ev = {};
         returned = response.data ;
         console.log( response.data);
@@ -161,7 +159,7 @@ $(document).ready(function(){
         */
       });
 
-      var myEvent = 
+      var myEvent =
       {
         title:"my new event",
         allDay: false,
@@ -179,7 +177,7 @@ $(document).ready(function(){
 
 </script>
 
-
+#}
 
 
 @endsection

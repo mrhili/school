@@ -8,7 +8,7 @@ use App\History;
 use Illuminate\Http\Request;
 use App\{
   TheClass,
-  Demande
+  Demandefourniture
 };
 use Auth;
 use Relation;
@@ -20,7 +20,8 @@ class FournitureController extends Controller
     public function demande(Request $request, User $student, Fourniture $fourniture, $howmany){
       $totalmoney = $howmany * $fourniture->average_price;
 
-      $demande = Demande::create([
+      $demande = Demandefourniture::create([
+        'fourniture_id' => $fourniture->id ,
         'parent_id' => Auth::id(),
         'student_id' => $student->id,
         'howmany' => $howmany,
@@ -35,15 +36,15 @@ class FournitureController extends Controller
             'id_link' => $demande->id,
             'info' => 'just talk',
             'hidden_note' => $request->hidden_note,
-            'by-admin' => $Auth::id(),
+            'by-admin' => Auth::id(),
             'comment' => 'Cette fonction et faite par un parent',
             'category_history_id' => 29,
             'class' => 'info',
 
             ];
 
-          $creation['info'] = 'Le parent : <strong>'.$parent->name .' '.
-          $parent->last_name .'</strong> a demander '.$howmany.' fourniture qui porte le nom <strong>'.
+          $creation['info'] = 'Le parent : <strong>'.Auth::user()->name .' '.
+          Auth::user()->last_name .'</strong> a demander '.$howmany.' fourniture qui porte le nom <strong>'.
           $fourniture->name.' </strong> la charge sera' . $totalmoney . ' </strong>.'  ;
 
           History::create( $creation );

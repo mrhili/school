@@ -245,6 +245,30 @@ class CatHistorySeed extends Seeder
             'role' => 2
         ]);//29
 
+        DB::table('history_categories')->insert([
+            'name' => 'Une demande a etait Accepté:',
+            'model' => 'Demande',
+            'icon' => 'check',
+            'kind' => 2,
+            'role' => 1
+        ]);//30
+
+        DB::table('history_categories')->insert([
+            'name' => 'Une Emploi du temps a etait linké maitre - matiére:',
+            'model' => 'Calendarteatchification',
+            'icon' => 'calendar',
+            'kind' => 1,
+            'role' => 1
+        ]);//31
+
+        DB::table('history_categories')->insert([
+            'name' => 'Une Emploi du temps a etait créé:',
+            'model' => 'Calendar',
+            'icon' => 'calendar',
+            'kind' => 1,
+            'role' => 1
+        ]);//32
+
 
     }
 }
