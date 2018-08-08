@@ -32,12 +32,23 @@ use Carbon;
 use Auth;
 class Relation {
 
+
+  public static function calendar_teat_from_class(TheClass $class){
+    $year = Session::get('yearId');
+
+    $sc = Subjectclass::where('the_class_id', $class->id)->where('year_id', $year )->get(['id'])->toArray();
+
+    $t = Teatchification::whereIn('subject_the_class_id', $sc)->where('year_id', $year )->get(['id'])->toArray();
+
+    return Calendarteatchification::whereIn('teatchification_id', $t)->where('year_id', $year )->get();
+  }
+
   public static function calendar_teat_ids_from_class(TheClass $class){
     $year = Session::get('yearId');
 
     $sc = Subjectclass::where('the_class_id', $class->id)->where('year_id', $year )->get(['id'])->toArray();
 
-    $t = Teatchification::whereIn('the_class_id', $sc)->where('year_id', $year )->get(['id'])->toArray();
+    $t = Teatchification::whereIn('subject_the_class_id', $sc)->where('year_id', $year )->get(['id'])->toArray();
 
     return Calendarteatchification::whereIn('teatchification_id', $t)->where('year_id', $year )->get(['calendar_id'])->toArray();
   }

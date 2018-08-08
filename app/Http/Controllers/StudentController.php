@@ -84,7 +84,13 @@ class StudentController extends Controller
 
         $mytests = Testyearsubclass::whereIn('subject_the_class_id', $ids )->where('publish', true)->get();
 
-        return view('back.students.home',compact('mytests', 'teatchifications'));
+        $class = TheClass::find($user->the_class_id);
+
+        $calendar = Application::loadCalendarForClass( $class );
+
+
+
+        return view('back.students.home',compact('mytests', 'teatchifications', 'calendar'));
     }
 
     public function myProfile(){

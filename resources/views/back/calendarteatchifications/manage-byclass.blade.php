@@ -1,9 +1,13 @@
 @extends('back.layouts.app')
 
+@section('datatableCss')
+  <link rel="stylesheet" href="{!! asset('adminl/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') !!}">
+
+@endsection
+
 @section('styles')
 
 
-    <link rel="stylesheet" href="{!! asset('adminl/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') !!}">
     <link rel="stylesheet" href="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.min.css') !!}">
       <link rel="stylesheet" href="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.print.min.css') !!}" media="print">
 
@@ -68,12 +72,12 @@
 
         <form id="add-form" class="form-horizontal">
 
-          @include('back.partials.formG', ['name' => 'teatchification', 'type' => 'select','selected' => null, 'text' => 'Maitre -> Matiére', 'class'=>'repeated_type', 'required' => false, 'array' => $teatchers_subjects,'additionalInfo' => [ 'id' => 'teatchifications' ]])
+          @include('back.partials.formG', ['name' => 'teatchification', 'type' => 'select','selected' => null, 'text' => 'Maitre -> Matiére', 'class'=>'repeated_type', 'required' => false, 'array' => $teatchers_subjects,'additionalInfo' => [ 'id' => 'teatchification' ]])
 
           <hr />
 
-          @include('back.partials.formG', ['name' => 'start_date', 'type' => 'datetime-local', 'text' => 'Debut devenement', 'class'=>'', 'required' => true,'additionalInfo' => [ 'id' => 'start_date' ]])
-          @include('back.partials.formG', ['name' => 'end_date', 'type' => 'datetime-local', 'text' => 'Fin devenement', 'class'=>'', 'required' => true,'additionalInfo' => [ 'id' => 'end_date' ]])
+          @include('back.partials.formG', ['name' => 'start_date', 'type' => 'datetime-local', 'text' => 'Debut devenement', 'class'=>'', 'required' => true,'additionalInfo' => [ 'id' => 'start_date' ], 'value' => $today])
+          @include('back.partials.formG', ['name' => 'end_date', 'type' => 'number', 'text' => 'Combien dure par minutes', 'class'=>'', 'required' => true,'additionalInfo' => [ 'id' => 'end_date' ]])
           @include('back.partials.formG', ['name' => 'background_color', 'type' => 'color', 'text' => 'Couleur devenement', 'class'=>'', 'required' => true,'additionalInfo' => [ 'id' => 'background_color' ]])
           @include('back.partials.formG', ['name' => 'is_all_day', 'type' => 'checkbox', 'text' => 'joure complet', 'class'=>'is_all_day', 'required' => false, 'checked' => false,'additionalInfo' => ['id' => 'is_all_day']])
             <hr />
@@ -119,6 +123,10 @@
 @section('datatableScript')
 
 
+    <!-- DataTables -->
+    <script src="{!! asset('adminl/bower_components/datatables.net/js/jquery.dataTables.min.js') !!}"></script>
+    <script src="{!! asset('adminl/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') !!}"></script>
+
 
 @endsection
 
@@ -136,13 +144,8 @@
 
   <script src="{!! asset('axios/axios.min.js') !!}"></script>
   <script src="{!! asset('validate/jquery.validate.min.js') !!}"></script>
+
   {!! $calendar->script() !!}
-
-
-  <!-- DataTables -->
-  <script src="{!! asset('adminl/bower_components/datatables.net/js/jquery.dataTables.min.js') !!}"></script>
-  <script src="{!! asset('adminl/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') !!}"></script>
-
 
   <script type="text/javascript">
 
@@ -192,7 +195,7 @@ repeated.change(function() {
 
 
 
-$('#table').DataTable({
+var table = $('#table').DataTable({
     processing: true,
     serverSide: true,
     ajax: "{!! route('calendarteatchifications.data-manage-byclass', $class->id ) !!}",
@@ -210,15 +213,6 @@ $('#table').DataTable({
     ]
 });
 
-
-
-
-
-
-
-
-
-
 addform.submit(function(e){
         e.preventDefault();
         if( addform.valid() ){
@@ -234,12 +228,16 @@ addform.submit(function(e){
             start_date : start_date.val(),
             end_date : end_date.val(),
             background_color : background_color.val(),
-            is_all_day : is_all_day.val(),
+            is_all_day : is_all_day.prop('checked'),
             repeated_type : repeatedtype.val(),
             end_repeated_date : endrepeateddate.val(),
-            repeated : repeated.val()
+            repeated : repeated.prop('checked'),
+            title: $('#teatchification>option[value="'+teatchification.val()+'"]').text()
 
           }).then(function( response ){
+
+            console.log(response);
+            submit.attr('disabled', false);
 
             swal(
               'Bien sauvegarder',
@@ -249,7 +247,28 @@ addform.submit(function(e){
 
             var returnedArray = response.data;
 
+            var node = table.row.add( {
+
+                      "background_color":       "Tiger Nixon",
+                      "subject":   "System Architect",
+                      "teatcher":     "$3,120",
+                      "start_date": "2011/04/25",
+                      "repeated": "2011/04/25",
+                      "repeated_type":     "Edinburgh",
+                      "is_all_day":       "Tiger Nixon",
+                      "end_date":   "System Architect",
+                      "end_repeated_date":     "$3,120",
+                      "action": "2011/04/25"
+                  } ).draw( ).node();
+            $( node )
+            .css( 'color', 'red' )
+            .animate( { color: 'black' } );
+
           }).catch(function( error ){
+
+            submit.attr('disabled', false);
+
+            console.log(error);
 
             swal(
               'Erreur',

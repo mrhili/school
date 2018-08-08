@@ -38,15 +38,24 @@ use Relation;
 
 use Illuminate\Http\Request;
 
+use ArrayHolder;
+
+use Validator;
+
 
 class Application{
 
-  public static function method($method = null, $execution){
+  public static function method($method = null, $execution, $message = null){
     if ($method !== null) {
 
       if ($method !== 'ajax') {
           return;
       }
+
+    }
+    if ($message !== null) {
+
+      $message = 'erro inputs';
 
     }
     /*Execution**/
@@ -55,7 +64,7 @@ class Application{
       if ($method !== null) {
 
         if ($method == 'ajax') {
-          return response()->json(['error' => 'erro inputs'], 403);
+          return response()->json(['error' => $message], 403);
         }else{
           return back()->withInput();
         }
@@ -70,46 +79,71 @@ class Application{
 
 
 
-      if(!( Carbon::parse( $request->start_date ) < Carbon::parse( $request->end_date ) ) ){
-
-
-        self::method($method, 'backinputs');
-
-      }
+      $startdate = Carbon::parse( $request->start_date );
+      $enddate = $startdate->addMinutes( $request->end_date );
 
       $array = [
         'title' => $request->title,
         'start_date' => $request->start_date,
-        'end_date' => $request->end_date,
+        'end_date' => $enddate->format('Y-m-d H:i:s'),
         'background_color' => $request->background_color,
         'role' => $role
       ];
 
-      if( $request->is_all_day ){
+      $enddate = $startdate->addMinutes( $request->end_date )->format('l jS \of F Y h:i:s A');
+      $startdate = $startdate->format('l jS \\of F Y h:i:s A');
+
+      $isallday = '';
+
+      if( (boolean)$request->is_all_day ){
         $array['is_all_day'] = true;
+        $isallday = 'pour tous le joure';
       }else{
         $array['is_all_day'] = false;
+        $isallday = 'nest pas pour tous le joure';
       }
 
-      if( $request->holiday ){
+
+
+      $vacance;
+      if( (boolean)$request->holiday ){
         $array['holiday'] = true;
+        $vacance = '(cest une vacance)';
       }else{
         $array['holiday'] = false;
+        $vacance = '';
       }
 
+      $endrepeateddate;
+      $repeated_sentence = '';
 
-      if( $request->repeated ){
 
-        if(! $request->validate([
-            'repeated_type' => 'required',
-            'end_repeated_type' => 'required',
-          ])
-        ){
-            self::method($method, 'backinputs');
+
+      if( (boolean) $request->repeated ){
+
+        $vacance = 'répété';
+
+        $validator = Validator::make($request->all(), [
+          'repeated_type' => 'required',
+          'end_repeated_date' => 'required'
+        ]);
+
+
+        if ($validator->fails()) {
+            return null;
         }
+
+
         $array['repeated'] = true;
         $array['repeated_type'] = $request->repeated_type;
-        $array['end_repeated_type'] = $request->end_repeated_type;
+        $array['end_repeated_date'] = $request->end_repeated_date;
+
+
+        $endrepeateddate = Carbon::parse( $request->end_repeated_date )->format('l jS \of F Y h:i:s A');
+
+        $repeated_sentence = 'répété dans <strong>'.ArrayHolder::repeatedTypes( $request->repeated_type ).'</strong>
+        est la répétition va términer <strong>'. $endrepeateddate .'</strong>';
+
       }else{
         $array['repeated'] = false;
         $array['repeated_type'] = null;
@@ -117,19 +151,18 @@ class Application{
       }
 
 
-      $calendar = Calendinar::create($array);
+
+      $calendar = Calendinar::create( $array );
+
+
 
       if( $calendar ){
-
-
-
-
 
         $admin = Auth::user();
 
         $creation = [
 
-            'id_link' => $calendarteatchification->id,
+            'id_link' => $calendar->id,
             'comment' => $request->comment,
             //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
             'info' => 'just talk',
@@ -141,12 +174,14 @@ class Application{
 
             ];
 
-        $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a linker le calendrier <strong>'.$teatcher->name.' </strong>au maitre <strong>'.$teatcher->name.' </strong> est la matiere qui porte le nom' . $subject_the_class_id->subject->name . ' et la  class ' . $subject_the_class_id->the_class->name . '  </strong>.'.
-        'les information du calendrier'  ;
+        $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a ajouter le calendrier <strong>'.$calendar->title.' </strong>au maitre <strong>'.
+        'les information du calendrier sont : '.
+        'il va debuter <strong>'. $startdate .'</strong>'.
+        'jusqu a <strong>'. $enddate .'</strong> <br />'.
+        '<strong>'. $isallday .'</strong> '.$vacance.' <br />'.
+        $repeated_sentence ;
 
-
-
-
+        return $calendar;
 
       }
 
@@ -166,25 +201,17 @@ class Application{
 
           //dd( $start_date->addDay() );
 
-          for( $i = 0; $i <= 7; $i++ ){
-
-            if( $start_date <= $end_repeated_date ){
-
-              break;
-
-            }
-
-            $be_sure_to_not_change_date = Carbon::parse( $start_date );
+          do {
 
             $events[] = \Calendar::event(
               $data_repeated->title, //event title
-               $data_repeated->is_full_day, //full day event?
+               (boolean) $data_repeated->is_full_day, //full day event?
                Carbon::parse( $start_date ),
-               Carbon::parse( $be_sure_to_not_change_date->addSeconds($end_date) ),
+               Carbon::parse( $start_date->addSeconds($end_date) ),
                $data_repeated->id,
                [
                    'color' => $data_repeated->background_color,
-                   'url' => '#',
+                   'url' => $data_repeated->url
                ]
              );
 
@@ -197,7 +224,7 @@ class Application{
              }
 
 
-          }
+          }while( $start_date <= $end_repeated_date );
 
           $start_date = null;
           $end_date = null;
@@ -225,14 +252,14 @@ class Application{
         foreach ($data as $value) {
             $events[] = Calendar::event(
                 $value->title,
-                $value->is_full_day,
+                (boolean) $value->is_full_day,
                 new Carbon($value->start_date),
                 new Carbon($value->end_date),
-                $data->id,
+                $value->id,
                 // Add color and link on event
              [
                  'color' => $value->background_color,
-                 'url' => '#',
+                 'url' => $value->url,
              ]
 
             );

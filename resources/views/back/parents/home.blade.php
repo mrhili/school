@@ -1,7 +1,8 @@
 @extends('back.layouts.app')
 
 @section('styles')
-
+  <link rel="stylesheet" href="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.min.css') !!}">
+    <link rel="stylesheet" href="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.print.min.css') !!}" media="print">
 @endsection
 
 @section('page_header')
@@ -62,6 +63,14 @@
 
   </div>
 
+  @php
+
+  $array4Childs = [];
+
+  $countChilds = 0;
+
+  @endphp
+
 
 @foreach($childs as $child)
 
@@ -90,6 +99,25 @@
                       </li>
 
                     </ul>
+
+                    <hr />
+
+                    @php
+
+                    $array4Childs[] = Application::loadCalendarForClass( \App\TheClass::find( $child->the_class_id ))
+
+                    @endphp
+
+
+
+
+                    <div class="row">
+
+                      <div class="col-xs-12 calendarsparent">
+                        {!! $array4Childs[ $countChilds ]->calendar() !!}
+                      </div>
+
+                    </div>
 
                     <hr />
 
@@ -168,7 +196,9 @@
 
 
 
-
+@php
+$countChilds++;
+@endphp
 
 @endforeach
 
@@ -213,6 +243,20 @@
 
 @section('scripts')
 
+  <script src="{!! asset('adminl/bower_components/jquery-ui/jquery-ui.min.js') !!}"></script>
+  <script src="{!! asset('adminl/bower_components/moment/moment.js') !!}"></script>
+  <script src="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.min.js"') !!}"></script>
+
+
+  <script src="{!! asset('adminl/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') !!}"></script>
+  <script src="{!! asset('adminl/bower_components/fastclick/lib/fastclick.js') !!}"></script>
+
+
+@foreach( $array4Childs as $childScript )
+
+  {!! $childScript->script() !!}
+
+@endforeach
 <!-- Morris.js charts -->
 
 <script src="{!! asset('adminl/bower_components/raphael/raphael.min.js') !!}"></script>

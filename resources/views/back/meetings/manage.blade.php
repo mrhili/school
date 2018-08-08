@@ -64,7 +64,7 @@ The Main Configuration Of the web application
               <form id="form">
               <div class="modal-body">
 
-                  
+
 
 
                   <div class="col-xs-12">
@@ -167,7 +167,7 @@ $(function() {
 
 $( document ).ready(function() {
 
-    
+
 	$("#table").on("click", ".btn-note", function(){
 	   // your code goes here
 	   			$button = $(this)
@@ -221,10 +221,10 @@ sendformnote.on("click", function(e){
 
 if( $('#form').valid() ){
               sendformnote.attr('disabled', true);
-              
+
               note = $('#notefield').val();
 
-              
+
               id = $('#idfield').val();
 
 
@@ -238,7 +238,7 @@ if( $('#form').valid() ){
                 .then(function (response) {
                   sendformnote.attr('disabled', false);
                   $('#modalpayment').modal('hide');
-                  
+
                   var returnedArray = response.data;
                   console.log(returnedArray);
 
@@ -251,7 +251,7 @@ if( $('#form').valid() ){
 
 }
 
-  }); 
+  });
 
 
 
@@ -315,18 +315,6 @@ $("#table").on("click", ".btn-present", function(){
 
 
   });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 });
