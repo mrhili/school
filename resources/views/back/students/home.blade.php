@@ -4,6 +4,7 @@
   Etudiant Dashboard
 @endsection
 
+
 @section('styles')
 
   <link rel="stylesheet" href="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.min.css') !!}">
@@ -35,6 +36,39 @@
 
 
   @component('back.components.dashboard_head')
+
+
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">{{ $teatchifications->count() }}</h5>
+        <span class="description-text">Maitres</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">{{Auth::user()->relashionshipsParentsStudent->count() }}</h5>
+        <span class="description-text">Parents</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">{{Auth::user()->relashionshipsParentsStudent->count() }}</h5>
+        <span class="description-text">Fournitures eu</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">{{Auth::user()->relashionshipsParentsStudent->count() }}</h5>
+        <span class="description-text">Fournitures non eu</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+
     <div class="col-sm-4 border-right">
       <div class="description-block">
         <h5 class="description-header">3,200</h5>
@@ -99,7 +133,7 @@
 
     @slot('titlePlain')
 
-      Calendirier
+      Calendrier
 
     @endslot
 
@@ -169,7 +203,7 @@
                         @foreach(Auth::user()->relashionshipsParentsStudent as $parent)
                         <li>
                           {!! Html::image(CommonPics::ifImg( 'parents' ,  $parent->img ),'User Image', ['class' => ''] ) !!}
-                          <a class="users-list-name" href="#">{{ $parent->name }} {{ $parent->last_name }}</a>
+                          <a class="users-list-name" href="{{ route('parents.profile', $parent->id) }}">{{ $parent->name }} {{ $parent->last_name }}</a>
                           <span class="users-list-date">relationship</span>
                         </li>
                         @endforeach
@@ -210,7 +244,7 @@
                         @foreach( $teatchifications as $teatchification)
                         <li>
                           {!! Html::image(CommonPics::ifImg( 'teatchers' ,  $teatchification->teatcher->img ),'User Image', ['class' => ''] ) !!}
-                          <a class="users-list-name" href="#">{{ $teatchification->teatcher->name }} {{ $teatchification->teatcher->last_name }}</a>
+                          <a class="users-list-name" href="">{{ $teatchification->teatcher->name }} {{ $teatchification->teatcher->last_name }}</a>
                           <span class="users-list-date">...</span>
                         </li>
                         @endforeach
@@ -278,18 +312,6 @@ Examins
           </div>
         <!-- /.row -->
 
-      <div class="overlay spin-months-bd">
-              En attendent que le chart des benifits et deficites se charge
-              <i class="fa fa-refresh fa-spin"></i>
-      </div>
-
-      <div class="chart" id="bar-chart" style="height: 300px;"></div>
-
-
-
-
-
-
 
   @endslot
 
@@ -309,21 +331,43 @@ Examins
 
 
 
-        <!-- Small boxes (Stat box) -->
-      <div class="row">
 
 
 
-      </div>
-      <!-- /.row -->
+
+
+
+
+
+@component('back.components.plain')
+
+  @slot('titlePlain')
+
+    Payments
+
+  @endslot
+
+  @component('back.components.table',['id' => 'payments', 'columns'=>['Month' , 'Statut']])
+
+  @endcomponent
+
+
+@endcomponent
+
+
+
+
+
+
 @endsection
 
 @section('datatableScript')
 
 
-
-
 @endsection
+
+
+
 
 @section('scripts')
 
@@ -343,34 +387,6 @@ Examins
 <script src="{!! asset('axios/axios.min.js') !!}"></script>
 
 
-<script>
-  $(function () {
-    "use strict";
 
-
-axios.get('/months-bd/')
-                .then(function (response) {
-                  //BAR CHART
-                  var bar = new Morris.Bar({
-                    element: 'bar-chart',
-                    resize: true,
-                    data: response.data ,
-                    barColors: ['#00a65a', '#f56954'],
-                    xkey: 'y',
-                    ykeys: ['a', 'b'],
-                    labels: ['Bennefits', 'Deficits'],
-                    hideHover: 'auto'
-                  });
-                  $('.spin-months-bd').hide();
-                })
-                .catch(function (error) {
-                  alert(error);
-                  console.log( error );
-                });
-
-
-
-  });
-</script>
 
 @endsection

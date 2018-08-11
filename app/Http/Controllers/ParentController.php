@@ -13,6 +13,36 @@ use Session;
 class ParentController extends Controller
 {
     //
+
+    public function profile(User $user){
+
+      $year = Session::get('yearId');
+
+
+      /****************/
+      $passInfo = true;
+      $passChangeInfo = false;
+      if( Auth::check() ){
+
+        if( Auth::user()->role > 1 ){
+          $passChangeInfo = true;
+
+        }
+
+      }
+
+
+      /*****************/
+
+      return view('back.parents.profile', compact('passInfo', 'user', 'passChangeInfo'));
+
+
+    }
+
+
+
+
+
     public function myProfile(){
 
 

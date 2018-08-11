@@ -15,7 +15,7 @@
             <div class="box-body box-profile">
 
 
-              @component('back.components.idcard')
+              @component('back.components.idcard', ['user' => Auth::user()])
                 @slot('placement')
                     students
                 @endslot
@@ -48,14 +48,14 @@
             <div class="box-body">
 
               @if(Auth::user()->role == 1)
-                @component('back.components.student_info')
+                @component('back.components.student_info', ['user' => Auth::user()])
 
                 @endcomponent
               @endif
 
               @if($passInfo)
 
-                @component('back.components.private_info')
+                @component('back.components.private_info', ['user' => Auth::user()])
 
                 @endcomponent
 
@@ -308,7 +308,7 @@
               <div class="tab-pane" id="settings">
 
 
-                @component('back.components.change_info')
+                @component('back.components.change_info', ['user' => Auth::user()])
 
                 @endcomponent
 

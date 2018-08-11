@@ -4,7 +4,7 @@
 
   Route::get('/my-profile-as-student', 'StudentController@myProfile')->name('students.my-profile');
   Route::get('/student-profile/{student}', 'StudentController@profile')->name('students.profile');
-  Route::get('/parent-profile/{parent}', 'ParentController@profile')->name('parents.profile');
+  Route::get('/parent-profile/{user}', 'ParentController@profile')->name('parents.profile');
 
 	Route::get('/my-meetings', 'MeetingpopulatingController@mine')->name('meetings.mine');
 	Route::get('/data-my-meetings', 'MeetingpopulatingController@dataMine')->name('meetings.data-mine');

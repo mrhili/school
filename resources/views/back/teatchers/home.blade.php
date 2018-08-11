@@ -1,7 +1,18 @@
 @extends('back.layouts.app')
 
+@section('title')
+  Maitre Dashboard
+@endsection
+
+
 @section('styles')
 <link rel="stylesheet" href="{!! asset('adminl/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') !!}">
+
+<link rel="stylesheet" href="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.min.css') !!}">
+  <link rel="stylesheet" href="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.print.min.css') !!}" media="print">
+
+
+
 @endsection
 
 @section('page_header')
@@ -84,12 +95,27 @@
   <!-- Small boxes (Stat box) -->
   <div class="row">
 
-
-
-
-
-
   </div>
+
+
+
+  @component('back.components.plain')
+
+    @slot('titlePlain')
+
+      Calendrier
+
+    @endslot
+
+    <div class="calendarparent">
+
+      {!! $calendar->calendar() !!}
+
+    </div>
+
+  @endcomponent
+
+
 
 
   @component('back.components.plain')

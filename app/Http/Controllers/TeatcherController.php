@@ -10,12 +10,18 @@ use Session;
 
 use Auth;
 
+use Application;
+
 class TeatcherController extends Controller
 {
     //
     public function home(){
 
-        return view('back.teatchers.home' );
+      $user = Auth::user();
+
+      $calendar = Application::loadCalendarForTeatcher( $user );
+
+        return view('back.teatchers.home', compact('calendar') );
     }
 
     public function myProfile(){

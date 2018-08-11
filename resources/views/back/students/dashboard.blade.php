@@ -4,7 +4,12 @@
   Etudiant Dashboard
 @endsection
 
+@section('styles')
 
+  <link rel="stylesheet" href="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.min.css') !!}">
+    <link rel="stylesheet" href="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.print.min.css') !!}" media="print">
+
+@endsection
 
 
 @section('page_header')
@@ -88,6 +93,25 @@
   @endcomponent
 
 
+
+
+    <div class="row"></div>
+
+    @component('back.components.plain')
+
+      @slot('titlePlain')
+
+        Calendrier
+
+      @endslot
+
+      <div class="calendarparent">
+
+        {!! $calendar->calendar() !!}
+
+      </div>
+
+    @endcomponent
 
         <!-- Small boxes (Stat box) -->
         <div class="row">
@@ -256,6 +280,16 @@ Examins
 
 @section('scripts')
 
+
+  <script src="{!! asset('adminl/bower_components/jquery-ui/jquery-ui.min.js') !!}"></script>
+  <script src="{!! asset('adminl/bower_components/moment/moment.js') !!}"></script>
+  <script src="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.min.js"') !!}"></script>
+
+
+  <script src="{!! asset('adminl/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') !!}"></script>
+  <script src="{!! asset('adminl/bower_components/fastclick/lib/fastclick.js') !!}"></script>
+
+{!! $calendar->script() !!}
 <!-- Morris.js charts -->
 
 <script src="{!! asset('adminl/bower_components/raphael/raphael.min.js') !!}"></script>

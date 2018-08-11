@@ -12,10 +12,61 @@ use App\{
 use Application;
 use Auth;
 use Math;
+use Session;
+
+use Yajra\Datatables\Datatables;
 
 
 class StudentsPaymentController extends Controller
 {
+
+  public function childPayments(User $student){
+
+
+    return view('back.studentspayments.child-payments', compact('student'));
+
+  }
+
+
+  public function dataChildPayments(User $student){
+
+    $year = Session::get('yearId');
+
+
+
+    return Datatables::of(
+
+        StudentsPayment::where('user_id', $student->id )->where('the_class_id', $student->the_class_id )->where('year_id', $year )->get()
+
+       )
+
+       ->editColumn('month', function( $model ){
+
+
+
+            return $model->month->name;
+
+        })
+
+        ->editColumn('statut', function( $model )use($year){
+
+          $moneyArray = Application::fillMonthButtonForChild($model);
+
+
+
+          $label = $moneyArray['money'];
+          $class = $moneyArray['class'];
+
+
+
+          return link_to('#', $label, ['class' => 'btn btn-'. $class .' btn-circle' ], null);
+
+         })
+
+         ->rawColumns(['statut'])
+
+         ->make(true);
+  }
 
 
     public function addPayment(Request $request, $id, $payment, $month, $year, $class)
@@ -25,14 +76,14 @@ class StudentsPaymentController extends Controller
         $month_id = $month;
 
         $student = User::find( $id );
-        
+
         $month = $student->payments()->where('month_id', $month )->where('year_id', $year )->where('the_class_id', $class )->first();
 
         $creation = [
 
             'id_link' => $id,
-            'comment' => $request->comment, 
-            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh 
+            'comment' => $request->comment,
+            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
             'info' => 'just talk',
             'hidden_note' => $request->hidden_note,
             'by-admin' => Auth::id(),
@@ -83,7 +134,7 @@ class StudentsPaymentController extends Controller
             $creation['class'] = 'success';
         }else{
 
-            
+
 
             $complet = 'incomplet il devrait payé <strong>'.$moneyArray['money']. ' dh </strong>';
 
@@ -95,7 +146,7 @@ class StudentsPaymentController extends Controller
         if( $month_id == 13) {
 
             $month = 'pour  <strong> les frais denregisrement</strong>';
-            
+
         }elseif( $month_id == 14){
 
             $month = 'pour <strong> les frais dassurance </strong>';

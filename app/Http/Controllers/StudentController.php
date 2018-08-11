@@ -50,9 +50,9 @@ class StudentController extends Controller
     public function dashboard(User $student){
 
 
-      if( Auth::user()->role == 2 ){
+      if( Auth::user()->role >= 2 ){
 
-        if ( ! Relation::hisParent(Auth::id() , $student) ){
+        if ( ! Relation::isParent(Auth::id() , $student) ){
 
           return back();
 
@@ -67,6 +67,10 @@ class StudentController extends Controller
       $ids = Subjectclass::where('year_id', $year)->where('the_class_id', $student->the_class_id )->pluck('id')->toArray();
 
       $mytests = Testyearsubclass::whereIn('subject_the_class_id', $ids )->where('publish', true)->get();
+
+      $class = App\TheClass::find( $student->the_class_id );
+
+      $calendar = Application::loadCalendarForClass( $class );
 
       return view('back.students.dashboard',compact('mytests', 'teatchifications', 'student'));
 

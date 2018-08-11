@@ -33,6 +33,16 @@ use Auth;
 class Relation {
 
 
+
+  public static function calendar_teat_from_teatcher(User $teatcher){
+    $year = Session::get('yearId');
+
+    $t = Teatchification::where('user_id', $teatcher->id )->where('year_id', $year )->get(['id'])->toArray();
+
+    return Calendarteatchification::whereIn('teatchification_id', $t)->where('year_id', $year )->get();
+  }
+
+
   public static function calendar_teat_from_class(TheClass $class){
     $year = Session::get('yearId');
 
@@ -53,7 +63,7 @@ class Relation {
     return Calendarteatchification::whereIn('teatchification_id', $t)->where('year_id', $year )->get(['calendar_id'])->toArray();
   }
 
-  public function isParent(User $parent, User $student){
+  public static function  isParent(User $parent, User $student){
     $parents = User::find( $student->id )->relashionshipsParentsStudent->pluck(['id'])->toArray();
     return in_array($parent->id, $parents);
   }

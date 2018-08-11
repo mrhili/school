@@ -1,11 +1,9 @@
 @extends('back.layouts.app')
 
-@section('styles')
 
-@endsection
 
 @section('page_header')
-  Parent Dashboard
+  Secretaria Dashboard
 @endsection
 
 @section('page_header_desc')

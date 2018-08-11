@@ -238,6 +238,62 @@ class Application{
     return $events;
   }
 
+    public static function loadCalendarForTeatcher(User $user){
+
+      $year = Session::get('yearId');
+
+      $events = [];
+
+      $ct = Relation::calendar_teat_from_teatcher($user);
+
+      $data = Calendinar::whereIn('id', $ct )->where('repeated', false)->get();
+
+      if($data->count()) {
+          foreach ($data as $value) {
+              $events[] = Calendar::event(
+                  $value->title,
+                  (boolean) $value->is_full_day,
+                  new Carbon($value->start_date),
+                  new Carbon($value->end_date),
+                  $value->id,
+                  // Add color and link on event
+               [
+                   'color' => $value->background_color,
+                   'url' => $value->url,
+               ]
+
+              );
+          }
+      }
+
+      $datas_repeated = Calendinar::whereIn('id', $ct )->where('repeated', true)->get();
+
+      $events = self::repeatedEvent($datas_repeated, $events);
+
+      $calendar = Calendar::addEvents($events)
+      ->setOptions([ //set fullcalendar options
+          'firstDay' => 1,
+          'header' => [
+              'left' => 'prev,next today',
+              'center' => 'title',
+              'right' => 'month,agendaWeek,agendaDay'
+              ],
+          'buttonText' => [
+              'today' => 'today',
+              'month' => 'month',
+              'week' => 'week',
+              'day' => 'day'
+              ],
+          'editable' => true,
+          'dropable' => true,
+      ]);
+
+      return $calendar;
+
+
+
+    }
+
   public static function loadCalendarForClass(TheClass $class){
 
     $year = Session::get('yearId');
@@ -551,7 +607,14 @@ public static function fillExistButton($model){
 /*********************/
 
 
+public static function fillMonthButtonForChild(StudentsPayment $model){
 
+        $totalShouldPay = $model->should_pay + $model->add_classes_pay + $model->transport_pay;
+
+        $moneyArray = Math::countMoney( $model->payment , $totalShouldPay );
+
+        return $moneyArray;
+}
 
 
 

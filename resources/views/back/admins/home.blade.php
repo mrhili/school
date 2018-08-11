@@ -5,7 +5,7 @@
 @endsection
 
 @section('page_header')
-  Parent Dashboard
+  Admin Dashboard
 @endsection
 
 @section('page_header_desc')

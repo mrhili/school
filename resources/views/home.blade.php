@@ -23,7 +23,22 @@
 
 @section('content')
 
-<h1 class="text-center">{{ Session::get('yearName') }}</h1>
+
+  @component('back.components.dashboard_head')
+
+
+    <div class="col-sm-4 border-right">
+      <div class="description-block">
+        <h5 class="description-header">3,200</h5>
+        <span class="description-text">dodododo</span>
+      </div>
+      <!-- /.description-block -->
+    </div>
+
+  @endcomponent
+
+  <div class="row"></div>
+
 
 <h2 class="text-center">Personelle</h2>
 <div class="row">

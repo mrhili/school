@@ -13,3 +13,11 @@
 
 
   Route::post('/fourniture-demande/{student}/{fourniture}/{howmany}', 'FournitureController@demande')->name('fournitures.demande');
+
+
+
+
+
+
+  Route::get('/child-payments/{student}', 'StudentsPaymentController@childPayments')->name('studentspayments.child-payments');
+  Route::get('/data-child-payments/{student}', 'StudentsPaymentController@dataChildPayments')->name('studentspayments.data-child-payments');

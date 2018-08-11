@@ -22,14 +22,13 @@ class StudentsPayment extends Model
 
     public function class()
     {
-        return $this->belongsTo('App\TheClass');
+        return $this->belongsTo('App\TheClass', 'the_class_id');
     }
 
     public function month()
     {
-        return $this->belongsTo('App\Month');
+        return $this->belongsTo('App\Month', 'month_id');
     }
 
-    
-}
 
+}

@@ -1,5 +1,9 @@
 @extends('back.layouts.app')
 
+@section('title')
+  Parent Dashboard
+@endsection
+
 @section('styles')
   <link rel="stylesheet" href="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.min.css') !!}">
     <link rel="stylesheet" href="{!! asset('adminl/bower_components/fullcalendar/dist/fullcalendar.print.min.css') !!}" media="print">
@@ -137,6 +141,23 @@
                           <a href="{{ route('fournitures.child-fournitures', $child->id) }}" class="small-box-footer"> Mes fournitures<i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                       </div>
+
+
+                      <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+                          <div class="inner">
+                            <h3>Ses payments</h3>
+                            <p>...</p>
+                          </div>
+                          <div class="icon">
+                            <i class="fa fa-graduation-cap"></i>
+                          </div>
+                          <a href="{{ route('studentspayments.child-payments', $child->id) }}" class="small-box-footer"> Mes fournitures<i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                      </div>
+
+
 
                     </div>
 

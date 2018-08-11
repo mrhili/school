@@ -43,7 +43,7 @@ Route::get('/testprintable-sheet-worker', 'TestoController@printableSheetWorker'
 
 
 Auth::routes();
-
+/*
 Route::get('/cal-test', 'CalendarController@test')->name('cal');
 Route::get('/cal-test2', 'CalendarController@test2')->name('cal2');
 Route::get('/cal-index', 'CalendarController@index')->name('calendars.index');
@@ -52,7 +52,7 @@ Route::get('/cal-create', 'CalendarController@create')->name('calendars.create')
 Route::put('/cal-edit/{cal}', 'CalendarController@edit')->name('calendars.edit');
 Route::get('/cal-show/{cal}', 'CalendarController@show')->name('calendars.show');
 Route::delete('/cal-dest/{cal}', 'CalendarController@destroy')->name('calendars.destroy');
-
+*/
 
 Route::get('demos/loaddata','HistoryController@loadData');
 Route::post('demos/loaddata','HistoryController@loadDataAjax' );
