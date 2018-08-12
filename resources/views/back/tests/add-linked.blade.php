@@ -45,7 +45,7 @@ Nouveau etudient
 
     @include('back.partials.formG', ['name' => 'publish', 'type' => 'checkbox', 'text' => 'Publier le test maintenent pour les éléve', 'class'=>'transport-check', 'required' => true, 'checked' => true,'additionalInfo' => []])
 
-    @include('back.partials.formG', ['name' => 'navigation', 'type' => 'checkbox', 'text' => 'Laisser l'etudiant chercher sur intenet ?, 'class'=>'transport-check', 'required' => true, 'checked' => true,'additionalInfo' => ['id' =>  'publishfield']])
+    @include('back.partials.formG', ['name' => 'navigation', 'type' => 'checkbox', 'text' => 'Laisser letudiant chercher sur intenet ?', 'class'=>'transport-check', 'required' => true, 'checked' => true,'additionalInfo' => ['id' =>  'publishfield']])
   	<div id="editor"></div>
 
   	<a href="#" class="btn  btn-lg btn-block btn-success" id="confimation">Confirmer le test</a>
@@ -223,7 +223,7 @@ var notesfield = $('#notesfield');
   $('#confimation').click(function(e){
   	var items;
   	e.preventDefault();
-	
+
 	values.empty();
   	chovalues = [];
   	var json = fb.actions.getData('json');
@@ -239,7 +239,7 @@ var notesfield = $('#notesfield');
 	        return i;
 
 	    }
-	    
+
 	});
 
 	values.append('<div class="form-group col-xs-12"><label class="col-sm-2">Total Notes collecté</label><div class="col-sm-10"><h3 id="total"></h3></div></div>');
@@ -251,12 +251,12 @@ var notesfield = $('#notesfield');
 	var save = $('#save');
 	var valueClasses = $('.value');
 	var valuefields = $('.value');
-	  function updateField() {    
+	  function updateField() {
 	  	items = 0;
-	    
+
 	    $.each(valuefields, function($field) {
 	      if (valuefields[$field].value.length > 0) { items += Number( valuefields[$field].value ); }
-	    });    
+	    });
 	    total.text(items);
 	  }
 

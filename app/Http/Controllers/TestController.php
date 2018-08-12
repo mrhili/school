@@ -81,7 +81,7 @@ class TestController extends Controller
     }
 
     public function getNote(Request $request, Test $test, Note $note){
-        
+
         $student_answers = array_except($request->all(), ['_token','done_minutes']);
         $answers = json_decode($test->answers, true);
         $notes = json_decode($test->notes, true);
@@ -170,7 +170,7 @@ class TestController extends Controller
 
         $test = Test::create(['body' => $request->body, 'title' => $request->title, 'notes' => $request->notes, 'time_minutes' => $request->time_minutes]);
 
-        
+
 
         if($test){
 
@@ -225,13 +225,13 @@ class TestController extends Controller
         $subject = Subject::find($subject_id);
         $subject_class = Subjectclass::where('the_class_id', $class_id)->where('subject_id', $subject_id)->first();
 
-        $tests = $subject_class->tests;
+        $testsyearMines = $subject_class->testyearsubclasses()->get(['id'])->toArray();
 
-        $testsMines = $subject_class->tests->pluck('id')->toArray();
-        $testsFull = Test::pluck('id')->toArray();
-        $testsIds = array_diff($testsFull, $testsMines);
+        $testsMines = Testyearsubclass::whereIn('id', $testsyearMines )->get(['test_id'])->toArray();
 
-        $testsArray = Test::find($testsIds)->pluck('title', 'id')->toArray();
+        $tests = Test::find( $testsMines );
+
+        $testsArray = Test::whereNotIn('id',  $testsMines )->pluck('title', 'id')->toArray();
 
         return view('back.tests.add-linked-linking',compact('subject', 'class', 'testsArray', 'tests'));
     }
@@ -281,7 +281,7 @@ class TestController extends Controller
     }
 
     public function postAnswers(Request $request, Test $test){
-        
+
         $rArray = $request->all();
 
         $questions = json_decode($test->body, true);
@@ -303,7 +303,7 @@ class TestController extends Controller
     }
 
     public function test(){
-        
+
         $test = Test::find(1);
 
         return $test;

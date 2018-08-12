@@ -92,9 +92,9 @@ class StudentController extends Controller
 
         $calendar = Application::loadCalendarForClass( $class );
 
+        $scTeatchifications = Teatchification::whereIn('subject_the_class_id', $ids)->where('year_id', $year)->get();
 
-
-        return view('back.students.home',compact('mytests', 'teatchifications', 'calendar'));
+        return view('back.students.home',compact('mytests', 'teatchifications', 'calendar', 'scTeatchifications'));
     }
 
     public function myProfile(){

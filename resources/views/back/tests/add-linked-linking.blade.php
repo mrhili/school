@@ -46,7 +46,7 @@
 
                   <div class="col-xs-12">
 
-                  @include('back.partials.formG', ['name' => 'navigation', 'type' => 'checkbox', 'text' => 'Laisser l'etudiant chercher sur intenet ?, 'class'=>'transport-check', 'required' => true, 'checked' => true,'additionalInfo' => ['id' =>  'publishfield']])
+                  @include('back.partials.formG', ['name' => 'navigation', 'type' => 'checkbox', 'text' => 'Laisser letudiant chercher sur intenet ?', 'class'=>'transport-check', 'required' => true, 'checked' => true,'additionalInfo' => ['id' =>  'publishfield']])
                   </div>
 
 
@@ -158,7 +158,7 @@ var comment, hidden_note, name;
               publish = $('#publishfield').val();
 
 
-  
+
 //post-test-linked-linking/{test}/{class_id}/{subject_id}
               axios.post('/post-test-linked-linking/'+test+'/'+ the_class +'/'+ subject,{
                 headers: {

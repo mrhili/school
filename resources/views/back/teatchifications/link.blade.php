@@ -1,11 +1,11 @@
 
-@section('title')
-Linker un maitre
-@endsection
+
 
 @extends('back.layouts.app')
 
-
+@section('title')
+Linker un maitre
+@endsection
 
 @section('page_header')
 Linker un maitre
@@ -127,7 +127,7 @@ L'année selectionée est {{ Session::get('yearId') }}
 <script src="{!! asset('helpers/helpers.js') !!}"></script>
 
 <script type="text/javascript">
-
+$(document).ready(function(){
 var add = $('#add');
 var alertempty = $('#alert-empty');
 var newitems = $('#new-items');
@@ -194,14 +194,24 @@ var comment, hidden_note, name;
                         .catch(function (error) {
                         add.attr('disabled', false);
                         alert(error);
-                        console.log( error );
+                        swal(
+                          'Error',
+                          error,
+                          'error'
+                        )
                         });
 
               }else{
                 add.attr('disabled', false);
+
+                swal(
+                  'Formulaire incoreecte!',
+                  'Formulaire incoreecte!',
+                  'error'
+                )
               }
 
             });
-
+});
 </script>
 @endsection

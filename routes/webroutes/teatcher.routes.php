@@ -7,7 +7,7 @@ Route::put('/store-link-teatcher-subcourse-class/{teatcher}/{subject_the_class_i
 
 Route::get('/teatcher-home', 'TeatcherController@home')->name('teatchers.home');
 Route::get('/my-profile-as-teatcher', 'TeatcherController@myProfile')->name('teatchers.my-profile');
-Route::get('/teatcher-profile/{teatcher}', 'TeatcherController@profile')->name('teatchers.profile');
+
 
 Route::get('/courses', 'CourseController@list')->name('courses.list');
 Route::post('/store-course', 'CourseController@store')->name('courses.store');
@@ -53,3 +53,13 @@ Route::post('/post-answers/{test}', 'TestController@postAnswers')->name('tests.s
 Route::get('/tests', 'TestController@index')->name('tests.index');
 
 Route::get('/data-check-fournitures/{class}', 'FourniturationController@dataCheck')->name('fournitures.data-check-by-class');
+
+
+/**********************************Subject and course linking******************************************************/
+
+Route::get('/subject-course-language-linked/{class}/{subject}', 'CourseController@languageLinked')->name('courses.language-linked');
+Route::get('/add-subject-course-linked/{class}/{subject}/{language?}', 'CourseController@addLinked')->name('courses.add-linked');
+Route::post('/post-subject-course-linked/{class}/{subject}', 'CourseController@storeLinked')->name('courses.store-linked');
+
+Route::get('/add-subject-course-linked-linking/{class}/{subject}', 'CourseController@addLinkedLinking')->name('courses.add-linked-linking');
+Route::post('/post-subject-course-linked-linking/{course}/{class}/{subject}', 'CourseController@storeLinkedLinking')->name('courses.store-linked-linking');

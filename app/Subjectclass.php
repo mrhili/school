@@ -17,7 +17,7 @@ class Subjectclass extends Model
 
     public function testyearsubclasses()
     {
-        return $this->hasMany('App\Testyearsubclass');
+        return $this->hasMany('App\Testyearsubclass', 'subject_the_class_id');
     }
 
     public function coursepopuating()

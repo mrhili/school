@@ -12,9 +12,44 @@ use Auth;
 
 use Application;
 
+use App\{
+  User
+};
+
 class TeatcherController extends Controller
 {
     //
+    public function profile(User $user){
+
+      $year = Session::get('yearId');
+
+
+      /****************/
+      $passInfo = false;
+      $passChangeInfo = false;
+      if( Auth::check() ){
+
+        if( Auth::user()->role >= 4 ){
+          $passChangeInfo = true;
+
+          $passInfo = true;
+
+        }
+
+      }
+
+
+
+
+      /*****************/
+
+      return view('back.teatchers.profile', compact('passInfo', 'user', 'passChangeInfo'));
+
+
+    }
+
+
+
     public function home(){
 
       $user = Auth::user();

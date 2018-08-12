@@ -71,56 +71,56 @@
 
     <div class="col-sm-4 border-right">
       <div class="description-block">
-        <h5 class="description-header">3,200</h5>
+        <h5 class="description-header">x,xx</h5>
         <span class="description-text">Test passé</span>
       </div>
       <!-- /.description-block -->
     </div>
     <div class="col-sm-4 border-right">
       <div class="description-block">
-        <h5 class="description-header">3,200</h5>
+        <h5 class="description-header">x,xx</h5>
         <span class="description-text">Exercice passé</span>
       </div>
       <!-- /.description-block -->
     </div>
     <div class="col-sm-4 border-right">
       <div class="description-block">
-        <h5 class="description-header">3,200</h5>
+        <h5 class="description-header">x,xx</h5>
         <span class="description-text">Cours absenté</span>
       </div>
       <!-- /.description-block -->
     </div>
     <div class="col-sm-4 border-right">
       <div class="description-block">
-        <h5 class="description-header">3,200</h5>
+        <h5 class="description-header">x,xx</h5>
         <span class="description-text">Action fait</span>
       </div>
       <!-- /.description-block -->
     </div>
     <div class="col-sm-4 border-right">
       <div class="description-block">
-        <h5 class="description-header">3,200</h5>
+        <h5 class="description-header">x,xx</h5>
         <span class="description-text">Meeting arrivé</span>
       </div>
       <!-- /.description-block -->
     </div>
     <div class="col-sm-4 border-right">
       <div class="description-block">
-        <h5 class="description-header">3,200</h5>
+        <h5 class="description-header">x,xx</h5>
         <span class="description-text">Note posé</span>
       </div>
       <!-- /.description-block -->
     </div>
     <div class="col-sm-4 border-right">
       <div class="description-block">
-        <h5 class="description-header">3,200</h5>
+        <h5 class="description-header">x,xx</h5>
         <span class="description-text">Observation collécté</span>
       </div>
       <!-- /.description-block -->
     </div>
     <div class="col-sm-4 border-right">
       <div class="description-block">
-        <h5 class="description-header">3,200</h5>
+        <h5 class="description-header">x,xx</h5>
         <span class="description-text">Année vecu</span>
       </div>
       <!-- /.description-block -->
@@ -244,8 +244,10 @@
                         @foreach( $teatchifications as $teatchification)
                         <li>
                           {!! Html::image(CommonPics::ifImg( 'teatchers' ,  $teatchification->teatcher->img ),'User Image', ['class' => ''] ) !!}
-                          <a class="users-list-name" href="">{{ $teatchification->teatcher->name }} {{ $teatchification->teatcher->last_name }}</a>
-                          <span class="users-list-date">...</span>
+                          <a class="users-list-name" href="{{ route('teatchers.profile', $teatchification->teatcher->id) }}">{{ $teatchification->teatcher->name }} {{ $teatchification->teatcher->last_name }}</a>
+
+                            <span class="users-list-date">..</span>
+
                         </li>
                         @endforeach
 
@@ -260,6 +262,52 @@
 
 
 @endcomponent
+
+
+
+
+
+
+@component('back.components.plain')
+
+  @slot('titlePlain')
+
+    Les matiére
+
+  @endslot
+
+
+  @slot('sectionPlain')
+
+
+                      <ul class="users-list clearfix">
+                        @foreach( $scTeatchifications as $subject)
+                        <li>
+
+                          <a class="users-list-name" href="#">{{ $subject->subject_class->subject->name }}</a>
+
+                            <span class="users-list-date">{{ $subject->teatcher->name }} {{ $subject->teatcher->name }}</span>
+
+                        </li>
+                        @endforeach
+                      </ul>
+
+
+  @endslot
+
+
+
+
+
+
+@endcomponent
+
+
+
+
+
+
+
 
 
 
@@ -339,20 +387,6 @@ Examins
 
 
 
-@component('back.components.plain')
-
-  @slot('titlePlain')
-
-    Payments
-
-  @endslot
-
-  @component('back.components.table',['id' => 'payments', 'columns'=>['Month' , 'Statut']])
-
-  @endcomponent
-
-
-@endcomponent
 
 
 

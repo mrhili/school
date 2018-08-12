@@ -15,7 +15,7 @@
 @section('content')
 
 
-    @forelse($course->subcourses as $subcourse )   
+    @forelse($course->subcourses as $subcourse )
 
                 <div class="box box-default collapsed-box box-subcourse" id="box-subcourse-{{ $subcourse->id }}" data-id="{{ $subcourse->id }}">
                   <div class="box-header with-border">
@@ -393,7 +393,7 @@ $('.bttn-soft-delete').on('click', function(){
                   $('#box-subcourse-'+id).remove();
 
                   alert('success soft deleted');
-                  
+
                 })
                 .catch(function (error) {
                   $(this).attr('disabled', false);
@@ -423,7 +423,7 @@ $('.bttn-delete').on('click', function(){
                   $('#box-subcourse-'+id).remove();
 
                   alert('success deleted');
-                  
+
                 })
                 .catch(function (error) {
                   $(this).attr('disabled', false);
@@ -495,7 +495,7 @@ if( $('#form-link-now').valid() ){
 
 
               $send.attr('disabled', true);
- 
+
               $subcoursefield = $('#subcoursefield');
               $subcourseId = $subcoursefield.val();
 
@@ -506,7 +506,7 @@ if( $('#form-link-now').valid() ){
                 },
                 comment: $('#form-link-now .commentfield').val(),
                 hidden_note: $('#form-link-now .hiddennotefield').val(),
-                
+
               })
                 .then(function (response) {
                   $send.attr('disabled', false);
@@ -514,7 +514,7 @@ if( $('#form-link-now').valid() ){
 
                   //$subcoursefield.val("val2");
                   $('#subcoursefield option[value="'+ $subcourseId +'"]').remove();
-                  
+
                   var returnedArray = response.data;
                   console.log(returnedArray);
 
@@ -542,17 +542,17 @@ if( $('#form-link-now').valid() ){
                   <button class="btn btn-primary bttn-link-after" data-id="X">Linker un subcoure</button>\
                   <hr />\
                   <h4 class="box-title">Remplacer</h4>\
-                  <button class="btn btn-primary bttn-replace-new" data-id="{{ $subcourse->id }}">Par nouvaux</button>\
-                  <button class="btn btn-primary bttn-replace-link" data-id="{{ $subcourse->id }}">Parmis</button>\
+                  <button class="btn btn-primary bttn-replace-new" data-id="'+ returnedArray['id'] +'">Par nouvaux</button>\
+                  <button class="btn btn-primary bttn-replace-link" data-id="'+ returnedArray['id'] +'">Parmis</button>\
                   <hr />\
                   <h4 class="box-title">Suprimer</h4>\
-                  <button class="btn btn-alert bttn-soft-delete" data-id="{{ $subcourse->id }}">De la list</button>\
+                  <button class="btn btn-alert bttn-soft-delete" data-id="'+ returnedArray['id'] +'">De la list</button>\
                   @if( Auth::user()->role >= 5 )\
-                  <button class="btn btn-warning bttn-delete" data-id="{{ $subcourse->id }}">Definitifement</button>\
+                  <button class="btn btn-warning bttn-delete" data-id="'+ returnedArray['id'] +'">Definitifement</button>\
                   @endif\
                 </div>\
               </div>');
-                
+
                   $newBox.find('.sorting-number').text(   returnedArray['sort']  );
                   $newBox.find('.subcourse-title').text(  returnedArray['title']  );
                   $newBox.find('.btn').attr('data-id',  returnedArray['id']  );
@@ -577,7 +577,7 @@ if( $('#form-link-now').valid() ){
 
 
 
-                  
+
                 })
                 .catch(function (error) {
                   $send.attr('disabled', false);
@@ -626,7 +626,7 @@ if( $('#form-link-now').valid() ){
 
 
               $send.attr('disabled', true);
- 
+
               $subcoursefield = $('#subcoursefield');
               $subcourseId = $subcoursefield.val();
 
@@ -637,7 +637,7 @@ if( $('#form-link-now').valid() ){
                 },
                 comment: $('#form-link-now .commentfield').val(),
                 hidden_note: $('#form-link-now .hiddennotefield').val(),
-                
+
               })
                 .then(function (response) {
                   $send.attr('disabled', false);
@@ -645,7 +645,7 @@ if( $('#form-link-now').valid() ){
 
                   //$subcoursefield.val("val2");
                   $('#subcoursefield option[value="'+ $subcourseId +'"]').remove();
-                  
+
                   var returnedArray = response.data;
                   console.log(returnedArray);
 
@@ -674,17 +674,17 @@ if( $('#form-link-now').valid() ){
                   <button class="btn btn-primary bttn-link-after" data-id="X">Linker un subcoure</button>\
                   <hr />\
                   <h4 class="box-title">Remplacer</h4>\
-                  <button class="btn btn-primary bttn-replace-new" data-id="{{ $subcourse->id }}">Par nouvaux</button>\
-                  <button class="btn btn-primary bttn-replace-link" data-id="{{ $subcourse->id }}">Parmis</button>\
+                  <button class="btn btn-primary bttn-replace-new" data-id="'+ returnedArray['id'] +'">Par nouvaux</button>\
+                  <button class="btn btn-primary bttn-replace-link" data-id="'+ returnedArray['id'] +'">Parmis</button>\
                   <hr />\
                   <h4 class="box-title">Suprimer</h4>\
-                  <button class="btn btn-alert bttn-soft-delete" data-id="{{ $subcourse->id }}">De la list</button>\
+                  <button class="btn btn-alert bttn-soft-delete" data-id="'+ returnedArray['id'] +'">De la list</button>\
                   @if( Auth::user()->role >= 5 )\
-                  <button class="btn btn-warning bttn-delete" data-id="{{ $subcourse->id }}">Definitifement</button>\
+                  <button class="btn btn-warning bttn-delete" data-id="'+ returnedArray['id'] +'">Definitifement</button>\
                   @endif\
                 </div>\
               </div>');
-                
+
                   $newBox.find('.sorting-number').text(   returnedArray['sort']  );
                   $newBox.find('.subcourse-title').text(  returnedArray['title']  );
                   $newBox.find('.btn').attr('data-id',  returnedArray['id']  );
@@ -707,7 +707,7 @@ if( $('#form-link-now').valid() ){
 
 
 
-                  
+
                 })
                 .catch(function (error) {
                   $send.attr('disabled', false);
@@ -740,7 +740,7 @@ $addsubcourseafter.on('click', function(){
 if( $('#form-add-new').valid() ){
 
               $send.attr('disabled', true);
- 
+
               ///add-subcourse-before/{course}/{subcourse}
               axios.post('/add-subcourse-after/'+courseId+'/'+window.subcourseId,{
                 headers: {
@@ -760,7 +760,7 @@ if( $('#form-add-new').valid() ){
                 .then(function (response) {
                   $send.attr('disabled', false);
                   $addform.modal('hide');
-                  
+
                   var returnedArray = response.data;
                   console.log(returnedArray);
 
@@ -783,17 +783,17 @@ if( $('#form-add-new').valid() ){
                   <button class="btn btn-primary bttn-link-after" data-id="X">Linker un subcoure</button>\
                   <hr />\
                   <h4 class="box-title">Remplacer</h4>\
-                  <button class="btn btn-primary bttn-replace-new" data-id="{{ $subcourse->id }}">Par nouvaux</button>\
-                  <button class="btn btn-primary bttn-replace-link" data-id="{{ $subcourse->id }}">Parmis</button>\
+                  <button class="btn btn-primary bttn-replace-new" data-id="'+ returnedArray['id'] +'">Par nouvaux</button>\
+                  <button class="btn btn-primary bttn-replace-link" data-id="'+ returnedArray['id'] +'">Parmis</button>\
                   <hr />\
                   <h4 class="box-title">Suprimer</h4>\
-                  <button class="btn btn-alert bttn-soft-delete" data-id="{{ $subcourse->id }}">De la list</button>\
+                  <button class="btn btn-alert bttn-soft-delete" data-id="'+ returnedArray['id'] +'">De la list</button>\
                   @if( Auth::user()->role >= 5 )\
-                  <button class="btn btn-warning bttn-delete" data-id="{{ $subcourse->id }}">Definitifement</button>\
+                  <button class="btn btn-warning bttn-delete" data-id="'+ returnedArray['id'] +'">Definitifement</button>\
                   @endif\
                 </div>\
               </div>');
-                
+
                   $newBox.find('.sorting-number').text( returnedArray['sort'] +1 );
                   $newBox.find('.subcourse-title').text( returnedArray['title'] );
                   $newBox.find('.btn').attr('data-id',  returnedArray['id']  );
@@ -811,7 +811,7 @@ if( $('#form-add-new').valid() ){
                   $newBox.attr('data-id',returnedArray['id']);
                   $newBox.insertBefore( "#box-subcourse-"+window.subcourseId );
 
-                  
+
                 })
                 .catch(function (error) {
                   $send.attr('disabled', false);
@@ -838,7 +838,7 @@ $addsubcoursebefore.on('click', function(){
 if( $('#form-add-new').valid() ){
 
               $send.attr('disabled', true);
- 
+
               ///add-subcourse-before/{course}/{subcourse}
               axios.post('/add-subcourse-before/'+courseId+'/'+window.subcourseId,{
                 headers: {
@@ -858,7 +858,7 @@ if( $('#form-add-new').valid() ){
                 .then(function (response) {
                   $send.attr('disabled', false);
                   $addform.modal('hide');
-                  
+
                   var returnedArray = response.data;
                   console.log(returnedArray);
 
@@ -881,17 +881,17 @@ if( $('#form-add-new').valid() ){
                   <button class="btn btn-primary bttn-link-after" data-id="X">Linker un subcoure</button>\
                   <hr />\
                   <h4 class="box-title">Remplacer</h4>\
-                  <button class="btn btn-primary bttn-replace-new" data-id="{{ $subcourse->id }}">Par nouvaux</button>\
-                  <button class="btn btn-primary bttn-replace-link" data-id="{{ $subcourse->id }}">Parmis</button>\
+                  <button class="btn btn-primary bttn-replace-new" data-id="'+ returnedArray['id'] +'">Par nouvaux</button>\
+                  <button class="btn btn-primary bttn-replace-link" data-id="'+ returnedArray['id'] +'">Parmis</button>\
                   <hr />\
                   <h4 class="box-title">Suprimer</h4>\
-                  <button class="btn btn-alert bttn-soft-delete" data-id="{{ $subcourse->id }}">De la list</button>\
+                  <button class="btn btn-alert bttn-soft-delete" data-id="'+ returnedArray['id'] +'">De la list</button>\
                   @if( Auth::user()->role >= 5 )\
-                  <button class="btn btn-warning bttn-delete" data-id="{{ $subcourse->id }}">Definitifement</button>\
+                  <button class="btn btn-warning bttn-delete" data-id="'+ returnedArray['id'] +'">Definitifement</button>\
                   @endif\
                 </div>\
               </div>');
-                
+
                   $newBox.find('.sorting-number').text(   returnedArray['sort']  );
                   $newBox.find('.subcourse-title').text(  returnedArray['title']  );
                   $newBox.find('.btn').attr('data-id',  returnedArray['id']  );
@@ -909,7 +909,7 @@ if( $('#form-add-new').valid() ){
                   $newBox.attr('data-id',returnedArray['id']);
                   $newBox.insertBefore( "#box-subcourse-"+window.subcourseId );
 
-                  
+
                 })
                 .catch(function (error) {
                   $send.attr('disabled', false);
@@ -1008,7 +1008,7 @@ if( $('#form-add-new').valid() ){
                 .then(function (response) {
                   $send.attr('disabled', false);
                   $addform.modal('hide');
-                  
+
                   var returnedArray = response.data;
                   console.log(returnedArray);
 
@@ -1065,7 +1065,7 @@ if( $('#form-link-now').valid() ){
 
 
               $send.attr('disabled', true);
- 
+
               $subcoursefield = $('#subcoursefield');
               $subcourseId = $subcoursefield.val();
 
@@ -1075,7 +1075,7 @@ if( $('#form-link-now').valid() ){
                 },
                 comment: $('#form-link-now .commentfield').val(),
                 hidden_note: $('#form-link-now .hiddennotefield').val(),
-                
+
               })
                 .then(function (response) {
                   $send.attr('disabled', false);
@@ -1083,13 +1083,13 @@ if( $('#form-link-now').valid() ){
 
                   //$subcoursefield.val("val2");
                   $('#subcoursefield option[value="'+ $subcourseId +'"]').remove();
-                  
+
                   var returnedArray = response.data;
                   console.log(returnedArray);
 
 $('<div class="box box-default collapsed-box"><div class="box-header with-border"><h3 class="box-title">'+returnedArray['sort']+' - '+returnedArray['title']+'</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button></div></div><div class="box-body" id="sbject-form"><button type="button" class="btn btn-lg btn-primary btn-add-new" data-toggle="modal" data-target="#modal-default">Ajouter un subcourse</button><button type="button" class="btn btn-lg btn-primary btn-link-now" data-toggle="modal" data-target="#modal-default">Linker un subcourse</button></div></div>').insertBefore( ".box-add" );
 
-                  
+
                 })
                 .catch(function (error) {
                   $send.attr('disabled', false);
@@ -1126,7 +1126,7 @@ if( $('#form-add-new').valid() ){
 
 
               $send.attr('disabled', true);
- 
+
 
 
 
@@ -1148,13 +1148,13 @@ if( $('#form-add-new').valid() ){
                 .then(function (response) {
                   $send.attr('disabled', false);
                   $addform.modal('hide');
-                  
+
                   var returnedArray = response.data;
                   console.log(returnedArray);
 
 $('<div class="box box-default collapsed-box"><div class="box-header with-border"><h3 class="box-title">'+returnedArray['sort']+' - '+returnedArray['title']+'</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button></div></div><div class="box-body" id="sbject-form"><button type="button" class="btn btn-lg btn-primary btn-add-new" data-toggle="modal" data-target="#modal-default">Ajouter un subcourse</button><button type="button" class="btn btn-lg btn-primary btn-link-now" data-toggle="modal" data-target="#modal-default">Linker un subcourse</button></div></div>').insertBefore( ".box-add" );
 
-                  
+
                 })
                 .catch(function (error) {
                   $send.attr('disabled', false);

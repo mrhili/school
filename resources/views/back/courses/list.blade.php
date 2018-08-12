@@ -13,7 +13,7 @@
 
 @section('content')
 
-            
+
 
             <div class="box box-default collapsed-box">
               <div class="box-header with-border">
@@ -56,7 +56,7 @@
                       @include('back.partials.formG', ['name' => 'content', 'type' => 'textarea', 'text' => 'Le content', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'contentfield'] ])
                       </div>
 
-                      
+
 
                       <div class="col-xs-12">
 
@@ -73,7 +73,7 @@
                       <div class="col-xs-12 teaser teaser_video">
 
                       @include('back.partials.formG', ['name' => 'teaser_video', 'type' => 'url', 'text' => 'Un petit teaser', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'teaser_videofield'] ])
-                      
+
                       </div>
 
 
@@ -157,7 +157,7 @@ The Main Configuration Of the web application
 
   @slot('sectionPlain')
 
-                  
+
   @endslot
 
 
@@ -228,11 +228,11 @@ var comment, hidden_note, name;
 
             add.attr('disabled', true);
 
-            
+
 
             if( $('#form').valid() ){
 
-/**/            
+/**/
 
               comment = $('#commentfield').val();
               hidden_note = $('#hiddennotefield').val();
@@ -246,10 +246,10 @@ var comment, hidden_note, name;
 
 
 
-                        
 
-                    
-                    
+
+
+
 
                     axios.post('/store-course/',{
                         headers: {
@@ -269,9 +269,9 @@ var comment, hidden_note, name;
                         .then(function (response) {
                         console.log( response );
                         var returnedArray = response.data;
-                        
+
                         add.attr('disabled', false);
-                        
+
 
                         courses.append('<div class="col-md-4"><!--Widget:userwidgetstyle1--><div class="box box-widget widget-user-2"><!--Addthebgcolortotheheaderusinganyofthebg-*classes--><div class="widget-user-header bg-'+ randombgcolor() +'"><div class="widget-user-image"><img class="img-circle" src="'+schoolLink+'/'+imgLink+'" alt="UserAvatar"></div><!--/.widget-user-image--><h3 class="widget-user-username">'+ returnedArray['name']+'<p class="widget-user-desc">...</p></div><div class="box-footer no-padding"><ul class="nav nav-stacked"><li><a href="/add-subcourse/'+returnedArray['id']+'">add sub course<span class="pull-right badge bg-blue">31</span></a></li></ul></div></div><!--/.widget-user--></div>');
 
@@ -281,7 +281,7 @@ var comment, hidden_note, name;
                         alert(error);
                         console.log( error );
                         });
-                
+
 
 
               }

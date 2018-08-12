@@ -15,6 +15,21 @@ class CatHistorySeed extends Seeder
 
         //role -> what role can see this history
 
+        /*
+
+        DB::table('history_categories')->insert([
+
+            'name' => You shoult be a big name ( + if benefit from money):',
+            'model' => 'Wich model concerneb by this history',
+            'icon' => 'ICON about this model',
+            'kind' => number - ok kind if benifits,
+            'role' => number -which one can see this history
+        ]);//1
+
+
+
+        */
+
         DB::table('history_categories')->insert([
             'name' => 'Payement d\'un éleve ( + avec un benefits):',
             'model' => 'User',
