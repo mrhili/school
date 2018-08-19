@@ -25,7 +25,12 @@ class Note extends Model
     {
         return $this->belongsTo('App\Testyearsubclass', 'testyearsubclass_id');
     }
-    
+
+    public function teatcher()
+    {
+        return $this->belongsTo('App\User', 'teatcher_id');
+    }
+
     public function subject()
     {
         return $this->belongsTo('App\Subject');

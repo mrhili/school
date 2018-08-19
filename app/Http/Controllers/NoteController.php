@@ -4,63 +4,27 @@ namespace App\Http\Controllers;
 
 use App\{
     Note,
-    Subjectclass
+    Subjectclass,
+    User
 };
 use Illuminate\Http\Request;
 use Auth;
 use Yajra\Datatables\Datatables;
 use Session;
-
+use Application;
 class NoteController extends Controller
 {
 
 
 
-    public function childNotes(User $child)
+    public function studentNotes(User $student)
     {
         //
-        return view('back.notes.child-notes', compact('child'));
-    }
-
-    public function dataChildNotes(User $child)
-    {
-        //
-        $year = Session::get('yearId');
-
-        return Datatables::of( Note::where('student_id' , $child->id )->where('year_id' , $year )
-            //->orderBy('created_at', 'desc')
-            ->orderBy('created_at', 'desc')->get() )
-
-        ->editColumn('test_title', function( $model ){
-
-            return $model->testyearsubclass->test->title;
-
-        })
-        ->editColumn('subject', function( $model ){
-
-            return $model->subject->name;
-
-        })
-        ->make(true);
+        return view('back.notes.student-notes', compact('student'));
     }
 
 
-
-
-
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function myNotes()
-    {
-        //
-        return view('back.notes.my-notes');
-    }
-
-    public function dataMyNotes()
+    public function dataStudentNotes(User $student)
     {
         //
         $year = Session::get('yearId');
@@ -68,83 +32,52 @@ class NoteController extends Controller
         return Datatables::of( Note::where('student_id' , Auth::id() )->where('year_id' , $year )
             //->orderBy('created_at', 'desc')
             ->orderBy('created_at', 'desc')->get() )
+        ->editColumn('subject', function( $model ){
+
+            return $model->subject->name;
+
+        })
+
+        ->editColumn('type', function( $model ){
+
+            return Application::test_type($model->testyearsubclass->is_exercise);
+
+        })
+
+
+
+        ->editColumn('teatcher', function( $model ){
+
+            return $model->teatcher->name. ' '. $model->teatcher->last_name;
+
+        })
 
         ->editColumn('test_title', function( $model ){
 
             return $model->testyearsubclass->test->title;
 
         })
-        ->editColumn('subject', function( $model ){
 
-            return $model->subject->name;
+        ->editColumn('navigator', function( $model ){
+
+            return Application::test_type_navigator( $model->testyearsubclass->navigator );
 
         })
+
+        ->editColumn('minutes', function( $model ){
+
+            return $model->done_minutes.' / '.$model->testyearsubclass->test->time_minutes.':00';
+
+        })
+
+        ->editColumn('note', function( $model ){
+
+            return $model->note . ' /100';
+
+        })
+
         ->make(true);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Note  $note
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Note $note)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Note  $note
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Note $note)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Note  $note
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Note $note)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Note  $note
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Note $note)
-    {
-        //
-    }
 }

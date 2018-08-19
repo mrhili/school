@@ -25,7 +25,6 @@ use App\{
     Demandefourniture,
     Calendar as Calendinar,
     Calendarteatchification
-
 };
 
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
@@ -44,6 +43,52 @@ use Validator;
 
 
 class Application{
+
+  public static function test_type($is_exercise){
+    if( $is_exercise ){
+      return 'exercise';
+    }else{
+      return 'test';
+    }
+  }
+
+  public static function test_type_navigator($navigator){
+    if( $navigator ){
+      return 'avec recherche';
+    }else{
+      return 'sans recherche';
+    }
+  }
+
+  public static function setYear(){
+    if( Session::get('yearName') && Session::get('yearId')  ){
+
+    }else{
+
+      $thisYear = date("Y");
+      $year;
+
+      if( date('n') < 8 ){
+
+        $year = Year::firstOrCreate(['max' => $thisYear ], [
+          'max' => $thisYear ,
+          'min' => ($thisYear-1) ,
+          'name' => ($thisYear-1).'/'.$thisYear
+        ]);
+
+      }else{
+
+        $year = Year::firstOrCreate(['min' => $thisYear ], [
+          'min' => $thisYear ,
+          'max' => ($thisYear+1) ,
+          'name' => $thisYear.'/'.($thisYear+1)
+        ]);
+
+      }
+        Session::put('yearName', $year->name );
+        Session::put('yearId', $year->id );
+    }
+  }
 
   public static function method($method = null, $execution, $message = null){
     if ($method !== null) {

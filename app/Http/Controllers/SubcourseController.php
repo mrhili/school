@@ -17,6 +17,35 @@ use Relation;
 class SubcourseController extends Controller
 {
 
+		public function show(Course $course, Subcourse $subcourse){
+
+
+			$pivote = $course->subcourses()->where('subcourse_id', $subcourse->id )->first();
+
+			if( $pivote ){
+
+				$sorting =  $pivote->pivot->sorting;
+
+				$next = PivotCoursub::where('course_id', $course->id)
+					->where('sorting', $sorting + 1 )
+					->first();
+
+				$last = PivotCoursub::where('course_id', $course->id)
+
+					->where('sorting', $sorting - 1 )
+					->first();
+
+				//dd( $next, $last );
+
+				return view('back.subcourses.show', compact('subcourse', 'course', 'next', 'last'));
+
+			}else{
+				abort(500, 'Pivote pas trouvé.');
+			}
+
+
+		}
+
 ///{course}/{subcourse}
 
     public function linkSubCourse2CourseAfter(Request $request, Course $course, Subcourse $subcourse, Subcourse $subcourseAfter){
@@ -32,8 +61,8 @@ class SubcourseController extends Controller
 		        $creation = [
 
 		            'id_link' => $subcourse->id,
-		            'comment' => $request->comment, 
-		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh 
+		            'comment' => $request->comment,
+		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
 		            'by-admin' => $admin->id,
@@ -43,7 +72,7 @@ class SubcourseController extends Controller
 		            //'id_link' => $request->id_link,
 
 		            ];
-		       
+
 
 		        $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a crée un subcourse qui porte le titre <strong>'.$subcourse->title.' </strong> au coure qui porte le nom <strong>'.$course->name.' </strong> .'  ;
 
@@ -83,8 +112,8 @@ class SubcourseController extends Controller
 		        $creation = [
 
 		            'id_link' => $subcourse->id,
-		            'comment' => $request->comment, 
-		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh 
+		            'comment' => $request->comment,
+		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
 		            'by-admin' => $admin->id,
@@ -94,7 +123,7 @@ class SubcourseController extends Controller
 		            //'id_link' => $request->id_link,
 
 		            ];
-		       
+
 
 		        $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a crée un subcourse qui porte le titre <strong>'.$subcourse->title.' </strong> au coure qui porte le nom <strong>'.$course->name.' </strong> .'  ;
 
@@ -146,8 +175,8 @@ class SubcourseController extends Controller
 		        $creation = [
 
 		            'id_link' => $newsubcourse->id,
-		            'comment' => $request->comment, 
-		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh 
+		            'comment' => $request->comment,
+		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
 		            'by-admin' => $admin->id,
@@ -157,7 +186,7 @@ class SubcourseController extends Controller
 		            //'id_link' => $request->id_link,
 
 		            ];
-		       
+
 
 		        $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a crée un subcourse qui porte le titre <strong>'.$newsubcourse->title.' </strong> au coure qui porte le nom <strong>'.$course->name.' </strong> .'  ;
 
@@ -223,8 +252,8 @@ class SubcourseController extends Controller
 		        $creation = [
 
 		            'id_link' => $newsubcourse->id,
-		            'comment' => $request->comment, 
-		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh 
+		            'comment' => $request->comment,
+		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
 		            'by-admin' => $admin->id,
@@ -234,7 +263,7 @@ class SubcourseController extends Controller
 		            //'id_link' => $request->id_link,
 
 		            ];
-		       
+
 
 		        $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a crée un subcourse qui porte le titre <strong>'.$newsubcourse->title.' </strong> au coure qui porte le nom <strong>'.$course->name.' </strong> .'  ;
 
@@ -266,7 +295,7 @@ class SubcourseController extends Controller
 
 /*
 	Route::post('/replace-subcourse/{course}/{subcourse}', 'SubcourseController@storeSubCourse2CourseAndDetachSubcourse')->name('subcourses.replace-new');
-	Route::put('/replace-link-subcourse/{course}/{subcourse}/{detach}', 'SubcourseController@linkSubCourse2CourseAndDetachSubcourse')->name('subcourses.replace-link');	
+	Route::put('/replace-link-subcourse/{course}/{subcourse}/{detach}', 'SubcourseController@linkSubCourse2CourseAndDetachSubcourse')->name('subcourses.replace-link');
 */
 
 
@@ -307,7 +336,7 @@ class SubcourseController extends Controller
 
 Route::get('/add-subcourse/{course}', 'SubcourseController@addSubCourse2Course')->name('subcourses.add-link');
 	Route::post('/add-subcourse/{course}', 'SubcourseController@storeSubCourse2Course')->name('subcourses.store-link');
-	Route::put('/link-subcourse/{course}/{subcourse}', 'SubcourseController@linkSubCourse2Course')->name('subcourses.link-course');	
+	Route::put('/link-subcourse/{course}/{subcourse}', 'SubcourseController@linkSubCourse2Course')->name('subcourses.link-course');
 
     */
 
@@ -341,15 +370,15 @@ Route::get('/add-subcourse/{course}', 'SubcourseController@addSubCourse2Course')
 
     	if( $subcourse ){
 
-    			$sort = Relation::linkSubcourse2Course($course) ;
+    			$sort = Relation::linkSubcourse2Course($course , $subcourse) ;
 
 		        $admin = Auth::user();
 
 		        $creation = [
 
 		            'id_link' => $subcourse->id,
-		            'comment' => $request->comment, 
-		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh 
+		            'comment' => $request->comment,
+		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
 		            'by-admin' => $admin->id,
@@ -359,7 +388,7 @@ Route::get('/add-subcourse/{course}', 'SubcourseController@addSubCourse2Course')
 		            //'id_link' => $request->id_link,
 
 		            ];
-		       
+
 
 		        $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a crée un subcourse qui porte le titre <strong>'.$subcourse->title.' </strong> au coure qui porte le nom <strong>'.$course->name.' </strong> .'  ;
 
@@ -378,7 +407,7 @@ Route::get('/add-subcourse/{course}', 'SubcourseController@addSubCourse2Course')
 		            	]);
 
 
-    		
+
     	}
 
     }
@@ -386,15 +415,15 @@ Route::get('/add-subcourse/{course}', 'SubcourseController@addSubCourse2Course')
     public function linkSubCourse2Course(Request $request, Course $course, Subcourse $subcourse){
 
 
-    			$sort = Relation::linkSubcourse2Course($course) ;
+    			$sort = Relation::linkSubcourse2Course($course , $subcourse) ;
 
 		        $admin = Auth::user();
 
 		        $creation = [
 
 		            'id_link' => $subcourse->id,
-		            'comment' => $request->comment, 
-		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh 
+		            'comment' => $request->comment,
+		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
 		            'by-admin' => $admin->id,
@@ -404,7 +433,7 @@ Route::get('/add-subcourse/{course}', 'SubcourseController@addSubCourse2Course')
 		            //'id_link' => $request->id_link,
 
 		            ];
-		       
+
 
 		        $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a linké un subcourse qui porte le titre <strong>'.$subcourse->title.' </strong> au coure qui porte le nom <strong>'.$course->name.' </strong> .'  ;
 
@@ -422,7 +451,7 @@ Route::get('/add-subcourse/{course}', 'SubcourseController@addSubCourse2Course')
 		            	]);
 
 
-    		
+
     }
 
 /*

@@ -44,19 +44,19 @@ class CreateNotesTable extends Migration
             $table->foreign('subject_the_class_id')
               ->references('id')
               ->on('subject_the_class')
-              ->onDelete('set null');    
+              ->onDelete('set null');
 
             $table->integer('teatcher_id')->unsigned()->index()->nullable();
             $table->foreign('teatcher_id')
               ->references('id')
               ->on('users')
-              ->onDelete('set null'); 
+              ->onDelete('set null');
 
             $table->integer('student_id')->unsigned()->index();
             $table->foreign('student_id')
               ->references('id')
               ->on('users')
-              ->onDelete('cascade'); 
+              ->onDelete('cascade');
 
             $table->boolean('seen')->default(false);
 

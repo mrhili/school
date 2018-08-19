@@ -9,18 +9,25 @@ class Testyearsubclass extends Model
     //
 
     protected $fillable = [
-        'subject_the_class_id', 'the_class_id', 'subject_id' ,'test_id','year_id', 'publish', 'teatcher_id', 'navigation'
+        'subject_the_class_id', 'the_class_id', 'subject_id' ,'test_id','year_id'
+        , 'publish', 'teatcher_id', 'is_exercise','navigation','req_publish',
+        'end', 'course_id'
     ];
+
+    public function course()
+    {
+        return $this->belongsTo('App\Course', 'course_id');
+    }
 
 
     public function test()
     {
-        return $this->belongsTo('App\Test');
+        return $this->belongsTo('App\Test', 'test_id');
     }
 
     public function subjectclass()
     {
-        return $this->belongsTo('App\Subjectclass');
+        return $this->belongsTo('App\Subjectclass', 'subject_the_class_id');
     }
 
     public function year()
@@ -37,6 +44,6 @@ class Testyearsubclass extends Model
     {
         return $this->hasMany('App\Note', 'testyearsubclass_id');
     }
-    
+
 
 }

@@ -21,7 +21,17 @@ class Courseyearsubclass extends Model
 
     public function subjectclass()
     {
-        return $this->belongsTo('App\Subjectclass');
+        return $this->belongsTo('App\Subjectclass', 'subject_the_class_id');
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo('App\Subject', 'subject_id');
+    }
+
+    public function class()
+    {
+        return $this->belongsTo('App\TheClass', 'the_class_id');
     }
 
     public function year()
@@ -33,6 +43,8 @@ class Courseyearsubclass extends Model
     {
         return $this->belongsTo('App\User', 'teatcher_id');
     }
+
+    
 
 
 

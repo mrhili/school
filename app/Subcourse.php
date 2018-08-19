@@ -18,10 +18,10 @@ class Subcourse extends Model
 
     public function courses(){
 
-    	return $this->belongsToMany('App\Course')->withPivot('sorting');
+    	return $this->belongsToMany('App\Course')->withPivot('sorting')->withPivot('id');
 
     }
 
-    
+
 
 }

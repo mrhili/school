@@ -21,7 +21,9 @@ use App\{
     Meetingtype,
     Meeting,
     Meetingpopulating,
-    Demandefourniture
+    Demandefourniture,
+    Courseyearsubclass,
+    Testyearsubclass
 };
 use Application;
 use Auth;
@@ -70,6 +72,8 @@ class HomeController extends Controller
         if( $user->role != 6 ){
             return redirect()->route(  ArrayHolder::roles_routing($user->role).'.home');
         }
+
+        $year = Session::get('yearId');
         $users = User::where('role', 0 )->count();
         $students = User::where('role', 1 )->count();
         $parents = User::where('role', 2 )->count();
@@ -103,11 +107,25 @@ class HomeController extends Controller
 
         $demandefournitures = Demandefourniture::count();
 
+        $courses2Validate = Courseyearsubclass::where('publish', false)
+          ->where('year_id', $year)
+          ->take(10)
+          ->get();
 
-        return view('home', compact('users','students', 'parents', 'teatchers','secretarias','admins',
-        'masters', 'classes', 'subjects', 'tests','fournitures','rooms', 'roomtypes',
-         'etages', 'objctypes', 'objcts', 'observations', 'callings', 'meetingtypes',
-          'meetings', 'mymeetings', 'meetingsCreatedbyme', 'courses', 'demandefournitures'));
+          $tests2Validate = Testyearsubclass::where('publish', false)
+            ->where('year_id', $year)
+            //->orderBy('end', 'asc')
+            ->take(10)
+            ->get();
+
+        return view('home', compact('users','students', 'parents',
+         'teatchers','secretarias','admins',
+        'masters', 'classes', 'subjects', 'tests',
+        'fournitures','rooms', 'roomtypes',
+         'etages', 'objctypes', 'objcts', 'observations',
+          'callings', 'meetingtypes',
+          'meetings', 'mymeetings', 'meetingsCreatedbyme',
+           'courses', 'demandefournitures', 'courses2Validate', 'tests2Validate'));
     }
 
     public function monthsBD()

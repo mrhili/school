@@ -75,9 +75,19 @@ class User extends Authenticatable
         return $this->hasMany('App\Courseyearsubclass', 'teatcher_id');
     }
 
+    public function courses_posted()
+    {
+        return $this->hasMany('App\Courseyearsubclass', 'teatcher_id');
+    }
+
+    public function courses_created()
+    {
+        return $this->hasMany('App\Course', 'created_by');
+    }
+
     public function the_class()
     {
-        return $this->belongsTo('App\TheClass');
+        return $this->belongsTo('App\TheClass', 'the_class_id');
     }
 
     public function fourniturations()

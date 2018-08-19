@@ -26,6 +26,11 @@ class Test extends Model
         return $this->hasMany('App\Testyearsubclass');
     }
 
+    public function notes()
+    {
+        return $this->hasMany('App\Note', 'testyearsubclass_id');
+    }
+
 
 
 

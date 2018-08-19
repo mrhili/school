@@ -11,5 +11,5 @@
 
 
   <div class="alert alert-{{ $class }}" role="alert">
-    {!! $icon !!} {{ $slot }}
+    {!! $icon !!} {!! $slot !!}
   </div>

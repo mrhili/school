@@ -8,83 +8,95 @@ use App\{
     Subject,
     Subjectclass,
     Testyearsubclass,
-    Note
+    Courseyearsubclass,
+    Note,
+    User
 };
 use Illuminate\Http\Request;
 use Session;
 use Auth;
 use GetSetting;
+use Relation;
+use Carbon;
 class TestController extends Controller
 {
+
+
+
+  public function teatcherTests(User $teatcher){
+
+
+    //dd( $this->selected_year );
+
+    $year = Session::get('yearId');
+
+
+    $testYSC = Testyearsubclass::where('teatcher_id', $teatcher->id )
+    ->where('year_id', $year)
+    ->latest()
+    ->paginate(3);
+
+    return view('back.tests.teatcher-tests', compact('testYSC', 'teatcher') );
+  }
+
+
+
+
+    public function show(Test $test){
+
+        return view('back.tests.show',compact('test'));
+    }
+
     public function language(){
         return view('back.tests.language');
     }
 
-    public function passTest(Test $test, Subjectclass $subjectclass ){
+    public function passTest(Testyearsubclass $test){
 
 
-        $year_id = Session::get('yearId');
+        $year = Session::get('yearId');
+        $user = Auth::user();
 
-        $testyearsubclass = Testyearsubclass::where('year_id', $year_id)
-            ->where('subject_the_class_id', $subjectclass->id)
-            ->where('the_class_id', $subjectclass->the_class_id)
-            ->where('subject_id', $subjectclass->subject_id)
-            ->where('test_id', $test->id )
-            ->where('publish', true)
-            ->first();
-        if($testyearsubclass === null){
+        if($user->role < 3){
+            $note = Note::where('year_id', $year)
+                ->where('testyearsubclass_id', $test->id )
+                ->where('student_id', Auth::id() )
+                ->first();
 
-            return 'there is a problem check the administration';
+            if(!$note){ return 'there is a problem check the administration - n'; }
+            if(!$test->publish){ return 'there is a problem check the administration - n'; }
 
-        }
+            if(!$test->is_exercise && $note->test_passed_fine){
 
+              return 'You passed that test';
 
-        $checkifpassed = Note::where('year_id', $year_id)
-            ->where('testyearsubclass_id', $testyearsubclass->id )
-            ->where('subject_the_class_id', $subjectclass->id)
-            ->where('the_class_id', $subjectclass->the_class_id)
-            ->where('subject_id', $subjectclass->subject_id)
-            ->where('teatcher_id', $testyearsubclass->teatcher_id)
-            ->where('student_id', Auth::id())
-            ->first();
+            }
 
-        if($checkifpassed === null){
+          }
+/*
+          $adate= date("Y/m/d H:i:s");
+          $dateinsec=strtotime($adate);
+
+          $duration= ( $test->time_minutes * 60 ) + 60;
 
 
-            $note = Note::create([
-                    'testyearsubclass_id' => $testyearsubclass->id ,
-                    'year_id' => $year_id ,
-                    'the_class_id' => $subjectclass->the_class_id ,
-                    'subject_id' => $subjectclass->subject_id ,
-                    'subject_the_class_id' => $subjectclass->id ,
-                    //to modify when fixing teatchers dashboard
-                    'teatcher_id' => $testyearsubclass->teatcher_id ,
-                    'student_id' => Auth::id() ,
-                    'note' => 0,
-                    'seen' => false,
-                    'done_minutes' => "02:00"
-                ]);
+          $newdate=$dateinsec+$duration;
 
-            $adate= date("Y/m/d H:i:s");
-            $dateinsec=strtotime($adate);
+          $date = date('Y/m/d H:i:s',$newdate);
 
-            $duration= ( $test->time_minutes * 60 ) + 60;
+          //$date = Carbon::parse( $date );
+          //dd( $date );
+*/
+          return view('back.tests.pass', compact('test', 'note'));
 
-            $newdate=$dateinsec+$duration;
-            $date = date('Y/m/d H:i:s',$newdate);
 
-            return view('back.tests.pass', compact('test', 'subjectclass', 'note', 'date'));
-
-        }else{
-            return 'You passed that test';
-        }
     }
 
-    public function getNote(Request $request, Test $test, Note $note){
+    public function getNote(Request $request, Testyearsubclass $test, Note $note){
 
         $student_answers = array_except($request->all(), ['_token','done_minutes']);
-        $answers = json_decode($test->answers, true);
-        $notes = json_decode($test->notes, true);
+        $answers = json_decode($test->test->answers, true);
+        $notes = json_decode($test->test->notes, true);
         //dd($student_answers , '------------', $answers , '------------', $notes );
         $final_note = 0;
 
@@ -97,29 +109,36 @@ class TestController extends Controller
             }
 
         }
-        $note->note = $final_note;
 
-        $minutes = $request->done_minutes / 60;
-        $minutes = (int)$minutes;
-        $seconds = $request->done_minutes % 60;
+        if(!$test->is_exercise || ( $test->is_exercise && $note->note < $final_note )  ){
+          $note->note = $final_note;
 
-        if( $minutes < 10){
 
-            $minutes = "0".$minutes;
+
+
+          $minutes = $request->done_minutes / 60;
+          $minutes = (int)$minutes;
+          $seconds = $request->done_minutes % 60;
+
+          if( $minutes < 10){
+
+              $minutes = "0".$minutes;
+
+          }
+
+          if( $seconds < 10){
+
+              $seconds = "0".$seconds;
+
+          }
+
+          $note->done_minutes = $minutes.":".$seconds;
+
+          $note->test_passed_fine = true;
+          $note->save();
 
         }
 
-        if( $seconds < 10){
-
-            $seconds = "0".$seconds;
-
-        }
-
-        $note->done_minutes = $minutes.":".$seconds;
-
-
-        $note->test_passed_fine = true;
-        $note->save();
 
         return redirect()->route('notes.my-notes');
 
@@ -155,20 +174,47 @@ class TestController extends Controller
     }
 
     public function addLinked($class_id,  $subject_id, $language = null){
-
+/*
         if( $language == null ){
 
             $language = GetSetting::getConfig('test-language');
         }
+*/
+        $year = Session::get('yearId');
+
+        if( $language == null ){
+
+            $language = 'fr-FR';
+        }
+
+        $courses = Courseyearsubclass::where('the_class_id', $class_id)
+          ->where('subject_id', $subject_id)
+          ->where('year_id', $year)
+          ->where('publish', true)
+          ->get();
+
+        $courseArray = [];
+
+        foreach($courses as $course){
+          $courseArray[ $course->id ] = $course->course->name.' by '.$course->teatcher->name.' '.$course->teatcher->last_name;
+        }
 
         $class = TheClass::find($class_id);
         $subject = Subject::find($subject_id);
-        return view('back.tests.add-linked',compact('subject', 'class','language'));
+        return view('back.tests.add-linked',compact('subject', 'class','language', 'courseArray'));
     }
 
     public function storeLinked(Request $request, $class_id,  $subject_id ){
 
-        $test = Test::create(['body' => $request->body, 'title' => $request->title, 'notes' => $request->notes, 'time_minutes' => $request->time_minutes]);
+        $test = Test::create([
+          'body' => $request->body,
+          'title' => $request->title,
+          'notes' => $request->notes,
+          'time_minutes' => $request->time_minutes,
+          'notes' => $request->notes,
+        ]);
+
+
 
 
 
@@ -181,6 +227,7 @@ class TestController extends Controller
                 if( $request->publish ){
 
                     $publish = true;
+
 
                 }else{
 
@@ -199,7 +246,18 @@ class TestController extends Controller
 
                 }
 
-                Testyearsubclass::create([
+                $isexercise;
+                if( $request->is_exercise ){
+
+                    $isexercise = true;
+
+                }else{
+
+                    $isexercise = false;
+
+                }
+
+                $testYSC = Testyearsubclass::create([
                     'year_id' => Session::get('yearId'),
                     'test_id' => $test->id,
                     'subject_the_class_id' => $subject_class->id,
@@ -207,11 +265,28 @@ class TestController extends Controller
                     'the_class_id' => $class_id,
                     'teatcher_id' => Auth::id(),
                     'publish' => $publish,
-                    'navigation' => $navigation
+                    'is_exercise' => $isexercise,
+                    'end' => $request->end,
+                    'navigator' => $navigation,
+                    'course_id' => $request->beforeTest
 
                     ]);
 
-                return redirect()->route('tests.get-answers', $test->id);
+
+                if( $testYSC ){
+
+                  if($publish){
+
+                    Relation::beginNoteCollections($testYSC);
+                  }
+
+
+                  return redirect()->route('tests.get-answers', $test->id);
+                }else{
+                  return back()->withInput();
+                }
+
+
 
             }
 
@@ -221,6 +296,7 @@ class TestController extends Controller
     }
 
     public function addLinkedLinking($class_id,  $subject_id){
+        $year = Session::get('yearId');
         $class = TheClass::find($class_id);
         $subject = Subject::find($subject_id);
         $subject_class = Subjectclass::where('the_class_id', $class_id)->where('subject_id', $subject_id)->first();
@@ -233,7 +309,19 @@ class TestController extends Controller
 
         $testsArray = Test::whereNotIn('id',  $testsMines )->pluck('title', 'id')->toArray();
 
-        return view('back.tests.add-linked-linking',compact('subject', 'class', 'testsArray', 'tests'));
+        $courses = Courseyearsubclass::where('the_class_id', $class_id)
+          ->where('subject_id', $subject_id)
+          ->where('year_id', $year)
+          ->where('publish', true)
+          ->get();
+
+        $courseArray = [];
+
+        foreach($courses as $course){
+          $courseArray[ $course->id ] = $course->course->name.' by '.$course->teatcher->name.' '.$course->teatcher->last_name;
+        }
+
+        return view('back.tests.add-linked-linking',compact('subject', 'class', 'testsArray', 'tests','courseArray'));
     }
     public function storeLinkedLinking(Request $request,Test $test, $class_id,  $subject_id ){
         $class = TheClass::find($class_id);
@@ -261,8 +349,18 @@ class TestController extends Controller
 
         }
 
+        $isexercise;
+        if( $request->is_exercise ){
 
-        Testyearsubclass::create([
+            $isexercise = true;
+
+        }else{
+
+            $isexercise = false;
+
+        }
+
+        $testYSC = Testyearsubclass::create([
             'year_id' => Session::get('yearId'),
             'test_id' => $test->id,
             'subject_id' => $subject_id,
@@ -270,9 +368,26 @@ class TestController extends Controller
             'subject_the_class_id' => $subject_class->id,
             'teatcher_id' => Auth::id(),
             'publish' => $publish,
-            'navigation' => $navigation
+            'navigator' => $navigation,
+            'end' => $request->end,
+            'is_exercise' => $isexercise,
+            'course_id' => $request->beforeTest
         ]);
-        return response()->json(['id' => $test->id, 'name' => $test->title ]);
+
+
+        if( $testYSC ){
+          if($publish){
+            Relation::beginNoteCollections($testYSC);
+          }
+
+
+          return response()->json(['id' => $test->id, 'name' => $test->title ]);
+        }else{
+          return response()->json(['message' => 'faild testYSC'], 503);
+        }
+
+
+
     }
 
     public function getAnswers(Test $test){
@@ -286,12 +401,19 @@ class TestController extends Controller
 
         $questions = json_decode($test->body, true);
 
+        //dd($questions, $rArray);
+
         $aJSON = [];
 
         foreach ($questions as $key => $question) {
             # code...
-            $aJSON[ $question['name'] ] = $rArray[ $question['name'] ] ;
+            if (array_key_exists("name", $question)){
+                $aJSON[ $question['name'] ] = $rArray[ $question['name'] ] ;
+              }
+
         }
+
+        //dd( $aJSON );
 
         $test->answers =  json_encode($aJSON);
         $test->ready =  true;

@@ -36,6 +36,8 @@ Nouveau etudient
 
   	@include('back.partials.formG', ['name' => 'title', 'type' => 'text', 'text' => 'name', 'class'=>'', 'required' => true,'additionalInfo' => [ 'id' => 'titlefield' ]])
 
+    @include('back.partials.formG', ['name' => 'time_minutes', 'type' => 'number', 'text' => 'Duréé par minute', 'class'=>'', 'required' => true,'additionalInfo' => [ 'id' => 'timefield' ]])
+
   	<div id="editor"></div>
 
   	<a href="#" class="btn  btn-lg btn-block btn-success" id="confimation">Confirmer le test</a>
@@ -219,7 +221,7 @@ function func(e){
 
   });
 
-  values.append('<div class="form-group col-xs-12"><label class="col-sm-2">Total Notes collecté</label><div class="col-sm-10"><h3 id="total"></h3></div></div>');
+  values.append('<div class="form-group col-xs-12"><label class="col-sm-2">Total Notes collecté</label><div class="col-sm-10"><h3><span id="total"></span> / 100</h3></div></div>');
 
   var total = $('#total');
 
@@ -262,22 +264,11 @@ function func(e){
 
   }
 
+  $('#confimation').click(function( e ){
 
+    func(e);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  $('#confimation').click(func(e));
+  });
 
 
 

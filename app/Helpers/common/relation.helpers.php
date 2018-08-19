@@ -23,7 +23,11 @@ use App\{
     Subjectclass,
     Teatchification,
     Demandefourniture,
-    Calendarteatchification
+    Calendarteatchification,
+    Course,
+    Subcourse,
+    Testyearsubclass,
+    Note
 
 };
 
@@ -32,7 +36,62 @@ use Carbon;
 use Auth;
 class Relation {
 
+  public static function testsYouShouldStart(User $student ){
 
+    $year = Session::get('yearId');
+
+    $sc_ids = Subjectclass::where('the_class_id', $student->the_class_id)->get(['the_class_id'])->toArray();
+
+    if (!empty($sc_ids)) {
+     // list is empty.
+
+      $tests = Testyearsubclass::whereIn('subject_the_class_id', $sc_ids)->get();
+
+      foreach($tests as $test ){
+
+        Note::create([
+          'testyearsubclass_id' => $test->id,
+          'year_id' => $year,
+          'the_class_id' => $test->subjectclass->the_class->id,
+          'subject_id' => $test->subjectclass->subject->id,
+          'subject_the_class_id' => $test->subjectclass->id,
+          'teatcher_id' => $test->teatcher->id,
+          'student_id' => $student->id,
+          'note' => 0,
+          'done_minutes' => 0
+        ]);
+
+
+      }
+
+    }
+
+
+
+  }
+
+  public static function beginNoteCollections(Testyearsubclass $test ){
+
+    $year = Session::get('yearId');
+
+    $students = User::where('the_class_id', $test->subjectclass->the_class->id )->where('role', 1)->get();
+    foreach( $students as $student){
+
+      Note::create([
+        'testyearsubclass_id' => $test->id,
+        'year_id' => $year,
+        'the_class_id' => $test->subjectclass->the_class->id,
+        'subject_id' => $test->subjectclass->subject->id,
+        'subject_the_class_id' => $test->subjectclass->id,
+        'teatcher_id' => $test->teatcher->id,
+        'student_id' => $student->id,
+        'note' => 0,
+        'done_minutes' => 0
+      ]);
+
+    }
+
+  }
 
   public static function calendar_teat_from_teatcher(User $teatcher){
     $year = Session::get('yearId');
@@ -89,7 +148,7 @@ class Relation {
     }
 
 
-    public static function linkSubcourse2Course($course){
+    public static function linkSubcourse2Course(Course $course, Subcourse $subcourse){
 
         $sorting = $course->subcourses()->pluck('sorting')->toArray();
 

@@ -46,6 +46,9 @@ The Main Configuration Of the web application
 
   @slot('sectionPlain')
 
+
+
+
     <h3>Emploi de temps</h3>
 
     @foreach($classes as $class)

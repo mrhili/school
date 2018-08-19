@@ -86,7 +86,17 @@ class StudentController extends Controller
 
         $ids = Subjectclass::where('year_id', $year)->where('the_class_id', $user->the_class_id )->pluck('id')->toArray();
 
-        $mytests = Testyearsubclass::whereIn('subject_the_class_id', $ids )->where('publish', true)->get();
+        $mytests = Testyearsubclass::whereIn('subject_the_class_id', $ids )
+        ->where('publish', true)
+        ->where('year_id', $year)
+        ->where('is_exercise', false)
+        ->get();
+
+        $myExercises = Testyearsubclass::whereIn('subject_the_class_id', $ids )
+        ->where('publish', true)
+        ->where('year_id', $year)
+        ->where('is_exercise', true)
+        ->get();
 
         $class = TheClass::find($user->the_class_id);
 
@@ -94,7 +104,10 @@ class StudentController extends Controller
 
         $scTeatchifications = Teatchification::whereIn('subject_the_class_id', $ids)->where('year_id', $year)->get();
 
-        return view('back.students.home',compact('mytests', 'teatchifications', 'calendar', 'scTeatchifications'));
+        return view('back.students.home',compact('mytests', 'teatchifications',
+         'calendar', 'scTeatchifications',
+         'myExercises'
+       ));
     }
 
     public function myProfile(){
@@ -247,11 +260,16 @@ class StudentController extends Controller
 
             Relation::fillFournituration( $student->id , $year , $request->class   );
 
+            Relation::testsYouShouldStart( $student );
+
             $student->fill_payment = true;
 
             $student->save();
 
             //$this->addStudentHistory();
+
+
+
 
 
             $creation = [

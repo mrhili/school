@@ -14,7 +14,7 @@
 
 @section('content')
 
-            
+
 
 
 
@@ -69,7 +69,7 @@ The Main Configuration Of the web application
 
   @slot('sectionPlain')
 
-                  
+
   @endslot
 
 

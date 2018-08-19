@@ -1,8 +1,4 @@
-@php
 
-  $years =\App\Year::pluck('name', 'id');
-
-@endphp
 
 @extends('back.layouts.app')
 
@@ -89,13 +85,6 @@ Nouveau etudient
     <div id="answers"></div>
 
 
-
-
-
-
-
-
-
   @endslot
 
 
@@ -112,7 +101,7 @@ Nouveau etudient
 	@endcomponent
 
   @endslot
-  
+
 
 
 
@@ -146,17 +135,24 @@ Nouveau etudient
 $(document).ready(function(){
 
 var options = {
-      formData: '{!! $test->body !!}',
+      formData: '{!! $test->test->body !!}',
       dataType: 'json'
     };
 $answers = $('#answers');
 $answers.formRender(options);
 $answers.append('<input type="text" class="hidden" name="done_minutes" id="timing" />');
 $timing = $('#timing');
+var duration = '{{ $test->test->time_minutes }}';
+var now = new Date();
+var dateend = new Date();
+dateend.setMinutes( now.getMinutes() + Number( duration ) );
 
 
+console.log(dateend);
   $("#countdown")
-  .countdown("{{ $date }}", function(event) {
+  .countdown( dateend, function(event) {
+
+    console.log( event.strftime('%S seconds') );
 
     $('#hours').text(
       event.strftime('%H heurs')
@@ -164,22 +160,54 @@ $timing = $('#timing');
     $('#minutes').text(
       event.strftime('%M minutes')
     );
+
     $('#seconds').text(
       event.strftime('%S seconds')
     );
 
-  }).on('update.countdown', function(){
+}).on('update.countdown', function(){
 
     $timing.val( Number($timing.val()) + 1 );
-    
+
   })
+
+
   .on('finish.countdown', function(){
+
+    @if (Auth::user()->role < 3 )
+      $("#get-note").submit();
+    @else
+      alert('done');
+    @endif
+
+  });
+@if( $test->navigator )
+
+
+  @if (Auth::user()->role < 3 )
+
+    $(window).blur(function() {
+      $("#get-note").submit();
+     });
+
+  @else
+    alert('done');
+  @endif
+
+
+
+
+@endif
+
+@if (Auth::user()->role < 3 )
+$(window).on("beforeunload", function(e) {
+    //call a php function that sets the flag to 0 or whatever you want
     $("#get-note").submit();
   });
+@else
+  alert('done');
+@endif
 
-  $(window).blur(function() {
-    $("#get-note").submit();
-   });
 
 });
 

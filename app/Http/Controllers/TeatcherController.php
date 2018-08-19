@@ -13,7 +13,9 @@ use Auth;
 use Application;
 
 use App\{
-  User
+  User,
+  Courseyearsubclass,
+  Testyearsubclass
 };
 
 class TeatcherController extends Controller
@@ -54,9 +56,31 @@ class TeatcherController extends Controller
 
       $user = Auth::user();
 
+      $year = Session::get('yearId');
+
       $calendar = Application::loadCalendarForTeatcher( $user );
 
-        return view('back.teatchers.home', compact('calendar') );
+      $courses2rValidate = Courseyearsubclass::where('publish', false)
+        ->where('year_id', $year)
+        ->where('teatcher_id', $user->id )
+        ->where('req_publish', false )
+        ->where('publish', false )
+        ->take(10)
+        ->get();
+
+        //dd($courses2rValidate);
+
+
+
+        $tests2rValidate = Testyearsubclass::where('publish', false)
+          ->where('year_id', $year)
+          ->where('teatcher_id', $user->id )
+          ->where('req_publish', false )
+          ->where('publish', false )
+          ->take(10)
+          ->get();
+
+        return view('back.teatchers.home', compact('calendar', 'courses2rValidate', 'tests2rValidate') );
     }
 
     public function myProfile(){

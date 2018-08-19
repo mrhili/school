@@ -1,8 +1,4 @@
-@php
 
-  $years =\App\Year::pluck('name', 'id');
-
-@endphp
 
 @extends('back.layouts.app')
 
@@ -70,7 +66,7 @@ Nouveau etudient
 	@endcomponent
 
   @endslot
-  
+
 
 
 

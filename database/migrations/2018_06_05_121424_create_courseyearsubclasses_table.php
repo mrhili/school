@@ -53,7 +53,7 @@ class CreateCourseyearsubclassesTable extends Migration
               ->on('users')
               ->onDelete('set null');
 
-
+            $table->boolean('req_publish')->default(false);
 
             $table->boolean('publish')->default(false);
 

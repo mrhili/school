@@ -37,7 +37,173 @@
 
   @endcomponent
 
-  <div class="row"></div>
+  <div class="row">
+
+    <div class="col-xs-6">
+
+
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Classes pour validé</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive">
+            <table class="table no-margin">
+              <thead>
+              <tr>
+                <th>Title</th>
+                <th>Nombre du Subcourses</th>
+                <th>Matiére</th>
+                <th>Class</th>
+                <th>Teatcher</th>
+                <th>Demande de validation</th>
+                <th>Validation</th>
+              </tr>
+              </thead>
+              <tbody>
+
+
+              @foreach( $courses2Validate as $course2Validate )
+
+                <tr>
+                  <td><a href="{{ route('subcourses.add-link', $course2Validate->course->id ) }}" target="_blank" class="btn btn-xs btn-info">{{ $course2Validate->course->name }}</a></td>
+                  <td>{{ $course2Validate->course->subcourses->count() }}</td>
+                  <td>{{ $course2Validate->subject->title }}</td>
+                  <td>{{ $course2Validate->class->name }}</td>
+                  <td>{{ $course2Validate->teatcher->name }} {{ $course2Validate->teatcher->last_name }}</td>
+                  <td><span class="label label-{{ $course2Validate->req_publish? 'warning':'default' }}">Demande de validation</span></td>
+                  <td><a href="#" class="btn btn-xs btn-info btn-valide" data-id="{{$course2Validate->id}}">{{ $course2Validate->course->name }}</a></td>
+                </tr>
+
+              @endforeach
+
+              </tbody>
+            </table>
+          </div>
+
+          <!-- /.table-responsive -->
+          <div class="col-xs-12">Info : <span class="label label-warning">Une demande recue</span> <span class="label label-default">Pas de demande</span></div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer clearfix">
+
+          <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Regardez tout</a>
+        </div>
+        <!-- /.box-footer -->
+      </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="col-xs-6">
+
+
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Classes pour validé</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive">
+            <table class="table no-margin">
+              <thead>
+              <tr>
+                <th>Title</th>
+                <th>Maitre</th>
+                <th>Matiére</th>
+                <th>Class</th>
+                <th>Temps</th>
+                <th>Navigation</th>
+                <th>Type</th>
+                <th>Demande de validation</th>
+                <th>Temps de fin</th>
+                <th>Validation</th>
+              </tr>
+              </thead>
+              <tbody>
+
+
+              @foreach( $tests2Validate as $test2Validate )
+
+                <tr>
+                  <td><a href="{{ route('tests.show', $test2Validate->test->id) }}" target="_blank" class="btn btn-xs btn-info">{{ $test2Validate->test->title }}</a></td>
+                  <td>{{ $test2Validate->subjectclass->subject->name }}</td>
+                  <td>{{ $test2Validate->teatcher->name }} {{ $test2Validate->teatcher->last_name }}</td>
+                  <td>{{ $test2Validate->subjectclass->the_class->name }}</td>
+                  <td>{{ $test2Validate->test->time_minutes }}</td>
+                  <td>{{ Application::test_type_navigator($test2Validate->navigator ) }}</td>
+                  <td>{{ Application::test_type($test2Validate->is_exercise ) }}</td>
+                  <td><span class="label label-{{ $test2Validate->req_publish? 'warning':'default' }}">Demande de validation</span></td>
+
+                  <td>{{ Carbon::parse($test2Validate->end)->diffForHumans()  }}</td>
+                  <td><a href="#" class="btn btn-xs btn-info btn-valide-test" data-id="{{$test2Validate->id}}">Validé</a></td>
+                </tr>
+
+              @endforeach
+
+              </tbody>
+            </table>
+          </div>
+          <!-- /.table-responsive -->
+
+          <div class="col-xs-12">Info : <span class="label label-warning">Une demande recue</span> <span class="label label-default">Pas de demande</span></div>
+
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer clearfix">
+
+          <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Regardez tout</a>
+        </div>
+        <!-- /.box-footer -->
+      </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
 
 
 <h2 class="text-center">Personelle</h2>
@@ -596,6 +762,98 @@ axios.get('/months-bd/')
                   console.log( error );
                 });
 
+
+
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var btnvalide = $('.btn-valide');
+
+    var btnvalidetest = $('.btn-valide-test');
+
+    btnvalide.click(function(e){
+      e.preventDefault();
+      $this = $(this);
+      $this.attr('disabled', true);
+
+      axios.put('/valid-course/'+ $this.attr('data-id'),{
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      })
+      .then(function (response) {
+
+        $this.attr('disabled', false);
+        swal({
+          position: 'top-end',
+          type: 'success',
+          title: 'Validé avec success',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+        $this.parent().parent().remove();
+
+      })
+      .catch(function (error) {
+
+        console.log(error);
+        $this.attr('disabled', false);
+        swal(
+          'Erreur de validation',
+          error,
+          'error'
+        )
+        console.log( error );
+      });
+
+
+
+    });
+
+/*****************************/
+
+btnvalidetest.click(function(e){
+  e.preventDefault();
+  $this = $(this);
+  $this.attr('disabled', true);
+
+  axios.put('/valid-test/'+ $this.attr('data-id'),{
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  })
+  .then(function (response) {
+
+    $this.attr('disabled', false);
+    swal({
+      position: 'top-end',
+      type: 'success',
+      title: 'Validé avec success',
+      showConfirmButton: false,
+      timer: 1500
+    })
+
+    $this.parent().parent().remove();
+
+  })
+  .catch(function (error) {
+
+    console.log(error);
+    $this.attr('disabled', false);
+    swal(
+      'Erreur de validation',
+      error,
+      'error'
+    )
+    console.log( error );
+  });
+
+
+
+});
 
 
   });

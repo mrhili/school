@@ -22,6 +22,14 @@ class CreateCoursesTable extends Migration
             $table->text('teaser_text')->nullable();
             $table->string('teaser_video')->nullable();
             $table->tinyInteger('teaser_type')->nullable();
+
+            $table->integer('created_by')->unsigned()->index()->nullable();
+            $table->foreign('created_by')
+              ->references('id')
+              ->on('users')
+              ->onDelete('set null');
+
+
             $table->timestamps();
         });
     }

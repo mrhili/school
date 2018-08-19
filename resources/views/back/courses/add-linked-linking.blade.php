@@ -1,28 +1,17 @@
 @extends('back.layouts.app')
 
 @section('title')
-Ajouter un coure
+Linké un coure
 @endsection
 
 @section('styles')
 
-@if($language == 'ar')
-
-<style>
-
-  textarea, input[type="text"]{
-    direction: rtl;
-  }
-
-</style>
-
-@endif
 
 @endsection
 
 
 @section('page_header')
-Ajouter un coure
+Linké un coure au Class : {{ $class->name }} et au Matiére : {{ $subject->name }}
 @endsection
 
 @section('page_header_desc')
@@ -34,8 +23,7 @@ L'année selectionée est {{ Session::get('yearId') }}
   <li><a href="{{ route('home')  }}"><i class="fa fa-dashboard"></i> dashboard</a></li>
   <li><a href="{{ route('classes.list')  }}"><i class="fa fa-dashboard"></i> Classes</a></li>
   <li><a href="{{ route('subjects.by-class', $class->id) }}"><i class="fa fa-dashboard"></i> Classs matierse</a></li>
-  <li><a href="{{ route('courses.language-linked',[$class->id, $subject->id]) }}"><i class="fa fa-dashboard"></i> Language</a></li>
-  <li class="active"> Ajouter un coure</li>
+  <li class="active"> Linké un coure au class: {{ $class->name }}</li>
 @endsection
 
 
@@ -44,7 +32,7 @@ L'année selectionée est {{ Session::get('yearId') }}
 
             @component('back.components.collapsed')
               @slot('heading')
-                Ajouter un coure
+                Linké un coure au Class : {{ $class->name }} et au Matiére : {{ $subject->name }}
               @endslot
               @slot('id')
                 course-form
@@ -55,50 +43,10 @@ L'année selectionée est {{ Session::get('yearId') }}
 
                                       <div class="col-xs-12">
 
-                                      @include('back.partials.formG', ['name' => 'name', 'type' => 'text', 'text' => 'Nom de meting', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'namefield'] ])
-                                      </div>
+                                        @include('back.partials.formG', ['name' => 'test', 'type' => 'select', 'selected' => null,'text' => 'Ajouter une coure à cette matiére', 'class'=>'', 'required' => true, 'array' => $coursesArray  ,'additionalInfo' => ['id' =>  'coursefield']])
 
-                                      <div class="col-xs-12">
-
-                                      @include('back.partials.formG', ['name' => 'objective', 'type' => 'textarea', 'text' => 'Objectives du coure', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'objectivefield'] ])
-                                      </div>
-
-                                      <div class="col-xs-12">
-
-                                      @include('back.partials.formG', ['name' => 'introduction', 'type' => 'textarea', 'text' => 'Une petite introduction', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'introductionfield'] ])
-                                      </div>
-
-                                      <div class="col-xs-12">
-
-                                      @include('back.partials.formG', ['name' => 'content', 'type' => 'textarea', 'text' => 'Le content', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'contentfield'] ])
-                                      </div>
-
-
-
-                                      <div class="col-xs-12">
-
-                                      @include('back.partials.formG', ['name' => 'teaser', 'type' => 'select', 'selected' => 0,'text' => 'Type de teaser', 'class'=>'', 'required' => true, 'array' => ArrayHolder::teaserTypes()  ,'additionalInfo' => ['id' =>  'teaserfield']])
 
                                       </div>
-
-                                      <div class="col-xs-12 teaser teaser_text">
-
-                                      @include('back.partials.formG', ['name' => 'teaser_text', 'type' => 'textarea', 'text' => 'Un petit teaser', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'teaser_textfield'] ])
-
-                                      </div>
-
-                                      <div class="col-xs-12 teaser teaser_video">
-
-                                      @include('back.partials.formG', ['name' => 'teaser_video', 'type' => 'url', 'text' => 'Un petit teaser', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'teaser_videofield'] ])
-
-                                      </div>
-
-
-                                      @if( Auth::user()->role >= 4 )
-                                        @include('back.partials.formG', ['name' => 'publish', 'type' => 'checkbox', 'text' => 'Publier le test maintenent pour les éléve', 'class'=>'', 'required' => false, 'checked' => true,'additionalInfo' => [ 'id' => 'publishfield' ]])
-                                      @else
-                                        @include('back.partials.formG', ['name' => 'publish', 'type' => 'checkbox', 'text' => 'Publier le test maintenent pour les éléve', 'class'=>' hidden', 'required' => false, 'checked' => false,'additionalInfo' => [ 'id' => 'publishfield'  ]])
-                                      @endif
 
 
 
@@ -114,6 +62,18 @@ L'année selectionée est {{ Session::get('yearId') }}
 
                                       @include('back.partials.formG', ['name' => 'hidden_note', 'type' => 'textarea', 'text' => 'Une Note Secret pour toi', 'class'=>'', 'required' => false, 'additionalInfo' => ['id' =>  'hiddennotefield'] ])
                                       </div>
+
+
+                                      <div class="col-xs-12">
+                                        @if( Auth::user()->role >= 4 )
+                                          @include('back.partials.formG', ['name' => 'publish', 'type' => 'checkbox', 'text' => 'Publier le test maintenent pour les éléve', 'class'=>'', 'required' => false, 'checked' => true,'additionalInfo' => [ 'id' => 'publishfield' ]])
+                                        @else
+                                          @include('back.partials.formG', ['name' => 'publish', 'type' => 'checkbox', 'text' => 'Publier le test maintenent pour les éléve', 'class'=>' hidden', 'required' => false, 'checked' => false,'additionalInfo' => [ 'id' => 'publishfield'  ]])
+                                        @endif
+                                      </div>
+
+
+
 
                                       <div class="col-xs-12">
                                         <div class="form-group">
@@ -201,32 +161,7 @@ $(document).ready(function(){
   var imgLink = "{{ 'images/config/'. GetSetting::getConfig('no-image') }}";
 
 /******************/
-  $teaser = $('.teaser');
-  $teaser.hide();
-
-  $teaser_text = $('.teaser_text');
-  $teaser_video = $('.teaser_video');
-
-  $teaser_textfield = $('#teaser_textfield');
-  $teaser_videofield = $('#teaser_videofield');
-
-  $teaser_text.show();
-
-  $teaserfield = $("#teaserfield");
-
-  $teaserfield.on('change', function(){
-
-    if( $teaserfield.val() == 0 ){
-        $teaser.hide();
-        $teaser_videofield.val('');
-        $teaser_text.show();
-    }else if( $teaserfield.val() == 1 ){
-        $teaser.hide();
-        $teaser_textfield.val('');
-        $teaser_video.show();
-    }
-
-  });
+//teasering
 /*******************/
 
 
@@ -244,29 +179,17 @@ $(document).ready(function(){
               hidden_note = $('#hiddennotefield').val();
 
 
-              namefield = $('#namefield').val();
-              objective = $('#objectivefield').val();
-              introduction = $('#introductionfield').val();
-              content = $('#contentfield').val();
-              teaser = $('#teaserfield').val();
-              teaser_text = $teaser_textfield.val();
-              teaser_video = $teaser_videofield.val();
+              course = $('#coursefield').val();
               publish = $('#publishfield').val();
 
 
-                    axios.post('/post-subject-course-linked/'+ class_id +'/'+ subject_id,{
+
+                    axios.post('/post-subject-course-linked-linking/'+course+'/'+ class_id +'/'+ subject_id,{
                         headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         comment: comment,
                         hidden_note: hidden_note,
-                        namefield: namefield,
-                        objective: objective,
-                        introduction: introduction,
-                        content: content,
-                        teaser: teaser,
-                        teaser_text: teaser_text,
-                        teaser_video: teaser_video,
                         publish:publish
 
                     })
@@ -279,7 +202,7 @@ $(document).ready(function(){
                         swal({
                           position: 'top-end',
                           type: 'success',
-                          title: 'La class à etait bien crée, Hamdoullah',
+                          title: 'La class à etait bien Linké, Hamdoullah',
                           showConfirmButton: false,
                           timer: 1500
                         })

@@ -20,6 +20,11 @@ class Subjectclass extends Model
         return $this->hasMany('App\Testyearsubclass', 'subject_the_class_id');
     }
 
+    public function courseyearsubclasses()
+    {
+        return $this->hasMany('App\Courseyearsubclass', 'subject_the_class_id');
+    }
+
     public function coursepopuating()
     {
         return $this->hasMany('App\Courseyearsubclass');
@@ -32,7 +37,7 @@ class Subjectclass extends Model
 
     public function subject()
     {
-        return $this->belongsTo('App\Subject');
+        return $this->belongsTo('App\Subject', 'subject_id');
     }
 
     public function year()

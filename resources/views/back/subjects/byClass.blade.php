@@ -207,10 +207,10 @@ var comment, hidden_note, name;
                   </li>\
 \
 <li>\
-<a href="'+window.index+'/subject-course-language-linked/'+the_class+'/'+returnedArray['id']+'">Click pour ajouter un test<span class="pull-right badge bg-aqua">+</span></a>\
+<a href="'+window.index+'/subject-course-language-linked/'+the_class+'/'+returnedArray['id']+'">Click pour ajouter un Coure<span class="pull-right badge bg-aqua">+</span></a>\
 </li>\
 <li>\
-<a href="'+window.index+'/add-subject-course-linked-linking/'+the_class+'/'+returnedArray['id']+'">Clicker ici pour linker un test <span class="pull-right badge bg-green">X</span></a>\
+<a href="'+window.index+'/add-subject-course-linked-linking/'+the_class+'/'+returnedArray['id']+'">Clicker ici pour linker un Coure <span class="pull-right badge bg-green">X</span></a>\
 </li>\
                   </ul>\
                   </div>\

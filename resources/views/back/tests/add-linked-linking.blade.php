@@ -40,6 +40,10 @@
                   </div>
 
                   <div class="col-xs-12">
+                    @include('back.partials.formG', ['name' => 'beforeTest', 'type' => 'select', 'selected' => null,'text' => 'Un cour a etudié avant de passé le test', 'class'=>'', 'required' => false, 'array' => $courseArray  ,'additionalInfo' => ['id' =>  'before_testfield']])
+                  </div>
+
+                  <div class="col-xs-12">
 
                   @include('back.partials.formG', ['name' => 'publish', 'type' => 'checkbox', 'text' => 'Publier le test maintenent pour les éléve', 'class'=>'transport-check', 'required' => true, 'checked' => true,'additionalInfo' => ['id' =>  'publishfield']])
                   </div>
@@ -68,8 +72,21 @@
 
                   <div class="col-xs-12">
 
+
+                  @include('back.partials.formG', ['name' => 'is_exercise', 'type' => 'checkbox', 'text' => 'Esque cest just Un Exercice  ?', 'class'=>'', 'required' => false, 'checked' => true,'additionalInfo' => ['id' =>  'is_exercicefield']])
+
+                  </div>
+
+                  <div class="col-xs-12">
+                      @include('back.partials.formG', ['name' => 'end', 'type' => 'date', 'text' => 'Date de fin', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'endfield']])
+                  </div>
+
+                  <div class="col-xs-12">
+
                       <button  type="button" class="btn btn-primary" id="add" >Enregistrer</button>
                   </div>
+
+
 
 
 
@@ -141,7 +158,27 @@ var subject = {{ $subject->id }};
 
 var comment, hidden_note, name;
 
+var endfield = $('#endfield');
+var isexercicefield = $('#is_exercicefield');
 
+/******/
+
+isexercicefield.change(function() {
+
+
+  if(this.checked) {
+
+      endfield.hide().prop('required', false);
+      endfield.val(null);
+
+  }else{
+
+    endfield.show().prop('required', true);
+
+  }
+
+});
+/********/
 
           add.on("click", function(e){
 
@@ -153,9 +190,12 @@ var comment, hidden_note, name;
 
               comment = $('#commentfield').val();
               hidden_note = $('#hiddennotefield').val();
+              beforeTest = $('#before_testfield').val();
               test = $('#testfield').val();
               time_minutes = $('#time_minutes_field').val();
               publish = $('#publishfield').val();
+              is_exercise = $('#is_exercisefield').val();
+              end = $('#endfield').val();
 
 
 
@@ -167,7 +207,10 @@ var comment, hidden_note, name;
                 comment: comment,
                 hidden_note: hidden_note,
                 publish: publish,
-                time_minutes: time_minutes
+                time_minutes: time_minutes,
+                end:end,
+                is_exercise:is_exercise,
+                beforeTest:beforeTest
 
               })
                 .then(function (response) {

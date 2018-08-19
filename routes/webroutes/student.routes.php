@@ -30,10 +30,10 @@
     Route::get('/student/{id}', 'StudentController@show')->name('students.show');
     Route::get('/student-home', 'StudentController@home')->name('students.home');
     Route::get('/student-my-tests', 'TestController@studentMyTests')->name('tests.my-tests');
-    Route::get('/pass-test/{test}/{subjectclass}', 'TestController@passTest')->name('tests.pass-test');
+    Route::get('/pass-test/{test}', 'TestController@passTest')->name('tests.pass-test');
     Route::post('/get-note/{test}/{note}', 'TestController@getNote')->name('tests.get-note');
-    Route::get('/my-notes', 'NoteController@myNotes')->name('notes.my-notes');
-    Route::get('/data-my-notes', 'NoteController@dataMyNotes')->name('notes.data-my-notes');
+    Route::get('/student-notes/{student}', 'NoteController@studentNotes')->name('notes.student-notes');
+    Route::get('/data-student-notes/{student}', 'NoteController@dataStudentNotes')->name('notes.data-student-notes');
 
     Route::get('/my-fournitures', 'FourniturationController@myFournitures')->name('fournitures.my-fournitures');
     Route::get('/data-my-fournitures', 'FourniturationController@dataMyfournitures')->name('fournitures.data-my-fournitures');
@@ -43,3 +43,9 @@
 
 
     Route::post('/demande-fourniture/{f}/{n}', 'FourniturationController@demande')->name('fournitures.demande');
+
+    Route::get('/student-courses/{student}', 'CourseController@studentCourses')->name('courses.student-courses');
+
+    Route::get('/subcourse-show/{course}/{subcourse}', 'SubcourseController@show')->name('subcourses.show');
+
+    Route::get('/course-show/{course}', 'CourseyearsubclassController@show')->name('courses.show');

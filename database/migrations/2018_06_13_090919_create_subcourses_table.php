@@ -16,6 +16,8 @@ class CreateSubcoursesTable extends Migration
         Schema::create('subcourses', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->tinyInteger('language')->default(0);
+
 
             $table->text('title');
 

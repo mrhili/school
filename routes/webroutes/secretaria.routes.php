@@ -118,3 +118,7 @@ Route::post('/link-subject-class/{class}/{subject_id}', 'SubjectController@linkC
 
 Route::get('/subjects', 'SubjectController@list')->name('subjects.list');
 Route::post('/store-subject', 'SubjectController@store')->name('subjects.store');
+
+/*****************************Courses*********************/
+
+Route::get('/courses', 'CourseController@list')->name('courses.list');

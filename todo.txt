@@ -1,9 +1,5 @@
 The perfect view = /link-teatcher-subcourse-class  /  teatchifications\link.blade i guess
 
-when creating fourniture if you got that then you should required price
-selling syteme from demande sytem :p
-you should limit demande to not be higher than what is there
-
 +public_html
 +school
 
@@ -14,20 +10,16 @@ http://domain.com/
 
 - Do if paymet + change kind
 tasnport :p
-LINK TEATCHERS TO CLASSES
+
 
 ---------------------------------------
 For parent : is realy his child?,
----------------------------
-HIstory category d room w mayanzilo minha
-----------------------------------
-Do les relation room w ma jawaraha
+
 -----------------------------
 Add image for all object annd room iguess
 ----------------------
 Required or not fields
------------------
-made a test to an exercice
+
 ---------------------
 Lister les etudiants par class
 ------------------------------
@@ -38,8 +30,6 @@ Button observation undder every user
 Nice success page
 --------------------
 Nice faild page
------------------
-Histtory calling
 
 -----------------
 Continue the all table
@@ -49,17 +39,6 @@ modifing text - edit(FORMATAGE TIME)
 ---
 Parnt - my calings
 
-
-
-----------
-
-history meeting type
-
------------
-
-history meeting
----------
-history metingpopulating
 --------------------------------
 entring notes from peope who are invited in the meeting
 -------------
@@ -83,7 +62,3 @@ if the master put some config that make easy for entring fields
 -----------------------------
 Numero denregistrement
 You should put the last number of saving for kids an put it to the dashboard
-
-
-----------------
-You should let the parents demande books to by from the system

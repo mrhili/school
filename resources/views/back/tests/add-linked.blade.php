@@ -41,11 +41,22 @@ Nouveau etudient
 
   	@include('back.partials.formG', ['name' => 'title', 'type' => 'text', 'text' => 'name', 'class'=>'', 'required' => true,'additionalInfo' => [ 'id' => 'titlefield' ]])
 
-    @include('back.partials.formG', ['name' => 'time_minutes', 'type' => 'number', 'text' => 'Temps du test par minutes', 'class'=>'', 'required' => true,'additionalInfo' => [ 'id' => 'timefield' ]])
+    @include('back.partials.formG', ['name' => 'beforeTest', 'type' => 'select', 'selected' => null,'text' => 'Un cour a etudié avant de passé le test', 'class'=>'', 'required' => false, 'array' => $courseArray  ,'additionalInfo' => ['id' =>  'before_testfield']])
 
-    @include('back.partials.formG', ['name' => 'publish', 'type' => 'checkbox', 'text' => 'Publier le test maintenent pour les éléve', 'class'=>'transport-check', 'required' => true, 'checked' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'time_minutes', 'type' => 'number', 'text' => 'Temps du test par minutes', 'class'=>'', 'required' => true,'additionalInfo' => [ 'id' => 'timefield', 'multiple' => true ]])
 
-    @include('back.partials.formG', ['name' => 'navigation', 'type' => 'checkbox', 'text' => 'Laisser letudiant chercher sur intenet ?', 'class'=>'transport-check', 'required' => true, 'checked' => true,'additionalInfo' => ['id' =>  'publishfield']])
+
+@if( Auth::user()->role >= 4 )
+  @include('back.partials.formG', ['name' => 'publish', 'type' => 'checkbox', 'text' => 'Publier le test maintenent pour les éléve', 'class'=>'', 'required' => false, 'checked' => true,'additionalInfo' => []])
+@else
+  @include('back.partials.formG', ['name' => 'publish', 'type' => 'checkbox', 'text' => 'Publier le test maintenent pour les éléve', 'class'=>' hidden', 'required' => false, 'checked' => false,'additionalInfo' => []])
+@endif
+
+    @include('back.partials.formG', ['name' => 'navigation', 'type' => 'checkbox', 'text' => 'Laisser letudiant chercher sur intenet ?', 'class'=>'', 'required' => true, 'checked' => true,'additionalInfo' => ['id' =>  'publishfield']])
+
+    @include('back.partials.formG', ['name' => 'is_exercise', 'type' => 'checkbox', 'text' => 'Esque cest just Un Exercice  ?', 'class'=>'', 'required' => false, 'checked' => false,'additionalInfo' => ['id' =>  'is_exercicefield']])
+
+    @include('back.partials.formG', ['name' => 'end', 'type' => 'date', 'text' => 'Date de fin', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'endfield']])
   	<div id="editor"></div>
 
   	<a href="#" class="btn  btn-lg btn-block btn-success" id="confimation">Confirmer le test</a>
@@ -181,6 +192,27 @@ todo
 $(document).ready(function(){
 
 
+var endfield = $('#endfield');
+var isexercicefield = $('#is_exercicefield');
+
+/******/
+
+isexercicefield.change(function() {
+
+
+  if(this.checked) {
+
+      endfield.hide().prop('required', false);
+      endfield.val(null);
+
+  }else{
+
+    endfield.show().prop('required', true);
+
+  }
+/********/
+
+});
 var sendform = $("#send-form");
 
 sendform.hide();
@@ -235,14 +267,14 @@ var notesfield = $('#notesfield');
 	        return i;
 	    } else {
 
-	        values.append('<div class="form-group col-xs-12"><div class="text-center">' + i.label + '<div/><label for="' + i.name + '" class="col-sm-2">' + i.name + '</label><div class="col-sm-10"><input type="number" data-name="' + i.name + '" required="required" id="'+ i.name +'" class="form-control value" /></div></div>');
+        values.append('<div class="form-group col-xs-12"><div class="text-center">' + i.label + '<div/><label for="' + i.name + '" class="col-sm-2">' + i.name + '</label><div class="col-sm-10"><input type="number" data-name="' + i.name + '" required="required" id="'+ i.name +'" class="form-control value" /></div></div>');
 	        return i;
 
 	    }
 
 	});
 
-	values.append('<div class="form-group col-xs-12"><label class="col-sm-2">Total Notes collecté</label><div class="col-sm-10"><h3 id="total"></h3></div></div>');
+	values.append('<div class="form-group col-xs-12"><label class="col-sm-2">Total Notes collecté</label><div class="col-sm-10"><h3><span id="total"></span> / 100</h3></div></div>');
 
 	var total = $('#total');
 
@@ -290,8 +322,6 @@ var notesfield = $('#notesfield');
 
 
 });
-
-
 
 
 

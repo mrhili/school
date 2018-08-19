@@ -15,7 +15,8 @@ class Course extends Model
 	            'content',
 	            'teaser_type',
 	            'teaser_text',
-	            'teaser_video'
+	            'teaser_video',
+              'created_by'
 
     ];
 
@@ -25,7 +26,12 @@ class Course extends Model
     }
 
     public function subcourses(){
-    	return $this->belongsToMany('App\Subcourse')->withPivot('sorting');
+    	return $this->belongsToMany('App\Subcourse')->withPivot('sorting')->withPivot('id');
     }
-    
+
+    public function created_by()
+    {
+        return $this->belongsTo('App\User', 'created_by');
+    }
+
 }

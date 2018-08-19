@@ -177,10 +177,24 @@
                   <div class="icon">
                     <i class="fa fa-graduation-cap"></i>
                   </div>
-                  <a href="{{ route('notes.my-notes') }}" class="small-box-footer"> Mes notes<i class="fa fa-arrow-circle-right"></i></a>
+                  <a href="{{ route('notes.student-notes', Auth::user()->id) }}" class="small-box-footer"> Mes notes<i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
           <!-- ./col -->
+
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+              <div class="inner">
+                <h3>Mes Cours</h3>
+                <p>...</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-graduation-cap"></i>
+              </div>
+              <a href="{{ route('courses.student-courses', Auth::user()->id ) }}" class="small-box-footer"> Mes cours<i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
 
 
 
@@ -325,23 +339,68 @@ Examins
         <!-- Small boxes (Stat box) -->
         <div class="row">
 <div class="col-xs-12">
-        <h3>Mes tests</h3>
+
 
 
   @forelse($mytests as $test)
 
-              <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-aqua">
-                  <div class="inner">
-                    <h3>{{ $test->test->title }}</h3>
-                    <p><a href="{{ route('tests.my-tests') }}">{{ $test->test->title }}</a></p>
-                  </div>
-                  <div class="icon">
-                    <i class="fa fa-graduation-cap"></i>
-                  </div>
-                  <a href="{{ route('tests.pass-test',[$test->test->id, $test->subject_the_class_id] ) }}" class="small-box-footer">... <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
+              <div class="col-lg-6 col-xs-12 bg-green-gradient">
+                @php
+                  $note = $test->notes->where('student_id', Auth::id() )->first();
+                @endphp
+
+                <h3>{{ $test->test->title }}</h3>
+                <div class="media">
+
+                            <div class="media-body">
+                                <div class="clearfix">
+                                    <p class="pull-right">
+                                        @if (!$note->test_passed_fine )
+                                        <a href="{{ route('tests.pass-test',$test->id ) }}"
+                                          class="btn btn-success btn-sm ad-click-event">
+                                            Passé le test
+                                        </a>
+                                      @endif
+                                    </p>
+
+                                    <h4>Matiére: {{ $test->subjectclass->subject->name }}</h4>
+
+                                    <p>By : {{ $test->teatcher->name }} {{ $test->teatcher->last_name }}</p>
+                                    @if ($test->navigator)
+                                      <p><i class="fa fa-search margin-r5"></i>
+                                        Tu peux rechercher tant que tu veux</p>
+                                    @else
+                                      <p>
+                                        Tu peux pas rechercher</p>
+                                    @endif
+                                    <hr />
+                                    <p>
+                                        <i class="fa fa-clock-o margin-r5"></i> Date de fin:  {{ Carbon::parse($test->end)->diffForHumans() }}
+                                    </p>
+
+
+                                    @if ($note->test_passed_fine )
+                                      <p>
+                                          Note: {{ $note->note }} / 100
+                                      </p>
+                                    @else
+                                      <p>
+                                          Tu a pas encore passé le test
+                                      </p>
+                                    @endif
+
+
+                                </div>
+
+                            </div>
+                            <hr />
+                            @if($test->course_id)
+                            <div>
+                              a étudié avant le test: <a class="pull-right btn btn-default btn-md"
+                              href="{{ route('courses.show', $test->course_id) }}">{{ $test->course->name }}</a>
+                            </div>
+                            @endif
+                        </div>
               </div>
           <!-- ./col -->
 
@@ -364,19 +423,118 @@ Examins
   @endslot
 
 
+@endcomponent
 
-  @slot('footerPlain')
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@component('back.components.plain')
+
+  @slot('titlePlain')
+
+Exercices
+
+  @endslot
+
+
+  @slot('sectionPlain')
+
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+<div class="col-xs-12">
+
+
+
+  @forelse($myExercises as $exercise)
+
+    <div class="col-lg-6 col-xs-12 bg-green-gradient">
+
+
+      <h3>{{ $exercise->test->title }}</h3>
+      <div class="media">
+        @php
+          $note = $test->notes->where('student_id', Auth::id() )->first();
+        @endphp
+                  <div class="media-body">
+                      <div class="clearfix">
+                          <p class="pull-right">
+                              <a href="{{ route('tests.pass-test', $exercise->test->id ) }}"
+                                class="btn btn-success btn-sm ad-click-event">
+                                  Passé lexercice
+                              </a>
+                          </p>
+
+                          <h4>Matiére: {{ $exercise->subjectclass->subject->name }}</h4>
+
+                          <p>By : {{ $exercise->teatcher->name }} {{ $exercise->teatcher->last_name }}</p>
+                          <hr />
+                          @if ($exercise->navigator)
+                            <p><i class="fa fa-search margin-r5"></i>
+                              Tu peux rechercher tant que tu veux</p>
+                          @else
+                            <p>
+                              Tu peux pas rechercher</p>
+                          @endif
+                          <p>
+                              <i class="fa fa-clock-o margin-r5"></i> Date de fin:  {{ Carbon::parse($exercise->end)->diffForHumans() }}
+                          </p>
+
+                          @if ($exercise->test_passed_fine )
+                            <p>
+                                Note: {{ $exercise->note }} / 100
+                            </p>
+                          @else
+                            <p>
+                                Tu a pas encore passé l'exercice
+                            </p>
+                          @endif
+                      </div>
+                  </div>
+                  <hr />
+                  @if($exercise->course_id)
+                  <div>
+                    a étudié avant le test: <a class="pull-right btn btn-default btn-md" href="{{ route('courses.show', $exercise->course_id) }}">{{ $exercise->course->name }}</a>
+                  </div>
+                  @endif
+              </div>
+    </div>
+          <!-- ./col -->
+
+  @empty
+
+          <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-check"></i> Alert!</h4>
+            Il ya pas de test maintenent.
+          </div>
+
+  @endforelse
+
+</div>
+
+          </div>
+        <!-- /.row -->
 
 
   @endslot
 
 
-
-
-
 @endcomponent
-
 
 
 

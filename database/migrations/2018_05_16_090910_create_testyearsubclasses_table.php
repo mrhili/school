@@ -53,11 +53,21 @@ class CreateTestyearsubclassesTable extends Migration
               ->on('users')
               ->onDelete('set null');
 
-
+              $table->integer('course_id')->unsigned()->index()->nullable();
+              $table->foreign('course_id')
+                ->references('id')
+                ->on('courses')
+                ->onDelete('set null');
 
             $table->boolean('publish')->default(false);
 
+            $table->boolean('req_publish')->default(false);
+
+            $table->date('end')->nullable();
+
             $table->boolean('navigator')->default(true);
+
+            $table->boolean('is_exercise')->default(true);
 
             $table->timestamps();
         });
