@@ -1,4 +1,9 @@
 <?php
+Route::get('/docs-teatcher/{selected?}', 'TeatcherController@docs')->name('teatcher.docs');
+
+
+Route::get('/notes-by-class/{class}', 'NoteController@byClass')->name('notes.by-class');
+Route::get('/data-notes-by-class/{class}', 'NoteController@databyClass')->name('notes.data-by-class');
 
 Route::get('/data-students-by-teatcher/{teatcher}', 'StudentController@dataByTeatcher')->name('students.by-teatcher');
 

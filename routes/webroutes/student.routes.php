@@ -1,5 +1,7 @@
 <?php
 
+Route::get('/docs-student/{selected?}', 'StudentController@docs')->name('student.docs');
+
   Route::put('/change-info/{user}', 'UserController@changeInfo')->name('users.change-info');
 
   Route::get('/my-profile-as-student', 'StudentController@myProfile')->name('students.my-profile');

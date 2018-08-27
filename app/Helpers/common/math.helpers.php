@@ -21,16 +21,41 @@ use App\{
     PivotCoursub,
     Subjectclass,
     Teatchification,
-    Demandefourniture
-
+    Demandefourniture,
+    Note
 };
 
 use Session;
 use Carbon;
 use Auth;
 class Math {
-    //$moneyArray = Math::countMoney( $whatPayed , $totalShouldBePayed );
 
+  //for 1 subject (notesofAlltests/ numberTests) * %param = ( paraemeter / Total parameters )
+  // for final = Total of subjects result
+    public static function countFinalResult( User $student ){
+
+      $finalResult = 0;
+
+      $subjectClasses = Subjectclass::where('the_class_id', $student->the_class_id )
+        ->where('year_id', Session::get('yearId') )
+        ->get();
+
+      foreach($subjectClasses as $subjectClass){
+
+
+        $notes = Note::where('subject_the_class_id', $subjectClass->id)
+        ->where('student_id', $student->id)
+        ->get();
+
+          $finalResult += $notes->avg('note') * ( $subjectClass->parameter / $subjectClasses->sum('parameter') );
+
+      }
+
+      return $finalResult;
+
+
+    }
+    //$moneyArray = Math::countMoney( $whatPayed , $totalShouldBePayed );
     public static function countMoney( $min = 0, $max = 0 ){
 
         $array = [];

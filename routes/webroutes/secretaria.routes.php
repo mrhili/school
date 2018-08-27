@@ -1,5 +1,5 @@
 <?php
-
+Route::get('/docs-secretaria/{selected?}', 'SecretariaController@docs')->name('secretaria.docs');
 
 
 /*PERSONELLE*/

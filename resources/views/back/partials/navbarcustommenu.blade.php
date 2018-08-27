@@ -1,6 +1,8 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
+
+          {{--
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -16,11 +18,9 @@
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        @guest
-                          {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'img-circle'] ) !!}
-                        @else
+
                           {!! Html::image(CommonPics::ifImg( ArrayHolder::roles_routing( Auth::user()->role ) ,  Auth::user()->img ),'User Image', ['class' => 'img-circle'] ) !!}
-                        @endguest
+
 
 
                       </div>
@@ -40,9 +40,11 @@
               <li class="footer"><a href="#">See All Messages</a></li>
             </ul>
           </li>
+          --}}
           <!-- /.messages-menu -->
 
           <!-- Notifications Menu -->
+          {{--
           <li class="dropdown notifications-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -65,7 +67,9 @@
               <li class="footer"><a href="#">View all</a></li>
             </ul>
           </li>
+          --}}
           <!-- Tasks Menu -->
+          {{--
           <li class="dropdown tasks-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -102,77 +106,11 @@
               </li>
             </ul>
           </li>
+
+          --}}
           <!-- User Account Menu -->
           @guest
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'user-image'] ) !!}
 
-              </a>
-
-              <ul class="dropdown-menu">
-                <!-- The user image in the menu -->
-                <li class="user-header">
-                  {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'img-circle'] ) !!}
-
-
-                  <p>
-                    name
-                    <small>..</small>
-                  </p>
-                </li>
-                <!-- Menu Body -->
-
-                <li class="user-body">
-                  <div class="row">
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Followers</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Sales</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Friends</a>
-                    </div>
-
-
-
-
-                  </div>
-
-                  <div class="row">
-                  @forelse(config('app.locales') as $locale)
-
-
-                    @if($locale != session('locale'))
-                        <div class="col-xs-4 text-center">
-                          <a href="{{ route('language', $locale) }}">{{ session('locale') }}</a>
-                        </div>
-                    @endif
-
-                  @empty
-
-                  <div class="col-xs-4 text-center">
-                      There is no language
-                    </div>
-
-                  @endforelse
-
-
-
-
-                  </div>
-
-                  <!-- /.row -->
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-
-                </li>
-              </ul>
-
-
-            </li>
           @else
 
 
@@ -183,7 +121,6 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
               {!! Html::image(CommonPics::ifImg( ArrayHolder::roles_routing( Auth::user()->role ) ,  Auth::user()->img ),'User Image', ['class' => 'user-image'] ) !!}
-              {!! Html::image('images/adminl/user2-160x160.jpg','User Image', ['class' => 'user-image'] ) !!}
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">{{ Auth::user()->name }} {{ Auth::user()->last_name }}</span>
             </a>
@@ -262,8 +199,26 @@
 
 
           <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
+
+          @if( !empty( $outside_links ) )
+
+            @if( !in_array ( \Request::route()->getName() , $outside_links ) )
+              <li>
+
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+              </li>
+            @endif
+
+          @else
+
+            <li>
+
+              <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            </li>
+
+          @endif
+
+
+
         </ul>
       </div>

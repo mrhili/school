@@ -47,6 +47,32 @@ The Main Configuration Of the web application
   @slot('sectionPlain')
 
 
+        <h3>Notes</h3>
+
+        @foreach($classes as $class)
+
+                <div class="col-lg-4 col-xs-6">
+                      <div class="info-box bg-yellow ">
+                        <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+
+                        <div class="info-box-content">
+                          <span class="info-box-text">{{ $class->name }}</span>
+                          <span class="info-box-number">5,200</span>
+
+                          <div class="progress">
+                            <div class="progress-bar" style="width: 50%"></div>
+                          </div>
+                          <span class="progress-description">
+                                <a href="{{ route('notes.by-class', $class->id ) }}" >Notes<i class="fa fa-arrow-circle-right"></i></a>
+                              </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+                </div>
+
+        @endforeach
+
+        <hr />
 
 
     <h3>Emploi de temps</h3>

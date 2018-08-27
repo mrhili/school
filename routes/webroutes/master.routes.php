@@ -1,6 +1,7 @@
 <?php
 /*********************************PERSONELE*********************************/
   Route::get('/my-profile-as-master', 'MasterController@myProfile')->name('masters.my-profile');
+  Route::get('/docs-master/{selected?}', 'MasterController@docs')->name('masters.docs');
 
 /***********************************Human**********************************/
 

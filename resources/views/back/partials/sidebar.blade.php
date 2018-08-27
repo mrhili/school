@@ -37,17 +37,9 @@
         <!-- Optionally, you can add icons to the links -->
         <li class="{{ (Route::is('home')? 'active': '') }}"><a href="{{route('home')}}"><i class="fa fa-link"></i> <span>Home</span></a></li>
         <li><a href="{{ route('my-profile') }}"><i class="fa fa-link"></i> <span>Mon profile</span></a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
-          </ul>
-        </li>
+
+        <li><a href="{{ route('docs') }}"><i class="fa fa-link"></i> <span>Documentaire</span></a></li>
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>

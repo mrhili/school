@@ -19,7 +19,6 @@ class Controller extends BaseController
     public function __construct()
     {
       Application::setYear();
-      $selected_year = Session::get('yearId');
-
+      $this->selected_year = Session::get('yearId');
     }
 }

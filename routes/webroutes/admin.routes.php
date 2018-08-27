@@ -1,4 +1,8 @@
 <?php
+
+Route::get('/docs-admin/{selected?}', 'AdminController@docs')->name('admins.docs');
+
+
 Route::get('/my-profile-as-admin', 'AdminController@myProfile')->name('admins.my-profile');
 
 Route::get('/admin-home', 'AdminController@home')->name('admins.home');
