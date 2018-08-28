@@ -261,6 +261,7 @@ return [
         'Math' => App\Helpers\Common\Math::class,
 
         'GetSetting' => App\Helpers\Config\Setting::class,
+        'GetSchoolSetting' => App\Helpers\Schoolconfig\Setting::class,
 
 
 

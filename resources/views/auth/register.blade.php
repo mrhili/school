@@ -10,7 +10,7 @@
 
 
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">S'enregistrer'</p>
 
     <form class="" method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
@@ -76,13 +76,6 @@
       </div>
     </form>
 
-    <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block"><i class="fa fa-facebook"></i> Sign in using
-        Facebook</a>
-      <a href="#" class="btn btn-block"><i class="fa fa-google-plus"></i> Sign in using
-        Google+</a>
-    </div>
     <!-- /.social-auth-links -->
     <a href="{{ route('login') }}" class="text-center">Login</a>
 

@@ -15,7 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Starter</title>
+  <title>{{ GetSetting::getConfig('site-name') }} | @yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{!! asset('adminl/bower_components/bootstrap/dist/css/bootstrap.min.css') !!}">
@@ -76,7 +76,7 @@ desired effect
 
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <a href="{{ route('index') }}">{{ GetSetting::getConfig('site-name') }}</a>
   </div>
   <!-- /.login-logo -->
 
@@ -88,18 +88,6 @@ desired effect
   <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!-- REQUIRED JS SCRIPTS -->

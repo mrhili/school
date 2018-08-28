@@ -210,7 +210,7 @@ class StudentController extends Controller
         $categoryships = Categoryship::pluck('name', 'id');
     	$role = 1;
 
-      $maxNumber = User::where('role', 1)->max('num') +1;
+      $maxNumber = User::where('role', 1)->max('num') + 1;
 
     	return view('back.users.add', compact('role', 'classes', 'categoryships', 'maxNumber'));
     }

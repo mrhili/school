@@ -70,8 +70,8 @@ Nouveau etudient
   	@include('back.partials.formG', ['name' => 'name', 'type' => 'text', 'text' => 'Prénom', 'class'=>'', 'required' => true,'additionalInfo' => []])
   	@include('back.partials.formG', ['name' => 'last_name', 'type' => 'text', 'text' => 'Nom', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
-    @include('back.partials.formG', ['name' => 'arabic_name', 'type' => 'text', 'text' => 'Arabic Prénom', 'class'=>'', 'required' => true,'additionalInfo' => []])
-  	@include('back.partials.formG', ['name' => 'arabic_last_name', 'type' => 'text', 'text' => 'Arabic Nom', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'arabic_name', 'type' => 'text', 'text' => 'Arabic Prénom', 'class'=>'', 'required' => true,'additionalInfo' => [ 'dir' => 'rtl']])
+  	@include('back.partials.formG', ['name' => 'arabic_last_name', 'type' => 'text', 'text' => 'Arabic Nom', 'class'=>'', 'required' => true,'additionalInfo' => [ 'dir' => 'rtl' ]])
 
   	@include('back.partials.formG', ['name' => 'gender', 'type' => 'select', 'selected' => null , 'text' => 'Genre', 'class'=>'', 'required' => true, 'array' => ArrayHolder::gender() ,'additionalInfo' => []])
 
@@ -110,21 +110,21 @@ Nouveau etudient
     </div>
 
 
-    @include('back.partials.formG', ['name' => 'should_pay', 'type' => 'number', 'text' => 'Payement montielle de lecole', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'should_pay', 'type' => 'number', 'text' => 'Payement montielle de lecole', 'class'=>'', 'required' => true,'additionalInfo' => [], 'value' => GetSchoolSetting::getConfig('price-month-primary')])
 
-    @include('back.partials.formG', ['name' => 'saving_pay', 'type' => 'number', 'text' => 'Frais denregistrement', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'saving_pay', 'type' => 'number', 'text' => 'Frais denregistrement', 'class'=>'', 'required' => true,'additionalInfo' => [], 'value' => GetSchoolSetting::getConfig('price-saving-primary') ])
 
-    @include('back.partials.formG', ['name' => 'assurence_pay', 'type' => 'number', 'text' => 'Frais dassurence', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'assurence_pay', 'type' => 'number', 'text' => 'Frais dassurence', 'class'=>'', 'required' => true,'additionalInfo' => [], 'value' => GetSchoolSetting::getConfig('price-assurence-primary')])
 
     @include('back.partials.formG', ['name' => 'transport', 'type' => 'checkbox', 'text' => 'Transport', 'class'=>'transport-check', 'required' => false, 'checked' => true,'additionalInfo' => []])
 
-    @include('back.partials.formG', ['name' => 'transport_pay', 'type' => 'number', 'text' => 'Payement montielle du transport', 'class'=>'transport-field', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'transport_pay', 'type' => 'number', 'text' => 'Payement montielle du transport', 'class'=>'transport-field', 'required' => false,'additionalInfo' => [], 'value' => GetSchoolSetting::getConfig('min-price-monthly-trans') ])
 
-    @include('back.partials.formG', ['name' => 'trans_assurence_pay', 'type' => 'number', 'text' => 'Assurence du transport', 'class'=>'transport-field', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'trans_assurence_pay', 'type' => 'number', 'text' => 'Assurence du transport', 'class'=>'transport-field', 'required' => false,'additionalInfo' => [], 'value' => GetSchoolSetting::getConfig('min-price-assurence-trans') ])
 
-    @include('back.partials.formG', ['name' => 'add_classes', 'type' => 'checkbox', 'text' => 'Cours de soutien', 'class'=>'add-classes-check', 'required' => false, 'checked' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'add_classes', 'type' => 'checkbox', 'text' => 'Cours de soutien', 'class'=>'add-classes-check', 'required' => false, 'checked' => true,'additionalInfo' => []  ])
 
-    @include('back.partials.formG', ['name' => 'add_classes_pay', 'type' => 'number', 'text' => 'Payement montielle des cours de soutien', 'class'=>'add-classes-field', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'add_classes_pay', 'type' => 'number', 'text' => 'Payement montielle des cours de soutien', 'class'=>'add-classes-field', 'required' => false,'additionalInfo' => [], 'value' => GetSchoolSetting::getConfig('price-add-courses') ])
 
     <hr />
     <div class="text-center">
@@ -135,6 +135,7 @@ Nouveau etudient
     </div>
 
     @include('back.partials.formG', ['name' => 'num', 'type' => 'number', 'text' => 'Numero denregistrement', 'class'=>'', 'required' => true,'additionalInfo' => [], 'value' => $maxNumber])
+    @include('back.partials.formG', ['name' => 'massar_id', 'type' => 'text', 'text' => 'Numero ID Massar', 'class'=>'', 'required' => false,'additionalInfo' => []   ])
 
     @include('back.partials.formG', ['name' => 'comment', 'type' => 'textarea', 'text' => 'Comentaire', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
@@ -243,15 +244,22 @@ Nouveau etudient
 
 <script type="text/javascript">
 
+  var addFieldValue = {{ GetSchoolSetting::getConfig('price-add-courses') }};
+
+  var transportPayementValue = {{ GetSchoolSetting::getConfig('min-price-monthly-trans') }};
+
+  var transportAssurenceValue = {{ GetSchoolSetting::getConfig('min-price-assurence-trans') }};
+
   $('.add-classes-check').change(function() {
 
     var addClassesField = $('.add-classes-field');
     if(!this.checked) {
         addClassesField.hide();
-
+        addClassesField.hide().val(null);
     }else{
 
         addClassesField.show();
+        addClassesField.val( addFieldValue );
 
     }
   });
@@ -263,9 +271,16 @@ Nouveau etudient
     if(!this.checked) {
         transportField.hide();
 
+        transportField.hide().val(null);
+
     }else{
 
         transportField.show();
+
+        transportField.attr('name', 'transport_pay').val( transportPayementValue );
+
+        transportField.attr('name', 'trans_assurence_pay').val( transportAssurenceValue );
+
 
     }
   });

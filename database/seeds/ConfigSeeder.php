@@ -17,7 +17,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'site-name',
             'nameSetting' => 'site name',
-            'value' => 'إسم',
+            'value' => 'Fatima Azzahrae',
             'type' => 'text',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -26,7 +26,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'description',
             'nameSetting' => 'Description',
-            'value' => 'ديسكريبشيون',
+            'value' => 'C\'est un site pour la gestion d\'ecole fatima azzahrae à Allal tazi',
             'type' => 'textarea',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -34,7 +34,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'licence',
             'nameSetting' => 'licence',
-            'value' => '49/50',
+            'value' => '012/042',
             'type' => 'text',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -42,14 +42,30 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'company',
             'nameSetting' => 'company',
-            'value' => 'Descktop company',
+            'value' => 'Fatima Azzahrae',
             'type' => 'text',
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('configs')->insert([
+            'slug' => 'by',
+            'nameSetting' => 'by',
+            'value' => 'Idda tech',
+            'type' => 'text',
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('configs')->insert([
+            'slug' => 'url-by',
+            'nameSetting' => 'company',
+            'value' => 'https://it2018.wixsite.com/it18',
+            'type' => 'url',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
         DB::table('configs')->insert([
             'slug' => 'mobile-number',
             'nameSetting' => 'phone number',
-            'value' => '+212 06 06 06 06 06',
+            'value' => '+212 06 63 22 60 32',
             'type' => 'tel',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -57,7 +73,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'fix-number',
             'nameSetting' => 'fix number',
-            'value' => '+212 06 06 06 06 06',
+            'value' => '+212 06 63 22 60 32',
             'type' => 'tel',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -68,7 +84,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'adress',
             'nameSetting' => 'adress',
-            'value' => 'Canada',
+            'value' => 'N°211 Lot el houda',
             'type' => 'textarea',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -76,7 +92,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'city',
             'nameSetting' => 'city',
-            'value' => 'Canada',
+            'value' => 'Allal tazi',
             'type' => 'text',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -93,7 +109,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'email',
             'nameSetting' => 'Adress email',
-            'value' => 'site@host.com',
+            'value' => 'fatimaazzahraeschool@gmail.com',
             'type' => 'email',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -102,7 +118,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'youtube',
             'nameSetting' => 'Youtube chanel',
-            'value' => 'troklo',
+            'value' => 'UClZ8x36HHgUlaCGAKmixxEg',
             'type' => 'text',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -111,7 +127,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'twitter',
             'nameSetting' => 'Twitter account',
-            'value' => 'troklo',
+            'value' => 'FatimaAzzahrae6v',
             'type' => 'text',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -120,7 +136,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'facebook',
             'nameSetting' => 'Facebook Page',
-            'value' => 'troklo',
+            'value' => 'Fatima-azzahrae-185877205288816',
             'type' => 'text',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -128,7 +144,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'github',
             'nameSetting' => 'Git account',
-            'value' => 'troklo',
+            'value' => 'git',
             'type' => 'text',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -136,7 +152,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'google-plus',
             'nameSetting' => 'Google account',
-            'value' => 'troklo',
+            'value' => 'Fatima-azzahrae-185877205288816',
             'type' => 'text',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -144,23 +160,23 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'lat',
             'nameSetting' => 'Latitude',
-            'value' => "34.525994",
-            'type' => 'number',
+            'value' => "34,521380",
+            'type' => 'text',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('configs')->insert([
             'slug' => 'lng',
             'nameSetting' => 'Langitude',
-            'value' => "-6.322755",
-            'type' => 'number',
+            'value' => "-6,323930",
+            'type' => 'text',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('configs')->insert([
             'slug' => 'paypal',
             'nameSetting' => 'Paypal account',
-            'value' => 'app',
+            'value' => 'paypal',
             'type' => 'text',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -184,7 +200,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'logo',
             'nameSetting' => 'Logo',
-            'value' => 'logo.jpg',
+            'value' => '1535440397_logo.png',
             'type' => 'file',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
