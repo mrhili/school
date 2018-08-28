@@ -50,12 +50,38 @@ class Setting {
 class Holder {
 
 	public static function configTypes( $item = null ){
-
+/*
+color
+date
+datetime-local
+email
+month
+number
+range
+search
+tel
+time
+url
+week
+*/
 		$configTypes = [
 			'text' => 'text',
 			'textarea' => 'textarea',
 			'number' => 'number',
-			'file' => 'file'
+			'file' => 'file',
+      'url' => 'url',
+      'checkbox' => 'checkbox',
+      'color' => 'color',
+      'date' => 'date',
+      'datetime-local' => 'datetime-local',
+      'email' => 'email',
+      'month' => 'month',
+      'range' => 'range',
+      'search' => 'search',
+      'tel' => 'tel',
+      'time' => 'time',
+      'week' => 'week'
+
 		];
 
 		if( $item == null){

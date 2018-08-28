@@ -308,3 +308,18 @@
 
 
 @endsection
+
+
+
+
+@section('scripts')
+<script>
+
+
+
+  $('.printnow').click(function(){
+    window.print();
+  });
+</script>
+
+@endsection

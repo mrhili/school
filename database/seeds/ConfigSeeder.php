@@ -73,7 +73,7 @@ class ConfigSeeder extends Seeder
         DB::table('configs')->insert([
             'slug' => 'fix-number',
             'nameSetting' => 'fix number',
-            'value' => '+212 06 63 22 60 32',
+            'value' => '+212 06 69 48 93 69',
             'type' => 'tel',
             'created_at' => date('Y-m-d H:i:s'),
         ]);

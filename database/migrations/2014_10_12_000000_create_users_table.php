@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             /*common*/
             $table->increments('id');
             $table->integer('num')->nullable()->unique()->unsigned();
-            $table->text('massar_id')->nullable()->unique();
+            $table->string('massarid')->nullable()->unique();
             $table->string('name');
             $table->string('last_name')->nullable();
             $table->string('arabic_name')->nullable();

@@ -73,7 +73,7 @@
             <tr>
               <th>Ville de naissance</th> <td>Ville de naissance</td>
             </tr>
-            
+
           </tbody>
 
         </table>
@@ -81,7 +81,7 @@
     </div>
 
     <div class="col-xs-6">
-      
+
         <table class="table table-striped">
           <tbody>
             <tr>
@@ -96,7 +96,7 @@
             <tr>
               <th>Téléphone</th> <td>Téléphone</td>
             </tr>
-            
+
           </tbody>
 
         </table>
@@ -132,7 +132,7 @@
               <th>Frais d’assuence</th> <td>Frais d’assuence</td>
             </tr>
 
-            
+
           </tbody>
 
         </table>
@@ -150,7 +150,7 @@
             <tr>
               <th>Frais transport</th> <td>Frais transport</td>
             </tr>
-            
+
           </tbody>
 
         </table>
@@ -163,7 +163,7 @@
             <tr>
               <th>Frais des cours</th> <td>Frais transport</td>
             </tr>
-            
+
           </tbody>
 
         </table>

@@ -135,7 +135,7 @@ Nouveau etudient
     </div>
 
     @include('back.partials.formG', ['name' => 'num', 'type' => 'number', 'text' => 'Numero denregistrement', 'class'=>'', 'required' => true,'additionalInfo' => [], 'value' => $maxNumber])
-    @include('back.partials.formG', ['name' => 'massar_id', 'type' => 'text', 'text' => 'Numero ID Massar', 'class'=>'', 'required' => false,'additionalInfo' => []   ])
+    @include('back.partials.formG', ['name' => 'massarid', 'type' => 'text', 'text' => 'Numero ID Massar', 'class'=>'', 'required' => false,'additionalInfo' => []   ])
 
     @include('back.partials.formG', ['name' => 'comment', 'type' => 'textarea', 'text' => 'Comentaire', 'class'=>'', 'required' => true,'additionalInfo' => []])
 

@@ -31,13 +31,31 @@
   }
 
 
-
-
   </style>
 </head>
 
 <body>
 
+  <nav class="navbar navbar-fixed-top hidden-print">
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <li class=""><button class="btn btn-primary printnow"><i class="fa fa-print"></i> Imprimer</button></li>
+      </ul>
+      <ul class="nav navbar-right">
+        <li class=""><a href="{{ route('students.profile', $student->id ) }}" class="btn btn-primary"><i class="fa fa-user"></i> Continuer vers son profile</a></li>
+      </ul>
+
+    </div>
+  </nav>
+
+
   @yield('content')
 
+  <scrip src="{!! asset('helpers/for-print.js') !!}"></script>
+
+    <!-- jQuery 3 -->
+  <script src="{!! asset('adminl/bower_components/jquery/dist/jquery.min.js') !!}"></script>
+
+
+  @yield('scripts')
 </body>
