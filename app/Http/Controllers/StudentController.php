@@ -212,7 +212,17 @@ class StudentController extends Controller
 
       $maxNumber = User::where('role', 1)->max('num') + 1;
 
-    	return view('back.users.add', compact('role', 'classes', 'categoryships', 'maxNumber'));
+      $parents_rows = User::where('role', 2)->get(['id', 'name', 'last_name']);
+
+      $parents = [];
+
+      foreach( $parents_rows as $parent ){
+
+        $parents[$parent->id] = $parent->name.' '.$parent->last_name;
+
+      }
+
+    	return view('back.users.add', compact('role', 'classes', 'categoryships', 'maxNumber', 'parents'));
     }
 
     public function addStudentHistory($id, $comment, $hidden_note){
@@ -226,23 +236,38 @@ class StudentController extends Controller
     	$array = array_except( $request->toarray(), [
         '_token',
          'password' ,
-         'img', 'should_pay',
+         'img',
+          'should_pay',
          'transport_pay',
           'add_class_pay',
-          'transport',
-           'add_classes', 'saving_pay', 'tars_assurence_pay',
-           'assurence_pay',
-            'imgparent',
-             'nameparent',
-             'last_nameparent', 'genderparent',
-             'birth_dateparent',
-             'birth_placeparent', 'cityparent',
-              'zip_codeparent', 'adressparent',
-              'phone1parent', 'phone2parent',
-              'phone3parent' , 'whatsappparent','facebookparent',  'fixparent',
-               'emailparent', 'passwordparent', 'categoryship',
-                'cinparent',
-               'professionparent', 'family_situationparent']);
+        'transport',
+         'add_classes',
+          'saving_pay',
+          'tars_assurence_pay',
+         'assurence_pay',
+          'imgparent',
+           'nameparent',
+           'last_nameparent',
+            'genderparent',
+           'birth_dateparent',
+           'birth_placeparent',
+            'cityparent',
+            'zip_codeparent',
+             'adressparent',
+            'phone1parent',
+             'phone2parent',
+            'phone3parent' ,
+             'whatsappparent',
+             'facebookparent',
+               'fixparent',
+             'emailparent',
+              'passwordparent',
+               'categoryship',
+              'cinparent',
+             'professionparent',
+              'family_situationparent',
+           'existparent',
+         'categoryship']);
 
         $arrayParent = [];
 
@@ -391,7 +416,15 @@ class StudentController extends Controller
             $arrayParent['email'] = $request->emailparent;
             $arrayParent['password'] = Hash::make($request->passwordparent);
 
-            $parent = User::create($arrayParent);
+            if( $request->existparent ){
+
+              $parent = User::find( $request->parent_id );
+
+            }else{
+
+              $parent = User::create($arrayParent);
+
+            }
 
             if( $parent ){
 
@@ -419,7 +452,9 @@ class StudentController extends Controller
             $creationHistoryParent['info'] = "Le parent <strong>".$parent->name." ".$parent->last_name."</strong> a etait crée avec succes et il est relation en genre <strong>".$relationship->category->name ."</strong> avec létudiant <strong>".$student->name." ".$student->last_name."</strong> qui port le <strong>id = ".$student->id."</strong>
             est ses information personelle sont  => genre = <strong>". ArrayHolder::gender( $parent->gender) ."</strong>, Numero de la carte = <strong>".$parent->cin."</strong>, habite à <strong>".$parent->city."</strong>, code postal = <strong>".$parent->zip_code."</strong>, son adress est <strong>".$parent->adress."</strong>, son telephone 1  = <strong>".$parent->phone1."</strong>, telephone 2  = <strong>".$parent->phone2."</strong>, telephone 3  = <strong>".$parent->phone3."</strong>, telephone fix = <strong>".$parent->fix."</strong>, sa profession est <strong>".$parent->profession."</strong>, sa cituation familiale est <strong>".$maried."</strong> .";
 
-                }
+          }else{
+              return 'no relationship';
+          }
 
             History::create($creationHistoryParent);
 
@@ -429,6 +464,8 @@ class StudentController extends Controller
 
               return redirect()->route('printables.new-student-with-parent',[ $student->id, $parent->id]  );
 
+            }else{
+              return 'no parent';
             }
 
 

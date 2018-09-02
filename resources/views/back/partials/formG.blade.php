@@ -186,7 +186,6 @@
 
                                 <img src="{{ \App\Helpers\Config\Setting::ifImg( $name ) }}" class="img-responsive" width="30%"/>
 
-
                         </div>
 
 

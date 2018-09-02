@@ -145,52 +145,57 @@ Nouveau etudient
 
     <hr />
     <div class="text-center">
-      <h3 >Informatio sur parent 1</h3>
+      <h3 >Informations sur parent</h3>
       <p>
         ...
       </p>
+
+    </div>
+    @include('back.partials.formG', ['name' => 'existparent', 'type' => 'checkbox', 'text' => 'Le parent déja exist', 'class'=>'', 'required' => false, 'checked' => false,'additionalInfo' => [ 'id' => 'existparent' ]])
+    @include('back.partials.formG', ['name' => 'parent_id', 'type' => 'select','selected' => null, 'text' => 'Parent', 'class'=>'parent_exist', 'required' => false, 'array' => $parents ,'additionalInfo' => []])
+
+    <hr />
+    <div class='parent_dont_exist'>
+      @include('back.partials.formG', ['name' => 'imgparent', 'type' => 'file', 'text' => 'Image Parent 1', 'class'=>'', 'required' => false ,'additionalInfo' => []])
     </div>
 
-    @include('back.partials.formG', ['name' => 'imgparent', 'type' => 'file', 'text' => 'Image Parent 1', 'class'=>'', 'required' => false ,'additionalInfo' => []])
 
 
 
+    @include('back.partials.formG', ['name' => 'nameparent', 'type' => 'text', 'text' => 'Prénom Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'last_nameparent', 'type' => 'text', 'text' => 'Nom Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'arabic_nameparent', 'type' => 'text', 'text' => 'Arabic Prénom Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'arabic_last_nameparent', 'type' => 'text', 'text' => 'Arabic Nom Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
 
-    @include('back.partials.formG', ['name' => 'nameparent', 'type' => 'text', 'text' => 'Prénom Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'last_nameparent', 'type' => 'text', 'text' => 'Nom Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'arabic_nameparent', 'type' => 'text', 'text' => 'Arabic Prénom Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'arabic_last_nameparent', 'type' => 'text', 'text' => 'Arabic Nom Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-
-    @include('back.partials.formG', ['name' => 'genderparent', 'type' => 'select', 'selected' => null , 'text' => 'Genre Parent 1', 'class'=>'', 'required' => true, 'array' => ArrayHolder::gender() ,'additionalInfo' => []])
-
-
-    @include('back.partials.formG', ['name' => 'birth_dateparent', 'type' => 'date', 'text' => 'Date de naissance Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'birth_placeparent', 'type' => 'text', 'text' => 'ville de naissance Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'genderparent', 'type' => 'select', 'selected' => null , 'text' => 'Genre Parent 1', 'class'=>'parent_dont_exist', 'required' => true, 'array' => ArrayHolder::gender() ,'additionalInfo' => []])
 
 
-
-    @include('back.partials.formG', ['name' => 'cinparent', 'type' => 'text', 'text' => 'CIN du Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'professionparent', 'type' => 'text', 'text' => 'Profession du Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'birth_dateparent', 'type' => 'date', 'text' => 'Date de naissance Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'birth_placeparent', 'type' => 'text', 'text' => 'ville de naissance Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
 
 
 
-    @include('back.partials.formG', ['name' => 'family_situationparent', 'type' => 'checkbox', 'text' => 'La situation familiale du Parent 1, Marié?', 'class'=>'', 'required' => false, 'checked' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'cinparent', 'type' => 'text', 'text' => 'CIN du Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'professionparent', 'type' => 'text', 'text' => 'Profession du Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
+
+
+
+    @include('back.partials.formG', ['name' => 'family_situationparent', 'type' => 'checkbox', 'text' => 'La situation familiale du Parent 1, Marié?', 'class'=>'parent_dont_exist', 'required' => false, 'checked' => false,'additionalInfo' => []])
 
 
 
 
 
-    @include('back.partials.formG', ['name' => 'cityparent', 'type' => 'text', 'text' => 'Ville Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'cityparent', 'type' => 'text', 'text' => 'Ville Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
 
-    @include('back.partials.formG', ['name' => 'zip_codeparent', 'type' => 'text', 'text' => 'Code postal Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'adressparent', 'type' => 'text', 'text' => 'Adress', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'phone1parent', 'type' => 'tel', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'phone2parent', 'type' => 'tel', 'text' => 'Téléphone Parent 2', 'class'=>'', 'required' => true,'additionalInfo' => []])
-   @include('back.partials.formG', ['name' => 'phone3parent', 'type' => 'tel', 'text' => 'Téléphone Parent 3', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'fixparent', 'type' => 'tel', 'text' => 'Téléphone Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'whatsappparent', 'type' => 'tel', 'text' => 'Whatsapp', 'class'=>'', 'required' => true,'additionalInfo' => []])
-      @include('back.partials.formG', ['name' => 'facebookparent', 'type' => 'text', 'text' => 'Facebook Link', 'class'=>'', 'required' => false,'additionalInfo' => []])
-
+    @include('back.partials.formG', ['name' => 'zip_codeparent', 'type' => 'text', 'text' => 'Code postal Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'adressparent', 'type' => 'text', 'text' => 'Adress', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'phone1parent', 'type' => 'tel', 'text' => 'Téléphone Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'phone2parent', 'type' => 'tel', 'text' => 'Téléphone Parent 2', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'phone3parent', 'type' => 'tel', 'text' => 'Téléphone Parent 3', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'fixparent', 'type' => 'tel', 'text' => 'Téléphone Parent 1', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'whatsappparent', 'type' => 'tel', 'text' => 'Whatsapp', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'facebookparent', 'type' => 'text', 'text' => 'Facebook Link', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
 
     <hr />
     <div class="text-center">
@@ -249,6 +254,49 @@ Nouveau etudient
   var transportPayementValue = {{ GetSchoolSetting::getConfig('min-price-monthly-trans') }};
 
   var transportAssurenceValue = {{ GetSchoolSetting::getConfig('min-price-assurence-trans') }};
+  var parentDontExist = $('.parent_dont_exist');
+  var parentExist = $('.parent_exist');
+
+  parentExist.hide();
+  parentExist.attr('required', false );
+
+
+  $('#existparent').change(function() {
+
+    if(this.checked) {
+      parentDontExist.hide().val(null);
+      parentDontExist.attr('required', false );
+      parentExist.show();
+
+
+    }else{
+      parentDontExist.show();
+      parentExist.hide().val(null);
+
+      parentDontExist.each(function(  ) {
+
+        if( $.inArray( $( this ).attr('name'), [
+          'family_situationparent',
+        'phone2parent',
+        'phone3parent',
+        'fixparent',
+        'whatsappparent',
+        'facebookparent'
+      ]) != -1  ){
+        $( this ).attr('required', false );
+      }else{
+
+        $( this ).attr('required', true );
+
+      }
+
+
+       });
+
+
+
+    }
+  });
 
   $('.add-classes-check').change(function() {
 
