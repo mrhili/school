@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 26 août 2018 à 12:10
+-- Généré le :  Dim 02 sep. 2018 à 14:21
 -- Version du serveur :  5.7.21
 -- Version de PHP :  7.2.4
 
@@ -147,35 +147,37 @@ CREATE TABLE IF NOT EXISTS `configs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `configs`
 --
 
 INSERT INTO `configs` (`id`, `slug`, `nameSetting`, `value`, `type`, `created_at`, `updated_at`) VALUES
-(1, 'site-name', 'site name', 'إسم', 'text', '2018-08-26 10:09:17', NULL),
-(2, 'description', 'Description', 'ديسكريبشيون', 'textarea', '2018-08-26 10:09:17', NULL),
-(3, 'licence', 'licence', '49/50', 'text', '2018-08-26 10:09:17', NULL),
-(4, 'company', 'company', 'Descktop company', 'text', '2018-08-26 10:09:17', NULL),
-(5, 'mobile-number', 'phone number', '+212 06 06 06 06 06', 'tel', '2018-08-26 10:09:17', NULL),
-(6, 'fix-number', 'fix number', '+212 06 06 06 06 06', 'tel', '2018-08-26 10:09:17', NULL),
-(7, 'adress', 'adress', 'Canada', 'textarea', '2018-08-26 10:09:17', NULL),
-(8, 'city', 'city', 'Canada', 'text', '2018-08-26 10:09:17', NULL),
-(9, 'zip_code', 'zip code', '14052', 'text', '2018-08-26 10:09:17', NULL),
-(10, 'email', 'Adress email', 'site@host.com', 'email', '2018-08-26 10:09:17', NULL),
-(11, 'youtube', 'Youtube chanel', 'troklo', 'text', '2018-08-26 10:09:17', NULL),
-(12, 'twitter', 'Twitter account', 'troklo', 'text', '2018-08-26 10:09:17', NULL),
-(13, 'facebook', 'Facebook Page', 'troklo', 'text', '2018-08-26 10:09:17', NULL),
-(14, 'github', 'Git account', 'troklo', 'text', '2018-08-26 10:09:17', NULL),
-(15, 'google-plus', 'Google account', 'troklo', 'text', '2018-08-26 10:09:17', NULL),
-(16, 'lat', 'Latitude', '34.525994', 'number', '2018-08-26 10:09:17', NULL),
-(17, 'lng', 'Langitude', '-6.322755', 'number', '2018-08-26 10:09:17', NULL),
-(18, 'paypal', 'Paypal account', 'app', 'text', '2018-08-26 10:09:17', NULL),
-(19, 'tags', 'Tags', 'tag1|tag2', 'textarea', '2018-08-26 10:09:17', NULL),
-(20, 'no-image', 'No image', 'no-image.jpg', 'file', '2018-08-26 10:09:17', NULL),
-(21, 'logo', 'Logo', 'logo.jpg', 'file', '2018-08-26 10:09:17', NULL),
-(22, 'test-language', 'Test Language', 'ar-TN', 'text', '2018-08-26 10:09:17', NULL);
+(1, 'site-name', 'site name', 'Fatima Azzahrae', 'text', '2018-09-02 11:52:43', NULL),
+(2, 'description', 'Description', 'C\'est un site pour la gestion d\'ecole fatima azzahrae à Allal tazi', 'textarea', '2018-09-02 11:52:43', NULL),
+(3, 'licence', 'licence', '012/042', 'text', '2018-09-02 11:52:43', NULL),
+(4, 'company', 'company', 'Fatima Azzahrae', 'text', '2018-09-02 11:52:43', NULL),
+(5, 'by', 'by', 'Idda tech', 'text', '2018-09-02 11:52:43', NULL),
+(6, 'url-by', 'company', 'https://it2018.wixsite.com/it18', 'url', '2018-09-02 11:52:43', NULL),
+(7, 'mobile-number', 'phone number', '+212 06 63 22 60 32', 'tel', '2018-09-02 11:52:43', NULL),
+(8, 'fix-number', 'fix number', '+212 06 69 48 93 69', 'tel', '2018-09-02 11:52:43', NULL),
+(9, 'adress', 'adress', 'N°211 Lot el houda', 'textarea', '2018-09-02 11:52:43', NULL),
+(10, 'city', 'city', 'Allal tazi', 'text', '2018-09-02 11:52:43', NULL),
+(11, 'zip_code', 'zip code', '14052', 'text', '2018-09-02 11:52:43', NULL),
+(12, 'email', 'Adress email', 'fatimaazzahraeschool@gmail.com', 'email', '2018-09-02 11:52:43', NULL),
+(13, 'youtube', 'Youtube chanel', 'UClZ8x36HHgUlaCGAKmixxEg', 'text', '2018-09-02 11:52:43', NULL),
+(14, 'twitter', 'Twitter account', 'FatimaAzzahrae6v', 'text', '2018-09-02 11:52:43', NULL),
+(15, 'facebook', 'Facebook Page', 'Fatima-azzahrae-185877205288816', 'text', '2018-09-02 11:52:43', NULL),
+(16, 'github', 'Git account', 'git', 'text', '2018-09-02 11:52:43', NULL),
+(17, 'google-plus', 'Google account', 'Fatima-azzahrae-185877205288816', 'text', '2018-09-02 11:52:43', NULL),
+(18, 'lat', 'Latitude', '34,521380', 'text', '2018-09-02 11:52:43', NULL),
+(19, 'lng', 'Langitude', '-6,323930', 'text', '2018-09-02 11:52:43', NULL),
+(20, 'paypal', 'Paypal account', 'paypal', 'text', '2018-09-02 11:52:43', NULL),
+(21, 'tags', 'Tags', 'tag1|tag2', 'textarea', '2018-09-02 11:52:43', NULL),
+(22, 'no-image', 'No image', 'no-image.jpg', 'file', '2018-09-02 11:52:43', NULL),
+(23, 'logo', 'Logo', '1535440397_logo.png', 'file', '2018-09-02 11:52:43', NULL),
+(24, 'test-language', 'Test Language', 'ar-TN', 'text', '2018-09-02 11:52:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -880,12 +882,12 @@ CREATE TABLE IF NOT EXISTS `schoolconfigs` (
 --
 
 INSERT INTO `schoolconfigs` (`id`, `slug`, `nameSetting`, `value`, `type`, `created_at`, `updated_at`) VALUES
-(1, 'price-month-primary', 'Price monthly for primary school', '350', 'number', '2018-08-26 10:09:18', NULL),
-(2, 'price-saving-primary', 'Price saving for primary school', '250', 'number', '2018-08-26 10:09:18', NULL),
-(3, 'price-assurence-primary', 'Price assurence for primary school', '250', 'number', '2018-08-26 10:09:18', NULL),
-(4, 'min-price-monthly-trans', 'Price minimum monthly for transport', '200', 'number', '2018-08-26 10:09:18', NULL),
-(5, 'min-price-assurence-trans', 'Price minimum assurence for transport', '200', 'number', '2018-08-26 10:09:18', NULL),
-(6, 'price-add-courses', 'Price  for additional courses', '100', 'number', '2018-08-26 10:09:18', NULL);
+(1, 'price-month-primary', 'Price monthly for primary school', '350', 'number', '2018-09-02 11:52:43', NULL),
+(2, 'price-saving-primary', 'Price saving for primary school', '250', 'number', '2018-09-02 11:52:43', NULL),
+(3, 'price-assurence-primary', 'Price assurence for primary school', '250', 'number', '2018-09-02 11:52:43', NULL),
+(4, 'min-price-monthly-trans', 'Price minimum monthly for transport', '200', 'number', '2018-09-02 11:52:43', NULL),
+(5, 'min-price-assurence-trans', 'Price minimum assurence for transport', '200', 'number', '2018-09-02 11:52:43', NULL),
+(6, 'price-add-courses', 'Price  for additional courses', '100', 'number', '2018-09-02 11:52:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -1115,6 +1117,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `num` int(10) UNSIGNED DEFAULT NULL,
+  `massarid` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `arabic_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1151,6 +1154,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
   UNIQUE KEY `users_num_unique` (`num`),
+  UNIQUE KEY `users_massarid_unique` (`massarid`),
   KEY `users_the_class_id_index` (`the_class_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1158,9 +1162,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `num`, `name`, `last_name`, `arabic_name`, `arabic_last_name`, `gender`, `birth_date`, `birth_place`, `city`, `zip_code`, `adress`, `phone`, `phone2`, `phone3`, `fix`, `facebook`, `whatsapp`, `email`, `password`, `img`, `role`, `the_class_id`, `transport`, `additional_classes`, `fill_payment`, `cin`, `profession`, `family_situation`, `cv`, `cnss`, `cnss_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'master', 'amine', NULL, NULL, 1, '2018-08-26', 'rabat', 'rabat', '14000', 'kenitra', '0606060606', '0606060606', '0606060606', '0606060606', NULL, NULL, 'master@app.com', '$2y$10$6c/KRW0/YsOP5ejF7sQRue/yi0F2LB9w0cPwxU4bSluleq.dybwce', 'profile.png', 6.00, NULL, 0, 0, 0, 'G620912', NULL, NULL, NULL, 1, 'CNSS11111', 'YjWuoGFRYl', NULL, NULL),
-(7, NULL, 'user', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user@app.com', '$2y$10$dXajO6Yi5M4Y6tkauyDTCuB8sLmSuXn1CeGqOo8Mw5uAiDRVbqSUq', 'profile.png', 0.00, NULL, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'yWUXOKIWcj', NULL, NULL);
+INSERT INTO `users` (`id`, `num`, `massarid`, `name`, `last_name`, `arabic_name`, `arabic_last_name`, `gender`, `birth_date`, `birth_place`, `city`, `zip_code`, `adress`, `phone`, `phone2`, `phone3`, `fix`, `facebook`, `whatsapp`, `email`, `password`, `img`, `role`, `the_class_id`, `transport`, `additional_classes`, `fill_payment`, `cin`, `profession`, `family_situation`, `cv`, `cnss`, `cnss_id`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, NULL, NULL, 'master', 'amine', NULL, NULL, 1, '2018-09-02', 'rabat', 'rabat', '14000', 'kenitra', '0606060606', '0606060606', '0606060606', '0606060606', NULL, NULL, 'master@app.com', '$2y$10$53M7AKTYO3gRK3CMRWhQfOnuAcJMA6ee/NdVvmkJlrBfub3VUSMoW', 'profile.png', 6.00, NULL, 0, 0, 0, 'G620912', NULL, NULL, NULL, 1, 'CNSS11111', 'TLsulaW0iv', NULL, NULL),
+(7, NULL, NULL, 'user', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user@app.com', '$2y$10$4u8pR44AwKR5HEnPfy6c4.577nmxjkG5ZOczXbPm4vvRIa8y7oBcC', 'profile.png', 0.00, NULL, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'RovJ64PaRw', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1191,16 +1195,16 @@ CREATE TABLE IF NOT EXISTS `userspayments` (
 --
 
 INSERT INTO `userspayments` (`id`, `user_id`, `year_id`, `month_id`, `should_be_payed`, `cnss_payment`, `payment`, `payment_complete`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 10000, 1000, 0, 0, '2018-08-26 10:09:18', '2018-08-26 10:09:18'),
-(2, 1, 1, 2, 10000, 1000, 0, 0, '2018-08-26 10:09:18', '2018-08-26 10:09:18'),
-(3, 1, 1, 3, 10000, 1000, 0, 0, '2018-08-26 10:09:18', '2018-08-26 10:09:18'),
-(4, 1, 1, 4, 10000, 1000, 0, 0, '2018-08-26 10:09:18', '2018-08-26 10:09:18'),
-(5, 1, 1, 5, 10000, 1000, 0, 0, '2018-08-26 10:09:18', '2018-08-26 10:09:18'),
-(6, 1, 1, 6, 10000, 1000, 0, 0, '2018-08-26 10:09:18', '2018-08-26 10:09:18'),
-(7, 1, 1, 9, 10000, 1000, 0, 0, '2018-08-26 10:09:18', '2018-08-26 10:09:18'),
-(8, 1, 1, 10, 10000, 1000, 0, 0, '2018-08-26 10:09:18', '2018-08-26 10:09:18'),
-(9, 1, 1, 11, 10000, 1000, 0, 0, '2018-08-26 10:09:18', '2018-08-26 10:09:18'),
-(10, 1, 1, 12, 10000, 1000, 0, 0, '2018-08-26 10:09:18', '2018-08-26 10:09:18');
+(1, 1, 1, 1, 10000, 1000, 0, 0, '2018-09-02 11:52:44', '2018-09-02 11:52:44'),
+(2, 1, 1, 2, 10000, 1000, 0, 0, '2018-09-02 11:52:45', '2018-09-02 11:52:45'),
+(3, 1, 1, 3, 10000, 1000, 0, 0, '2018-09-02 11:52:45', '2018-09-02 11:52:45'),
+(4, 1, 1, 4, 10000, 1000, 0, 0, '2018-09-02 11:52:45', '2018-09-02 11:52:45'),
+(5, 1, 1, 5, 10000, 1000, 0, 0, '2018-09-02 11:52:45', '2018-09-02 11:52:45'),
+(6, 1, 1, 6, 10000, 1000, 0, 0, '2018-09-02 11:52:45', '2018-09-02 11:52:45'),
+(7, 1, 1, 9, 10000, 1000, 0, 0, '2018-09-02 11:52:45', '2018-09-02 11:52:45'),
+(8, 1, 1, 10, 10000, 1000, 0, 0, '2018-09-02 11:52:45', '2018-09-02 11:52:45'),
+(9, 1, 1, 11, 10000, 1000, 0, 0, '2018-09-02 11:52:45', '2018-09-02 11:52:45'),
+(10, 1, 1, 12, 10000, 1000, 0, 0, '2018-09-02 11:52:45', '2018-09-02 11:52:45');
 
 -- --------------------------------------------------------
 
