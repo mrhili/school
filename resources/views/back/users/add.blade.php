@@ -193,7 +193,7 @@ Nouveau etudient
     @include('back.partials.formG', ['name' => 'phone1parent', 'type' => 'tel', 'text' => 'Téléphone Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'phone2parent', 'type' => 'tel', 'text' => 'Téléphone Parent 2', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'phone3parent', 'type' => 'tel', 'text' => 'Téléphone Parent 3', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'fixparent', 'type' => 'tel', 'text' => 'Téléphone Parent 1', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
+    @include('back.partials.formG', ['name' => 'fixparent', 'type' => 'tel', 'text' => 'Téléphone Fix', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'whatsappparent', 'type' => 'tel', 'text' => 'Whatsapp', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
     @include('back.partials.formG', ['name' => 'facebookparent', 'type' => 'text', 'text' => 'Facebook Link', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
 
