@@ -26,6 +26,12 @@
 
 @endif
 
+@if( empty( $txtbutton ))
+
+  @php $txtbutton = 'Envoyer';@endphp
+
+@endif
+
 
 
   <div class="modal fade" id="{{ $id }}">
@@ -68,7 +74,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          <button id="{{ $idbutton }}" type="button" class="btn btn-primary">Payé</button>
+          <button id="{{ $idbutton }}" type="button" class="btn btn-primary">{{ $txtbutton }}</button>
 
         </div>
         </form>

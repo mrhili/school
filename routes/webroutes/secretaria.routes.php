@@ -42,6 +42,10 @@ Route::get('/users/{role}', 'UserController@byRole')->name('users.by-role');
 Route::get('/users-data-by-role/{role}', 'UserController@dataByRole')->name('users.data-by-role');
 
 Route::get('/etudients', 'StudentController@all')->name('students.all');
+Route::get('/valider-etudients', 'StudentController@validaTheme')->name('students.validat-them');
+Route::get('/data-valider-etudients', 'StudentController@dataValidaTheme')->name('students.data-validat-them');
+
+Route::put('/valider-les-etidants-put', 'StudentController@putValidaTheme')->name('students.put-validat-them');
 
 Route::get('/add-student', 'StudentController@add')->name('students.add');
 Route::post('/store-student', 'StudentController@store')->name('students.store');

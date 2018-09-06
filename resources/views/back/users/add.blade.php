@@ -141,8 +141,6 @@ Nouveau etudient
 
     @include('back.partials.formG', ['name' => 'hidden_note', 'type' => 'textarea', 'text' => 'Une note pour toi', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
-
-
     <hr />
     <div class="text-center">
       <h3 >Informations sur parent</h3>
@@ -158,8 +156,6 @@ Nouveau etudient
     <div class='parent_dont_exist'>
       @include('back.partials.formG', ['name' => 'imgparent', 'type' => 'file', 'text' => 'Image Parent 1', 'class'=>'', 'required' => false ,'additionalInfo' => []])
     </div>
-
-
 
 
     @include('back.partials.formG', ['name' => 'nameparent', 'type' => 'text', 'text' => 'Prénom Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])

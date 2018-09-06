@@ -44,6 +44,75 @@ use Validator;
 
 class Application{
 
+  public static function studentpayment(User $student, Request $request){
+
+
+
+                $year = Session::get('yearId');
+                $transport_pay = ( $request->transport_pay ? $request->transport_pay : 0 );
+                $add_class_pay = ( $request->add_class_pay ? $request->add_class_pay : 0 );
+                $trans_assurence_pay = ( $request->trans_assurence_pay ? $request->trans_assurence_pay : 0 );
+
+                Relation::fillStudentsPayment($student->id, $year , $request->class, $request->should_pay, $transport_pay, $add_class_pay, $request->saving_pay ,$request->assurence_pay ,$trans_assurence_pay );
+
+
+                Relation::fillFournituration( $student->id , $year , $request->class   );
+
+                Relation::testsYouShouldStart( $student );
+
+                $student->fill_payment = true;
+
+                $student->save();
+
+                //$this->addStudentHistory();
+
+
+
+
+
+                $creation = [
+
+                    'id_link' => $student->id,
+                    'comment' => $request->comment,
+                    'hidden_note' => $request->hidden_note,
+                    'by-admin' => Auth::id(),
+
+                    'category_history_id' => 2,
+                    'class' => 'success'
+
+                    //'id_link' => $request->id_link,
+
+                ];
+
+                $transSentence;
+                if( $request->transport ){
+                    $transSentence = '<strong>avec le transport</strong> sous ladress  <strong>'. $request->adress .'</strong>  avec un montant décider de <strong>'. $request->transport_pay .' dh</strong> par mois et avec une assurence de trasport décider de <strong>'. $request->trans_assurence_pay .' dh</strong>.';
+                }else{
+                    $transSentence = '<strong>sans transport</strong> est sont adress est '. $request->adress;
+                }
+
+                $addCoursesSentence;
+                if( $request->transport ){
+                    $addCoursesSentence = '<strong>avec les cours suplementaires</strong> et avec un montant décider de <strong>'. $trans_assurence_pay .' dh </strong> par mois ';
+                }else{
+                    $addCoursesSentence = '<strong>sans les cours suplementaires</strong>';
+                }
+
+
+
+                $creation['info'] = "Un nouveau éléve c'est enregistrer dans la class <strong>". TheClass::find( $request->class )->name ."</strong>
+                qui port le nom complet de: <strong>". $student->last_name." ". $student->name ."</strong>
+                avec un montant d'enregistrement <strong>". $request->saving_pay ." dh</strong>
+                et d'assurence:  <strong>". $request->assurence_pay ." dh</strong> et ". $transSentence ."   et ". $addCoursesSentence ."
+                et le montant qui doit payé pour lécole c'est <strong>". $request->should_pay ." dh</strong> par mois
+                est cela c'est fait dans l'année <strong>". Year::find( $year )->name . "</strong> .";
+
+
+                History::create($creation);
+
+  }
+
+
   public static function test_type($is_exercise){
     if( $is_exercise ){
       return 'exercise';

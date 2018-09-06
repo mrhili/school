@@ -82,7 +82,8 @@ class HomeController extends Controller
 
         $year = Session::get('yearId');
         $users = User::where('role', 0 )->count();
-        $students = User::where('role', 1 )->count();
+        $students = User::where('role', 1 )->where('fill_payment', true )->count();
+        $studentsNonValidate = User::where('role', 1 )->where('fill_payment', false )->count();
         $parents = User::where('role', 2 )->count();
         $teatchers = User::where('role', 3 )->count();
         $secretarias = User::where('role', 4 )->count();
@@ -129,10 +130,14 @@ class HomeController extends Controller
          'teatchers','secretarias','admins',
         'masters', 'classes', 'subjects', 'tests',
         'fournitures','rooms', 'roomtypes',
-         'etages', 'objctypes', 'objcts', 'observations',
+         'etages', 'objctypes', 'objcts',
+         'observations',
           'callings', 'meetingtypes',
           'meetings', 'mymeetings', 'meetingsCreatedbyme',
-           'courses', 'demandefournitures', 'courses2Validate', 'tests2Validate'));
+           'courses', 'demandefournitures',
+           'courses2Validate',
+           'tests2Validate',
+           'studentsNonValidate'));
     }
 
     public function monthsBD()

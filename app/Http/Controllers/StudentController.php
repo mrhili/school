@@ -45,7 +45,90 @@ use Hash;
 
 class StudentController extends Controller
 {
-    //
+    //validate Theme
+
+    public function validaTheme(){
+
+      $classes = TheClass::pluck('name', 'id');
+
+      return view('back.students.validat-them', compact('classes') );
+
+    }
+
+    public function dataValidaTheme(){
+
+      return Datatables::of( User::where('role', 1)->where('fill_payment', false )->get() )
+
+      ->editColumn('class', function( $model ){
+
+        return $model->zip_code;
+
+     })
+      ->editColumn('completename', function( $model ){
+
+        return $model->name.' '.$model->last_name;
+
+     })
+
+      ->rawColumns([])
+
+      ->make(true);
+    }
+
+    public function putValidaTheme(Request $request){
+
+      $array = array_except( $request->toarray(), [
+        '_token',
+          'should_pay',
+         'transport_pay',
+          'add_class_pay',
+        'transport',
+         'add_classes',
+          'saving_pay',
+          'trans_assurence_pay',
+         'assurence_pay'
+          ]);
+
+          if( $request->transport ){
+
+              $array["transport"] = true;
+
+          }else{
+              $array["transport"] = false;
+          }
+
+          if( $request->add_classes ){
+
+              $array["add_classes"] = true;
+          }else{
+              $array["add_classes"] = false;
+          }
+
+
+            $ids = json_decode( $request->ids , False );
+
+            $students = User::findMany($ids);
+
+
+
+            foreach($students as $student){
+
+              $array['the_class_id'] = $request->class;
+
+              $array['zip_code'] = '';
+
+              $student->update($array);
+
+              if( $student ){
+
+                Application::studentpayment($student, $request);
+
+              }
+
+            }
+
+
+    }
 
     public function docs($selected=null){
         /****************/
@@ -243,7 +326,7 @@ class StudentController extends Controller
         'transport',
          'add_classes',
           'saving_pay',
-          'tars_assurence_pay',
+          'trans_assurence_pay',
          'assurence_pay',
           'imgparent',
            'nameparent',
@@ -305,70 +388,8 @@ class StudentController extends Controller
 
 	    if ($student) {
 
-            /*            $table->integer('should_pay')->default(350);
-            $table->integer('transport_pay')->default(350);
-            $table->integer('add_class_pay')->default(350);*/
 
-            $transport_pay = ( $request->transport_pay ? $request->transport_pay : 0 );
-            $add_class_pay = ( $request->add_class_pay ? $request->add_class_pay : 0 );
-            $trans_assurence_pay = ( $request->trans_assurence_pay ? $request->trans_assurence_pay : 0 );
-
-            Relation::fillStudentsPayment($student->id, $year , $request->class, $request->should_pay, $transport_pay, $add_class_pay, $request->saving_pay ,$request->assurence_pay ,$trans_assurence_pay );
-
-
-            Relation::fillFournituration( $student->id , $year , $request->class   );
-
-            Relation::testsYouShouldStart( $student );
-
-            $student->fill_payment = true;
-
-            $student->save();
-
-            //$this->addStudentHistory();
-
-
-
-
-
-            $creation = [
-
-                'id_link' => $student->id,
-                'comment' => $request->comment,
-                'hidden_note' => $request->hidden_note,
-                'by-admin' => Auth::id(),
-
-                'category_history_id' => 2,
-                'class' => 'success'
-
-                //'id_link' => $request->id_link,
-
-            ];
-
-            $transSentence;
-            if( $request->transport ){
-                $transSentence = '<strong>avec le transport</strong> sous ladress  <strong>'. $request->adress .'</strong>  avec un montant décider de <strong>'. $request->transport_pay .' dh</strong> par mois et avec une assurence de trasport décider de <strong>'. $request->trans_assurence_pay .' dh</strong>.';
-            }else{
-                $transSentence = '<strong>sans transport</strong> est sont adress est '. $request->adress;
-            }
-
-            $addCoursesSentence;
-            if( $request->transport ){
-                $addCoursesSentence = '<strong>avec les cours suplementaires</strong> et avec un montant décider de <strong>'. $trans_assurence_pay .' dh </strong> par mois ';
-            }else{
-                $addCoursesSentence = '<strong>sans les cours suplementaires</strong>';
-            }
-
-
-
-            $creation['info'] = "Un nouveau éléve c'est enregistrer dans la class <strong>". TheClass::find( $request->class )->name ."</strong>
-            qui port le nom complet de: <strong>". $student->last_name." ". $student->name ."</strong>
-            avec un montant d'enregistrement <strong>". $request->saving_pay ." dh</strong>
-            et d'assurence:  <strong>". $request->assurence_pay ." dh</strong> et ". $transSentence ."   et ". $addCoursesSentence ."
-            et le montant qui doit payé pour lécole c'est <strong>". $request->should_pay ." dh</strong> par mois
-            est cela c'est fait dans l'année <strong>". Year::find( $year )->name . "</strong> .";
-
-
-            History::create($creation);
+            Application::studentpayment($student, $request);
 
             /*Parent variable creation*/
 

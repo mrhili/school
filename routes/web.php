@@ -24,6 +24,9 @@
  ];
  */
 
+
+
+
 Route::get('/', function () {
     return view('welcome');
 })->name('index');
@@ -32,6 +35,15 @@ Route::get('/test', function () {
 $model_name = 'App\User';
 return $model_name::find(1)->name;
 });
+
+// Route for view/blade file.
+Route::get('importExport', 'TestoController@importExport');
+// Route for export/download tabledata to .csv, .xls or .xlsx
+Route::get('downloadExcel/{type}', 'TestoController@downloadExcel');
+// Route for import excel data to database.
+Route::post('importExcel', 'TestoController@importExcel');
+
+/*****************************/
 
 Route::get('/testtest/', 'TestController@test');
 

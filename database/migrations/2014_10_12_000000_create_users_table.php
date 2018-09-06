@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             /*common*/
             $table->increments('id');
             $table->integer('num')->nullable()->unique()->unsigned();
-            $table->string('massarid')->nullable()->unique();
+
             $table->string('name');
             $table->string('last_name')->nullable();
             $table->string('arabic_name')->nullable();
@@ -40,7 +40,7 @@ class CreateUsersTable extends Migration
             $table->float('role')->default(0);
 
             /* student */
-
+            $table->string('massarid')->nullable()->unique();
             $table->integer('the_class_id')->unsigned()->index()->nullable();
             $table->foreign('the_class_id')
               ->references('id')

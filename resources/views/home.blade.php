@@ -207,6 +207,8 @@
 
 
 <h2 class="text-center">Personelle</h2>
+
+
 <div class="row">
 
 
@@ -251,37 +253,63 @@
 <h2 class="text-center">Les gens</h2>
       <!-- Small boxes (Stat box) -->
       <div class="row">
-
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-green">
-                <div class="inner">
-                  <h3>{{ $users }}</h3>
-                  <p><a href="{{ route('users.userlist') }}">Users</a></p>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-file"></i>
-                </div>
-                <a href="{{ route('users.userlist') }}" class="small-box-footer">Voire observations <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{ $users }}</h3>
+              <p><a href="{{ route('users.userlist') }}">Users</a></p>
             </div>
-
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
-                <div class="inner">
-                  <h3>{{ $students }}</h3>
-
-                  <p><a href="{{ route('students.all') }}" class="text-white">Etudients</a></p>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-graduation-cap"></i>
-                </div>
-                <a href="{{ route('students.add') }}" class="small-box-footer">Ajouter un etudient maintenent <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
             </div>
+            <a href="{{ route('users.userlist') }}" class="small-box-footer">Voire observations <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
 
-        <!-- ./col -->
+
+
+
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+              <div class="inner">
+                <h3>{{ $students }}</h3>
+
+                <p><a href="{{ route('students.all') }}" class="text-white">Etudients</a></p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-graduation-cap"></i>
+              </div>
+              <a href="{{ route('students.add') }}" class="small-box-footer">Ajouter un etudient maintenent <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <div class="inner">
+              <h3>{{ $studentsNonValidate }}</h3>
+
+              <p><a href="{{ route('students.validat-them') }}" class="text-white">Valider les Etudients depuis massar</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-graduation-cap"></i>
+            </div>
+            <a href="{{ route('students.add') }}" class="small-box-footer">Ajouter un etudient maintenent <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+
+
+    <!-- ./col -->
+      </div>
+      <div class="row">
+
+
+
+
 
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
