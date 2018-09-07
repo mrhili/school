@@ -38,6 +38,11 @@ Route::post('/store-meeting/{meetingtype}', 'MeetingController@store')->name('me
 
 /********HUMAN**************/
 
+//Importer les etudiants depuis excel
+
+Route::get('/import-students-excel', 'StudentController@importExcel')->name('students.import-excel');
+Route::post('/post-import-students-excel', 'StudentController@postImportExcel')->name('students.post-import-excel');
+
 Route::get('/users/{role}', 'UserController@byRole')->name('users.by-role');
 Route::get('/users-data-by-role/{role}', 'UserController@dataByRole')->name('users.data-by-role');
 
@@ -49,6 +54,9 @@ Route::put('/valider-les-etidants-put', 'StudentController@putValidaTheme')->nam
 
 Route::get('/add-student', 'StudentController@add')->name('students.add');
 Route::post('/store-student', 'StudentController@store')->name('students.store');
+
+Route::get('/add-parent/{student?}', 'ParentController@add')->name('parents.add');
+Route::post('/store-parent', 'ParentController@store')->name('parents.store');
 
 Route::get('/students/{class}', 'StudentController@byClass')->name('students.by-class');
 Route::get('/students-data-by-class/{class}', 'StudentController@dataByClass')->name('students.data-by-class');

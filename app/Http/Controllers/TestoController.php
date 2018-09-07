@@ -46,35 +46,8 @@ class TestoController extends Controller
           return 'no file';
         }
 
-        /**************/
-        /*
-        $excel->load($filepath);
-        $excel->setSheet($sheetNumber);
-        $collection = $excel->getCollection();
-        */
-
         return 'success' ;
-/*
 
-          if($request->hasFile('import_file')){
-              Excel::load($request->file('import_file')->getRealPath(), function ($reader) {
-                  foreach ($reader->toArray() as $key => $row) {
-                      $data['title'] = $row['title'];
-                      $data['description'] = $row['description'];
-
-                      if(!empty($data)) {
-                          DB::table('users')->insert($data);
-                      }
-                  }
-              });
-          }
-
-          Session::put('success', 'Youe file successfully import in database!!!');
-
-          return back();
-
-
-          */
       }
 
 

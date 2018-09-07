@@ -23,6 +23,11 @@ use App\{
     Teatchification
 };
 
+use App\Parsers\StudFromMassar;
+use App\Exports\UsersExport;
+//use Excel;
+use Importer;
+
 use Yajra\Datatables\Datatables;
 
 use Auth;
@@ -46,6 +51,32 @@ use Hash;
 class StudentController extends Controller
 {
     //validate Theme
+
+    public function importExcel(){
+
+      return view('back.students.import-excel');
+
+    }
+
+    public function postImportExcel( Request $request ){
+
+      if($request->hasFile('sheet')){
+
+          $filepath = $request->file('sheet')->getRealPath();
+          $collection = Importer::make('Excel')
+            ->load($filepath)
+
+            ->setParser(new StudFromMassar)
+
+            ->getCollection();
+
+          return redirect()->route('students.validat-them');
+
+      }else{
+        return 'no file';
+      }
+
+    }
 
     public function validaTheme(){
 
@@ -473,11 +504,14 @@ class StudentController extends Controller
             $creationHistoryParent['info'] = "Le parent <strong>".$parent->name." ".$parent->last_name."</strong> a etait crée avec succes et il est relation en genre <strong>".$relationship->category->name ."</strong> avec létudiant <strong>".$student->name." ".$student->last_name."</strong> qui port le <strong>id = ".$student->id."</strong>
             est ses information personelle sont  => genre = <strong>". ArrayHolder::gender( $parent->gender) ."</strong>, Numero de la carte = <strong>".$parent->cin."</strong>, habite à <strong>".$parent->city."</strong>, code postal = <strong>".$parent->zip_code."</strong>, son adress est <strong>".$parent->adress."</strong>, son telephone 1  = <strong>".$parent->phone1."</strong>, telephone 2  = <strong>".$parent->phone2."</strong>, telephone 3  = <strong>".$parent->phone3."</strong>, telephone fix = <strong>".$parent->fix."</strong>, sa profession est <strong>".$parent->profession."</strong>, sa cituation familiale est <strong>".$maried."</strong> .";
 
+
+            History::create($creationHistoryParent);
+
           }else{
               return 'no relationship';
           }
 
-            History::create($creationHistoryParent);
+
 
 
 

@@ -286,6 +286,26 @@
               <a href="{{ route('students.add') }}" class="small-box-footer">Ajouter un etudient maintenent <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
+
+
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+              <div class="inner">
+                <h3>Xcl</h3>
+
+                <p><a href="{{ route('students.import-excel') }}" class="text-white">Importer les etudiants depuis excel</a></p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-graduation-cap"></i>
+              </div>
+              <a href="{{ route('students.import-excel') }}" class="small-box-footer">Importer les etudiants depuis excel <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+
+
+
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
@@ -322,7 +342,7 @@
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a href="#" class="small-box-footer">Ajouter un parent maintenent <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('parents.add') }}" class="small-box-footer">Linker un parent a un eleve <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 
