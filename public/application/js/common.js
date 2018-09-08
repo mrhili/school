@@ -60,7 +60,54 @@ if($( ".change-year" ).length ){
 
 }
 
-/***********************************************************/
+/***********************CHANGE DEBUG************************************/
+
+
+if($( ".change-debug" ).length ){
+
+  var changeDebug = $( ".change-debug" );
+
+  var role;
+
+  changeDebug.on('click', function(e){
+
+    e.preventDefault();
+    role = $(this).attr('data-role');
+
+  axios.get('/change-debug/'+role)
+    .then(function (response) {
+      //remove class bg-green and add it for the selection year
+      changeDebug.each(function( index ) {
+
+
+      if( changeDebug.eq(index).attr('data-role') == role ){
+
+				console.log( response.data );
+				if( response.data.enable ){
+					changeDebug.eq(index).find('.menu-icon').addClass('bg-green');
+				}else{
+					changeDebug.eq(index).find('.menu-icon').addClass('bg-red');
+				}
+
+      }
+    });
+
+		swal(
+		  'debugage iption a etait changer avec succes',
+		  '... ',
+		  'success'
+		)
+
+    })
+  .catch(function (error) {
+      console.log(error);
+   });
+
+
+  });
+
+}
+
 /*************************************************************/
 /*****************************************************************/
 /***********************************************************************/

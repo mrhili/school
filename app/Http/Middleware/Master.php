@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
+use Debugbar;
+use Application;
 class Master
 {
     /**
@@ -18,6 +20,9 @@ class Master
 
         if( Auth::check() || Auth::user()->role == 6 ){
 
+          if( Application::setDebuggar( Auth::user()->role ) ){
+            Debugbar::enable();
+          }
             return $next($request);
 
 

@@ -287,6 +287,7 @@ class StudentController extends Controller
 
           $passInfo = true;
           $passChangeInfo = true;
+          $passChangeSensibleInfo = true;
 
         }
 
@@ -295,7 +296,10 @@ class StudentController extends Controller
 
       /*****************/
 
-      return view('back.students.profile', compact('passInfo', 'user', 'passChangeInfo', 'notes', 'fournitures'));
+      return view('back.students.profile', compact('passInfo',
+      'user', 'passChangeInfo', 'notes',
+      'passChangeSensibleInfo',
+       'fournitures'));
 
 
     }

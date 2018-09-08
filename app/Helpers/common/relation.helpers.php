@@ -44,8 +44,9 @@ class Relation {
 
     if (!empty($sc_ids)) {
      // list is empty.
-
-      $tests = Testyearsubclass::whereIn('subject_the_class_id', $sc_ids)->get();
+     //conditions, publish kda ...
+      $tests = Testyearsubclass::whereIn('subject_the_class_id', $sc_ids)
+        ->where('publish', true )->get();
 
       foreach($tests as $test ){
 

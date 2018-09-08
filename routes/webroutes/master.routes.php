@@ -29,6 +29,9 @@ Route::post('/configs/store-config', 'ConfigController@storeConfig')->name('conf
 /**********************History*************************************/
 
 	Route::get('/history-master', 'HistoryController@master')->name('histories.master');
+/***************************DEBUG**************************************/
+
+Route::get('/change-debug/{role}', 'DebugController@changeDebug')->name('debugs.change');
 
   /********************Artisan*******************************/
 

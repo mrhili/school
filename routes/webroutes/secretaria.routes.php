@@ -1,4 +1,6 @@
 <?php
+
+
 Route::get('/docs-secretaria/{selected?}', 'SecretariaController@docs')->name('secretaria.docs');
 
 
@@ -65,7 +67,10 @@ Route::get('/students-data-by-class/{class}', 'StudentController@dataByClass')->
 
 Route::get('/parents', 'ParentController@all')->name('parents.all');
 
+/********HUMAN CLASS**************/
 
+Route::get('/change-class-4-stud/{student}', 'TheClassController@change4StudentPage')->name('classes.change-4-student-page');
+Route::put('/change-class-4-stud/{student}', 'TheClassController@change4Student')->name('classes.change-4-student');
 
 /***********CALLING*************/
 

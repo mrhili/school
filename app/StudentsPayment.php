@@ -8,7 +8,12 @@ class StudentsPayment extends Model
 {
 
 
-    protected $fillable = ['user_id', 'year_id', 'month_id', 'the_class_id','should_pay','transport_pay','add_classes_pay','payment','payment_complete'];
+    protected $fillable = [
+      'user_id', 'year_id', 'month_id',
+      'the_class_id','should_pay',
+      'transport_pay','add_classes_pay',
+      'payment','payment_complete'
+    ];
 
     public function user()
     {

@@ -3,6 +3,17 @@
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
 
       <li class="active"><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+
+      @if (Auth::check())
+
+        @if (Auth::user()->role == 6)
+
+          <li class=""><a href="#master-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+
+        @endif
+
+      @endif
+
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
@@ -35,6 +46,48 @@
 
       </div>
       <!-- /.tab-pane -->
+
+
+      @if (Auth::check())
+
+        @if (Auth::user()->role == 6)
+
+      <div class="tab-pane" id="master-sidebar-settings-tab">
+
+        <h3 class="control-sidebar-heading">EN/Able Debuggar bar:</h3>
+
+        <ul class="control-sidebar-menu">
+
+          @foreach (ArrayHolder::roles_routing() as $rr => $roles_routing)
+            <li>
+              <a href="#" class="change-debug" id="debug-{{ $rr }}" data-role="{{ $rr }}">
+                <i class="menu-icon fa fa-bug {{ Application::setDebuggar( $rr )? 'bg-green':'bg-red' }}"></i>
+
+                <div class="menu-info">
+                  <h4 class="control-sidebar-subheading">{{ $roles_routing }}</h4>
+                  <p>...</p>
+                </div>
+              </a>
+            </li>
+          @endforeach
+
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+
+      @endif
+
+    @endif
+
+
+      <!---->
+
+
+
+
+
+
     </div>
   </aside>
   <!-- /.control-sidebar -->

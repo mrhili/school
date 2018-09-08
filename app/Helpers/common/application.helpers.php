@@ -44,6 +44,36 @@ use Validator;
 
 class Application{
 
+
+  public static $enabledDebuggar = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+  ];
+
+  public static function setDebuggar($role , $method ='get'){
+
+
+	  if($method == 'get' ){
+
+	  	return self::$enabledDebuggar[ $role ];
+
+	  }else if($method == 'change' ){
+
+	  	self::$enabledDebuggar[ $role ] = !self::$enabledDebuggar[ $role ];
+
+      return self::$enabledDebuggar[ $role ];
+
+	  }
+
+  }
+
+
+
   public static function studentpayment(User $student, Request $request){
 
 

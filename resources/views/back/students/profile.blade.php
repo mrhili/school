@@ -85,6 +85,10 @@
               <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
               <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
               <li><a href="#settings" data-toggle="tab">Settings</a></li>
+
+              @if ($passChangeSensibleInfo)
+              <li><a href="#sensible-settings" data-toggle="tab">Sensible Settings</a></li>
+              @endif
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
@@ -309,6 +313,11 @@
 
 
               </div>
+              @if ($passChangeSensibleInfo)
+              <div class="tab-pane" id="sensible-settings">
+                <a href="{{route('classes.change-4-student-page', $user->id)}}">Changer la class</a>
+              </div>
+              @endif
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->
