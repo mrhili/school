@@ -216,7 +216,13 @@
 
           axios.put( "/valider-les-etidants-put" ,{
             headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Credentials' : false,
+              'Access-Control-Allow-Methods':'GET',
+              'Access-Control-Allow-Headers':'application/json',
             },
             ids: JSON.stringify( window.ids ),
             class: $('#class').val(),

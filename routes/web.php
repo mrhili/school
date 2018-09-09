@@ -73,32 +73,38 @@ Route::post('demos/loaddata','HistoryController@loadDataAjax' );
 Route::name('language')->get('language/{lang}', 'HomeController@language');
 Route::name('language')->get('language', 'HomeController@getLanguage');
 
-Route::group(['middleware' => ['user']], function () {
+Route::group(['middleware' => ['cors']], function () {
 
   require __DIR__.'/webroutes/user.routes.php';
 
 });
 
-Route::group(['middleware' => ['student']], function () {
+Route::group(['middleware' => ['user','cors']], function () {
+
+  require __DIR__.'/webroutes/user.routes.php';
+
+});
+
+Route::group(['middleware' => ['student','cors']], function () {
 
   require __DIR__.'/webroutes/student.routes.php';
 
 });
 
-Route::group(['middleware' => ['parent']], function () {
+Route::group(['middleware' => ['parent','cors']], function () {
   require __DIR__.'/webroutes/parent.routes.php';
 });
 
-Route::group(['middleware' => ['teatcher']], function () {
+Route::group(['middleware' => ['teatcher','cors']], function () {
   require __DIR__.'/webroutes/teatcher.routes.php';
 });
 
-Route::group(['middleware' => ['secretaria']], function () {
+Route::group(['middleware' => ['secretaria','cors']], function () {
 
   require __DIR__.'/webroutes/secretaria.routes.php';
 });
 
-Route::group(['middleware' => ['admin']], function () {
+Route::group(['middleware' => ['admin','cors']], function () {
 
   require __DIR__.'/webroutes/admin.routes.php';
 
