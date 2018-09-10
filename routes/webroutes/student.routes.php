@@ -2,28 +2,30 @@
 
 Route::get('/docs-student/{selected?}', 'StudentController@docs')->name('student.docs');
 
-  Route::put('/change-info/{user}', 'UserController@changeInfo')->name('users.change-info');
+  Route::post('/change-info/{user}', 'UserController@changeInfo')->name('users.change-info');
 
   Route::get('/my-profile-as-student', 'StudentController@myProfile')->name('students.my-profile');
   Route::get('/student-profile/{student}', 'StudentController@profile')->name('students.profile');
   Route::get('/parent-profile/{user}', 'ParentController@profile')->name('parents.profile');
-
-
   Route::get('/teatcher-profile/{user}', 'TeatcherController@profile')->name('teatchers.profile');
+
+  Route::get('/secretaria-profile/{user}', 'TeatcherController@profile')->name('secretarias.profile');
+  Route::get('/admin-profile/{user}', 'AdminController@profile')->name('admins.profile');
+  Route::get('/master-profile/{user}', 'MasterController@profile')->name('masters.profile');
 
 	Route::get('/my-meetings', 'MeetingpopulatingController@mine')->name('meetings.mine');
 	Route::get('/data-my-meetings', 'MeetingpopulatingController@dataMine')->name('meetings.data-mine');
 
 	Route::get('/see-note/{meetingpopulating}', 'MeetingpopulatingController@see')->name('meetingpopulatings.see-note');
-	Route::put('/modify-note/{meetingpopulating}', 'MeetingpopulatingController@modify')->name('meetingpopulatings.modify-note');
+	Route::post('/modify-note/{meetingpopulating}', 'MeetingpopulatingController@modify')->name('meetingpopulatings.modify-note');
 
 	Route::get('/write-obs', 'ObservationController@write')->name('observations.write');
 	Route::get('/write-obs-for/{user}', 'ObservationController@writefor')->name('observations.write-for');
 	Route::post('/write-obs-for/{user}', 'ObservationController@postWritefor')->name('observations.post-write-for');
 	Route::get('/my-obs', 'ObservationController@myObs')->name('observations.my-obs');
 	Route::get('/data-my-obs', 'ObservationController@dataMyObs')->name('observations.data-my-obs');
-	Route::put('/reporte-obs/{o}', 'ObservationController@switchReported')->name('observations.switch-reported-obs');
-	Route::delete('/delete-obs', 'ObservationController@deleteObs')->name('observations.delete-obs');
+	Route::post('/reporte-obs/{o}', 'ObservationController@switchReported')->name('observations.switch-reported-obs');
+	Route::post('/delete-obs', 'ObservationController@deleteObs')->name('observations.delete-obs');
 
 
 

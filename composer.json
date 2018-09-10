@@ -12,6 +12,7 @@
         "caouecs/laravel-lang": "~3.0",
         "cyber-duck/laravel-excel": "^1.2",
         "fideloper/proxy": "~3.3",
+        "kalnoy/nestedset": "^4.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",

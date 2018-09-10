@@ -4,6 +4,11 @@
 
 @section( 'content' )
 
+  @component('back.components.printbutton')
+      <li class=""><a href="{{ route('students.profile', $student->id ) }}" class="btn btn-primary"><i class="fa fa-user"></i> Continuer vers son profile</a></li>
+  @endcomponent
+
+
 <section class="container">
 <div class="row">
   <div class="text-center col-xs-12">

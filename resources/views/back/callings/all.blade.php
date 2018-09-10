@@ -149,7 +149,7 @@ $("#table").on("click", ".btn-terminated", function(){
               $button.attr('disabled',true);
 
 
-                axios.put('/switch-terminated-calling/'+id,{
+                axios.post('/switch-terminated-calling/'+id,{
                   headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   }
@@ -193,7 +193,7 @@ $("#table").on("blur", ".text-result", function(){
               $txt.attr('disabled',true);
 
 
-                axios.put('/write-result-calling/'+id,{
+                axios.post('/write-result-calling/'+id,{
                   headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   },

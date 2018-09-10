@@ -30,5 +30,8 @@ class DatabaseSeeder extends Seeder
         $this->call(FournitureSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(SubjectSeeder::class);
+
+
+        $this->call(CMSeeder::class);
     }
 }

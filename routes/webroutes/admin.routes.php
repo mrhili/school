@@ -9,5 +9,5 @@ Route::get('/admin-home', 'AdminController@home')->name('admins.home');
 
 Route::get('/months-bd', 'HomeController@monthsBD')->name('home.months-bd');
 
-Route::put('/valid-course/{course}', 'CourseyearsubclassController@valid')->name('courses.valid');
-Route::put('/valid-test/{test}', 'TestyearsubclassController@valid')->name('tests.valid');
+Route::post('/valid-course/{course}', 'CourseyearsubclassController@valid')->name('courses.valid');
+Route::post('/valid-test/{test}', 'TestyearsubclassController@valid')->name('tests.valid');

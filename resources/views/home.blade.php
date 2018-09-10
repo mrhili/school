@@ -827,7 +827,7 @@ axios.get('/months-bd/')
       $this = $(this);
       $this.attr('disabled', true);
 
-      axios.put('/valid-course/'+ $this.attr('data-id'),{
+      axios.post('/valid-course/'+ $this.attr('data-id'),{
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -869,7 +869,7 @@ btnvalidetest.click(function(e){
   $this = $(this);
   $this.attr('disabled', true);
 
-  axios.put('/valid-test/'+ $this.attr('data-id'),{
+  axios.post('/valid-test/'+ $this.attr('data-id'),{
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }

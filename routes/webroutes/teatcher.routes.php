@@ -8,7 +8,7 @@ Route::get('/data-notes-by-class/{class}', 'NoteController@databyClass')->name('
 Route::get('/data-students-by-teatcher/{teatcher}', 'StudentController@dataByTeatcher')->name('students.by-teatcher');
 
 Route::get('/link-teatcher-subcourse-class', 'TeatchificationController@link')->name('teatcherifications.link');
-Route::put('/store-link-teatcher-subcourse-class/{teatcher}/{subject_the_class_id}', 'TeatchificationController@storeLink')->name('teatcherifications.store-link');
+Route::post('/store-link-teatcher-subcourse-class/{teatcher}/{subject_the_class_id}', 'TeatchificationController@storeLink')->name('teatcherifications.store-link');
 
 Route::get('/teatcher-home', 'TeatcherController@home')->name('teatchers.home');
 Route::get('/my-profile-as-teatcher', 'TeatcherController@myProfile')->name('teatchers.my-profile');
@@ -19,26 +19,26 @@ Route::post('/store-course', 'CourseController@store')->name('courses.store');
 //ading and linking sub course
 Route::get('/add-subcourse/{course}', 'SubcourseController@addSubCourse2Course')->name('subcourses.add-link');
 Route::post('/add-subcourse/{course}', 'SubcourseController@storeSubCourse2Course')->name('subcourses.store-link');
-Route::put('/link-subcourse/{course}/{subcourse}', 'SubcourseController@linkSubCourse2Course')->name('subcourses.link-course');
+Route::post('/link-subcourse/{course}/{subcourse}', 'SubcourseController@linkSubCourse2Course')->name('subcourses.link-course');
 
 //Before
 Route::post('/add-subcourse-before/{course}/{subcourse}', 'SubcourseController@storeSubCourse2CourseBefore')->name('subcourses.store-link-before');
-Route::put('/link-subcourse-before/{course}/{subcourse}/{subcourseBefore}', 'SubcourseController@linkSubCourse2CourseBefore')->name('subcourses.link-course-before');
+Route::post('/link-subcourse-before/{course}/{subcourse}/{subcourseBefore}', 'SubcourseController@linkSubCourse2CourseBefore')->name('subcourses.link-course-before');
 //After
 Route::post('/add-subcourse-after/{course}/{subcourse}', 'SubcourseController@storeSubCourse2CourseAfter')->name('subcourses.store-link-after');
-Route::put('/link-subcourse-after/{course}/{subcourse}/{subcourseAfter}', 'SubcourseController@linkSubCourse2CourseAfter')->name('subcourses.link-course-after');
+Route::post('/link-subcourse-after/{course}/{subcourse}/{subcourseAfter}', 'SubcourseController@linkSubCourse2CourseAfter')->name('subcourses.link-course-after');
 //Repace
 
 Route::post('/replace-subcourse/{course}/{subcourse}', 'SubcourseController@storeSubCourse2CourseAndDetachSubcourse')->name('subcourses.replace-new');
-Route::put('/replace-link-subcourse/{course}/{subcourse}/{detach}', 'SubcourseController@linkSubCourse2CourseAndDetachSubcourse')->name('subcourses.replace-link');
+Route::post('/replace-link-subcourse/{course}/{subcourse}/{detach}', 'SubcourseController@linkSubCourse2CourseAndDetachSubcourse')->name('subcourses.replace-link');
 
 
 //Delete
-Route::delete('/detach-subcourse-from-course/{course}/{subcourse}', 'SubcourseController@detachSubcourseFromCourse')->name('subcourses.detach');
-Route::delete('/destroy-subcourse/{subcourse}', 'SubcourseController@destroy')->name('subcourses.destroy');
+Route::post('/detach-subcourse-from-course/{course}/{subcourse}', 'SubcourseController@detachSubcourseFromCourse')->name('subcourses.detach');
+Route::post('/destroy-subcourse/{subcourse}', 'SubcourseController@destroy')->name('subcourses.destroy');
 
-Route::put('/request-valid-course/{course}', 'CourseyearsubclassController@requestValidation')->name('courses.request-validation');
-Route::put('/request-valid-test/{test}', 'TestyearsubclassController@requestValidation')->name('tests.request-validation');
+Route::post('/request-valid-course/{course}', 'CourseyearsubclassController@requestValidation')->name('courses.request-validation');
+Route::post('/request-valid-test/{test}', 'TestyearsubclassController@requestValidation')->name('tests.request-validation');
 //--------------------------------//
 
 Route::get('/classes', 'TheClassController@list')->name('classes.list');

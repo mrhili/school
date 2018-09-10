@@ -130,7 +130,7 @@ $("#table").on("click", ".btn-report", function(){
               $button.attr('disabled',true);
 
 
-                axios.put('/reporte-obs/'+id,{
+                axios.post('/reporte-obs/'+id,{
                   headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   }

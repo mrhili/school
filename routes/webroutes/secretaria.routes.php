@@ -29,7 +29,7 @@ Route::get('/meeting-management/{meetingpopulating}', 'MeetingpopulatingControll
 
 Route::get('/data-meeting-management/{meetingpopulating}', 'MeetingpopulatingController@dataManage')->name('meetingpopulatings.data-manage');
 
-Route::put('/switch-present/{m}', 'MeetingpopulatingController@switchPresent')->name('meetingpopulatings.switch-present');
+Route::post('/switch-present/{m}', 'MeetingpopulatingController@switchPresent')->name('meetingpopulatings.switch-present');
 
 Route::get('/meetingtypes', 'MeetingtypeController@list')->name('meetingtypes.list');
 Route::post('/store-meetingtype', 'MeetingtypeController@store')->name('meetingtypes.store');
@@ -52,8 +52,10 @@ Route::get('/etudients', 'StudentController@all')->name('students.all');
 Route::get('/valider-etudients', 'StudentController@validaTheme')->name('students.validat-them');
 Route::get('/data-valider-etudients', 'StudentController@dataValidaTheme')->name('students.data-validat-them');
 
-Route::put('/valider-les-etidants-put', 'StudentController@putValidaTheme')->name('students.put-validat-them');
 
+Route::post('/valider-les-etidants-put', 'StudentController@putValidaTheme')->name('students.put-validat-them');
+Route::post('/suprimer-les-etidants-en-attente', 'StudentController@delThem')->name('students.del-them');
+///
 Route::get('/add-student', 'StudentController@add')->name('students.add');
 Route::post('/store-student', 'StudentController@store')->name('students.store');
 
@@ -63,14 +65,12 @@ Route::post('/store-parent', 'ParentController@store')->name('parents.store');
 Route::get('/students/{class}', 'StudentController@byClass')->name('students.by-class');
 Route::get('/students-data-by-class/{class}', 'StudentController@dataByClass')->name('students.data-by-class');
 
-
-
 Route::get('/parents', 'ParentController@all')->name('parents.all');
 
 /********HUMAN CLASS**************/
 
 Route::get('/change-class-4-stud/{student}', 'TheClassController@change4StudentPage')->name('classes.change-4-student-page');
-Route::put('/change-class-4-stud/{student}', 'TheClassController@change4Student')->name('classes.change-4-student');
+Route::post('/change-class-4-stud/{student}', 'TheClassController@change4Student')->name('classes.change-4-student');
 
 /***********CALLING*************/
 
@@ -80,11 +80,11 @@ Route::post('/store-new-call/{parent?}', 'CallingController@storeNew')->name('ca
 Route::get('/callings', 'CallingController@all')->name('callings.all');
 Route::get('/data-callings', 'CallingController@dataAll')->name('callings.data-all');
 
-Route::put('/switch-terminated-calling/{c}', 'CallingController@switchTerminatedCalling')->name('callings.switch-terminated-calling');
-  Route::put('/write-result-calling/{c}', 'CallingController@writeResultCalling')->name('callings.write-result-calling');
+Route::post('/switch-terminated-calling/{c}', 'CallingController@switchTerminatedCalling')->name('callings.switch-terminated-calling');
+  Route::post('/write-result-calling/{c}', 'CallingController@writeResultCalling')->name('callings.write-result-calling');
   Route::get('/edit-calling/{calling}', 'CallingController@editCalling')->name('callings.edit');
   Route::get('/delete-calling/{calling}', 'CallingController@deleteCalling')->name('callings.delete');
-  Route::put('/update-calling/{calling}', 'CallingController@updateCalling')->name('callings.update');
+  Route::post('/update-calling/{calling}', 'CallingController@updateCalling')->name('callings.update');
 
 
 
@@ -99,7 +99,7 @@ Route::post('/store-fourniture', 'FournitureController@store')->name('fourniture
 /********************Demande Fourniture******************************/
 
 Route::get('/demandefourniture-list', 'DemandefournitureController@list')->name('demandefournitures.list');
-Route::put('/accepte-demande-fourniture/{demande}', 'DemandefournitureController@accept')->name('demandefournitures.accept');
+Route::post('/accepte-demande-fourniture/{demande}', 'DemandefournitureController@accept')->name('demandefournitures.accept');
 Route::get('/demandefourniture-load', 'DemandefournitureController@loadDataAjax')->name('demandefournitures.loaddata');
 
 /****************ROOMS*************/

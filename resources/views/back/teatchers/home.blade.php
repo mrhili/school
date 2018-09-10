@@ -424,7 +424,7 @@
       $this = $(this);
       $this.attr('disabled', true);
 
-      axios.put('/request-valid-course/'+ $this.attr('data-id'),{
+      axios.post('/request-valid-course/'+ $this.attr('data-id'),{
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -479,7 +479,7 @@
           $this = $(this);
           $this.attr('disabled', true);
 
-          axios.put('/request-valid-test/'+ $this.attr('data-id'),{
+          axios.post('/request-valid-test/'+ $this.attr('data-id'),{
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }

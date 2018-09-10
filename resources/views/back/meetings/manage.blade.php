@@ -228,7 +228,7 @@ if( $('#form').valid() ){
               id = $('#idfield').val();
 
 
-              axios.put('/modify-note/'+id,{
+              axios.post('/modify-note/'+id,{
                 headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -284,7 +284,7 @@ $("#table").on("click", ".btn-present", function(){
               $button.attr('disabled',true);
 
 
-                axios.put('/switch-present/'+id,{
+                axios.post('/switch-present/'+id,{
                   headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   }

@@ -198,7 +198,7 @@ sendform.on("click", function(e){
 return response()->json(['id' => $fourniture->id, 'name' => $fourniture->name, 'average_price' => $fourniture->average_price, 'howmany' => $howmany ,'totalmoney' => $totalmoney ]);
 */
 
-    axios.put('/accepte-demande-fourniture/' + window.wichone,{
+    axios.post('/accepte-demande-fourniture/' + window.wichone,{
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },

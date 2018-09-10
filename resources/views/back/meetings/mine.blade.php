@@ -238,7 +238,7 @@ if( $('#form').valid() ){
               id = $('#idfield').val();
 
 
-              axios.put('/modify-note/'+id,{
+              axios.post('/modify-note/'+id,{
                 headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },

@@ -148,7 +148,7 @@ var comment, hidden_note, name;
               teatcher_id = teatcher.val();
               subject_id = subject.val();
 
-                    axios.put('/store-link-teatcher-subcourse-class/'+ teatcher_id +'/'+ subject_id,{
+                    axios.post('/store-link-teatcher-subcourse-class/'+ teatcher_id +'/'+ subject_id,{
                         headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },

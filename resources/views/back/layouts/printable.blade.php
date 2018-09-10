@@ -36,17 +36,7 @@
 
 <body>
 
-  <nav class="navbar navbar-fixed-top hidden-print">
-    <div class="container">
-      <ul class="nav navbar-nav">
-        <li class=""><button class="btn btn-primary printnow"><i class="fa fa-print"></i> Imprimer</button></li>
-      </ul>
-      <ul class="nav navbar-right">
-        <li class=""><a href="{{ route('students.profile', $student->id ) }}" class="btn btn-primary"><i class="fa fa-user"></i> Continuer vers son profile</a></li>
-      </ul>
 
-    </div>
-  </nav>
 
 
   @yield('content')

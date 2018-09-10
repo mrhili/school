@@ -106,6 +106,34 @@ class StudentController extends Controller
       ->make(true);
     }
 
+
+    //delThem
+
+    public function delThem(Request $request){
+
+
+
+
+            $ids = json_decode( $request->ids , False );
+
+            $students = User::findMany($ids);
+
+
+
+            foreach($students as $student){
+
+              $delStudent = User::find( $student->id );
+
+              $delStudent->delete();
+
+            }
+
+            return response()->json(true);
+    }
+
+
+
+/******************/
     public function putValidaTheme(Request $request){
 
       $array = array_except( $request->toarray(), [
@@ -158,6 +186,8 @@ class StudentController extends Controller
 
             }
 
+            return response()->json(true);
+
 
     }
 
@@ -182,8 +212,6 @@ class StudentController extends Controller
                     ]
                   ]
                 ]
-
-
               ]
             ]
 

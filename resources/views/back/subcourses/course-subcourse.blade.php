@@ -411,7 +411,7 @@ $items.on( "click", '.bttn-soft-delete', function() {
   id = $(this).attr('data-id');
 
 
-  axios.delete('/detach-subcourse-from-course/'+courseId+'/'+id)
+  axios.post('/detach-subcourse-from-course/'+courseId+'/'+id)
                 .then(function (response) {
 
                   $(this).attr('disabled', false);
@@ -441,7 +441,7 @@ $items.on( "click", '.bttn-delete', function() {
   id = $(this).attr('data-id');
 
 
-  axios.delete('/destroy-subcourse/'+ id)
+  axios.post('/destroy-subcourse/'+ id)
                 .then(function (response) {
 
                   $(this).attr('disabled', false);
@@ -526,7 +526,7 @@ if( $('#form-link-now').valid() ){
               $subcourseId = $subcoursefield.val();
 
               ///link-subcourse-before/{course}/{subcourse}/{subcourseBefore}
-              axios.put('/link-subcourse-before/'+courseId+'/'+ $subcourseId +'/' + window.subcourseId,{
+              axios.post('/link-subcourse-before/'+courseId+'/'+ $subcourseId +'/' + window.subcourseId,{
                 headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -655,7 +655,7 @@ if( $('#form-link-now').valid() ){
               $subcourseId = $subcoursefield.val();
 
               ///link-subcourse-before/{course}/{subcourse}/{subcourseBefore}
-              axios.put('/link-subcourse-after/'+courseId+'/'+ $subcourseId +'/' + window.subcourseId,{
+              axios.post('/link-subcourse-after/'+courseId+'/'+ $subcourseId +'/' + window.subcourseId,{
                 headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -970,7 +970,7 @@ if( $('#form-link-now').valid() ){
               $subcoursefield = $('#subcoursefield');
               $subcourseId = $subcoursefield.val();
 
-              axios.put('/replace-link-subcourse/'+courseId+'/'+$subcourseId+'/'+ window.subcourseId,{
+              axios.post('/replace-link-subcourse/'+courseId+'/'+$subcourseId+'/'+ window.subcourseId,{
                 headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -1101,7 +1101,7 @@ if( $('#form-link-now').valid() ){
               $subcoursefield = $('#subcoursefield');
               $subcourseId = $subcoursefield.val();
 
-              axios.put('/link-subcourse/'+courseId+'/'+ $subcourseId,{
+              axios.post('/link-subcourse/'+courseId+'/'+ $subcourseId,{
                 headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },

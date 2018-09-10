@@ -25,6 +25,7 @@
     @endslot
 
         <button class="btn btn-danger btn-xs btn-send"  data-toggle='modal' data-target='#modal'> Confirmer les etudiants</button>
+        <button class="btn btn-danger btn-xs pull-right" id="btn-del"> Suprimer les etudiants</button>
       <br />
       <br />
 
@@ -197,6 +198,8 @@
 
     $send = $("#send-form");
 
+    $delbtn = $("#btn-del");
+
     $modal = $("#modal");
 
     $( "body" ).delegate( ".pagination a", "click", function() {
@@ -214,15 +217,25 @@
 
         if( $('#form').valid()){
 
-          axios.put( "/valider-les-etidants-put" ,{
+          axios.post( "/valider-les-etidants-put" ,{
+            //mode: 'no-cors'
+            /*
+            mode: 'no-cors',
+            withCredentials: false,
+            credentials: 'same-origin',
+            */
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*',
+              /*'Content-Type': 'application/json',
+              'crossDomain': true
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+
               'Access-Control-Allow-Credentials' : false,
               'Access-Control-Allow-Methods':'GET',
-              'Access-Control-Allow-Headers':'application/json',
+              'Access-Control-Allow-Headers':'application/json',*/
             },
             ids: JSON.stringify( window.ids ),
             class: $('#class').val(),
@@ -249,6 +262,8 @@
               $("#table tr.selected").remove();
               window.ids = [];
 
+              alert('action reussie');
+
             }).catch(function(error) {
 
               $send.attr('disabled', false);
@@ -261,6 +276,7 @@
 
         }else{
           alert("form not valid");
+          $send.attr('disabled', false);
         }
 
 
@@ -309,6 +325,67 @@
 
         }
       });
+
+
+
+/*************************************************************************************************************/
+
+
+
+    $delbtn.click(function(){
+
+      $delbtn.attr('disabled', true);
+
+      if ( window.ids.length > 0 ) {
+
+          axios.post( "/suprimer-les-etidants-en-attente" ,{
+            //mode: 'no-cors'
+            /*
+            mode: 'no-cors',
+            withCredentials: false,
+            credentials: 'same-origin',
+            */
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+              'Access-Control-Allow-Origin': '*',
+              /*'Content-Type': 'application/json',
+              'crossDomain': true
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+
+              'Access-Control-Allow-Credentials' : false,
+              'Access-Control-Allow-Methods':'GET',
+              'Access-Control-Allow-Headers':'application/json',*/
+            },
+            ids: JSON.stringify( window.ids ),
+
+          }).then(function(response) {
+
+
+
+            $delbtn.attr('disabled', false);
+
+              $("#table tr.selected").remove();
+              window.ids = [];
+
+              alert('action reussie');
+
+
+            }).catch(function(error) {
+
+              $delbtn.attr('disabled', false);
+
+              alert(error);
+              console.log(error);
+
+            });
+
+      }else{
+        alert("empty");
+        $delbtn.attr('disabled', false);
+      }
+    });
 
 
 
