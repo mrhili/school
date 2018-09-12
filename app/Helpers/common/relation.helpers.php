@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Helpers\Common;
+use Illuminate\Http\Request;
 use File;
 
 use App\Helpers\Config\Setting;
@@ -35,6 +36,36 @@ use Session;
 use Carbon;
 use Auth;
 class Relation {
+
+    public static function linkClass2Subj(TheClass $class, Fourniture $fourniture, Request $request ){
+
+
+              $pivot = $class->fournitures()->attach( $fourniture->id );
+
+              $admin = User::find( Auth::id() );
+
+              $creation = [
+
+                  'id_link' => $fourniture->id,
+                  'comment' => $request->comment,
+                  'info' => 'just talk',
+                  'hidden_note' => $request->hidden_note,
+                  'by-admin' => $admin->id,
+
+                  'category_history_id' => 24,
+                  'class' => 'success',
+                  //'id_link' => $request->id_link,
+
+                  ];
+
+              $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .
+              '</strong> a ajouté une fourniture qui porte le nom <strong>'.
+              $fourniture->name.' </strong> au class qui porte le nom' . $class->name . ' </strong>.'  ;
+
+              History::create( $creation );
+
+              self::fillStudentsFournituration( $class, $fourniture  );
+    }
 
   public static function testsYouShouldStart(User $student ){
 

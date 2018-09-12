@@ -48,9 +48,112 @@ use ArrayHolder;
 
 use Hash;
 
+
+
 class StudentController extends Controller
 {
-    //validate Theme
+
+    public function profileByClass(TheClass $class){
+
+      $students = $class->students;
+
+      return view('back.students.all', compact( 'students' ));
+    }
+
+    public function correctNumberInEmail()
+    {
+        $stds = User::where('role', 1)->get();
+
+        foreach($stds as $s){
+
+          $pretendedEmail = str_slug( $s->name.'-'. $s->last_name , '-');
+          $bones = '@fa.com';
+
+          while( !User::where('email', $pretendedEmail.$bones ) ){
+
+            $pretendedEmail .= rand( 0, 9 );
+
+          }
+
+          $s->email = $pretendedEmail.$bones;
+
+          $s->save();
+
+        }
+
+        return "success";
+
+
+    }
+
+    public function correct()
+    {
+        $stds = User::where('role', 1)->get();
+
+        foreach($stds as $s){
+
+          $s->email = str_replace( "fa.com" ,"@fa.com" , $s->email );
+
+          $s->save();
+
+        }
+
+        return "success";
+
+
+    }
+
+
+
+    //
+    public function loginByClass($class){
+
+    	$class = TheClass::find($class);
+
+        $users = User::pluck('name', 'id');
+
+    	return view('back.students.login-by-class', compact('class', 'users'));
+
+    }
+
+    public function dataLoginByClass($class){
+
+    	$theclass = TheClass::find($class);
+
+        $year = Session::get('yearId');
+
+        return Datatables::of(User::where('role', 1)->where('the_class_id', $class)->get() )
+
+
+            ->editColumn('site', function( $model ){
+
+               return route('index');
+
+           })
+            ->editColumn('nomcomplet', function( $model ){
+
+             return $model->name . ' '. $model->last_name;
+
+         })
+
+        ->editColumn('email', function( $model ) use($year, $theclass){
+
+          return $model->email;
+
+
+        })
+        ->editColumn('password', function( $model ) use($year, $theclass){
+
+            return $model->password;
+
+        })
+
+        ->make(true);
+
+    }
+
+
+
 
     public function importExcel(){
 
@@ -193,8 +296,6 @@ class StudentController extends Controller
 
     public function docs($selected=null){
         /****************/
-
-
 
         $array =
         [

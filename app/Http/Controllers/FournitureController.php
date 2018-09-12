@@ -134,7 +134,7 @@ class FournitureController extends Controller
 
         $class = TheClass::find($class);
 
-        $fournitures = $class->fournitures;
+        $fournitures = $class->fournitures()->paginate( 10 );
 
         $fournituresMines = $class->fournitures->pluck('id')->toArray();
 
@@ -155,31 +155,7 @@ class FournitureController extends Controller
 
         $fourniture = Fourniture::find( $fourniture_id );
 
-        $pivot = $the_class->fournitures()->attach( $fourniture_id );
-
-        $admin = User::find( Auth::id() );
-
-        $creation = [
-
-            'id_link' => $fourniture->id,
-            'comment' => $request->comment,
-            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
-            'info' => 'just talk',
-            'hidden_note' => $request->hidden_note,
-            'by-admin' => $admin->id,
-
-            'category_history_id' => 24,
-            'class' => 'success',
-            //'id_link' => $request->id_link,
-
-            ];
-
-        $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a ajouté une fourniture qui porte le nom <strong>'.$fourniture->name.' </strong> au class qui porte le nom' . $the_class->name . ' </strong>.'  ;
-
-        History::create( $creation );
-
-        Relation::fillStudentsFournituration( $the_class, $fourniture  );
-
+        Relation::linkClass2Subj($the_class, $fourniture, $request);
 
 
         if( $fourniture ){

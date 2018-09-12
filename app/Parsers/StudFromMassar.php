@@ -6,11 +6,23 @@ use Cyberduck\LaravelExcel\Contract\ParserInterface;
 
 class StudFromMassar implements ParserInterface
 {
+
     public function transform($row, $header)
     {
 
       $model = new User();
 
+
+      $pretendedEmail = str_slug( $row[3].'-'.$row[4] , '-');
+      $bones = '@fa.com';
+
+      while( !User::where('email', $pretendedEmail.$bones ) ){
+
+        $pretendedEmail .= rand(0, 9);
+
+      }
+
+      $model->email = $pretendedEmail.$bones;
       $model->zip_code = $row[0];
       $model->massarid = $row[1];
       $model->last_name = $row[2];
@@ -24,19 +36,6 @@ class StudFromMassar implements ParserInterface
       }
 
       $model->role = 1.0;
-
-      $pretendedEmail = str_slug( $model->name.'-'.$model->last_name , '-');
-
-      $bones = 'fa.com';
-      if (! User::where('email', $pretendedEmail ) ){
-        $pretendedEmail .= $bones;
-        $model->email = $pretendedEmail;
-      }else{
-        $pretendedEmail .= rand(0, 99);
-        $pretendedEmail .= $bones;
-        $model->email = $pretendedEmail;
-      }
-
       $model->password = bcrypt('987654321');
 
       $model->save();

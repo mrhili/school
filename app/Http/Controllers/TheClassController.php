@@ -7,17 +7,53 @@ use App\{
   User,
   Student,
   StudentsPayment,
+  Fourniture,
   Fournituration,
   History,
   Testyearsubclass,
   Subjectclass,
-  Note
+  Note,
+  Subject
 
 };
 use Illuminate\Http\Request;
+use Relation;
+
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TheClassController extends Controller
 {
+
+    public function multipleFournitures()
+    {
+      $classes = TheClass::get(['id','name'])->pluck('name','id')->toArray();
+      $fournitures = Fourniture::get(['id','name'])->pluck('name','id')->toArray();
+
+      return view('back.classes.four-multi', compact('classes','fournitures') );
+    }
+
+    public function storeMultipleFournitures(Request $request)
+    {
+
+      foreach ($request->classes as $class) {
+
+        $class = TheClass::find( $class );
+
+        foreach ( $request->fournitures as $fourniture ) {
+
+          $fourniture = Fourniture::find( $fourniture );
+
+          Relation::linkClass2Subj($class, $fourniture, $request );
+
+          Alert::success('Les classes en etait bien link', 'Success Message');
+
+          return back();
+        }
+
+      }
+
+      //return dd($request->subjects, $request->classes );
+    }
     /**
      * Display a listing of the resource.
      *

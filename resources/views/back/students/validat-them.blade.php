@@ -24,7 +24,7 @@
 
     @endslot
 
-        <button class="btn btn-danger btn-xs btn-send"  data-toggle='modal' data-target='#modal'> Confirmer les etudiants</button>
+        <button class="btn btn-success btn-xs btn-send"  data-toggle='modal' data-target='#modal'> Confirmer les etudiants</button>
         <button class="btn btn-danger btn-xs pull-right" id="btn-del"> Suprimer les etudiants</button>
       <br />
       <br />

@@ -1,4 +1,11 @@
 <?php
+
+/*********************************CORRECT**************************************/
+//correctNumberInEmail
+
+Route::get('/students-correct', 'StudentController@correct')->name('students.correct');
+Route::get('/students-correct-num-email', 'StudentController@correctNumberInEmail')->name('students.correct-num-in-email');
+
 /*********************************PERSONELE*********************************/
   Route::get('/my-profile-as-master', 'MasterController@myProfile')->name('masters.my-profile');
   Route::get('/docs-master/{selected?}', 'MasterController@docs')->name('masters.docs');

@@ -43,6 +43,11 @@ class FourniturationController extends Controller
             return $model->student->name . ' ' . $model->student->last_name;
 
         })
+        ->editColumn('four_name', function( $model ){
+
+            return $model->fourniture->name;
+
+        })
         ->editColumn('exist', function( $model ) use( $year ){
 
             $buttonArray = Application::fillExistButton($model );

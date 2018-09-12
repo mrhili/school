@@ -14,6 +14,9 @@ Route::get('/secretaria-home', 'SecretariaController@home')->name('secretarias.h
 Route::get('/printable-sheet-new-student-with-parent/{student}/{parent}', 'PrintableController@printableSheeNewStudentWithParent')->name('printables.new-student-with-parent');
 
 Route::get('/printable-sheet-new-worker/{worker}', 'PrintableController@printableSheeNewWorker')->name('printables.new-worker');
+/*********************************CLASSES*************************************************************/
+
+
 
 /**********************************Claendar teatchifications****************************************/
 
@@ -62,10 +65,12 @@ Route::post('/store-student', 'StudentController@store')->name('students.store')
 Route::get('/add-parent/{student?}', 'ParentController@add')->name('parents.add');
 Route::post('/store-parent', 'ParentController@store')->name('parents.store');
 
-Route::get('/students/{class}', 'StudentController@byClass')->name('students.by-class');
-Route::get('/students-data-by-class/{class}', 'StudentController@dataByClass')->name('students.data-by-class');
-
 Route::get('/parents', 'ParentController@all')->name('parents.all');
+
+/************LOGIN*******************************/
+
+Route::get('/students-login/{class}', 'StudentController@loginByClass')->name('students.login-by-class');
+Route::get('/students-data-login-by-class/{class}', 'StudentController@dataLoginByClass')->name('students.data-login-by-class');
 
 /********HUMAN CLASS**************/
 
@@ -96,6 +101,12 @@ Route::post('/link-fourniture-class/{class}/{fourniture_id}', 'FournitureControl
 
 Route::get('/fournitures', 'FournitureController@list')->name('fournitures.list');
 Route::post('/store-fourniture', 'FournitureController@store')->name('fournitures.store');
+
+//classes.multiple-fours
+
+Route::get('/linker-multiple-fours-au-classes', 'TheClassController@multipleFournitures')->name('classes.multiple-fours');
+Route::post('/store-multiple-fours-au-classes', 'TheClassController@storeMultipleFournitures')->name('classes.store-multiple-fours');
+
 /********************Demande Fourniture******************************/
 
 Route::get('/demandefourniture-list', 'DemandefournitureController@list')->name('demandefournitures.list');
@@ -126,7 +137,8 @@ Route::post('/store-objct/{room}/{objctype}', 'ObjctController@store')->name('ob
 Route::post('/add-payment-student/{id}/{payment}/{month}/{year}/{class}', 'StudentsPaymentController@addPayment')->name('students.add-payment');
 Route::post('/add-payment-user/{id}/{payment}/{month}/{year}', 'UserspaymentController@addPayment')->name('users.add-payment');
 
-
+Route::get('/students/{class}', 'StudentController@byClass')->name('students.by-class');
+Route::get('/students-data-by-class/{class}', 'StudentController@dataByClass')->name('students.data-by-class');
 
 /**********************SUBJECT*****************/
 

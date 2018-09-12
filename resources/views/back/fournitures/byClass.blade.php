@@ -96,6 +96,8 @@
 
 </div>
 
+{{ $fournitures->links()  }}
+
 
 
 
@@ -118,6 +120,7 @@ Eleves et founitures
             <thead>
                 <tr>
                     <th>nom d'eleve</th>
+                    <th>nom de la fourniture</th>
                     <th>exist</th>
                     <th>confirmed</th>
                     <th>rejected</th>
@@ -170,6 +173,7 @@ $(function() {
         columns: [
 
             { data: 'name', name: '' },
+            { data: 'four_name', name: '' },
             { data: 'exist', name: '' },
             { data: 'confirmed', name: '' },
             { data: 'rejected', name: '' }
@@ -193,12 +197,6 @@ var the_class = {{ $class->id }};
 var comment, hidden_note, name;
 
 $(document).ready(function(){
-
-
-
-
-
-
 
 
 
@@ -429,10 +427,6 @@ $("#table").on("click", ".btn-rejected", function(){
 
 
   });
-
-
-
-
 
 
 

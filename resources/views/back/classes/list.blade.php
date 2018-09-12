@@ -2,14 +2,6 @@
 
 
 
-
-
-
-
-
-
-
-
 @section('styles')
 
 
@@ -47,6 +39,74 @@ The Main Configuration Of the web application
   @slot('sectionPlain')
 
 
+
+    <div class="row">
+    <div class="col-xs-12">
+
+        <h3>Profils</h3>
+
+        @foreach($classes as $class)
+                <div class="col-lg-4 col-xs-6">
+                      <div class="info-box bg-yellow ">
+                        <span class="info-box-icon"><i class="fa fa-hashtag"></i></span>
+
+                        <div class="info-box-content">
+                          <span class="info-box-text">{{ $class->name }}</span>
+                          <span class="info-box-number">5,200</span>
+
+                          <div class="progress">
+                            <div class="progress-bar" style="width: 50%"></div>
+                          </div>
+                          <span class="progress-description">
+                                <a href="{{ route('students.profile-by-class', $class->id) }}">lISTER Le Profile des etudiants <i class="fa fa-arrow-circle-right"></i></a>
+                              </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                      </div>
+
+                </div>
+
+        @endforeach
+    </div>
+    </div>
+        <hr />
+
+<div class="row">
+<div class="col-xs-12">
+
+    <h3>Login</h3>
+
+    @foreach($classes as $class)
+            <div class="col-lg-4 col-xs-6">
+                  <div class="info-box bg-yellow ">
+                    <span class="info-box-icon"><i class="fa fa-hashtag"></i></span>
+
+                    <div class="info-box-content">
+                      <span class="info-box-text">{{ $class->name }}</span>
+                      <span class="info-box-number">5,200</span>
+
+                      <div class="progress">
+                        <div class="progress-bar" style="width: 50%"></div>
+                      </div>
+                      <span class="progress-description">
+                            <a href="{{ route('students.login-by-class', $class->id) }}">lISTER Le LOGIN DES ETUDIANTS <i class="fa fa-arrow-circle-right"></i></a>
+                          </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+
+            </div>
+
+    @endforeach
+</div>
+</div>
+    <hr />
+
+
+
+
+<div class="row">
+<div class="col-xs-12">
         <h3>Notes</h3>
 
         @foreach($classes as $class)
@@ -71,9 +131,15 @@ The Main Configuration Of the web application
                 </div>
 
         @endforeach
+</div>
+      </div>
+          <hr />
 
-        <hr />
 
+
+
+      <div class="row">
+<div class="col-xs-12">
 
     <h3>Emploi de temps</h3>
 
@@ -99,10 +165,16 @@ The Main Configuration Of the web application
             </div>
 
     @endforeach
+</div>
+  </div>
+      <hr />
 
-    <hr />
 
-<h3>Students</h3>
+
+
+  <div class="row">
+<div class="col-xs-12">
+<h3>Payements</h3>
 
 @foreach($classes as $class)
         <div class="col-lg-4 col-xs-6">
@@ -126,9 +198,15 @@ The Main Configuration Of the web application
         </div>
 
 @endforeach
+</div>
+</div>
+    <hr />
 
-<hr />
 
+
+
+<div class="row">
+<div class="col-xs-12">
 
 
 
@@ -156,9 +234,16 @@ The Main Configuration Of the web application
         </div>
 
 @endforeach
+</div>
+</div>
 
-<hr />
+    <hr />
 
+
+
+
+<div class="row">
+<div class="col-xs-12">
 <h3>Fournitures</h3>
 
 @foreach($classes as $class)
@@ -183,7 +268,25 @@ The Main Configuration Of the web application
         </div>
 
 @endforeach
-
+</div>
+</div>
+<hr />
+  <div class="row">
+    <div class="col-lg-4 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+        <div class="inner">
+          <h3>Four et classes</h3>
+          <p><a href="#">Linker plusieru fourniture a plusieur classes</a></p>
+        </div>
+        <div class="icon">
+          <i class="fa fa-list-ol"></i>
+        </div>
+        <a href="{{ route('classes.multiple-fours') }}" class="small-box-footer">Linker plusieru fourniture a plusieur classes<i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+  </div>
+<hr />
 
 
   @endslot

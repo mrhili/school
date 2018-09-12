@@ -1,6 +1,8 @@
 <?php
-Route::get('/docs-teatcher/{selected?}', 'TeatcherController@docs')->name('teatcher.docs');
+//
+Route::get('/profile-students/{class}', 'StudentController@profileByClass')->name('students.profile-by-class');
 
+Route::get('/docs-teatcher/{selected?}', 'TeatcherController@docs')->name('teatcher.docs');
 
 Route::get('/notes-by-class/{class}', 'NoteController@byClass')->name('notes.by-class');
 Route::get('/data-notes-by-class/{class}', 'NoteController@databyClass')->name('notes.data-by-class');
