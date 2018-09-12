@@ -1,4 +1,4 @@
-{!! Form::model(Auth::user(),[ 'method' => 'put', 'route'=> ['users.change-info', Auth::id() ], 'class' => 'form-horizontal' ]) !!}
+{!! Form::model(Auth::user(),[ 'method' => 'post', 'route'=> ['users.change-info', Auth::id() ], 'class' => 'form-horizontal' ]) !!}
 
     {{ csrf_field() }}
 

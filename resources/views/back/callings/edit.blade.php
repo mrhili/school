@@ -11,7 +11,7 @@
 
 @section('content')
 
-{!! Form::model($calling,['route' => ['callings.update', $calling->id], 'method' => 'put' ,'class' => 'form-horizontal']) !!}
+{!! Form::model($calling,['route' => ['callings.update', $calling->id], 'method' => 'post' ,'class' => 'form-horizontal']) !!}
 
 @component('back.components.plain')
 

@@ -74,7 +74,7 @@ Route::get('/students-data-login-by-class/{class}', 'StudentController@dataLogin
 
 /********HUMAN CLASS**************/
 
-Route::get('/change-class-4-stud/{student}', 'TheClassController@change4StudentPage')->name('classes.change-4-student-page');
+Route::get('/change-class-4-stud-page/{student}', 'TheClassController@change4StudentPage')->name('classes.change-4-student-page');
 Route::post('/change-class-4-stud/{student}', 'TheClassController@change4Student')->name('classes.change-4-student');
 
 /***********CALLING*************/

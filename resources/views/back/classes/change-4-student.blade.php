@@ -22,7 +22,7 @@ L'année selectionée est {{ Session::get('yearId') }}
 @endsection
 
 @section('content')
-  {!! Form::open(['route' => ['classes.change-4-student', $student->id], 'files' => true, 'method' => 'put' ,'class' => 'form-horizontal']) !!}
+  {!! Form::open(['route' => ['classes.change-4-student', $student->id], 'files' => true, 'method' => 'post' ,'class' => 'form-horizontal']) !!}
 
   @component('back.components.plain')
 
