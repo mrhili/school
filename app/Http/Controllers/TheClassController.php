@@ -45,12 +45,14 @@ class TheClassController extends Controller
 
           Relation::linkClass2Subj($class, $fourniture, $request );
 
-          Alert::success('Les classes en etait bien link', 'Success Message');
 
-          return back();
         }
 
       }
+
+      Alert::success('Les classes en etait bien link', 'Success Message');
+
+      return back();
 
       //return dd($request->subjects, $request->classes );
     }
