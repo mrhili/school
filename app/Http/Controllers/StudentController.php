@@ -30,9 +30,9 @@ use Importer;
 
 use Yajra\Datatables\Datatables;
 
-use Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
-use Alert;
+use Auth;
 
 use Session;
 
@@ -52,6 +52,47 @@ use Hash;
 
 class StudentController extends Controller
 {
+
+    public function changeClass4ThemPage(){
+
+      $stds = User::where('role',1)->orderBy('the_class_id', 'asc')->get();
+
+      $students = [];
+
+      foreach($stds as $std){
+
+
+
+        $students[$std->id] = $std->the_class->name .' -> '.$std->name.' '.$std->last_name;
+
+      }
+
+
+      $classes = TheClass::get(['name', 'id'])->pluck('name', 'id');
+
+
+
+      return view('back.students.migration',compact('classes', 'students'));
+
+    }
+
+
+      public function changeClass4Them(Request $request){
+
+        foreach ($request->students as $student) {
+          // code...
+
+          $student = User::find( $student );
+
+          Relation::changeClass4Student($request, $student) ;
+        }
+
+        Alert::success('Success Title', 'Changement avec success');
+
+        return back();
+
+      }
+
 
     public function profileByClass(TheClass $class){
 
@@ -183,7 +224,7 @@ class StudentController extends Controller
 
     public function validaTheme(){
 
-      $classes = TheClass::pluck('name', 'id');
+      $classes = TheClass::get(['name', 'id'])->pluck('name', 'id');
 
       return view('back.students.validat-them', compact('classes') );
 
@@ -233,6 +274,8 @@ class StudentController extends Controller
 
             return response()->json(true);
     }
+
+
 
 
 

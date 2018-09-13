@@ -2,8 +2,6 @@
 
 @section('styles')
 
-
-
 @endsection
 
 @section('page_header')
@@ -323,6 +321,23 @@
 
 
 
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <div class="inner">
+              <h3>MG</h3>
+
+              <p><a href="#" class="text-white">Mighration groupé</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-graduation-cap"></i>
+            </div>
+            <a href="{{ route('students.migration') }}" class="small-box-footer">Ajouter un etudient maintenent <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+
+
     <!-- ./col -->
       </div>
 
@@ -422,8 +437,30 @@
         </div>
 
 
+
       </div>
       <!-- /.row -->
+    <div class="row">
+
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <div class="inner">
+              <h3>G L</h3>
+
+              <p><a href="{{ route('users.big-list') }}" class="text-white">Grduations</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-tachometer"></i>
+            </div>
+            <a href="#" class="small-box-footer">Ajouter un parent maintenent <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+
+    </div>
+    <!-- /.row -->
 
 <hr>
 <h2 class="text-center">Dashboard</h2>

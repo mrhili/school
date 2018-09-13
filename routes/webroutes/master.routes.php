@@ -20,6 +20,14 @@ Route::get('/students-correct-num-email', 'StudentController@correctNumberInEmai
 
   Route::get('/user-list-data', 'UserController@userlistdata')->name('users.userlistdata');
 
+
+/**************HUMAN GRADATION************************/
+
+Route::get('/big-list', 'UserController@bigList')->name('users.big-list');
+Route::get('/data-big-list', 'UserController@dataBigList')->name('users.data-big-list');
+Route::get('/gradation/{user}', 'UserController@gradation')->name('users.gradation');
+Route::post('/gradation-post/{user}', 'UserController@gradationPost')->name('users.grad-post');
+
 /**********************Configs*********************************/
 Route::get('/configs', 'ConfigController@index')->name('configs.index');
 Route::post('/configs/store', 'ConfigController@store')->name('configs.store');

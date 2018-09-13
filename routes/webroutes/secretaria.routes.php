@@ -1,6 +1,8 @@
 <?php
 
 
+
+
 Route::get('/docs-secretaria/{selected?}', 'SecretariaController@docs')->name('secretaria.docs');
 
 
@@ -15,7 +17,6 @@ Route::get('/printable-sheet-new-student-with-parent/{student}/{parent}', 'Print
 
 Route::get('/printable-sheet-new-worker/{worker}', 'PrintableController@printableSheeNewWorker')->name('printables.new-worker');
 /*********************************CLASSES*************************************************************/
-
 
 
 /**********************************Claendar teatchifications****************************************/
@@ -76,6 +77,11 @@ Route::get('/students-data-login-by-class/{class}', 'StudentController@dataLogin
 
 Route::get('/change-class-4-stud-page/{student}', 'TheClassController@change4StudentPage')->name('classes.change-4-student-page');
 Route::post('/change-class-4-stud/{student}', 'TheClassController@change4Student')->name('classes.change-4-student');
+
+
+Route::get('/changer-class-pour-eux-page', 'StudentController@changeClass4ThemPage')->name('students.migration');
+Route::post('/changer-class-pour-eux', 'StudentController@changeClass4Them')->name('students.migration-post');
+
 
 /***********CALLING*************/
 

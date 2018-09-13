@@ -201,7 +201,7 @@ return Datatables::of( Fournituration::where('student_id' , $child->id )->where(
         })
         ->editColumn('additional_info', function( $model ){
 
-            return $model->fourniture->additional_info;
+            return $model->fourniture->name;
 
         })
         ->editColumn('for', function( $model ){

@@ -284,6 +284,16 @@ class CatHistorySeed extends Seeder
             'role' => 1
         ]);//32
 
+        /****************Hna 3ad gadina l7ma9****************/
+
+        DB::table('history_categories')->insert([
+            'name' => 'Une Upgradation a etait effectué:',
+            'model' => 'User',
+            'icon' => 'user',
+            'kind' => 1,
+            'role' => 4
+        ]);//35
+
 
     }
 }

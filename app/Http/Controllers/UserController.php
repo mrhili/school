@@ -37,6 +37,109 @@ use Relation;
 class UserController extends Controller
 {
     //
+    public function bigList(){
+      return view('back.users.gradation-list');
+    }
+
+    public function dataBigList(){
+
+      return Datatables::of( User::where('role', '>' , 1)->get() )
+
+        ->editColumn('name', function( $model ){
+
+          return $model->name.' '.$model->last_name;
+     })
+
+     ->editColumn('role', function( $model ){
+
+          return ArrayHolder::roles( $model->role );
+    })
+
+    ->editColumn('grad', function( $model ){
+
+          return link_to_route('users.gradation', 'Graduation', [ $model->id ], ['class' => 'btn btn-info btn-circle', 'target' => '_blank']);
+
+     })
+
+     ->make(true);
+    }
+
+    public function gradation(User $user){
+      return view('back.users.gradation',compact('user'));
+    }
+
+    public function gradationPost(Request $request, User $user){
+
+      $old_role = $user->role;
+
+      $array = array_except( $request->all(), ['_token', 'should_be_payed', 'cnss', 'cnss_payment']);
+
+      if( $request->cnss ){
+
+          $array["cnss"] = true;
+
+
+      }else{
+          $array["cnss"] = false;
+      }
+
+
+
+
+       if( $user->update($array) ){
+
+
+                     $cnss_payment = ( $request->cnss ? $request->cnss_payment : 0 );
+
+                     Relation::fillUsersPayment($user->id, Session::get('yearId'), $request->should_be_payed, $cnss_payment );
+
+                     $user->fill_payment = true;
+
+                     $user->save();
+
+                     //$this->addStudentHistory();
+
+
+                     $creation = [
+
+                         'id_link' => $user->id,
+                         'comment' => $request->comment,
+                         'hidden_note' => $request->hidden_note,
+                         'by-admin' => Auth::id(),
+
+                         'category_history_id' => 35,
+                         'class' => 'success'
+                     ];
+
+                     $cnssSentence;
+                     if( $request->cnss ){
+                         $cnssSentence = 'avec la cnss sous lid <strong>'. $request->cnss_id .'</strong> avec de paiment montielle cnss <strong>'. $request->cnss_payment .'</strong>';
+                     }else{
+                         $cnssSentence = 'sans cnss';
+                     }
+
+
+
+                     $creation['info'] ="Un cadre a etait graduer depuis". ArrayHolder::roles( $old_role ) ." à  ".
+                      ArrayHolder::roles( $request->role ) .
+                     "</strong>qui porte le mnom <strong>".$user->name." ".$user->last_name.
+                     "</strong> ".$cnssSentence." et il doit a lecole chaque mois <strong>". $request->should_be_payed ."</strong>";
+
+
+                     History::create($creation);
+
+
+                     return redirect()->route('printables.new-worker', $user->id );
+
+
+       }
+
+
+
+
+    }
+
+
 
     public function userlist(){
       return view('back.users.userlist');
@@ -128,7 +231,8 @@ class UserController extends Controller
     public function store(UserRequest $request){
 
 
-    	$array = array_except( $request->all(), ['_token', 'password' ,'img','cv', 'family_situation', 'should_be_payed', 'cnss', 'cnss_payment']);
+    	$array = array_except( $request->all(), ['_token', 'password' ,'img','cv', 'family_situation',
+      'should_be_payed', 'cnss', 'cnss_payment', 'comment', 'hidden_note']);
 
 
     	if( $request->hasFile( 'img' ) ){
@@ -177,10 +281,6 @@ class UserController extends Controller
 
 	    if ($user) {
 
-            /*            $table->integer('should_pay')->default(350);
-            $table->integer('transport_pay')->default(350);
-            $table->integer('add_class_pay')->default(350);*/
-
             $cnss_payment = ( $request->cnss ? $request->cnss_payment : 0 );
 
             Relation::fillUsersPayment($user->id, Session::get('yearId'), $request->should_be_payed, $cnss_payment );
@@ -209,13 +309,6 @@ class UserController extends Controller
 
             ];
 
-            $transSentence;
-            if( $request->transport ){
-                $transSentence = '<strong>avec le transport</strong> sous ladress  <strong>'. $request->adress .'</strong>  avec un montant décider de <strong>'. $request->transport_pay .' dh</strong> par mois ';
-            }else{
-                $transSentence = '<strong>sans transport</strong> est sont adress est '. $request->adress;
-            }
-
             $cnssSentence;
             if( $request->cnss ){
                 $cnssSentence = 'avec la cnss sous lid <strong>'. $request->cnss_id .'</strong> avec de paiment montielle cnss <strong>'. $request->cnss_payment .'</strong>';
@@ -225,7 +318,15 @@ class UserController extends Controller
 
 
 
-            $creation['info'] = "Un nouveau <strong> ". ArrayHolder::roles( $request->role ) ."</strong>qui porte le mnom <strong>".$user->name." ".$user->last_name."</strong> a etait crée avec succes  est ses information personelle sont  => genre = <strong>". ArrayHolder::gender($user->gender)."</strong>, Numero de la carte = <strong>".$user->cin."</strong>, habite à <strong>".$user->city."</strong>, code postal = <strong>".$user->zip_code."</strong>, son adress est <strong>".$user->adress."</strong>, son telephone 1  = <strong>".$user->phone."</strong>, telephone 2  = <strong>".$user->phone2."</strong>, telephone 3  = <strong>".$user->phone3."</strong>, telephone fix = <strong>".$user->fix."</strong>, sa profession est <strong>".$user->profession."</strong>, sa cituation familiale est <strong>".$maried."</strong> ".$cnssSentence." et il doit a lecole chaque mois <strong>". $request->should_be_payed ."</strong>";
+            $creation['info'] = "Un nouveau <strong> ". ArrayHolder::roles( $request->role ) .
+            "</strong>qui porte le mnom <strong>".$user->name." ".$user->last_name.
+            "</strong> a etait crée avec succes  est ses information personelle sont  => genre = <strong>". ArrayHolder::gender($user->gender).
+            "</strong>, Numero de la carte = <strong>".$user->cin."</strong>, habite à <strong>".$user->city.
+            "</strong>, code postal = <strong>".$user->zip_code."</strong>, son adress est <strong>".$user->adress.
+            "</strong>, son telephone 1  = <strong>".$user->phone."</strong>, telephone 2  = <strong>".$user->phone2.
+            "</strong>, telephone 3  = <strong>".$user->phone3."</strong>, telephone fix = <strong>".$user->fix.
+            "</strong>, sa profession est <strong>".$user->profession."</strong>, sa cituation familiale est <strong>".$maried.
+            "</strong> ".$cnssSentence." et il doit a lecole chaque mois <strong>". $request->should_be_payed ."</strong>";
 
 
             History::create($creation);

@@ -37,6 +37,149 @@ use Carbon;
 use Auth;
 class Relation {
 
+/************************************************/
+
+
+
+    public static function changeClass4Student(Request $request, User $student){
+
+      $the_class = TheClass::find( $request->class );
+
+      //change s payments
+
+      $spayments = StudentsPayment::where('user_id', $student->id )
+        ->where('year_id', Session::get('yearId') )
+        ->where('the_class_id', $student->the_class_id )
+        ->get();
+
+
+      foreach ($spayments as $sp ) {
+        // code...
+        $sp->the_class_id = $request->class;
+        $sp->save();
+      }
+
+      //change fournituration and check if repeated
+      foreach ($the_class->fournitures as $fourniture) {
+          # code...
+
+          $exist = Fournituration::where('student_id', $student->id )
+            ->where('year_id', Session::get('yearId') )
+            ->where('the_class_id', $student->the_class_id )
+            ->first();
+
+          if ( $exist ) {
+            // code...
+            $exist->the_class_id = $request->class;
+            $exist->save();
+          }else{
+            // code...
+            Fournituration::create([
+                'student_id' => $student->id,
+                'year_id' => Session::get('yearId'),
+                'the_class_id' => $request->class,
+                'fourniture_id' => $fourniture->id
+            ]);
+
+          }
+
+      }
+
+      $notInClassFournitures = Fournituration::where('student_id', $student->id )
+        ->where('year_id', Session::get('yearId') )
+        ->where('the_class_id', $student->the_class_id )
+        ->get();
+
+      foreach ($notInClassFournitures as $fourniture) {
+
+        if ( $fourniture->exist && $fourniture->confirmed ) {
+          // code...
+          $fourniture->the_class_id = $request->class;
+          $fourniture->save();
+        }else {
+          Fournituration::find( $fourniture->id )->delete();
+        }
+
+      }
+
+      //Copy notes
+
+      $new_sc_ids = Subjectclass::where('the_class_id', $request->class)
+      ->get(['the_class_id'])->toArray();
+
+      if (!empty($new_sc_ids)) {
+       // list is empty.
+
+        $tests = Testyearsubclass::whereIn('subject_the_class_id', $new_sc_ids)
+        ->where('publish', true )->get();
+
+        foreach($tests as $test ){
+          $alt_test = Note::where('year_id', Session::get('yearId')  )
+            ->where('the_class_id', $student->the_class_id )
+            ->where('subject_id', $test->subject_id )
+            ->where('publish', true )
+            ->where('navigator', $test->navigator )
+            ->where('is_exercise', $test->is_exercise )
+            ->first();
+
+            $oldnote = Note::where('year_id', Session::get('yearId')  )
+              ->where('student_id', $student->id )
+              ->where('testyearsubclass_id', $test->id )
+              ->first();
+
+          if ($alt_test && $oldnote) {
+            // code...
+              $oldnote->testyearsubclass_id = $alt_test->id;
+              $oldnote->the_class_id = $request->class;
+              $oldnote->subject_the_class_id = $alt_test->subject_the_class_id;
+              $oldnote->save();
+
+          }else {
+
+            Note::create([
+              'testyearsubclass_id' => $test->id,
+              'year_id' => $year,
+              'the_class_id' => $test->subjectclass->the_class->id,
+              'subject_id' => $test->subjectclass->subject->id,
+              'subject_the_class_id' => $test->subjectclass->id,
+              'teatcher_id' => $test->teatcher->id,
+              'student_id' => $student->id,
+              'note' => 0,
+              'done_minutes' => 0
+            ]);
+
+
+          }
+
+        }
+
+      }
+
+      //endcopy notes
+      $shoudlDelNotes = Note::where('year_id', Session::get('yearId')  )
+                    ->where('student_id', $student->id )
+                    ->where('the_class_id', $student->the_class_id )
+                    ->get();
+
+      foreach($shoudlDelNotes as $shoudlDelNote ){
+
+        Note::find( $shoudlDelNote->id )->delete();
+
+      }
+
+
+      $student->the_class_id = $request->class;
+
+      $student->save();
+
+
+    }
+
+/********************************************/
+
+
+
+
     public static function linkClass2Subj(TheClass $class, Fourniture $fourniture, Request $request ){
 
 
