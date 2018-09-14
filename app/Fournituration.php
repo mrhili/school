@@ -18,5 +18,5 @@ class Fournituration extends Model
     {
         return $this->belongsTo('App\User');
     }
-    
+
 }

@@ -53,6 +53,115 @@ use Hash;
 class StudentController extends Controller
 {
 
+    public function addParent($student = null){
+
+      if(!$student){
+
+        $student = Auth::id();
+
+      }
+
+      $categoryships = Categoryship::pluck('name', 'id');
+
+      return view('back.students.add-parent', compact('categoryships', 'student'));
+
+    }
+
+    public function addParentPost(Request $request, User $student){
+
+      $array = array_except( $request->toarray(), [
+        '_token',
+         'password' ,
+         'img',
+          'categoryship',
+          'family_situation'
+        ]);
+
+
+        if( $request->hasFile( 'img' ) ){
+
+      		$imgName = CommonPics::storeFile( $request->img , 'parents' );
+
+      		$array["img"] = $imgName;
+
+      	}
+
+        $maried;
+
+        if( $request->family_situation ){
+
+            $array["family_situation"] = true;
+            $maried = "Marié";
+
+        }else{
+            $array["family_situation"] = false;
+            $maried = "Célibataire";
+        }
+
+        $array["password"] = bcrypt($request->password );
+
+        $array["role"] = 2;
+
+
+
+        $parent = User::create($array);
+
+        if( $parent ){
+
+            $relationship = Relashionship::create([
+
+            'student_id' => $student->id,
+            'parent_id' => $parent->id,
+            'categoryship_id' => $request->categoryship
+                ]);
+
+            if( $relationship){
+
+              $creationHistoryParent = [
+
+                  'id_link' => $parent->id,
+                  'comment' => 'no comment',
+                  'by-admin' => Auth::id(),
+
+                  'category_history_id' => 3,
+                  'class' => 'success'
+
+              ];
+
+              $creationHistoryParent['info'] = "Le parent <strong>".$parent->name.
+              " ".$parent->last_name."</strong> a etait crée avec succes et il est relation en genre <strong>".
+              $relationship->category->name ."</strong> avec létudiant <strong>".$student->name.
+              " ".$student->last_name."</strong> qui port le <strong>id = ".$student->id.
+              "</strong>est ses information personelle sont  => genre = <strong>".
+              ArrayHolder::gender( $parent->gender) ."</strong>, Numero de la carte = <strong>".
+              $parent->cin."</strong>, habite à <strong>".$parent->city."</strong>, code postal = <strong>".
+              $parent->zip_code."</strong>, son adress est <strong>".
+              $parent->adress."</strong>, son telephone 1  = <strong>".$parent->phone1.
+              "</strong>, telephone 2  = <strong>".$parent->phone2.
+              "</strong>, telephone 3  = <strong>".$parent->phone3.
+              "</strong>, telephone fix = <strong>".$parent->fix."</strong>, sa profession est <strong>".
+              $parent->profession."</strong>, sa cituation familiale est <strong>".
+              $maried."</strong> ". "<strong>par son fils</strong>" .".";
+
+
+              History::create($creationHistoryParent);
+
+
+              return redirect()->route('parents.profile', $parent->id);
+
+          }else{
+              return 'no relationship';
+          }
+
+
+
+        }
+
+
+
+
+    }
+
     public function changeClass4ThemPage(){
 
       $stds = User::where('role',1)->where('the_class_id', '!=', null)->orderBy('the_class_id', 'asc')->get();
@@ -453,6 +562,7 @@ class StudentController extends Controller
       /****************/
       $passInfo = false;
       $passChangeInfo = false;
+      $passChangeSensibleInfo = false;
       if( Auth::check() ){
 
         if( Auth::user()->role > 4 ){
@@ -461,6 +571,12 @@ class StudentController extends Controller
           $passChangeInfo = true;
           $passChangeSensibleInfo = true;
 
+        }elseif( Auth::user()->role == 2 ){
+          if(Auth::user()->relashionshipsStudentsParent()->where('student_id', $student->id)->first() ){
+            $passInfo = true;
+            $passChangeInfo = true;
+          }
+
         }
 
       }
@@ -468,10 +584,13 @@ class StudentController extends Controller
 
       /*****************/
 
-      return view('back.students.profile', compact('passInfo',
+      return view('back.students.profile', compact(
+      'passInfo',
       'user', 'passChangeInfo', 'notes',
       'passChangeSensibleInfo',
-       'fournitures'));
+       'fournitures'
+         )
+       );
 
 
     }
@@ -502,7 +621,7 @@ class StudentController extends Controller
 
       $maxNumber = User::where('role', 1)->max('num') + 1;
 
-      $parents_rows = User::where('role', 2)->get(['id', 'name', 'last_name']);
+      $parents_rows = User::whereBetween('role', [1,2])->get(['id', 'name', 'last_name']);
 
       $parents = [];
 

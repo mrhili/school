@@ -48,7 +48,7 @@
     <div class="col-sm-4 border-right">
       <div class="description-block">
         <h5 class="description-header">{{Auth::user()->relashionshipsParentsStudent->count() }}</h5>
-        <span class="description-text">Parents</span>
+        <span class="description-text">famille</span>
       </div>
       <!-- /.description-block -->
     </div>
@@ -205,7 +205,7 @@
 
   @slot('titlePlain')
 
-    Parents
+    famille
 
   @endslot
 
@@ -231,7 +231,7 @@
   @endslot
   @slot('footerPlain')
 
-
+    <a class="btn btn-primary" href="{{ route('students.add-parent')}}">Ajouter un membre de famille</a>
 
   @endslot
 

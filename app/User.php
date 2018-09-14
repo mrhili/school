@@ -199,6 +199,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Demandefourniture', 'student_id');
     }
 
+    public function fournitureYouAccepted()
+    {
+        return $this->hasMany('App\Demandefourniture', 'admin_id');
+    }
+
 
 
 }

@@ -9,7 +9,7 @@ class Fourniture extends Model
     //
 
     protected $fillable = [
-    	'name','additional_info','for','required','average_price'
+    	'name','additional_info','for','required','average_price', 'got'
     ];
 
     public function the_classes()

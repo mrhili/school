@@ -20,7 +20,21 @@ class DemandefournitureController extends Controller
 {
     public function accept(Request $request, Demandefourniture $demande){
       $demande->done = true;
+      $demande->admin_id = Auth::id();
       $true = $demande->save();
+
+      $fournituration = Fournituration::where('student_id', $demande->student_id)
+                          ->where('year_id', $this->selected_year )
+                          ->where('fourniture_id', $demande->fourniture->id )
+                          ->where('the_class_id', $demande->student->the_class_id)
+                          ->first();
+      if($fournituration){
+
+        $fournituration->exist = true;
+        $fournituration->confirmed = true;
+        $fournituration->save();
+
+      }
 
       $demande->fourniture->got = $demande->fourniture->got - $demande->howmany;
 

@@ -1,7 +1,7 @@
 <strong><i class="fa fa-book margin-r-5"></i> Ecole</strong>
 
 <p class="text-muted">
-  {{ GetSetting::getConfig( 'name' ) }}
+  {{ GetSetting::getConfig( 'site-name' ) }}
 </p>
 
 <hr>

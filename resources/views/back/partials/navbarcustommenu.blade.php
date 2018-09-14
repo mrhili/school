@@ -136,22 +136,6 @@
               </li>
               <!-- Menu Body -->
 
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-
-
-
-
-                </div>
 
                 <div class="row">
                 @forelse(config('app.locales') as $locale)
@@ -181,7 +165,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="{{ route('profile') }}" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{ route('my-profile') }}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="{{ route('logout') }}" id="logoutbutton" class="btn btn-default btn-flat">Sign out</a>

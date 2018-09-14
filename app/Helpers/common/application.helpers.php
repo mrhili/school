@@ -664,8 +664,8 @@ public static function fillGotButton(Fourniture $fourniture, User $parent, User 
   //check if his parent //else you have no permission
   //check if got
   //if big than zero button
-        $relation = new Relation();
-        $isParent = $relation->isParent($parent, $student);
+
+        $isParent = Relation::isParent($parent, $student);
 
         $existArray[ 'exist' ] = false;
         $existArray[ 'icon' ] = 'Tu as pas la permission de demander';
@@ -673,10 +673,11 @@ public static function fillGotButton(Fourniture $fourniture, User $parent, User 
 
 
         if( $isParent ){
+          //$fourniture->got > 0
+          if( true ){
 
-          if( $fourniture->got > 0){
-
-            $existArray[ 'icon' ] = 'Il rest '.$fourniture->got ;
+          //  $existArray[ 'icon' ] = 'Il rest '.$fourniture->got ;
+          $existArray[ 'icon' ] = 'Demande mintenent!' ;
             $existArray[ 'exist' ] = true;
             $existArray[ 'class' ] = 'info';
           }else{
@@ -706,13 +707,13 @@ public static function fillExistButton($model){
     if( (bool) $exist ){
 
         //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
-        $existArray[ 'icon' ] = 'V';
+        $existArray[ 'icon' ] = 'Exist';
         $existArray[ 'class' ] = 'success';
 
     }else{
 
         //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
-        $existArray[ 'icon' ] = 'X';
+        $existArray[ 'icon' ] = 'Exist Pas';
         $existArray[ 'class' ] = 'danger';
 
     }

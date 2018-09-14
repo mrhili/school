@@ -31,5 +31,10 @@ class Demandefourniture extends Model
         return $this->belongsTo('App\User', 'student_id');
     }
 
+    public function admin()
+    {
+        return $this->belongsTo('App\User', 'admin_id');
+    }
+
 
 }

@@ -41,6 +41,11 @@ class CreateDemandefournituresTable extends Migration
             $table->float('totalmoney')->unsigned();
             $table->boolean('done')->default(false);
 
+            $table->integer('admin_id')->unsigned()->index();
+            $table->foreign('admin_id')
+              ->references('id')
+              ->on('users')
+              ->onDelete('set null');
 
             $table->timestamps();
         });

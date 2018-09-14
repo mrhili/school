@@ -1,6 +1,11 @@
 <?php
+/***********************PERSONELLE*****************************/
+Route::get('/docs-student/{selected?}', 'StudentController@docs')->name('students.docs');
+/***********************PERSONELLE*FAMILY****************************/
+Route::get('/ajouter-membre-famille/{student?}', 'StudentController@addParent')->name('students.add-parent');
+Route::post('/ajouter-membre-famille-post/{student}', 'StudentController@addParentPost')->name('students.add-parent-post');
+/************************************************/
 
-Route::get('/docs-student/{selected?}', 'StudentController@docs')->name('student.docs');
 
   Route::post('/change-info/{user}', 'UserController@changeInfo')->name('users.change-info');
 

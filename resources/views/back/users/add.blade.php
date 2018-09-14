@@ -24,7 +24,7 @@ L'année selectionée est {{ Session::get('yearId') }}
 @section('breadcrumb')
   <li><a href="{{ route('index')  }}"><i class="fa fa-dashboard"></i> Index</a></li>
   <li><a href="{{ route('home')  }}"><i class="fa fa-dashboard"></i> dashboard</a></li>
-  <li class="active"> L'ajout dun etudiant</li>
+  <li class="active"> L'ajout dun parent</li>
 @endsection
 
 @section('content')
@@ -141,9 +141,9 @@ Nouveau etudient
 
     @include('back.partials.formG', ['name' => 'hidden_note', 'type' => 'textarea', 'text' => 'Une note pour toi', 'class'=>'', 'required' => true,'additionalInfo' => []])
 
-    <hr />
+
     <div class="text-center">
-      <h3 >Informations sur parent</h3>
+      <h3 >Informations sur parent existant</h3>
       <p>
         ...
       </p>
@@ -152,68 +152,9 @@ Nouveau etudient
     @include('back.partials.formG', ['name' => 'existparent', 'type' => 'checkbox', 'text' => 'Le parent déja exist', 'class'=>'', 'required' => false, 'checked' => false,'additionalInfo' => [ 'id' => 'existparent' ]])
     @include('back.partials.formG', ['name' => 'parent_id', 'type' => 'select','selected' => null, 'text' => 'Parent', 'class'=>'parent_exist', 'required' => false, 'array' => $parents ,'additionalInfo' => []])
 
-    <hr />
-    <div class='parent_dont_exist'>
-      @include('back.partials.formG', ['name' => 'imgparent', 'type' => 'file', 'text' => 'Image Parent 1', 'class'=>'', 'required' => false ,'additionalInfo' => []])
-    </div>
 
 
-    @include('back.partials.formG', ['name' => 'nameparent', 'type' => 'text', 'text' => 'Prénom Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'last_nameparent', 'type' => 'text', 'text' => 'Nom Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'arabic_nameparent', 'type' => 'text', 'text' => 'Arabic Prénom Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'arabic_last_nameparent', 'type' => 'text', 'text' => 'Arabic Nom Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
-
-    @include('back.partials.formG', ['name' => 'genderparent', 'type' => 'select', 'selected' => null , 'text' => 'Genre Parent 1', 'class'=>'parent_dont_exist', 'required' => true, 'array' => ArrayHolder::gender() ,'additionalInfo' => []])
-
-
-    @include('back.partials.formG', ['name' => 'birth_dateparent', 'type' => 'date', 'text' => 'Date de naissance Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'birth_placeparent', 'type' => 'text', 'text' => 'ville de naissance Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
-
-
-
-    @include('back.partials.formG', ['name' => 'cinparent', 'type' => 'text', 'text' => 'CIN du Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'professionparent', 'type' => 'text', 'text' => 'Profession du Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
-
-
-
-    @include('back.partials.formG', ['name' => 'family_situationparent', 'type' => 'checkbox', 'text' => 'La situation familiale du Parent 1, Marié?', 'class'=>'parent_dont_exist', 'required' => false, 'checked' => false,'additionalInfo' => []])
-
-
-
-
-
-    @include('back.partials.formG', ['name' => 'cityparent', 'type' => 'text', 'text' => 'Ville Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
-
-    @include('back.partials.formG', ['name' => 'zip_codeparent', 'type' => 'text', 'text' => 'Code postal Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'adressparent', 'type' => 'text', 'text' => 'Adress', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'phone1parent', 'type' => 'tel', 'text' => 'Téléphone Parent 1', 'class'=>'parent_dont_exist', 'required' => true,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'phone2parent', 'type' => 'tel', 'text' => 'Téléphone Parent 2', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'phone3parent', 'type' => 'tel', 'text' => 'Téléphone Parent 3', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'fixparent', 'type' => 'tel', 'text' => 'Téléphone Fix', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'whatsappparent', 'type' => 'tel', 'text' => 'Whatsapp', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
-    @include('back.partials.formG', ['name' => 'facebookparent', 'type' => 'text', 'text' => 'Facebook Link', 'class'=>'parent_dont_exist', 'required' => false,'additionalInfo' => []])
-
-    <hr />
-    <div class="text-center">
-      <h3 >Relation entre parent1 et éléve</h3>
-      <p>
-        ...
-      </p>
-    </div>
-
-    @include('back.partials.formG', ['name' => 'categoryship', 'type' => 'select','selected' => null, 'text' => 'Relation entre parent et éléve', 'class'=>'', 'required' => true, 'array' => $categoryships ,'additionalInfo' => []])
-
-    <hr />
-    <div class="text-center">
-      <h3 >Parent Login information</h3>
-      <p>
-        ...
-      </p>
-    </div>
-
-
-    @include('back.partials.formG', ['name' => 'emailparent', 'type' => 'email', 'text' => 'E-mail Parent 1', 'class'=>'', 'required' => true,'additionalInfo' => [  ]])
-    @include('back.partials.formG', ['name' => 'passwordparent', 'type' => 'text', 'text' => 'Password Parent 1', 'class'=>'', 'required' => true,'value' => str_random(6),'additionalInfo' => [  ]])
+    @include('back.partials.add-parent-form',['keyword' => 'parent'])
 
 
   @endslot
