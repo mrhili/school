@@ -23,13 +23,7 @@
 
               <ul class="list-group list-group-unbordered">
 
-                <li class="list-group-item">
-                  <b><a href="{{ route('fournitures.my-fournitures') }}">Fournitures</a></b> <a class="pull-right">{{ $fournitures }}</a>
-                </li>
 
-                <li class="list-group-item">
-                  <b><a href="{{ route('notes.my-notes') }}">Notes</a></b> <a class="pull-right">{{ $notes }}</a>
-                </li>
 
               </ul>
 

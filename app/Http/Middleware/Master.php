@@ -18,18 +18,16 @@ class Master
     public function handle($request, Closure $next)
     {
 
-        if( Auth::check() || Auth::user()->role == 6 ){
+      if( Auth::check() ){
 
-          if( Application::setDebuggar( Auth::user()->role ) ){
-            Debugbar::enable();
-          }
-            return $next($request);
+        if( Auth::user()->role >= 6){
 
-
-        }else{
-
-            return redirect('/');
+          return $next($request);
 
         }
+      }
+
+      return redirect('/');
+
     }
 }

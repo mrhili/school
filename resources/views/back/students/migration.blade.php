@@ -2,13 +2,15 @@
 
 @extends('back.layouts.app')
 
-
-
-@section('styles')
-
-{{-- output array min empty max id and more --}}
-
+@section('scripts')
+<style>
+select[multiple]{
+  height: 500px !important;
+}
+</style>
 @endsection
+
+
 
 @section('content')
 
@@ -89,16 +91,3 @@ Nouveau etudient
 
 @endsection
 {!! Form::close() !!}
-
-
-@section('scripts')
-
-<script type="text/javascript">
-
-
-
-
-
-
-</script>
-@endsection

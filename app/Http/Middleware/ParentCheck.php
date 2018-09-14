@@ -15,15 +15,18 @@ class ParentCheck
      */
     public function handle($request, Closure $next)
     {
-        if( Auth::check() || Auth::user()->role >= 2 ){
 
-            return $next($request);
+      if( Auth::check()){
 
+        if( Auth::user()->role >= 2){
 
-        }else{
-
-            return redirect('/');
+          return $next($request);
 
         }
+      }
+
+      return redirect('/');
+
+
     }
 }

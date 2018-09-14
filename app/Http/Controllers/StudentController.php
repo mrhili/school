@@ -55,7 +55,7 @@ class StudentController extends Controller
 
     public function changeClass4ThemPage(){
 
-      $stds = User::where('role',1)->orderBy('the_class_id', 'asc')->get();
+      $stds = User::where('role',1)->where('the_class_id', '!=', null)->orderBy('the_class_id', 'asc')->get();
 
       $students = [];
 

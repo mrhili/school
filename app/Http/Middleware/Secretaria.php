@@ -15,15 +15,16 @@ class Secretaria
      */
     public function handle($request, Closure $next)
     {
-        if( Auth::check() || Auth::user()->role >= 4 ){
+      if( Auth::check()){
 
-            return $next($request);
+        if( Auth::user()->role >= 4){
 
-
-        }else{
-
-            return redirect('/');
+          return $next($request);
 
         }
+      }
+
+      return redirect('/');
+
     }
 }
