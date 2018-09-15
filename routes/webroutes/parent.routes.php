@@ -1,5 +1,5 @@
 <?php
-Route::get('/docs-parent/{selected?}', 'ParentController@docs')->name('parent.docs');
+Route::get('/docs-parent/{selected?}', 'ParentController@docs')->name('parents.docs');
 
   Route::get('/my-profile-as-parent', 'ParentController@myProfile')->name('parents.my-profile');
   Route::get('/student-dashboard/{student}', 'StudentController@dashboard')->name('students.dashboard');

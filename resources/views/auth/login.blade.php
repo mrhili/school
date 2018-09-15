@@ -4,11 +4,6 @@
 
 
 
-
-
-
-
-
   <div class="login-box-body">
     <p class="login-box-msg">Entrer</p>
 
@@ -61,5 +56,18 @@
 
   </div>
 
+
+
+@endsection
+
+
+@section('video')
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item"  src="https://www.youtube.com/embed/8WFaTQWzj8Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
 
 @endsection

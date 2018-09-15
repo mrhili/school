@@ -1,11 +1,48 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\{
+  User
+};
 use Illuminate\Http\Request;
+use Auth;
 
+use Session;
 class AdminController extends Controller
 {
+
+  public function profile(User $user){
+
+    $year = Session::get('yearId');
+
+
+    /****************/
+    $passInfo = false;
+    $passChangeInfo = false;
+    if( Auth::check() ){
+
+      if( Auth::user()->role >= 4 ){
+        $passChangeInfo = true;
+
+        $passInfo = true;
+
+      }
+
+    }
+
+
+
+
+
+    /*****************/
+
+    return view('back.admins.profile', compact('passInfo', 'user', 'passChangeInfo'));
+
+
+  }
+
+
+
 
   public function docs($selected=null){
       /****************/

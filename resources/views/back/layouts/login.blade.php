@@ -89,7 +89,7 @@ desired effect
 </div>
 <!-- /.login-box -->
 
-
+  @yield('video')
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->

@@ -124,11 +124,14 @@ class TeatcherController extends Controller
 
     public function myProfile(){
 
+
+        $passChangeInfo = false;
         /****************/
         $passInfo = true;
         /*****************/
         $user = Auth::user();
-        return view('back.teatchers.my-profile',compact('passInfo', 'user'));
+        
+        return view('back.teatchers.my-profile',compact('passInfo','passChangeInfo', 'user'));
     }
 
     public function add(){
