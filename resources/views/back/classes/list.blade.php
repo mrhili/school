@@ -234,7 +234,34 @@ The Main Configuration Of the web application
         </div>
 
 @endforeach
+
+
+
 </div>
+</div>
+
+    <hr />
+<div class="row">
+<div class="col-xs-12">
+  <div class="col-lg-4 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+      <div class="inner">
+        <h3>Matiére et classes</h3>
+        <p><a href="#">Linker plusieru matiéres a plusieur classes</a></p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-list-ol"></i>
+      </div>
+      <a href="{{ route('classes.multiple-subjs') }}" class="small-box-footer">Linker plusieru matiéres a plusieur classe<i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+
+</div>
+
+
+
+
 </div>
 
     <hr />
@@ -271,21 +298,32 @@ The Main Configuration Of the web application
 </div>
 </div>
 <hr />
+
+<div class="col-xs-12">
   <div class="row">
+
+
     <div class="col-lg-4 col-xs-6">
       <!-- small box -->
       <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
         <div class="inner">
-          <h3>Four et classes</h3>
-          <p><a href="#">Linker plusieru fourniture a plusieur classes</a></p>
+          <h3>Matiére et classes</h3>
+          <p><a href="#">Linker plusieru matiéres a plusieur classes</a></p>
         </div>
         <div class="icon">
           <i class="fa fa-list-ol"></i>
         </div>
-        <a href="{{ route('classes.multiple-fours') }}" class="small-box-footer">Linker plusieru fourniture a plusieur classes<i class="fa fa-arrow-circle-right"></i></a>
+        <a href="{{ route('classes.multiple-subjs') }}" class="small-box-footer">Linker plusieru matiéres a plusieur classe<i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
+
+
   </div>
+
+</div>
+
+
+
 <hr />
 
 

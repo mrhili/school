@@ -155,7 +155,7 @@ class FournitureController extends Controller
 
         $fourniture = Fourniture::find( $fourniture_id );
 
-        Relation::linkClass2Subj($the_class, $fourniture, $request);
+        Relation::linkClass2Four($the_class, $fourniture, $request);
 
 
         if( $fourniture ){

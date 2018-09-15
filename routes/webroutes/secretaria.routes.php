@@ -1,8 +1,6 @@
 <?php
 
 
-
-
 Route::get('/docs-secretaria/{selected?}', 'SecretariaController@docs')->name('secretaria.docs');
 
 
@@ -153,6 +151,12 @@ Route::post('/link-subject-class/{class}/{subject_id}', 'SubjectController@linkC
 
 Route::get('/subjects', 'SubjectController@list')->name('subjects.list');
 Route::post('/store-subject', 'SubjectController@store')->name('subjects.store');
+
+
+/*********************CLASS MULTIPLE SUBJECTS *************/
+
+Route::get('/linker-multiple-subjs-au-classes', 'TheClassController@multipleSubjects')->name('classes.multiple-subjs');
+Route::post('/store-multiple-subjs-au-classes', 'TheClassController@storeMultipleSubjects')->name('classes.store-multiple-subjs');
 
 /*****************************Courses*********************/
 

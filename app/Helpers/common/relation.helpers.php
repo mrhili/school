@@ -28,7 +28,8 @@ use App\{
     Course,
     Subcourse,
     Testyearsubclass,
-    Note
+    Note,
+    Subject
 
 };
 
@@ -36,6 +37,34 @@ use Session;
 use Carbon;
 use Auth;
 class Relation {
+
+  public static function linkClass2Subj(TheClass $class, Subject $subject, Request $request ){
+
+            $year = Session::get('yearId');
+
+            $pivot = $class->subjects()->attach( $subject->id, ['parameter' => $request->parameter, 'year_id' => $year  ]);
+
+            $admin = User::find( Auth::id() );
+
+            $creation = [
+
+                'id_link' => $subject->id,
+                'comment' => $request->comment,
+                //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
+                'info' => 'just talk',
+                'hidden_note' => $request->hidden_note,
+                'by-admin' => $admin->id,
+
+                'category_history_id' => 13,
+                'class' => 'success',
+                //'id_link' => $request->id_link,
+
+                ];
+
+            $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a ajouté une matier qui porte le nom <strong>'.$subject->name.' </strong> au class qui porte le nom' . $class->name . ' </strong> avec cohéficiant </strong> au class qui porte le nom' . $request->parameter . ' </strong>.'  ;
+
+            History::create( $creation );
+  }
 
 /************************************************/
 
@@ -180,7 +209,7 @@ class Relation {
 
 
 
-    public static function linkClass2Subj(TheClass $class, Fourniture $fourniture, Request $request ){
+    public static function linkClass2Four(TheClass $class, Fourniture $fourniture, Request $request ){
 
 
               $pivot = $class->fournitures()->attach( $fourniture->id );

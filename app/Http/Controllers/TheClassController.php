@@ -24,6 +24,41 @@ use RealRashid\SweetAlert\Facades\Alert;
 class TheClassController extends Controller
 {
 
+  public function multipleSubjects()
+  {
+    $classes = TheClass::get(['id','name'])->pluck('name','id')->toArray();
+    $subjects = Subject::get(['id','name'])->pluck('name','id')->toArray();
+
+    return view('back.classes.subj-multi', compact('classes','subjects') );
+  }
+
+  public function storeMultipleSubjects(Request $request)
+  {
+
+    foreach ($request->classes as $class) {
+
+      $class = TheClass::find( $class );
+
+      foreach ( $request->subjects as $subject ) {
+
+        $subject = Subject::find( $subject );
+
+        if(!$subject){  dd($request->subjects, $subject );  }
+
+        Relation::linkClass2Subj($class, $subject, $request );
+
+      }
+
+    }
+
+    Alert::success('Les classes en etait bien linké', 'Success Message');
+
+    return back();
+
+    //return dd($request->subjects, $request->classes );
+  }
+
+
     public function multipleFournitures()
     {
       $classes = TheClass::get(['id','name'])->pluck('name','id')->toArray();
