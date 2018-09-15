@@ -16,8 +16,65 @@ use App\{
 use Session;
 use Auth;
 
+use Relation;
+
+use RealRashid\SweetAlert\Facades\Alert;
+
+use ArrayHolder;
+
 class TeatchificationController extends Controller
 {
+
+  public function multiLink()
+  {
+    // code...
+
+    $year = Session::get('yearId');
+
+    $teatchersModel = User::where('role','>=', 3 )->get(['id' ,'name', 'last_name', 'role']);
+
+    $teatchers = [];
+
+    foreach ($teatchersModel as $teatcher) {
+      // code...
+      $teatchers[ $teatcher->id ] = $teatcher->name.' '.$teatcher->last_name .',  -- -- role :'. ArrayHolder::roles( $teatcher->role )  ;
+
+    }
+
+    $subjects =  Subjectclass::where('year_id', $year )->get();
+
+    $selection = [];
+
+    foreach ($subjects as $subjectclass) {
+      // code...
+      $selection[ $subjectclass->id ] = $subjectclass->the_class->name.' => '.$subjectclass->subject->name ;
+
+    }
+
+    return view('back.teatchifications.multi-link',compact( 'teatchers', 'selection'));
+  }
+
+  public function storeMultiLink( Request $request ){
+
+    foreach ($request->teatchers as $teatcher) {
+
+      $teatcher = User::find( $teatcher );
+
+      foreach ( $request->subject_classes as $subject_class ) {
+
+        $subject_class = Subjectclass::find( $subject_class );
+
+        Relation::linkTeatcher2Subject($request , $teatcher, $subject_class );
+
+      }
+
+      Alert::success('Les matier int bien etait linké', 'Success Message');
+
+      return back()->withInput();
+
+    }
+
+  }
 
   public function link()
   {
@@ -27,7 +84,7 @@ class TeatchificationController extends Controller
 
     $teatchifications = Teatchification::where('year_id', $year )->paginate(1);
 
-    $teatchers = User::where('role', 3 )->pluck('name', 'id')->toArray();
+    $teatchers = User::where('role', '>',3 )->pluck('name', 'id')->toArray();
 
     $activated = Teatchification::where('year_id', $year )->pluck('subject_the_class_id')->toArray();
 
@@ -53,31 +110,8 @@ class TeatchificationController extends Controller
 
   public function storeLink( Request $request,User $teatcher, Subjectclass $subject_the_class_id ){
 
-    $teatchification = Teatchification::create([
-      'subject_the_class_id' => $subject_the_class_id->id,
-      'user_id' => $teatcher->id,
-      'year_id' => Session::get('yearId')
-    ]);
+    $teatchification = Relation::linkTeatcher2Subject($request, $teatcher, $subject_the_class_id);
 
-    $admin = User::find( Auth::id() );
-
-    $creation = [
-
-        'id_link' => $teatchification->id,
-        'comment' => $request->comment,
-        //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
-        'info' => 'just talk',
-        'hidden_note' => $request->hidden_note,
-        'by-admin' => $admin->id,
-        'category_history_id' => 28,
-        'class' => 'success',
-        //'id_link' => $request->id_link,
-
-        ];
-
-    $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a linker le maitre <strong>'.$teatcher->name.' </strong> au matiere qui porte le nom' . $subject_the_class_id->subject->name . ' au class ' . $subject_the_class_id->the_class->name . '  </strong>.'  ;
-
-    History::create( $creation );
 
     if( $teatchification ){
         return response()->json(['id' => $subject_the_class_id->id, 'teatcher' => $teatcher->name.' '.$teatcher->last_name, 'subject' => $subject_the_class_id->subject->name, 'class' => $subject_the_class_id->the_class->name ]);

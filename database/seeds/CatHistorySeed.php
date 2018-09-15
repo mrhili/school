@@ -209,56 +209,56 @@ class CatHistorySeed extends Seeder
             'icon' => 'file',
             'kind' => 1,
             'role' => 3
-        ]);//23
+        ]);//24
         DB::table('history_categories')->insert([
             'name' => 'Un test a était a linké a une class et une matiére:',
             'model' => 'Test',
             'icon' => 'file',
             'kind' => 1,
             'role' => 1
-        ]);//23
+        ]);//25
         DB::table('history_categories')->insert([
             'name' => 'Liaison dune fourniture avec une class:',
             'model' => 'Fourniture',
             'icon' => 'edit',
             'kind' => 1,
             'role' => 1
-        ]);//24
+        ]);//26
         DB::table('history_categories')->insert([
             'name' => 'Un cours a était ajouté:',
             'model' => 'Course',
             'icon' => 'book',
             'kind' => 1,
             'role' => 1
-        ]);//25
+        ]);//27
         DB::table('history_categories')->insert([
             'name' => 'Un subcour a etait crée est ajouté a un coure:',
             'model' => 'Subcourse',
             'icon' => 'book',
             'kind' => 1,
             'role' => 1
-        ]);//26
+        ]);//28
         DB::table('history_categories')->insert([
             'name' => 'Un subcour a etait linké a un coure:',
             'model' => 'Subcourse',
             'icon' => 'book',
             'kind' => 1,
             'role' => 1
-        ]);//27
+        ]);//29
         DB::table('history_categories')->insert([
             'name' => 'Un subcour a etait linké a un coure:',
             'model' => 'Teatchification',
             'icon' => 'pen',
             'kind' => 1,
             'role' => 1
-        ]);//28
+        ]);//30
         DB::table('history_categories')->insert([
             'name' => 'Une demande a etait effectué:',
             'model' => 'Demande',
             'icon' => 'angle-double-right',
             'kind' => 1,
             'role' => 2
-        ]);//29
+        ]);//31
 
         DB::table('history_categories')->insert([
             'name' => 'Une demande a etait Accepté:',
@@ -266,7 +266,7 @@ class CatHistorySeed extends Seeder
             'icon' => 'check',
             'kind' => 2,
             'role' => 1
-        ]);//30
+        ]);//32
 
         DB::table('history_categories')->insert([
             'name' => 'Une Emploi du temps a etait linké maitre - matiére:',
@@ -274,7 +274,7 @@ class CatHistorySeed extends Seeder
             'icon' => 'calendar',
             'kind' => 1,
             'role' => 1
-        ]);//31
+        ]);//33
 
         DB::table('history_categories')->insert([
             'name' => 'Une Emploi du temps a etait créé:',
@@ -282,7 +282,7 @@ class CatHistorySeed extends Seeder
             'icon' => 'calendar',
             'kind' => 1,
             'role' => 1
-        ]);//32
+        ]);//34
 
         /****************Hna 3ad gadina l7ma9****************/
 
@@ -293,6 +293,14 @@ class CatHistorySeed extends Seeder
             'kind' => 1,
             'role' => 4
         ]);//35
+
+        DB::table('history_categories')->insert([
+            'name' => 'Une Matiére a etait linké a un maitre:',
+            'model' => 'Teatchification',
+            'icon' => 'link',
+            'kind' => 1,
+            'role' => 4
+        ]);//36
 
 
     }

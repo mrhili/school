@@ -54,8 +54,6 @@ class TheClassController extends Controller
     Alert::success('Les classes en etait bien linké', 'Success Message');
 
     return back();
-
-    //return dd($request->subjects, $request->classes );
   }
 
 

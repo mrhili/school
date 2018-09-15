@@ -23,7 +23,13 @@ Route::get('/management-calendar-teatchifcation/{class}', 'Calendarteatchificati
 Route::get('/data-management-calendar-teatchifcation/{class}', 'CalendarteatchificationController@dataManagebyclass')->name('calendarteatchifications.data-manage-byclass');
 Route::post('/store-management-calendar-teatchifcation/{teatchification}', 'CalendarteatchificationController@store')->name('calendarteatchifications.store');
 
+/*************************************TEATCHIFICATION - link ******************************/
 
+Route::get('/link-teatcher-subcourse-class', 'TeatchificationController@link')->name('teatcherifications.link');
+Route::post('/store-link-teatcher-subcourse-class/{teatcher}/{subject_the_class_id}', 'TeatchificationController@storeLink')->name('teatcherifications.store-link');
+
+Route::get('/multi-link-teatcher-subcourse-class', 'TeatchificationController@multiLink')->name('teatcherifications.multi-link');
+Route::post('/store-multi-link-teatcher-subcourse-class', 'TeatchificationController@storeMultiLink')->name('teatcherifications.store-multi-link');
 /*****Meetings******/
 
 Route::get('/meeting-list-management', 'MeetingpopulatingController@managelist')->name('meetingpopulatings.managelist');

@@ -9,8 +9,7 @@ Route::get('/data-notes-by-class/{class}', 'NoteController@databyClass')->name('
 
 Route::get('/data-students-by-teatcher/{teatcher}', 'StudentController@dataByTeatcher')->name('students.by-teatcher');
 
-Route::get('/link-teatcher-subcourse-class', 'TeatchificationController@link')->name('teatcherifications.link');
-Route::post('/store-link-teatcher-subcourse-class/{teatcher}/{subject_the_class_id}', 'TeatchificationController@storeLink')->name('teatcherifications.store-link');
+
 
 Route::get('/teatcher-home', 'TeatcherController@home')->name('teatchers.home');
 Route::get('/my-profile-as-teatcher', 'TeatcherController@myProfile')->name('teatchers.my-profile');
