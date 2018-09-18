@@ -67,6 +67,9 @@ Route::post('/suprimer-les-etidants-en-attente', 'StudentController@delThem')->n
 Route::get('/add-student', 'StudentController@add')->name('students.add');
 Route::post('/store-student', 'StudentController@store')->name('students.store');
 
+Route::get('/quick-add-student', 'StudentController@quickAdd')->name('students.quick-add');
+Route::post('/quick-store-student', 'StudentController@quickStore')->name('students.quick-store');
+
 Route::get('/add-parent/{student?}', 'ParentController@add')->name('parents.add');
 Route::post('/store-parent', 'ParentController@store')->name('parents.store');
 

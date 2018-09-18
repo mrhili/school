@@ -191,16 +191,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
   </div>
 
 
@@ -250,6 +240,23 @@
 <hr>
 <h2 class="text-center">Les gens</h2>
       <!-- Small boxes (Stat box) -->
+
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>Q S</h3>
+              <p>...</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('students.quick-add') }}" class="small-box-footer">Ajouté vite <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->

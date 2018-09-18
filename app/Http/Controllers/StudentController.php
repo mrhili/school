@@ -54,6 +54,91 @@ class StudentController extends Controller
 {
 
 
+  public function quickAdd(){
+
+
+
+  	$classes = TheClass::pluck('name', 'id');
+      $categoryships = Categoryship::pluck('name', 'id');
+  	$role = 1;
+
+  	return view('back.students.quick-add', compact('role', 'classes'));
+  }
+
+
+  public function quickStore(UserRequest $request){
+
+    $year = Session::get('yearId');
+
+    $array = array_except( $request->toarray(), [
+      '_token',
+       'password' ,
+       'img',
+        'should_pay',
+       'transport_pay',
+        'add_class_pay',
+      'transport',
+       'add_classes',
+        'saving_pay',
+        'trans_assurence_pay',
+       'assurence_pay']);
+
+
+    if( $request->hasFile( 'img' ) ){
+
+      $imgName = CommonPics::storeFile( $request->img , 'students' );
+
+      $array["img"] = $imgName;
+
+    }
+
+    $array["password"] = bcrypt($request->password );
+
+      $array["role"] = 1;
+
+      if( $request->transport ){
+
+          $array["transport"] = true;
+
+      }else{
+          $array["transport"] = false;
+      }
+
+      if( $request->add_classes ){
+
+          $array["add_classes"] = true;
+      }else{
+          $array["add_classes"] = false;
+      }
+
+      $array['the_class_id'] = $request->class;
+
+    $student = User::create($array);
+
+
+    if ($student) {
+
+
+          Application::studentpayment($student, $request);
+
+          /*Parent variable creation*/
+
+          Alert::success('leleve a bien etait créer', 'OK');
+
+          return back()->route('users.home');
+
+
+    }else{
+      return back()->withInput();
+    }
+
+  }
+
+
+
+
+
+
 
   public function inv($class = null){
 
