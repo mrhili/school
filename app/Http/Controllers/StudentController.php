@@ -138,8 +138,6 @@ class StudentController extends Controller
 
 
 
-
-
   public function inv($class = null){
 
     if(!$class){

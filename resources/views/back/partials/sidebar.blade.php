@@ -30,6 +30,7 @@
 
         <li><a href="{{ route('docs') }}"><i class="fa fa-link"></i> <span>Documentaire</span></a></li>
         <li><a href="{{ route('games.index') }}"><i class="fa fa-link"></i> <span>Jeux</span></a></li>
+        <li><a href="{{ route('applications.index') }}"><i class="fa fa-link"></i> <span>Application</span></a></li>
 
       </ul>
       <!-- /.sidebar-menu -->

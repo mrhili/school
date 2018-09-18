@@ -46,6 +46,13 @@ Route::get('/games/flexfrog', 'GameController@flexfrog')->name('games.flexfrog')
 
 /***************/
 
+/*Applications*/
+Route::get('/apps', 'ApplicationController@index')->name('applications.index');
+Route::get('/apps/quran', 'ApplicationController@quran')->name('applications.quran');
+
+
+/***************/
+
 // Route for view/blade file.
 Route::get('importExport', 'TestoController@importExport');
 // Route for export/download tabledata to .csv, .xls or .xlsx
