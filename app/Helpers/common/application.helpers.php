@@ -819,13 +819,9 @@ public static function fillMonthButtonForChild(StudentsPayment $model){
             $yearBD['a'] += $monthBenifits;
 
             $yearBD['b'] += $monthDefecits;
-
-
-
         }
 
         $months = Month::findMany([1, 2, 3, 4, 5, 6, 7, 8 ]);
-
 
         foreach ($months as $month) {
             # code...

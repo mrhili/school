@@ -21,7 +21,6 @@
       </div>
 
 
-
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
@@ -30,6 +29,7 @@
         <li><a href="{{ route('my-profile') }}"><i class="fa fa-link"></i> <span>Mon profile</span></a></li>
 
         <li><a href="{{ route('docs') }}"><i class="fa fa-link"></i> <span>Documentaire</span></a></li>
+        <li><a href="{{ route('games.index') }}"><i class="fa fa-link"></i> <span>Jeux</span></a></li>
 
       </ul>
       <!-- /.sidebar-menu -->

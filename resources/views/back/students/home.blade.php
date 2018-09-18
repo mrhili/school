@@ -214,13 +214,19 @@
 
 
                       <ul class="users-list clearfix">
-                        @foreach(Auth::user()->relashionshipsParentsStudent as $parent)
+                        @forelse(Auth::user()->relashionshipsParentsStudent as $parent)
                         <li>
                           {!! Html::image(CommonPics::ifImg( 'parents' ,  $parent->img ),'User Image', ['class' => ''] ) !!}
                           <a class="users-list-name" href="{{ route('parents.profile', $parent->id) }}">{{ $parent->name }} {{ $parent->last_name }}</a>
                           <span class="users-list-date">relationship</span>
                         </li>
-                        @endforeach
+                      @empty
+                        @component('back.components.alert',['class' => 'danger'])
+
+                          Vous navez aucun membre de famille, ajoute le maintenent!
+
+                        @endcomponent
+                      @endforelse
 
                       </ul>
 

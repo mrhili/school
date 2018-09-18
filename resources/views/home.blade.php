@@ -458,6 +458,21 @@
           </div>
         </div>
 
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+            <div class="inner">
+              <h3>Login</h3>
+
+              <p>..</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-tachometer"></i>
+            </div>
+            <a href="{{route('users.login')}}" class="small-box-footer">Login<i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
 
     </div>
     <!-- /.row -->
@@ -465,6 +480,49 @@
 <hr>
 <h2 class="text-center">Dashboard</h2>
       <!-- Small boxes (Stat box) -->
+
+      <div class="row">
+          <div class="col-xs-12">
+            <h3>Transporting</h3>
+            <div class="row">
+
+
+
+
+
+              <div class="col-lg-3 col-xs-6">
+
+                <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+                  <div class="inner">
+                    <h3>T</h3>
+                    <p>Transport Management</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-list-ol"></i>
+                  </div>
+                  <a href="{{ route('transportings.list') }}" class="small-box-footer">Transport Management<i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-xs-6">
+
+                <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+                  <div class="inner">
+                    <h3>T</h3>
+                    <p>Transport Defecite Management</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-list-ol"></i>
+                  </div>
+                  <a href="{{ route('transportings.deficites') }}" class="small-box-footer">Transport Defecite Management<i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
       <div class="row">
 
 

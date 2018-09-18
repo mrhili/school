@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\{
     User,
     Year,
-    History
+    History,
+    Wallet
 };
 use Application;
 use Auth;
@@ -93,6 +94,14 @@ class StudentsPaymentController extends Controller
             //'id_link' => $request->id_link,
 
             ];
+
+        if( $payment > 0){
+          $creation['category_history_id'] = 1;
+        }elseif( $payment < 0){
+          $creation['category_history_id'] = 14;
+        }else{
+          $creation['category_history_id'] = 15;
+        }
         $hoo;
 
         if( $request->hoo == 'user'){
@@ -167,10 +176,37 @@ class StudentsPaymentController extends Controller
 
         $creation['payment'] = $payment;
 
-        History::create( $creation );
+        $history = History::create( $creation );
 
-        return response()->json($moneyArray);
+        if( !$history ){
 
-        //return response()->json([ 'parameter' => $request->parameter ]);
+           return response()->json(['message' => 'Error Application'], 500);
+         }
+
+
+
+        if( $payment != 0 ){
+
+
+            $wallet = Wallet::create( ['history_id' => $history->id,
+                              'amount' => $payment
+             ] );
+
+            if(!$wallet){
+
+              return response()->json(['message' => 'Error Wallet'], 500);
+
+            }
+
+
+            return response()->json($moneyArray);
+
+
+          }else{
+            return response()->json($moneyArray);
+          }
+
+
+
     }
 }

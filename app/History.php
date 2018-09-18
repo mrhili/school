@@ -43,4 +43,8 @@ class History extends Model
     {
         return $this->belongsTo('App\HistoryCategory', 'category_history_id');
     }
+
+    public function wallet(){
+      return $this->hasOne('App\Wallet');
+    }
 }

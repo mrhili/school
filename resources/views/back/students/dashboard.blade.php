@@ -299,7 +299,7 @@ Examins
   $(function () {
     "use strict";
 
-
+/*
 axios.get('/months-bd/')
                 .then(function (response) {
                   //BAR CHART
@@ -323,6 +323,9 @@ axios.get('/months-bd/')
 
 
   });
+
+
+  */
 </script>
 
 @endsection

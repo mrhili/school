@@ -77,6 +77,9 @@ Route::get('/parents', 'ParentController@all')->name('parents.all');
 Route::get('/students-login/{class}', 'StudentController@loginByClass')->name('students.login-by-class');
 Route::get('/students-data-login-by-class/{class}', 'StudentController@dataLoginByClass')->name('students.data-login-by-class');
 
+/***********INVITATION**************************/
+Route::get('/students-inv-by/{class?}', 'StudentController@inv')->name('students.inv');
+
 /********HUMAN CLASS**************/
 
 Route::get('/change-class-4-stud-page/{student}', 'TheClassController@change4StudentPage')->name('classes.change-4-student-page');

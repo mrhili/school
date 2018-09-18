@@ -6,7 +6,7 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="../../index2.html" class="navbar-brand">{{ GetSetting::getConfig('site-name') }}</a>
+          <a href="{{ route('index') }}" class="navbar-brand">{{ GetSetting::getConfig('site-name') }}</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>

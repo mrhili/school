@@ -36,6 +36,70 @@ use Relation;
 
 class UserController extends Controller
 {
+
+
+    public function workersInv($user = null){
+
+      if(!$user){
+
+        $workers = User::where('role','>', 2)->where('role','<', 6)->get();
+
+      }else{
+
+        $workers = User::where('id', $user)->get();
+
+      }
+
+      return view('back.workers.printables.inv', compact('workers'));
+
+    }
+
+    /**************/
+
+    public function workersLogin(){
+
+
+    	return view('back.users.workers-login');
+
+    }
+
+    public function workersLoginData(){
+
+        return Datatables::of(User::where('role', '>', 2)->where('role','<', 6)->get() )
+
+
+            ->editColumn('site', function( $model ){
+
+               return route('index');
+
+           })
+            ->editColumn('nomcomplet', function( $model ){
+
+             return $model->name . ' '. $model->last_name;
+
+         })
+
+        ->editColumn('email', function( $model ){
+
+          return $model->email;
+
+
+        })
+        ->editColumn('password', function( $model ){
+
+            return $model->password;
+
+        })
+
+        ->make(true);
+
+    }
+
+
+
+/******************/
+
+
     //
     public function bigList(){
       return view('back.users.gradation-list');

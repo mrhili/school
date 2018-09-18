@@ -53,6 +53,25 @@ use Hash;
 class StudentController extends Controller
 {
 
+
+
+  public function inv($class = null){
+
+    if(!$class){
+
+      $students = User::where('role', 1)->where('the_class_id', '!=', null)->get();
+
+    }else{
+
+      $students = TheClass::find( $class )->students ;
+
+    }
+
+    return view('back.students.printables.inv', compact('students'));
+
+
+  }
+
     public function addParent($student = null){
 
       if(!$student){
@@ -260,9 +279,7 @@ class StudentController extends Controller
 
     	$class = TheClass::find($class);
 
-        $users = User::pluck('name', 'id');
-
-    	return view('back.students.login-by-class', compact('class', 'users'));
+    	return view('back.students.login-by-class', compact('class'));
 
     }
 

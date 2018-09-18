@@ -28,6 +28,8 @@ use App\{
 use Application;
 use Auth;
 
+use RealRashid\SweetAlert\Facades\Alert;
+
 use App;
 use Session;
 use ArrayHolder;
@@ -76,7 +78,15 @@ class HomeController extends Controller
 
         $user = Auth::user();
 
+
+
         if( $user->role != 6 ){
+
+            Alert::html('<i>Bienvenue</i>',"
+                <b>Tu peut voire le documentaire</b> <a class='btn btn-success' href='". route(ArrayHolder::roles_routing($user->role).'.docs') ."'>ICI</a></b>.",
+                'success')->autoClose(500000);
+
+
             return redirect()->route(  ArrayHolder::roles_routing($user->role).'.home');
         }
 

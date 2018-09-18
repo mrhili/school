@@ -10,6 +10,13 @@ Route::get('/students-correct-num-email', 'StudentController@correctNumberInEmai
   Route::get('/my-profile-as-master', 'MasterController@myProfile')->name('masters.my-profile');
   Route::get('/docs-master/{selected?}', 'MasterController@docs')->name('masters.docs');
 
+/*****************WORKERS LOGIN*********************/
+
+Route::get('/workers-login', 'WorkerController@workersLogin')->name('users.login');
+Route::get('/data-workers-login', 'WorkerController@workersLoginData')->name('users.data-login');
+
+Route::get('/workers-inv/{user?}', 'WorkerController@workersInv')->name('users.workers-inv');
+
 /***********************************Human**********************************/
 
 	Route::get('/add-user/{role?}', 'UserController@add')->name('users.add');
@@ -19,7 +26,6 @@ Route::get('/students-correct-num-email', 'StudentController@correctNumberInEmai
   Route::get('/user-list', 'UserController@userlist')->name('users.userlist');
 
   Route::get('/user-list-data', 'UserController@userlistdata')->name('users.userlistdata');
-
 
 /**************HUMAN GRADATION************************/
 

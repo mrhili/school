@@ -40,7 +40,7 @@ class IncLog
       $catch = Catcher::firstOrNew([
         'user_id' => $user->id,
         'user_ip' => request()->ip(),
-        'user-agent' => request()->header('user-agent'),
+        'user_agent' => request()->header('user-agent'),
       ]);
 
       $catch->save();

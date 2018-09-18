@@ -49,12 +49,14 @@ Login de la class {{ $class->name }}
 
   @slot('footerPlain')
 
-
+    <a target="_blank" href="{{route('students.inv',$class->id)}}" class="btn btn-lg btn-info">Generate invitation blocks</a>
 
   @endslot
 
 
 @endcomponent
+
+
 
 
 @endsection
