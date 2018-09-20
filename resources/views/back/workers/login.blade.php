@@ -28,13 +28,15 @@ Login des maitre ets autres
 
 <div class="table-responsive no-padding">
 
-    <table class="table table-bordered table-striped" id="by-class-table">
+    <table class="table table-bordered table-striped" id="table">
         <thead>
             <tr>
                 <th>site</th>
                 <th>nomcomplet</th>
                 <th>Email</th>
                 <th>Password</th>
+                <th>Log</th>
+                <th>Log informations</th>
             </tr>
         </thead>
     </table>
@@ -50,6 +52,30 @@ Login des maitre ets autres
     <a target="_blank" href="{{route('users.workers-inv')}}" class="btn btn-lg btn-info">Generate invitation blocks</a>
 
   @endslot
+
+
+
+
+  @component('back.components.modal')
+
+    <div>
+      <table class="table">
+          <thead>
+            <tr>
+              <th>Ip</th>
+              <th>Agent</th>
+
+            </tr>
+          </thead>
+          <tbody id="informations">
+          </tbody>
+        </table>
+    </div>
+
+  @endcomponent
+
+
+
 
 
 @endcomponent
@@ -96,7 +122,7 @@ Login des maitre ets autres
 
 
 $(function() {
-    $('#by-class-table').DataTable({
+    $('#table').DataTable({
           dom: 'lBfrtip',
         buttons: [
           'copy', 'csv', 'excel', 'pdf', 'print'
@@ -109,7 +135,9 @@ $(function() {
             { data: 'site', name: '' },
             { data: 'nomcomplet', name: '' },
             { data: 'email', name: '' },
-            { data: 'password', name: '' }
+            { data: 'password', name: '' },
+            { data: 'log', name: '' },
+            { data: 'log_info', name: '' }
         ]
     });
 });
@@ -118,9 +146,47 @@ $(function() {
 
 <script type="text/javascript">
 
+
 $( document ).ready(function() {
 
+  $("#table").on("click", ".btn-info", function(){
+    axios.get('/get-logs/'+ $(this).attr('data-id'),{
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    } )
+    .then(function(response){
 
+      arrayInfos = response.data['infos'];
+      alert('heheh');
+      console.log(response);
+
+      $('.btn-info').attr('disabled', false);
+
+      $('#informations').html('');
+
+
+      arrayInfos.map(function(item){
+
+        $('#informations').append( $('<tr>\
+                      <td>'+ item['user_ip'] +'</td>\
+                      <td>'+ item['user_agent'] +'</td>\
+                    </tr>'));
+
+      })
+
+
+
+      $('#modal').modal('show');
+
+
+    })
+    .catch(function(error){
+      $('.btn-info').attr('disabled', false);
+      alert(error);
+      console.log( error );
+    });
+  });
 
 });
 

@@ -42,4 +42,9 @@ class Year extends Model
         return $this->hasMany('App\Calendarteatchification');
     }
 
+    public function bilings()
+    {
+        return $this->hasMany('App\Biling');
+    }
+
 }

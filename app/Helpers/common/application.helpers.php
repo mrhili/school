@@ -24,7 +24,8 @@ use App\{
     Teatchification,
     Demandefourniture,
     Calendar as Calendinar,
-    Calendarteatchification
+    Calendarteatchification,
+    Biling
 };
 
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
@@ -70,6 +71,58 @@ class Application{
 
 	  }
 
+  }
+
+
+  public static function fillPayedButton(Biling $model){
+
+      $existArray = [];
+
+      //dd($model);
+
+      $payed = $model->payed;
+
+      if( $payed ){
+
+          //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+          $existArray[ 'icon' ] = 'Payé';
+          $existArray[ 'class' ] = 'success';
+
+      }else{
+
+          //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+          $existArray[ 'icon' ] = 'Non payé';
+          $existArray[ 'class' ] = 'danger';
+
+      }
+
+      return $existArray;
+  }
+
+  public static function fillTokeButton(Biling $model){
+
+      $existArray = [];
+
+      //dd($model);
+
+      $toke = $model->toke;
+
+      if( $toke ){
+
+          //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+          $existArray[ 'icon' ] = 'Pris';
+          $existArray[ 'class' ] = 'success';
+
+      }else{
+
+          //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+          $existArray[ 'icon' ] = 'Non pris';
+          $existArray[ 'class' ] = 'danger';
+
+      }
+
+
+      return $existArray;
   }
 
 

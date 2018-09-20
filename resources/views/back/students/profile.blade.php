@@ -81,7 +81,19 @@
               </div>
               @if ($passChangeSensibleInfo)
               <div class="tab-pane" id="sensible-settings">
-                <a href="{{route('classes.change-4-student-page', $user->id)}}">Changer la class</a>
+                <ul class="list-unstyled">
+                  <li ><a class="btn btn-info btn-xs" href="{{route('classes.change-4-student-page', $user->id)}}">Changer la class</a></li>
+                  <li><button id="delete-student" class="btn btn-danger btn-xs">Suprimer</button></li>
+                </ul>
+
+                {!! Form::open(['route' => ['students.delete', $user->id ],'id' => 'form-delete','method' => 'post' ,'class' => 'hidden']) !!}
+
+                  {{ csrf_field() }}
+
+                  <input name="hidden" type="hidden" value="do" />
+
+                {!! Form::close() !!}
+
               </div>
               @endif
               <!-- /.tab-pane -->
@@ -109,7 +121,9 @@
 <script type="text/javascript">
 
 
-
+$("#delete-student").click(function(){
+  $("#form-delete").submit();
+});
 
 
 </script>

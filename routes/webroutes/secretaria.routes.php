@@ -1,8 +1,6 @@
 <?php
 
-
 Route::get('/docs-secretaria/{selected?}', 'SecretariaController@docs')->name('secretaria.docs');
-
 
 /*PERSONELLE*/
 Route::get('/my-profile-as-secretaria', 'SecretariaController@myProfile')->name('secretarias.my-profile');
@@ -15,6 +13,30 @@ Route::get('/printable-sheet-new-student-with-parent/{student}/{parent}', 'Print
 
 Route::get('/printable-sheet-new-worker/{worker}', 'PrintableController@printableSheeNewWorker')->name('printables.new-worker');
 /*********************************CLASSES*************************************************************/
+
+/**************************BILING******************************/
+
+
+/********SWITCHING***BYLING***********************/
+
+Route::post('/switch-toke-biling/{biling}', 'BilingController@switchToke')->name('bilings.switch-toke');
+
+Route::post('/switch-payed-biling/{biling}', 'BilingController@switchPayed')->name('bilings.switch-payed');
+
+
+/*******BILING BY CLASS**********/
+
+
+Route::get('/biling-by-class/{class?}', 'BilingController@byClass')->name('bilings.by-class');
+Route::post('/generate-biling-to-class/{class?}', 'BilingController@generateToClass')->name('bilings.generate-to-class');
+
+Route::get('/data-biling-by-class/{class}', 'BilingController@dataByClass')->name('bilings.data-by-class');
+
+Route::get('/bilings-user/{user}', 'BilingController@user')->name('bilings.user');
+
+Route::get('/bilings-user/{user}', 'BilingController@user')->name('bilings.user');
+
+Route::get('/data-bilings-user/{user}', 'BilingController@userData')->name('bilings.user-data');
 
 
 /**********************************Claendar teatchifications****************************************/
@@ -79,6 +101,7 @@ Route::get('/parents', 'ParentController@all')->name('parents.all');
 
 Route::get('/students-login/{class}', 'StudentController@loginByClass')->name('students.login-by-class');
 Route::get('/students-data-login-by-class/{class}', 'StudentController@dataLoginByClass')->name('students.data-login-by-class');
+Route::get('/get-logs/{user}', 'CatcherController@logs')->name('catchers.log');
 
 /***********INVITATION**************************/
 Route::get('/students-inv-by/{class?}', 'StudentController@inv')->name('students.inv');
@@ -136,8 +159,6 @@ Route::get('/roomtypes', 'RoomtypeController@list')->name('roomtypes.list');
 Route::post('/store-roomtype', 'RoomtypeController@store')->name('roomtypes.store');
 Route::get('/etages', 'EtageController@list')->name('etages.list');
 Route::post('/store-etage', 'EtageController@store')->name('etages.store');
-
-
 
 
 

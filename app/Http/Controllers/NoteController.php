@@ -26,9 +26,6 @@ class NoteController extends Controller
       $columns = [];
 
 
-
-
-
       $rows = Datatables::of(User::where('role', 1)->where('the_class_id', $class->id)->get() );
 
       $rows->addColumn('names', function(User $user) {

@@ -205,5 +205,21 @@ class User extends Authenticatable
     }
 
 
+    public function biled()
+    {
+        return $this->hasMany('App\Biling', 'user_id');
+    }
+
+    public function biling_accepted()
+    {
+        return $this->hasMany('App\Biling', 'token_id');
+    }
+
+    public function catchers()
+    {
+        return $this->hasMany('App\Catcher');
+    }
+
+
 
 }

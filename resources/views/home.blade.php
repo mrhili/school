@@ -490,6 +490,34 @@
 
       <div class="row">
           <div class="col-xs-12">
+            <h3>Bilings</h3>
+            <div class="row">
+
+
+
+              <div class="col-lg-3 col-xs-6">
+
+                <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+                  <div class="inner">
+                    <h3>Bil</h3>
+                    <p>Bil management</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-list-ol"></i>
+                  </div>
+                  <a href="{{ route('bils.manage') }}" class="small-box-footer">Bil Management<i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+
+      <div class="row">
+          <div class="col-xs-12">
             <h3>Transporting</h3>
             <div class="row">
 

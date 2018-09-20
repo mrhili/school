@@ -8,19 +8,26 @@ use App\Http\Requests\UserRequest;
 use CommonPics;
 
 use App\{
+    Biling,
+    Demandefourniture,
     User,
     Year,
+    Observation,
     TheClass,
     StudentsPayment,
     History,
     Categoryship,
+    Catcher,
     Relashionship,
     Testyearsubclass,
     Subjectclass,
     Test,
     Note,
     Fournituration,
-    Teatchification
+    Teatchification,
+    Meetingpopulatingrating,
+    Meetingpopulating
+
 };
 
 use App\Parsers\StudFromMassar;
@@ -52,6 +59,36 @@ use Hash;
 
 class StudentController extends Controller
 {
+
+  public function delete(Request $request, User $user){
+
+    if($request->hidden == 'do'){
+
+
+      Catcher::where('user_id', $user->id)->delete();
+      Biling::where('user_id', $user->id)->delete();
+      Demandefourniture::where('student_id', $user->id)->where('done', false)->delete();
+      Teatchification::where('user_id', $user->id)->delete();
+      Meetingpopulatingrating::where('user_id', $user->id)->delete();
+      Meetingpopulating::where('invited_id', $user->id)->delete();
+      Observation::where('observer_id', $user->id)->delete();
+      Observation::where('observed_id', $user->id)->delete();
+      Fournituration::where('student_id', $user->id)->delete();
+      Note::where('student_id', $user->id)->delete();
+      Relashionship::where('student_id', $user->id)->delete();
+      /***************/
+      StudentsPayment::where('user_id', $user->id)->delete();
+      User::find( $user->id )->delete();
+
+      Alert::success('Succefully', 'Suprimer');
+
+      return redirect()->route('home');
+
+    }else{
+      return redirect()->route('index');
+    }
+
+  }
 
 
   public function quickAdd(){
@@ -395,6 +432,16 @@ class StudentController extends Controller
         ->editColumn('password', function( $model ) use($year, $theclass){
 
             return $model->password;
+
+        })
+        ->editColumn('log', function( $model ) use($year, $theclass){
+
+            return $model->log;
+
+        })
+        ->editColumn('log_info', function( $model ) use($year, $theclass){
+
+            return link_to('#', 'Info', ['class' => 'btn btn-info btn-circle btn-info', 'data-id' => $model->id ], null);
 
         })
 

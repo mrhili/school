@@ -302,6 +302,22 @@ class CatHistorySeed extends Seeder
             'role' => 4
         ]);//36
 
+        DB::table('history_categories')->insert([
+            'name' => 'Une Bil a etait crée:',
+            'model' => 'Bil',
+            'icon' => 'money-bill-alt',
+            'kind' => 1,
+            'role' => 4
+        ]);//37
+
+        DB::table('history_categories')->insert([
+            'name' => 'Une Bilage a etait generer a:',
+            'model' => 'Bil',
+            'icon' => 'money-bill-alt',
+            'kind' => 1,
+            'role' => 4
+        ]);//38
+
 
     }
 }

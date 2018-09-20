@@ -72,6 +72,19 @@ class WorkerController extends Controller
 
             })
 
+            ->editColumn('log', function( $model ) {
+
+                return $model->log;
+
+            })
+            ->editColumn('log_info', function( $model ){
+
+                return link_to('#', 'Info', ['class' => 'btn btn-info btn-circle btn-info', 'data-id' => $model->id ], null);
+
+            })
+
+
+
             ->make(true);
 
         }
