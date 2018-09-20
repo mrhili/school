@@ -154,7 +154,7 @@ $( document ).ready(function() {
     .then(function(response){
 
       arrayInfos = response.data['infos'];
-      alert('heheh');
+
       console.log(response);
 
       $('.btn-info').attr('disabled', false);
@@ -170,8 +170,6 @@ $( document ).ready(function() {
                     </tr>'));
 
       })
-
-
 
       $('#modal').modal('show');
 

@@ -41,6 +41,8 @@ class CreateBilingsTable extends Migration
             $table->boolean('toke')->default(false);
             $table->boolean('payed')->default(false);
 
+            $table->boolean('refused')->default(false);
+
             $table->integer('token_id')->unsigned()->nullable()->index();
             $table->foreign('token_id')
               ->references('id')

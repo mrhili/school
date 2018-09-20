@@ -99,7 +99,7 @@ Nouveau etudient
 $(document).ready(function(){
 
 var options = {
-      formData: '{!! $test->body !!}',
+      formData: '{!!$test->body!!} ',
       dataType: 'json'
     };
 $answers = $('#answers');

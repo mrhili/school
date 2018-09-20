@@ -38,7 +38,7 @@ L'année selectionée est {{ Session::get('yearId') }}
 
 
 
-  @component('back.components.table',['columns' => ['service', 'price','toke','Payé']])
+  @component('back.components.table',['columns' => ['Service', 'Prix','Prise','Payé','Refusé'] ])
 
   @endcomponent
 
@@ -77,7 +77,8 @@ $(function() {
             { data: 'service', name: '' },
             { data: 'price', name: '' },
             { data: 'toke', name: '' },
-            { data: 'payed', name: '' }
+            { data: 'payed', name: '' },
+            { data: 'refused', name: '' }
         ]
     });
 });
@@ -88,9 +89,9 @@ $(function() {
 
 $( document ).ready(function() {
 
-  $("#table").on("click", ".btn-toke", function(){
+  $("#table").on("click", ".btn-toke", function(e){
 
-
+              e.preventDefault();
      // your code goes here
               $button = $(this)
 
@@ -133,9 +134,9 @@ $( document ).ready(function() {
   });
 
 
-  $("#table").on("click", ".btn-payed", function(){
+  $("#table").on("click", ".btn-payed", function(e){
 
-
+              e.preventDefault();
      // your code goes here
               $button = $(this)
 
@@ -174,6 +175,60 @@ $( document ).ready(function() {
 
 
   });
+
+
+
+
+    $("#table").on("click", ".btn-refuse", function(e){
+
+                e.preventDefault();
+       // your code goes here
+                $button = $(this)
+
+                id = $button.attr('data-id');
+
+                $button.attr('disabled',true);
+
+
+                  axios.post('/refuse-biling/'+id,{
+                    headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+
+                  })
+                    .then(function (response) {
+
+
+                      $('#refuse-'+ id).parent().parent().remove();
+
+                      swal({
+                        position: 'top-end',
+                        type: 'success',
+                        title: 'Bien refusé',
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+
+                    })
+                    .catch(function (error) {
+
+                      $button.attr('disabled',false);
+
+
+                      swal({
+                        position: 'top-end',
+                        type: 'error',
+                        title: 'Répéte une autre fois',
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                    });
+
+
+
+    });
+
+
 
 
 });

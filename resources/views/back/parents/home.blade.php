@@ -171,6 +171,20 @@
                         </div>
                       </div>
 
+                      <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+                          <div class="inner">
+                            <h3>Ses Biling</h3>
+                            <p>...</p>
+                          </div>
+                          <div class="icon">
+                            <i class="fa fa-graduation-cap"></i>
+                          </div>
+                          <a href="{{ route('bilings.user', $child->id) }}" class="small-box-footer"> Ses Bilings<i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                      </div>
+
 
 
                     </div>
@@ -242,31 +256,6 @@ $countChilds++;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @endsection
 
 @section('datatableScript')
@@ -300,11 +289,6 @@ $countChilds++;
 <script>
   $(function () {
     "use strict";
-
-
-
-
-
 
   });
 </script>

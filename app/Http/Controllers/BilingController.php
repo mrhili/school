@@ -21,14 +21,38 @@ use Application;
 class BilingController extends Controller
 {
     //
+    public function refuse(Biling $biling){
+
+      if( Auth::user()->role >= 2 && !$biling->toke ){
+
+        Biling::find( $biling->id )->delete();
+
+        response()->json(['message' => true ], 503);
+
+      }else{
+        response()->json(['message' => 'Error'], 503);
+      }
+
+
+    }
+
+
     public function switchPayed(Biling $biling){
 
+      if( Auth::user()->role >= 4 ){
         $biling->payed = !$biling->payed;
         $biling->save();
 
         $buttonArray = Application::fillPayedButton($biling );
 
-      return response()->json($buttonArray);
+        return response()->json($buttonArray);
+      }else{
+
+        $buttonArray = Application::fillPayedButton($biling );
+
+        return response()->json($buttonArray);
+
+      }
 
     }
 
@@ -52,11 +76,10 @@ class BilingController extends Controller
     }
     public function userData(User $user){
 
-    return Datatables::of(Biling::where('user_id', $user->id)->where('year_id', $this->selected_year)->get() )
-
-    ->addColumn('service', function(Biling $model) {
-        return $model->bil->service ;
-    })
+      $snif = Datatables::of(Biling::where('user_id', $user->id)->where('year_id', $this->selected_year)->get() )
+      ->addColumn('service', function(Biling $model) {
+          return $model->bil->service ;
+      })
 
     ->addColumn('price', function(Biling $model) {
         return $model->bil->price ;
@@ -75,20 +98,51 @@ class BilingController extends Controller
 
     ->addColumn('payed', function(Biling $model) {
 
+      $buttonArray = Application::fillPayedButton($model );
 
-        $buttonArray = Application::fillPayedButton($model );
+      $icon = $buttonArray['icon'];
+      $class = $buttonArray['class'];
 
-        $icon = $buttonArray['icon'];
-        $class = $buttonArray['class'];
+      if( Auth::user()->role >= 4 ){
 
         return link_to('#', $icon, ['class' => 'btn btn-'. $class .' btn-circle btn-payed', 'data-id' => $model->id, 'id' => 'payed-'.$model->id ], null);
 
-    })
 
-    ->rawColumns(['bilings','payed','toke'])
+      }else{
 
 
-    ->make(true);
+        return link_to('#', $icon, ['class' => 'btn btn-'. $class .' btn-circle', 'data-id' => $model->id, 'id' => 'payed-'.$model->id ], null);
+
+
+      }
+
+
+    });
+
+
+    if( Auth::user()->role == 2 ){
+      $snif->addColumn('refused', function(Biling $model) {
+
+
+        if( $model->toke ){
+
+          return 'Tu peut pas refusé parseque le biling est pris';
+
+        }else{
+
+
+          return link_to('#', 'Refusé', ['class' => 'btn btn-warning btn-circle btn-refuse', 'data-id' => $model->id, 'id' => 'refuse-'.$model->id ], null);
+
+        }
+
+      });
+    }
+
+
+    $snif->rawColumns(['bilings','payed','toke']);
+
+
+    return $snif->make(true) ;
 
 
 

@@ -32,11 +32,7 @@ Route::post('/generate-biling-to-class/{class?}', 'BilingController@generateToCl
 
 Route::get('/data-biling-by-class/{class}', 'BilingController@dataByClass')->name('bilings.data-by-class');
 
-Route::get('/bilings-user/{user}', 'BilingController@user')->name('bilings.user');
 
-Route::get('/bilings-user/{user}', 'BilingController@user')->name('bilings.user');
-
-Route::get('/data-bilings-user/{user}', 'BilingController@userData')->name('bilings.user-data');
 
 
 /**********************************Claendar teatchifications****************************************/
