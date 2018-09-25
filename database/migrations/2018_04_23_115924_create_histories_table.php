@@ -26,21 +26,21 @@ class CreateHistoriesTable extends Migration
 
             $table->text('hidden_note')->nullable();
 
-            $table->integer('by-admin')->unsigned()->index()->nullable();
-            $table->foreign('by-admin')
+            $table->integer('by_admin')->unsigned()->index()->nullable();
+            $table->foreign('by_admin')
               ->references('id')
               ->on('users')
               ->onDelete('set null');
 
-            $table->integer('by-user')->unsigned()->index()->nullable();
-            $table->foreign('by-user')
+            $table->integer('by_user')->unsigned()->index()->nullable();
+            $table->foreign('by_user')
               ->references('id')
               ->on('users')
               ->onDelete('set null');
 
-            $table->string('by-exterior-name')->nullable();
+            $table->string('by_exterior_name')->nullable();
 
-            $table->string('by-exterior-info')->nullable();
+            $table->string('by_exterior_info')->nullable();
 
             $table->integer('payment')->nullable();
 

@@ -385,7 +385,7 @@ CREATE TABLE IF NOT EXISTS `histories` (
   `comment` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `info` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `hidden_note` text COLLATE utf8mb4_unicode_ci,
-  `by-admin` int(10) UNSIGNED DEFAULT NULL,
+  `by_admin` int(10) UNSIGNED DEFAULT NULL,
   `by-user` int(10) UNSIGNED DEFAULT NULL,
   `by-exterior-name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `by-exterior-info` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -394,7 +394,7 @@ CREATE TABLE IF NOT EXISTS `histories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `histories_by_admin_index` (`by-admin`),
+  KEY `histories_by_admin_index` (`by_admin`),
   KEY `histories_by_user_index` (`by-user`),
   KEY `histories_category_history_id_index` (`category_history_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

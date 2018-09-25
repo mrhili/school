@@ -20,7 +20,17 @@ class CreateWalletsTable extends Migration
             $table->foreign('history_id')
               ->references('id')
               ->on('histories')
-              ->onDelete('cascade');
+              ->onDelete('set null');
+
+
+              $table->integer('transparancy_id')->nullable()->unsigned()->index();
+              $table->foreign('transparancy_id')
+                ->references('id')
+                ->on('trancparancies')
+                ->onDelete('set null');
+
+
+            $table->boolean('mines')->default(false);
 
             $table->float('amount');
 

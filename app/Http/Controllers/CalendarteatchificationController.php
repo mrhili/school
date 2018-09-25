@@ -175,27 +175,22 @@ class CalendarteatchificationController extends Controller
 
           $admin = Auth::user();
 
-          $creation = [
-
-              'id_link' => $calendarteatchification->id,
-              'comment' => $request->comment,
-              //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
-              'info' => 'just talk',
-              'hidden_note' => $request->hidden_note,
-              'by-admin' => $admin->id,
-              'category_history_id' => 31,
-              'class' => 'success',
-              //'id_link' => $request->id_link,
-
-              ];
-
-          $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a linker
+          $info = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a linker
           le calendrier <strong>'.$calendarteatchification->calendar->title.' </strong>
           au maitre <strong>'.$teatchification->teatcher->name.' '.$teatchification->teatcher->last_name.' </strong>
           est la matiere qui porte le nom' . $teatchification->subject_class->subject->name . '
            et la  class ' . $teatchification->subject_class->the_class->name . '  </strong>.'  ;
 
-          History::create( $creation );
+
+          Application::toHistory(
+            $calendarteatchification,
+            [
+              31,
+              'success',
+              $info
+            ],
+            $request
+            );
 
           /***********************/
           $returned_array = [

@@ -14,81 +14,8 @@ use Auth;
 use Math;
 class UserspaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Teatcherspayment  $teatcherspayment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Teatcherspayment $teatcherspayment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Teatcherspayment  $teatcherspayment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Teatcherspayment $teatcherspayment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Teatcherspayment  $teatcherspayment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Teatcherspayment $teatcherspayment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Teatcherspayment  $teatcherspayment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Teatcherspayment $teatcherspayment)
-    {
-        //
-    }
 
     public function addPayment(Request $request, $id, $payment, $month, $year)
     {
@@ -106,17 +33,22 @@ class UserspaymentController extends Controller
         $creation = [
 
             'id_link' => $id,
-            'comment' => $request->comment, 
-            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh 
+            'comment' => $request->comment,
+            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
             'info' => 'just talk',
             'hidden_note' => $request->hidden_note,
-            'by-admin' => $admin->id,
-
-            'category_history_id' => $user->role + 3,
-
-            //'id_link' => $request->id_link,
+            'by_admin' => $admin->id
 
             ];
+        if( $payment > 0 ){
+
+          $creation['category_history_id'] = $user->role + 5;
+
+        }else{
+
+          $creation['category_history_id'] = $user->role + 13;
+
+        }
 
 
         $old_payment = $month->payment;
@@ -144,7 +76,7 @@ class UserspaymentController extends Controller
             $creation['class'] = 'success';
         }else{
 
-            
+
 
             $complet = 'nest as complet lecole devrait payé <strong>'.$moneyArray['money']. ' dh </strong>';
 
@@ -160,10 +92,12 @@ class UserspaymentController extends Controller
 
         $creation['payment'] = $payment;
 
-        History::create( $creation );
+        $history = History::create( $creation );
+
+        Application::toWallet($history, $payment);
 
         return response()->json($moneyArray);
 
         //return response()->json([ 'parameter' => $request->parameter ]);
-    } 
+    }
 }

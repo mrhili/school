@@ -29,12 +29,7 @@ class FourniturationController extends Controller
     public function dataCheck( TheClass $class )
     {
         $year = Session::get('yearId');
-        /*
-            { data: 'name', name: '' },
-            { data: 'exist', name: '' },
-            { data: 'confirmed', name: '' },
-            { data: 'rejected', name: '' }
-        */
+
         return Datatables::of(
                 Fournituration::where('year_id' , $year )->where('the_class_id' , $class->id )->get()
             )

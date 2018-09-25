@@ -30,6 +30,23 @@ use Carbon;
 use Auth;
 class Holder {
 
+    public static function deficiteTypes( $item = null ){
+
+        $types = [
+            'Transport',
+            'Object',
+            'Room',
+            'fourniture'
+        ];
+
+        if( $item === null){
+            return $types;
+        }else{
+            return $types[$item];
+        }
+
+    }
+
     public static function repeatedTypes( $item = null ){
 
         $teaserTypes = [

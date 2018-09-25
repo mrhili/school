@@ -22,10 +22,12 @@ use App\{
     PivotCoursub,
     Subjectclass,
     Teatchification,
+    Transparancy,
     Demandefourniture,
     Calendar as Calendinar,
     Calendarteatchification,
-    Biling
+    Biling,
+    Wallet
 };
 
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
@@ -74,6 +76,116 @@ class Application{
   }
 
 
+
+  public static function toHistory($model, $info ,$request = null){
+    $histArr = [
+
+        'id_link' => $model->id,
+        'by_admin' => Auth::id(),
+        'category_history_id' => $info[0],
+        'class' => $info[1],
+        'info' => $info[2]
+    ];
+
+    if(!$request){
+
+      $histArr['comment'] = 'No Comment';
+
+    }else{
+
+      $histArr['comment'] = $request->comment;
+      $histArr['hidden_note'] = $request->hidden_note;
+    }
+
+    $history = History::create($histArr);
+    return $history;
+  }
+
+  public static function toWallet(History $history, $amount){
+
+
+    if( Auth::user()->role == 6 ){
+
+      $walletArr = [
+        'history_id' => $history->id,
+        'amount' => $amount,
+        'mines' => ( $amount > 0 )
+      ];
+
+      $wallet = Wallet::create( $walletArr );
+
+      if( $wallet ){
+
+        $walletHist = [
+            'id_link' => $wallet->id,
+            'comment' => 'no - comment',
+            'by_admin' => Auth::id()
+        ];
+
+        if($amount> 0){
+
+          $walletHist['category_history_id'] = 41;
+          $walletHist['class'] = 'success';
+
+          $walletHist['info'] = '<strong>'. $amount .' et entrer dans le wallet</strong>.';
+
+        }else{
+
+          $walletHist['category_history_id'] = 42;
+          $walletHist['class'] = 'danger';
+          $walletHist['info'] = '<strong>'. $amount .' et sortie de la wallet</strong>.';
+
+        }
+
+
+        $history = History::create( $walletHist );
+
+      }
+
+    }else{
+
+      $transparancy = [
+        'user_id' => Auth::id(),
+        'amount' => abs( $amount ),
+        'mines' => ( $amount > 0 )
+      ];
+
+      $transparancy = Transparancy::create( $transparancy );
+
+      if($transparancy){
+
+        $transHist = [
+            'id_link' => $transparancy->id,
+            'comment' => 'no - comment',
+            'by_admin' => Auth::id()
+        ];
+
+        if($amount> 0){
+
+          $transHist['category_history_id'] = 43;
+          $transHist['class'] = 'warning';
+
+          $transHist['info'] = '<strong>'. $amount .' </strong> et avec <strong>'.
+          Auth::user()->name.' '.Auth::user()->last_name .' </strong>.';
+
+        }else{
+
+          $transHist['category_history_id'] = 44;
+          $transHist['class'] = 'warning';
+
+          $transHist['info'] = '<strong>'. $amount .' </strong> doit arriver à <strong>'.
+          Auth::user()->name.' '.Auth::user()->last_name .' </strong>.';
+
+
+        }
+
+        $history = History::create( $transHist );
+
+      }
+
+    }
+
+  }
 
 
   public static function fillPayedButton(Biling $model){
@@ -160,7 +272,7 @@ class Application{
                     'id_link' => $student->id,
                     'comment' => $request->comment,
                     'hidden_note' => $request->hidden_note,
-                    'by-admin' => Auth::id(),
+                    'by_admin' => Auth::id(),
 
                     'category_history_id' => 2,
                     'class' => 'success'
@@ -366,7 +478,7 @@ class Application{
             //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
             'info' => 'just talk',
             'hidden_note' => $request->hidden_note,
-            'by-admin' => $admin->id,
+            'by_admin' => $admin->id,
             'category_history_id' => 32,
             'class' => 'success',
             //'id_link' => $request->id_link,

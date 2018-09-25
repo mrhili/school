@@ -36,6 +36,8 @@ class CalendarController extends Controller
         return back()->withInput();
       }
 
+      $info = '';
+
       $array = [
         'title' => $request->title,
         'start_date' => $request->start_date,
@@ -74,6 +76,24 @@ class CalendarController extends Controller
       }
 
       $calendinar = Calendinar::create($array);
+
+      if( $calendinar ){
+        $info = ' un calendrier est creer qui porte le nom ' .$calendinar->title.
+        'debut is ' .$calendinar->start_date.
+        'end is ' .$calendinar->end_date.
+        ($calendinar->title? ' répété': ' non répété').
+        ' .';
+        Application::toHistory(
+          $calendinar,
+          [
+            34,
+            'info',
+            $info
+          ],
+          $request
+        );
+
+      }
 
       return redirect()->route('calendars.index');
     }

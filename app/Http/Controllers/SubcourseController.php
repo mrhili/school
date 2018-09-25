@@ -65,7 +65,7 @@ class SubcourseController extends Controller
 		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
-		            'by-admin' => $admin->id,
+		            'by_admin' => $admin->id,
 
 		            'category_history_id' => 26,
 		            'class' => 'success',
@@ -116,7 +116,7 @@ class SubcourseController extends Controller
 		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
-		            'by-admin' => $admin->id,
+		            'by_admin' => $admin->id,
 
 		            'category_history_id' => 26,
 		            'class' => 'success',
@@ -179,7 +179,7 @@ class SubcourseController extends Controller
 		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
-		            'by-admin' => $admin->id,
+		            'by_admin' => $admin->id,
 
 		            'category_history_id' => 26,
 		            'class' => 'success',
@@ -256,7 +256,7 @@ class SubcourseController extends Controller
 		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
-		            'by-admin' => $admin->id,
+		            'by_admin' => $admin->id,
 
 		            'category_history_id' => 26,
 		            'class' => 'success',
@@ -381,7 +381,7 @@ Route::get('/add-subcourse/{course}', 'SubcourseController@addSubCourse2Course')
 		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
-		            'by-admin' => $admin->id,
+		            'by_admin' => $admin->id,
 
 		            'category_history_id' => 26,
 		            'class' => 'success',
@@ -426,7 +426,7 @@ Route::get('/add-subcourse/{course}', 'SubcourseController@addSubCourse2Course')
 		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
-		            'by-admin' => $admin->id,
+		            'by_admin' => $admin->id,
 
 		            'category_history_id' => 27,
 		            'class' => 'success',

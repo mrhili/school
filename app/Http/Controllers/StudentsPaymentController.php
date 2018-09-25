@@ -87,7 +87,7 @@ class StudentsPaymentController extends Controller
             //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
             'info' => 'just talk',
             'hidden_note' => $request->hidden_note,
-            'by-admin' => Auth::id(),
+            'by_admin' => Auth::id(),
 
             'category_history_id' => 1,
 
@@ -105,14 +105,14 @@ class StudentsPaymentController extends Controller
         $hoo;
 
         if( $request->hoo == 'user'){
-            $creation['by-user'] = $request->by_user;
+            $creation['by_user'] = $request->by_user;
             $modelHoo = User::find( $request->by_user );
             $hoo = $modelHoo->name . ' ' . $modelHoo->last_name ;
 
 
         }elseif( $request->hoo == 'exterior' ){
-            $creation['by-exterior-name'] = $request->by_exterior_name;
-            $creation['by-exterior-info'] = $request->by_exterior_info;
+            $creation['by_exterior_name'] = $request->by_exterior_name;
+            $creation['by_exterior_info'] = $request->by_exterior_info;
 
             $hoo = '<strong>'. $request->by_exterior_name . '</strong> qui porte le numero de la carte <strong>' . $request->by_exterior_info.'</strong>' ;
 
@@ -188,15 +188,7 @@ class StudentsPaymentController extends Controller
         if( $payment != 0 ){
 
 
-            $wallet = Wallet::create( ['history_id' => $history->id,
-                              'amount' => $payment
-             ] );
-
-            if(!$wallet){
-
-              return response()->json(['message' => 'Error Wallet'], 500);
-
-            }
+            Application::toWallet($history, $payment);
 
 
             return response()->json($moneyArray);

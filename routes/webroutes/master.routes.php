@@ -1,5 +1,21 @@
 <?php
 
+
+
+
+
+
+/*******************************Transparancies********************************/
+
+Route::get('/transparancies', 'TransparancyController@toFlip')->name('transparancies.to-flip');
+
+Route::get('/data-transparancies', 'WalletController@dataTrans')->name('transparancies.data-trans');
+
+Route::get('/data-transparancies-mines', 'WalletController@dataTransMines')->name('transparancies.data-trans-mines');
+
+Route::get('/switch-transparancy/{transparancy}', 'WalletController@switch')->name('transparancies.switch');
+
+
 /*********************************CORRECT**************************************/
 //correctNumberInEmail
 
@@ -49,7 +65,7 @@ Route::post('/configs/store-config', 'ConfigController@storeConfig')->name('conf
 
 /**********************History*************************************/
 
-	Route::get('/history-master', 'HistoryController@master')->name('histories.master');
+	Route::get('/history-master/{history_cat?}', 'HistoryController@master')->name('histories.master');
 /***************************DEBUG**************************************/
 
 Route::get('/change-debug/{role}', 'DebugController@changeDebug')->name('debugs.change');

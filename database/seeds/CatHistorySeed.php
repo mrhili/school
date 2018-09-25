@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 class CatHistorySeed extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Rthe database seeds.
      *
      * @return void
      */
@@ -31,15 +31,15 @@ class CatHistorySeed extends Seeder
         */
 
         DB::table('history_categories')->insert([
-            'name' => 'Payement d\'un éleve ( + avec un benefits):',
+            'name' => 'Payement d\'éleve ( + avec benefits):',
             'model' => 'User',
-            'icon' => 'money-bill-alt',
+            'icon' => 'money',
             'kind' => 2,
             'role' => 4
         ]);//1
 
         DB::table('history_categories')->insert([
-            'name' => 'Enregistrement d\'un éleve :',
+            'name' => 'Enregistrement d\'éleve :',
             'model' => 'User',
             'icon' => 'graduation-cap',
             'kind' => 1,
@@ -47,7 +47,7 @@ class CatHistorySeed extends Seeder
         ]);//2
 
         DB::table('history_categories')->insert([
-            'name' => 'Enregistrement d\'un parent:',
+            'name' => 'Enregistrement d\'parent:',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 1,
@@ -55,28 +55,28 @@ class CatHistorySeed extends Seeder
         ]);//3
 
         DB::table('history_categories')->insert([
-            'name' => 'Enregistrement d\'un Maitre:',
+            'name' => 'Enregistrement d\'Maitre:',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 1,
             'role' => 4
         ]);//4
         DB::table('history_categories')->insert([
-            'name' => 'Enregistrement d\'un Secretaire:',
+            'name' => 'Enregistrement d\'Secretaire:',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 1,
             'role' => 5
         ]);//5
         DB::table('history_categories')->insert([
-            'name' => 'Enregistrement d\'un Administrateur:',
+            'name' => 'Enregistrement d\'Administrateur:',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 1,
             'role' => 6
         ]);//6
         DB::table('history_categories')->insert([
-            'name' => 'Enregistrement d\'un Master:',
+            'name' => 'Enregistrement d\'Master:',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 1,
@@ -85,28 +85,28 @@ class CatHistorySeed extends Seeder
 
 
         DB::table('history_categories')->insert([
-            'name' => 'Payement effectuée pour un Maitre: ( - avec une deficit)',
+            'name' => 'Payement pour Maitre: ( - avec deficit)',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 0,
             'role' => 4
         ]);//8
         DB::table('history_categories')->insert([
-            'name' => 'Payement effectuée pour un Secretaire: ( - avec une deficit)',
+            'name' => 'Payement pour Secretaire: ( - avec deficit)',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 0,
             'role' => 5
         ]);//9
         DB::table('history_categories')->insert([
-            'name' => 'Payement effectuée pour un Administrateur: ( - avec une deficit)',
+            'name' => 'Payement pour Administrateur: ( - avec deficit)',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 0,
             'role' => 6
         ]);//10
         DB::table('history_categories')->insert([
-            'name' => 'Payement effectuée pour un Master: ( - avec une deficit)',
+            'name' => 'Payement pour Master: ( - avec deficit)',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 0,
@@ -114,7 +114,7 @@ class CatHistorySeed extends Seeder
         ]);//11
 
         DB::table('history_categories')->insert([
-            'name' => 'Ajout dune matiére:',
+            'name' => 'Ajout dmatiére:',
             'model' => 'Subject',
             'icon' => 'edit',
             'kind' => 1,
@@ -122,7 +122,7 @@ class CatHistorySeed extends Seeder
         ]);//12
 
         DB::table('history_categories')->insert([
-            'name' => 'Liaison dune matiére avec une class:',
+            'name' => 'Liaison dmatiére avec class:',
             'model' => 'Subject',
             'icon' => 'edit',
             'kind' => 1,
@@ -130,44 +130,44 @@ class CatHistorySeed extends Seeder
         ]);//13
 
         DB::table('history_categories')->insert([
-            'name' => 'Payement d\'un éleve ( - avec une deficit):',
+            'name' => 'Payement d\'éleve ( - avec deficit):',
             'model' => 'User',
-            'icon' => 'money-bill-alt',
+            'icon' => 'money',
             'kind' => 0,
             'role' => 4
         ]);//14
 
         DB::table('history_categories')->insert([
-            'name' => 'Payement d\'un éleve ( 0 ):',
+            'name' => 'Payement d\'éleve ( 0 ):',
             'model' => 'User',
-            'icon' => 'money-bill-alt',
+            'icon' => 'money',
             'kind' => 1,
             'role' => 4
         ]);//15
 
         DB::table('history_categories')->insert([
-            'name' => 'Payement effectuée pour un Maitre: ( + avec un benefits)',
+            'name' => 'Payement pour Maitre: ( + avec benefits)',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 2,
             'role' => 4
         ]);//16
         DB::table('history_categories')->insert([
-            'name' => 'Payement effectuée pour un Secretaire: ( + avec un benefits)',
+            'name' => 'Payement pour Secretaire: ( + avec benefits)',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 2,
             'role' => 5
         ]);//17
         DB::table('history_categories')->insert([
-            'name' => 'Payement effectuée pour un Administrateur: ( + avec un benefits)',
+            'name' => 'Payement pour Administrateur: ( + avec benefits)',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 2,
             'role' => 6
         ]);//18
         DB::table('history_categories')->insert([
-            'name' => 'Payement effectuée pour un Master: ( + avec un benefits)',
+            'name' => 'Payement pour Master: ( + avec benefits)',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 2,
@@ -176,84 +176,86 @@ class CatHistorySeed extends Seeder
 
 
         DB::table('history_categories')->insert([
-            'name' => 'Payement effectuée pour un Maitre: ( 0 )',
+            'name' => 'Payement pour Maitre: ( 0 )',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 1,
             'role' => 4
         ]);//20
         DB::table('history_categories')->insert([
-            'name' => 'Payement effectuée pour un Secretaire: ( 0 )',
+            'name' => 'Payement pour Secretaire: ( 0 )',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 1,
             'role' => 5
         ]);//21
         DB::table('history_categories')->insert([
-            'name' => 'Payement effectuée pour un Administrateur: ( 0 )',
+            'name' => 'Payement pour Administrateur: ( 0 )',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 1,
             'role' => 6
         ]);//22
         DB::table('history_categories')->insert([
-            'name' => 'Payement effectuée pour un Master: ( 0 )',
+            'name' => 'Payement pour Master: ( 0 )',
             'model' => 'User',
             'icon' => 'user-plus',
             'kind' => 1,
             'role' => 6
         ]);//23
         DB::table('history_categories')->insert([
-            'name' => 'Un test a était a jouté:',
+            'name' => 'ajout dtest:',
             'model' => 'Test',
             'icon' => 'file',
             'kind' => 1,
             'role' => 3
         ]);//24
         DB::table('history_categories')->insert([
-            'name' => 'Un test a était a linké a une class et une matiére:',
+            'name' => 'linkage de test dans class - matier:',
             'model' => 'Test',
             'icon' => 'file',
             'kind' => 1,
             'role' => 1
         ]);//25
         DB::table('history_categories')->insert([
-            'name' => 'Liaison dune fourniture avec une class:',
+            'name' => 'Liaison dfourniture avec class:',
             'model' => 'Fourniture',
             'icon' => 'edit',
             'kind' => 1,
             'role' => 1
         ]);//26
         DB::table('history_categories')->insert([
-            'name' => 'Un cours a était ajouté:',
+            'name' => 'cours a était ajouté:',
             'model' => 'Course',
             'icon' => 'book',
             'kind' => 1,
             'role' => 1
         ]);//27
         DB::table('history_categories')->insert([
-            'name' => 'Un subcour a etait crée est ajouté a un coure:',
+            'name' => 'ajout dsubcourse a cour:',
             'model' => 'Subcourse',
             'icon' => 'book',
             'kind' => 1,
             'role' => 1
         ]);//28
         DB::table('history_categories')->insert([
-            'name' => 'Un subcour a etait linké a un coure:',
+            'name' => 'Linkage cour subcourse:',
             'model' => 'Subcourse',
             'icon' => 'book',
             'kind' => 1,
             'role' => 1
         ]);//29
+
+        /************PROBLEMME*****************/
         DB::table('history_categories')->insert([
-            'name' => 'Un subcour a etait linké a un coure:',
+            'name' => 'Linkage cour subcourse:',
             'model' => 'Teatchification',
-            'icon' => 'pen',
+            'icon' => 'book',
             'kind' => 1,
             'role' => 1
         ]);//30
         DB::table('history_categories')->insert([
-            'name' => 'Une demande a etait effectué:',
+            'name' => 'demande :',
             'model' => 'Demande',
             'icon' => 'angle-double-right',
             'kind' => 1,
@@ -261,7 +263,7 @@ class CatHistorySeed extends Seeder
         ]);//31
 
         DB::table('history_categories')->insert([
-            'name' => 'Une demande a etait Accepté:',
+            'name' => 'accepte de demande :',
             'model' => 'Demande',
             'icon' => 'check',
             'kind' => 2,
@@ -269,7 +271,7 @@ class CatHistorySeed extends Seeder
         ]);//32
 
         DB::table('history_categories')->insert([
-            'name' => 'Une Emploi du temps a etait linké maitre - matiére:',
+            'name' => 'linkage  maitre matier pour emplois du temp:',
             'model' => 'Calendarteatchification',
             'icon' => 'calendar',
             'kind' => 1,
@@ -277,7 +279,7 @@ class CatHistorySeed extends Seeder
         ]);//33
 
         DB::table('history_categories')->insert([
-            'name' => 'Une Emploi du temps a etait créé:',
+            'name' => 'Creation demplois du temp:',
             'model' => 'Calendar',
             'icon' => 'calendar',
             'kind' => 1,
@@ -287,7 +289,7 @@ class CatHistorySeed extends Seeder
         /****************Hna 3ad gadina l7ma9****************/
 
         DB::table('history_categories')->insert([
-            'name' => 'Une Upgradation a etait effectué:',
+            'name' => 'Upgradation dCadre:',
             'model' => 'User',
             'icon' => 'user',
             'kind' => 1,
@@ -295,7 +297,7 @@ class CatHistorySeed extends Seeder
         ]);//35
 
         DB::table('history_categories')->insert([
-            'name' => 'Une Matiére a etait linké a un maitre:',
+            'name' => 'Linkage de matiére:',
             'model' => 'Teatchification',
             'icon' => 'link',
             'kind' => 1,
@@ -303,20 +305,101 @@ class CatHistorySeed extends Seeder
         ]);//36
 
         DB::table('history_categories')->insert([
-            'name' => 'Une Bil a etait crée:',
+            'name' => 'Creation de bil :',
             'model' => 'Bil',
-            'icon' => 'money-bill-alt',
+            'icon' => 'money',
             'kind' => 1,
             'role' => 4
         ]);//37
 
         DB::table('history_categories')->insert([
-            'name' => 'Une Bilage a etait generer a:',
+            'name' => 'Generation de billage:',
             'model' => 'Bil',
-            'icon' => 'money-bill-alt',
+            'icon' => 'money',
             'kind' => 1,
             'role' => 4
         ]);//38
+
+        /*************TOADD********************/
+
+        DB::table('history_categories')->insert([
+            'name' => 'refusement de billage:',
+            'model' => 'Bil',
+            'icon' => 'money',
+            'kind' => 1,
+            'role' => 1
+        ]);//39
+
+        DB::table('history_categories')->insert([
+            'name' => 'payement de billage:',
+            'model' => 'Biling',
+            'icon' => 'money',
+            'kind' => 2,
+            'role' => 1
+        ]);//40
+
+        DB::table('history_categories')->insert([
+            'name' => 'benefit enregistrer dans le wallet:',
+            'model' => 'Wallet',
+            'icon' => 'money',
+            'kind' => 2,
+            'role' => 6
+        ]);//41
+
+        DB::table('history_categories')->insert([
+            'name' => 'deficit enregistrer dans le wallet:',
+            'model' => 'Wallet',
+            'icon' => 'money',
+            'kind' => 0,
+            'role' => 6
+        ]);//42
+
+        DB::table('history_categories')->insert([
+            'name' => 'prise dsomme :',
+            'model' => 'Transparancy',
+            'icon' => 'money',
+            'kind' => 2,
+            'role' => 4
+        ]);//43
+
+        DB::table('history_categories')->insert([
+            'name' => 'payement dsomme :',
+            'model' => 'Transparancy',
+            'icon' => 'money',
+            'kind' => 0,
+            'role' => 4
+        ]);//44
+
+        DB::table('history_categories')->insert([
+            'name' => 'switch de prise de biling :',
+            'model' => 'Biling',
+            'icon' => 'hand-lizard-o',
+            'kind' => 0,
+            'role' => 2
+        ]);//45
+
+        DB::table('history_categories')->insert([
+            'name' => 'Linkage course dans matiere class :',
+            'model' => 'Courseyearsubclass',
+            'icon' => 'hand-lizard-o',
+            'kind' => 0,
+            'role' => 4
+        ]);//46
+        DB::table('history_categories')->insert([
+            'name' => 'ajout dun material deficite :',
+            'model' => 'Materialdeficite',
+            'icon' => 'exclamation',
+            'kind' => 0,
+            'role' => 5
+        ]);//47
+
+        DB::table('history_categories')->insert([
+            'name' => 'Nouveau ordering dun eleve :',
+            'model' => 'User',
+            'icon' => 'random',
+            'kind' => 0,
+            'role' => 4
+        ]);//48
 
 
     }

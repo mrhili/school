@@ -9,7 +9,9 @@ use App\{
   History,
   User,
   Biling,
-  Bil
+  Bil,
+  Transparancy,
+  Wallet
 };
 
 use Yajra\Datatables\Datatables;
@@ -25,7 +27,23 @@ class BilingController extends Controller
 
       if( Auth::user()->role >= 2 && !$biling->toke ){
 
-        Biling::find( $biling->id )->delete();
+        $info = "le bil a etait pour <strong>".$biling->client->name." ".$biling->client->last_name
+         ."</strong> qui est dans la class <strong>". $biling->client->the_class->name ."</strong>";
+
+        $ifTrue = Biling::find( $biling->id )->delete();
+
+        if($ifTrue){
+
+          Application::toHistory(
+              $biling->bil,
+              [
+                39,
+                'warning',
+                $info
+              ]
+          );
+
+        }
 
         response()->json(['message' => true ], 503);
 
@@ -40,12 +58,43 @@ class BilingController extends Controller
     public function switchPayed(Biling $biling){
 
       if( Auth::user()->role >= 4 ){
+
         $biling->payed = !$biling->payed;
-        $biling->save();
+        $biling->token_id = Auth::id();
+        $ifTrue = $biling->save();
 
-        $buttonArray = Application::fillPayedButton($biling );
+        if( $ifTrue ){
 
-        return response()->json($buttonArray);
+          $info = 'le <strong>'.$biling->bil->service.'</strong> de <strong>'.
+            $biling->client->name.' '.$biling->client->last_name.
+            '</strong> a etait payé et le prix est  <strong>'.$biling->bil->price .
+            '</strong>.';
+
+
+          $history = Application::toHistory(
+                        $biling,
+                        [
+                          40,
+                          'info',
+                          $info
+                        ]
+                    );
+
+
+
+          if( $history ){
+
+            Application::toWallet( $history, $biling->bil->price );
+
+
+            $buttonArray = Application::fillPayedButton($biling );
+
+            return response()->json($buttonArray);
+          }
+
+        }
+
+
       }else{
 
         $buttonArray = Application::fillPayedButton($biling );
@@ -60,7 +109,20 @@ class BilingController extends Controller
     public function switchToke(Biling $biling){
 
         $biling->toke = !$biling->toke;
-        $biling->save();
+        $ifTrue = $biling->save();
+
+        $info = 'le '. $biling->bil->service .' a etait '. ( $biling->toke? 'prise':'non prise');
+
+        if( $ifTrue ){
+          Application::toHistory(
+                        $biling,
+                        [
+                          45,
+                          'info',
+                          $info
+                        ]
+                    );
+        }
 
         $buttonArray = Application::fillTokeButton($biling );
 
@@ -208,22 +270,23 @@ class BilingController extends Controller
 
       }
 
-      $histArr = [
 
-          'id_link' => $bil->id,
-          'comment' => $request->comment,
-          'hidden_note' => $request->hidden_note,
-          'by-admin' => Auth::id(),
-
-          'category_history_id' => 38,
-          'class' => 'info'
-      ];
-
-      $histArr['info'] = 'le billage a etait generer a la class '. $class->name .'avec le nom de service:  <strong>'.
+      $info = 'le billage a etait generer a la class '. $class->name .'avec le nom de service:  <strong>'.
         $bil->service.'</strong> et le prix <strong>'.$bil->price .'</strong> au éléves: {'.
         implode(" , ", $namesOfStudents ) .'} .';
 
-      History::create( $histArr );
+
+
+          Application::toHistory(
+                        $bil,
+                        [
+                          38,
+                          'info',
+                          $info
+                        ],
+                        $request
+                    );
+
 
 
       return response()->json([ 'id' => $bil ]);

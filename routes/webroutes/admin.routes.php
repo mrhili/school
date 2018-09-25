@@ -22,13 +22,17 @@ Route::post('/valid-course/{course}', 'CourseyearsubclassController@valid')->nam
 
 Route::get('/transportation-list', 'TransportingController@list')->name('transportings.list');
 
-Route::post('/transportation-list-post', 'TransportingController@listPost')->name('transportings.list-post');
-
-
-Route::get('/transportation-management-deficite', 'TransportingController@deficites')->name('transportings.deficites');
-
+Route::post('/transportation-post', 'TransportingController@store')->name('transportings.post');
 
 /*BILING*/
 
 Route::get('/bils-manage', 'BilController@manage')->name('bils.manage');
 Route::post('/bils-post', 'BilController@post')->name('bils.post');
+
+
+
+Route::get('/bilan/{date?}', 'WalletController@bilan')->name('wallets.bilan');
+
+Route::get('/data-bilan-def/{date?}', 'WalletController@dataDef')->name('wallets.data-def');
+
+Route::get('/data-bilan-ben/{date?}', 'WalletController@dataBen')->name('wallets.data-ben');

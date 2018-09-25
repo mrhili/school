@@ -113,7 +113,7 @@ class UserController extends Controller
                          'id_link' => $user->id,
                          'comment' => $request->comment,
                          'hidden_note' => $request->hidden_note,
-                         'by-admin' => Auth::id(),
+                         'by_admin' => Auth::id(),
 
                          'category_history_id' => 35,
                          'class' => 'success'
@@ -308,7 +308,7 @@ class UserController extends Controller
                 'id_link' => $user->id,
                 'comment' => $request->comment,
                 'hidden_note' => $request->hidden_note,
-                'by-admin' => Auth::id(),
+                'by_admin' => Auth::id(),
 
                 'category_history_id' => $request->role+1,
                 'class' => 'success'

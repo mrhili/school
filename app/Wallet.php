@@ -9,7 +9,7 @@ class Wallet extends Model
     //
     protected $fillable = [
 
-      'history_id','amount'
+      'history_id','amount','mines'
     ];
 
     public function history(){

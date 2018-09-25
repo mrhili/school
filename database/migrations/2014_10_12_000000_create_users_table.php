@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             /*common*/
             $table->increments('id');
             $table->integer('log')->nullable()->unsigned();
-            
+
             $table->integer('num')->nullable()->unique()->unsigned();
 
 
@@ -50,6 +50,8 @@ class CreateUsersTable extends Migration
               ->references('id')
               ->on('the_classes')
               ->onDelete('cascade');
+
+            $table->tinyInteger('sort')->nullable()->unsigned();
 
             $table->boolean('transport')->default(false);
             $table->boolean('additional_classes')->default(false);

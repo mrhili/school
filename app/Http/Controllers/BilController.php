@@ -9,6 +9,8 @@ use App\{
 };
 use Auth;
 
+use Application;
+
 class BilController extends Controller
 {
     //
@@ -32,21 +34,17 @@ class BilController extends Controller
 
       if( $bil ){
 
-        $histArr = [
+        $info = 'nom <strong>'.$bil->service.'</strong> et le prix <strong>'.$bil->price .'</strong>.';
 
-            'id_link' => $bil->id,
-            'comment' => $request->comment,
-            'hidden_note' => $request->hidden_note,
-            'by-admin' => Auth::id(),
-
-            'category_history_id' => 37,
-            'class' => 'info'
-
-        ];
-
-        $histArr['info'] = 'nom <strong>'.$bil->service.'</strong> et le prix <strong>'.$bil->price .'</strong>.';
-
-        History::create( $histArr );
+        Application::toHistory(
+                      $bil,
+                      [
+                        37,
+                        'info',
+                        $info
+                      ],
+                      $request
+                  );
 
 
         return response()->json([

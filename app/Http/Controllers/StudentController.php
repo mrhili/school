@@ -60,6 +60,84 @@ use Hash;
 class StudentController extends Controller
 {
 
+  public function orderManualy(Request $request, User $student){
+
+    $student->sort = $request->sort;
+    $student->save();
+
+    return response()->json([
+      'sort' => $student->sort
+    ]);
+  }
+
+  public function order(Request $request, User $student){
+
+    if( $student->role == 1 && $student->the_class_id != null  ){
+
+      $others = User::where( 'the_class_id', $student->the_class_id )
+        ->where('role', 1 )
+        ->where('sort', '>=', $request->sort )
+        ->get();
+
+      $student->sort = $request->sort;
+
+      $holderSort = $request->sort+1;
+
+      foreach( $others as $other ){
+
+        $other->sort = $holderSort ++;
+        $other->save();
+
+      }
+
+      $student->save();
+
+      return response()->json([
+        'sort' => $student->sort,
+        'id' => $student->id
+      ]);
+
+    }else{
+
+      return response()->json(['message' => 'error'], 404);
+
+    }
+
+  }
+
+  public function ordering(TheClass $class){
+
+
+    $students = $class->students()->orderBy('sort', 'asc')->get();
+
+    $sort = $class->students()->orderBy('sort','desc')->first()->sort;
+
+    if($sort){
+
+      $sort = $sort + 1;
+
+    }else{
+
+      $sort = 1;
+
+    }
+
+
+
+    foreach($students as $student){
+
+      if( !$student->sort ){
+        $student->sort = $sort++;
+        $student->save();
+      }
+
+    }
+
+    return view('back.students.ordering', compact('students'));
+  }
+
+
+
   public function delete(Request $request, User $user){
 
     if($request->hidden == 'do'){
@@ -131,24 +209,38 @@ class StudentController extends Controller
 
     $array["password"] = bcrypt($request->password );
 
-      $array["role"] = 1;
+    $array["role"] = 1;
 
-      if( $request->transport ){
+    if( $request->transport ){
 
-          $array["transport"] = true;
+        $array["transport"] = true;
 
+    }else{
+        $array["transport"] = false;
+    }
+
+    if( $request->add_classes ){
+
+        $array["add_classes"] = true;
+    }else{
+        $array["add_classes"] = false;
+    }
+
+    $array['the_class_id'] = $request->class;
+
+    $class = TheClass::find( $request->class );
+
+    if( $class ){
+
+      $sort = $class->students()->orderBy('sort','desc')->first()->sort;
+
+      if( $sort ){
+        $array["sort"] = $sort +1 ;
       }else{
-          $array["transport"] = false;
+        $array["sort"] = 1 ;
       }
 
-      if( $request->add_classes ){
-
-          $array["add_classes"] = true;
-      }else{
-          $array["add_classes"] = false;
-      }
-
-      $array['the_class_id'] = $request->class;
+    }
 
     $student = User::create($array);
 
@@ -260,7 +352,7 @@ class StudentController extends Controller
 
                   'id_link' => $parent->id,
                   'comment' => 'no comment',
-                  'by-admin' => Auth::id(),
+                  'by_admin' => Auth::id(),
 
                   'category_history_id' => 3,
                   'class' => 'success'
@@ -856,6 +948,20 @@ class StudentController extends Controller
 
         $array['the_class_id'] = $request->class;
 
+        $class = TheClass::find( $request->class );
+
+        if( $class ){
+
+          $sort = $class->students()->orderBy('sort','desc')->first()->sort;
+
+          if( $sort ){
+            $array["sort"] = $sort +1 ;
+          }else{
+            $array["sort"] = 1 ;
+          }
+
+        }
+
     	$student = User::create($array);
 
 
@@ -936,7 +1042,7 @@ class StudentController extends Controller
                 'id_link' => $parent->id,
                 'comment' => $request->comment,
                 'hidden_note' => $request->hidden_note,
-                'by-admin' => Auth::id(),
+                'by_admin' => Auth::id(),
 
                 'category_history_id' => 3,
                 'class' => 'success'

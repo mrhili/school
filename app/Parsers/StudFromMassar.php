@@ -16,7 +16,7 @@ class StudFromMassar implements ParserInterface
       $pretendedEmail = str_slug( $row[3].'-'.$row[4] , '-');
       $bones = '@fa.com';
 
-      while( !User::where('email', $pretendedEmail.$bones ) ){
+      while( User::where('email', $pretendedEmail.$bones )->first() ){
 
         $pretendedEmail .= rand(0, 9);
 

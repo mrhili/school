@@ -117,7 +117,7 @@ class ParentController extends Controller
                     'id_link' => $parent->id,
                     'comment' => $request->comment,
                     'hidden_note' => $request->hidden_note,
-                    'by-admin' => Auth::id(),
+                    'by_admin' => Auth::id(),
                     'category_history_id' => 3,
                     'class' => 'success'
 

@@ -17,6 +17,7 @@ use App\{
     Fournituration,
     Fourniture,
     TheClass,
+    Transporting,
     Meetingtype,
     Meeting,
     Meetingpopulating,
@@ -33,10 +34,30 @@ use App\{
 
 };
 
+
+
 use Session;
 use Carbon;
 use Auth;
+
+use ArrayHolder;
+
 class Relation {
+
+  public static function modelOf($type, $model){
+
+    if( $type ){
+
+      $modeling = Transporting::find( $model );
+
+    }else{
+
+      $modeling = self::byModel( ArrayHolder::deficiteTypes( $type ) , $model );
+    }
+
+    return $modeling;
+
+  }
 
   public static function linkTeatcher2Subject(Request $request,User $teatcher, Subjectclass $subject_the_class_id )
   {
@@ -66,7 +87,7 @@ class Relation {
               //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
               'info' => 'just talk',
               'hidden_note' => $request->hidden_note,
-              'by-admin' => $admin->id,
+              'by_admin' => $admin->id,
               'category_history_id' => 36,
               'class' => 'success',
               //'id_link' => $request->id_link,
@@ -97,7 +118,7 @@ class Relation {
                 //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
                 'info' => 'just talk',
                 'hidden_note' => $request->hidden_note,
-                'by-admin' => $admin->id,
+                'by_admin' => $admin->id,
 
                 'category_history_id' => 13,
                 'class' => 'success',
@@ -266,7 +287,7 @@ class Relation {
                   'comment' => $request->comment,
                   'info' => 'just talk',
                   'hidden_note' => $request->hidden_note,
-                  'by-admin' => $admin->id,
+                  'by_admin' => $admin->id,
 
                   'category_history_id' => 24,
                   'class' => 'success',

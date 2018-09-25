@@ -40,6 +40,10 @@
     @include('back.partials.formG', ['name' => 'repeated_type', 'type' => 'select','selected' => null, 'text' => 'Type répétition', 'class'=>'repeated_type', 'required' => false, 'array' => ArrayHolder::repeatedTypes(),'additionalInfo' => [ 'id' => 'repeated_type' ]])
     @include('back.partials.formG', ['name' => 'end_repeated_date', 'type' => 'datetime-local', 'text' => 'Fin de devenement repeté', 'class'=>'end_repeated_date', 'required' => false,'additionalInfo' => [ 'id' => 'end_repeated_date']])
 
+    @include('back.partials.formG', ['name' => 'comment', 'type' => 'textarea', 'text' => 'Comment', 'class'=>'', 'required' => true,'additionalInfo' => [] ])
+    @include('back.partials.formG', ['name' => 'hidden_note', 'type' => 'textarea', 'text' => 'Hidden NOte', 'class'=>'', 'required' => false,'additionalInfo' => [] ])
+
+
     @slot('footerPlain')
 
     @component('back.components.button')

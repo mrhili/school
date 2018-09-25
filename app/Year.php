@@ -47,4 +47,9 @@ class Year extends Model
         return $this->hasMany('App\Biling');
     }
 
+    public function materialdeficites()
+    {
+        return $this->hasMany('App\Materialdeficite');
+    }
+
 }

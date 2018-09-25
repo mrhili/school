@@ -16,6 +16,13 @@ Route::get('/printable-sheet-new-worker/{worker}', 'PrintableController@printabl
 
 /**************************BILING******************************/
 
+/*************************Transporting***************************/
+
+
+Route::get('/add-deficite', 'MaterialdeficiteController@add')->name('materialdeficites.add');
+
+Route::post('/store-deficite', 'MaterialdeficiteController@store')->name('materialdeficites.store');
+
 
 /********SWITCHING***BYLING***********************/
 
@@ -31,8 +38,6 @@ Route::get('/biling-by-class/{class?}', 'BilingController@byClass')->name('bilin
 Route::post('/generate-biling-to-class/{class?}', 'BilingController@generateToClass')->name('bilings.generate-to-class');
 
 Route::get('/data-biling-by-class/{class}', 'BilingController@dataByClass')->name('bilings.data-by-class');
-
-
 
 
 /**********************************Claendar teatchifications****************************************/
@@ -92,6 +97,12 @@ Route::get('/add-parent/{student?}', 'ParentController@add')->name('parents.add'
 Route::post('/store-parent', 'ParentController@store')->name('parents.store');
 
 Route::get('/parents', 'ParentController@all')->name('parents.all');
+
+/************Student Ordering********************/
+
+Route::get('/ordering/{class}', 'StudentController@ordering')->name('students.ordering');
+Route::post('/write-order/{student}', 'StudentController@order')->name('students.order');
+Route::post('/write-order-manualy/{student}', 'StudentController@orderManualy')->name('students.order-manualy');
 
 /************LOGIN*******************************/
 

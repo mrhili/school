@@ -16,6 +16,8 @@ use App\{
 use Session;
 use Auth;
 
+use Application;
+
 class DemandefournitureController extends Controller
 {
     public function accept(Request $request, Demandefourniture $demande){
@@ -45,7 +47,7 @@ class DemandefournitureController extends Controller
             'id_link' => $demande->id,
             'info' => 'just talk',
             'hidden_note' => $request->hidden_note,
-            'by-admin' => Auth::id(),
+            'by_admin' => Auth::id(),
             'comment' => $request->hidden_note,
             'category_history_id' => 30,
             'class' => 'success',
@@ -56,7 +58,13 @@ class DemandefournitureController extends Controller
           Auth::user()->last_name .'</strong> a accepter la demande: <br />  '.$demande->howmany.' fourniture qui porte le nom <strong>'.
           $demande->fourniture->name.' </strong> la charge :' . $demande->totalmoney . ' </strong>.'  ;
 
-          History::create( $creation );
+          $history = History::create( $creation );
+
+          if( $history ){
+
+            Application::toWallet($history, $demande->totalmoney );
+
+          }
 
           return response()->json(['id' => $demande->id, 'name' => $demande->fourniture->name, 'average_price' => $demande->fourniture->average_price, 'howmany' => $demande->howmany ,'totalmoney' => $demande->totalmoney ]);
       }else{
@@ -75,7 +83,6 @@ class DemandefournitureController extends Controller
     {
         $output = '';
         $id = $request->id;
-        //$histories = History::where('id','<',$id)->orderBy('created_at','DESC')->limit(2)->get();
         $demandes = Demandefourniture::where('done', false)->orderBy('created_at','DESC')->limit(2)->get();
 
         if(!$demandes->isEmpty()){

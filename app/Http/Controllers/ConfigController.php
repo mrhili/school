@@ -81,8 +81,6 @@ class ConfigController extends Controller
             $temp = $config->where( 'slug' , $slug  )->first();
 
 
-
-
             if( $temp->type == "file" ){
 
 

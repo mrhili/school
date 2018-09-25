@@ -220,6 +220,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Catcher');
     }
 
+    public function transparencies()
+    {
+        return $this->hasMany('App\Transparancy');
+    }
+
 
 
 }

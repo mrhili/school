@@ -41,7 +41,6 @@ class CallingController extends Controller
     public function storeNew(Request $request, $parent = null){
 
 
-
     	$parent_id;
 
 

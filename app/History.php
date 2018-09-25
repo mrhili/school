@@ -21,13 +21,13 @@ class History extends Model
 
     'category_history_id',
 
-    'by-admin',
+    'by_admin',
 
-    'by-user',
+    'by_user',
 
-    'by-exterior-name',
+    'by_exterior_name',
 
-    'by-exterior-info',
+    'by_exterior_info',
 
     'payment'
 

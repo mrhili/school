@@ -18,13 +18,13 @@ class CreateTransportingsTable extends Migration
 
             $table->string('num_immatriculation');
             $table->string('imm_anterieure')->nullable();
-            $table->date('1er_mc');
-            $table->date('1er_mc_country');
+            $table->date('er_mc');
+            $table->date('er_mc_country');
             $table->date('mutation')->nullable();
             $table->string('usage');
             $table->string('proprietaire');
             $table->string('adresse');
-            $table->string('fin_validité');
+            $table->date('fin_validite');
             /**/
             $table->string('marque');
             $table->string('type');

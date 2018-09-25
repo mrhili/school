@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\History;
+use App\{
+  HistoryCategory,
+  History
+};
 use Illuminate\Http\Request;
 use Relation;
+use Auth;
 class HistoryController extends Controller
 {
 
@@ -85,14 +89,23 @@ class HistoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function master()
+    public function master($history_cat = null)
     {
         //
-        $histories = History::orderBy('created_at', 'desc')->get();
+        $history_cats = HistoryCategory::where('role', '<=' , Auth::user()->role )->orderBy('icon', 'desc')->get();
+
+        if($history_cat){
+
+          $histories = History::where('category_history_id', $history_cat )->paginate(1);
 
 
-        return view('back.histories.master', compact('histories'));
+
+        }else{
+          $histories = [];
+        }
+
+        return view('back.histories.master', compact('history_cats', 'histories'));
     }
 
-  
+
 }

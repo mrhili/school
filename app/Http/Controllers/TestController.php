@@ -140,7 +140,7 @@ class TestController extends Controller
         }
 
 
-        return redirect()->route('notes.my-notes');
+        return redirect()->route('notes.student-notes', Auth::id() );
 
     }
 

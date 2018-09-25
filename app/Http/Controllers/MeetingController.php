@@ -24,17 +24,17 @@ class MeetingController extends Controller
     public function list()
     {
         # code...
-       
+
         $meetings = Meeting::all();
 
         $meetingtypes = Meetingtype::pluck('name', 'id')->toArray();
 
         return view('back.meetings.list', compact('meetings', 'meetingtypes'));
     }
-    
 
 
-    
+
+
    public function store(Request $request, Meetingtype $meetingtype)
     {
 
@@ -77,11 +77,11 @@ $array['end_time'] = $time_end;
         $creation = [
 
             'id_link' => $meeting->id,
-            'comment' => $request->comment, 
-            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh 
+            'comment' => $request->comment,
+            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
             'info' => 'just talk',
             'hidden_note' => $request->hidden_note,
-            'by-admin' => $admin->id,
+            'by_admin' => $admin->id,
 
             'category_history_id' => 12,
             'class' => 'success',
@@ -98,17 +98,11 @@ $array['end_time'] = $time_end;
 
 
 
-
-
-
-
-
-
             return response()->json(['id' => $meeting->id, 'name' => $meeting->name, 'object' => $meeting->object, 'body' => $meeting->body, 'meetingtype' => $meetingtype->name ]);
         }
-        
 
-        
+
+
 
         //return response()->json([ 'parameter' => $request->parameter ]);
     }

@@ -16,18 +16,11 @@ use App\{
 use Auth;
 use Session;
 
+use Application;
+
 
 class CourseController extends Controller
 {
-
-
-
-
-
-
-
-
-
 
 		public function choose(){
 			$teatcher = Auth::user();
@@ -93,14 +86,14 @@ class CourseController extends Controller
 
 						$creation = [
 
-		            'id_link' => $course->id,
+		            'id_link' => $courseYSC->id,
 		            'comment' => $request->comment,
 		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
-		            'by-admin' => $admin->id,
+		            'by_admin' => $admin->id,
 
-		            'category_history_id' => 25,
+		            'category_history_id' => 46,
 		            'class' => 'success',
 		            //'id_link' => $request->id_link,
 
@@ -281,10 +274,9 @@ class CourseController extends Controller
 
 		            'id_link' => $course->id,
 		            'comment' => $request->comment,
-		            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
 		            'info' => 'just talk',
 		            'hidden_note' => $request->hidden_note,
-		            'by-admin' => $admin->id,
+		            'by_admin' => $admin->id,
 
 		            'category_history_id' => 25,
 		            'class' => 'success',
@@ -396,7 +388,7 @@ $crsArr = [
             //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
             'info' => 'just talk',
             'hidden_note' => $request->hidden_note,
-            'by-admin' => $admin->id,
+            'by_admin' => $admin->id,
 
             'category_history_id' => 25,
             'class' => 'success',
