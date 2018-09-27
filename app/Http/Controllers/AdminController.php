@@ -51,41 +51,43 @@ class AdminController extends Controller
 
       $array =
       [
-        'links' => [
-          [
-            "title" => "Tutorials" ,
-            "panels" => [
-              [
-                "title" => "Outils",
-                "videos" => [
+          'links' => [
+            [
+              "title" => "Tutorials" ,
+              "panels" => [
+                [
+                  "title" => "Outils",
+                  "videos" => [
 
-                  [
-                    "title" => "Login",
-                    "href" => "https://www.youtube.com/embed/8WFaTQWzj8Y",
-                  "p" => "Login"
-                  ],
-                  [
-                    "title" => "Changement d'anné",
-                    "href" => "https://www.youtube.com/embed/fMRK1xRMjhU",
-                  "p" => "Changement d'année"
-                  ],
+                    [
+                      "title" => "Login",
+                      "href" => "https://www.youtube.com/embed/8WFaTQWzj8Y",
+                    "p" => "Login"
+                    ],
+                    [
+                      "title" => "Changement d'anné",
+                      "href" => "https://www.youtube.com/embed/fMRK1xRMjhU",
+                    "p" => "Changement d'année"
+                    ],
 
-                  [
-                    "title" => "Changement d'informations",
-                    "href" => "https://www.youtube.com/embed/MXhogIxD3Xs",
-                  "p" => "Changement d'infos"
-                  ],
-                  [
-                    "title" => "Retour au dashboard",
-                    "href" => "https://www.youtube.com/embed/xKBAlyhjtrMs",
-                  "p" => "Retour au dashboard"
-                  ]
+                    [
+                      "title" => "Changement d'informations",
+                      "href" => "https://www.youtube.com/embed/MXhogIxD3Xs",
+                    "p" => "Changement d'infos"
+                    ],
+                    [
+                      "title" => "Retour au dashboard",
+                      "href" => "https://www.youtube.com/embed/xKBAlyhjtrMs",
+                    "p" => "Retour au dashboard"
+                    ]
+                ]
+
+
               ]
-
-
             ]
-          ]
 
+
+          ]
 
         ]
       ];
