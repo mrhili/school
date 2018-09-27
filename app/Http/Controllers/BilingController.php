@@ -133,7 +133,13 @@ class BilingController extends Controller
 
     public function user(User $user){
 
-      return view('back.bilings.user', compact('user'));
+      $columns = ['Service', 'Prix','Prise','Payé'];
+      if( Auth::user()->role == 2 || Auth::user()->role > 3 ){
+
+        $columns[] = 'Refusé';
+
+      }
+      return view('back.bilings.user', compact('user', 'columns'));
 
     }
     public function userData(User $user){
@@ -182,7 +188,7 @@ class BilingController extends Controller
     });
 
 
-    if( Auth::user()->role == 2 ){
+    if( Auth::user()->role == 2|| Auth::user()->role > 3 ){
       $snif->addColumn('refused', function(Biling $model) {
 
 

@@ -110,24 +110,25 @@ class StudentController extends Controller
 
     $students = $class->students()->orderBy('sort', 'asc')->get();
 
-    $sort = $class->students()->orderBy('sort','desc')->first()->sort;
+    $sort = $class->students()->orderBy('sort','desc')->first();
 
-    if($sort){
+    $sortNumber =  1 ;
 
-      $sort = $sort + 1;
+    if( $sort ){
 
-    }else{
+      if( $sort->sort ){
 
-      $sort = 1;
+        $sortNumber =  $sort->sort +1 ;
+
+      }
 
     }
-
 
 
     foreach($students as $student){
 
       if( !$student->sort ){
-        $student->sort = $sort++;
+        $student->sort = $sortNumber++;
         $student->save();
       }
 
@@ -230,17 +231,25 @@ class StudentController extends Controller
 
     $class = TheClass::find( $request->class );
 
+    $sortNumber =  1 ;
+
     if( $class ){
 
-      $sort = $class->students()->orderBy('sort','desc')->first()->sort;
+      $sort = $class->students()->orderBy('sort','desc')->first();
 
       if( $sort ){
-        $array["sort"] = $sort +1 ;
-      }else{
-        $array["sort"] = 1 ;
+
+        if( $sort->sort ){
+
+          $sortNumber =  $sort->sort +1 ;
+
+        }
+
       }
 
     }
+
+    $array["sort"] = $sortNumber ;
 
     $student = User::create($array);
 
@@ -254,7 +263,7 @@ class StudentController extends Controller
 
           Alert::success('leleve a bien etait créer', 'OK');
 
-          return back()->route('users.home');
+          return redirect()->route('students.profile', $student->id );
 
 
     }else{
@@ -692,16 +701,40 @@ class StudentController extends Controller
         [
           'links' => [
             [
-              "title" => "coucou" ,
+              "title" => "Tutorials" ,
               "panels" => [
                 [
-                  "title" => "panels 1 ",
+                  "title" => "Outils",
                   "videos" => [
+
                     [
-                      "title" => "video 1",
-                      "href" => "https://www.youtube.com/embed/XNBeUmd5O9s",
-                    "p" => "Lorem ipsum represents a fans."
+                      "title" => "Login",
+                      "href" => "https://www.youtube.com/embed/8WFaTQWzj8Y",
+                    "p" => "Login"
+                    ],
+                    [
+                      "title" => "Changement d'anné",
+                      "href" => "https://www.youtube.com/embed/fMRK1xRMjhU",
+                    "p" => "Changement d'année"
+                    ],
+
+                    [
+                      "title" => "Changement d'informations",
+                      "href" => "https://www.youtube.com/embed/MXhogIxD3Xs",
+                    "p" => "Changement d'infos"
+                    ],
+                    [
+                      "title" => "Retour au dashboard",
+                      "href" => "https://www.youtube.com/embed/xKBAlyhjtrMs",
+                    "p" => "Retour au dashboard"
+                    ],
+                    [
+                      "title" => "Ajout d'un memebre de famille",
+                      "href" => "https://www.youtube.com/embed/UG7nuOvqhik",
+                    "p" => "Ajouter un memebre de famille"
                     ]
+
+
                   ]
                 ]
               ]
@@ -948,21 +981,27 @@ class StudentController extends Controller
 
         $array['the_class_id'] = $request->class;
 
-        $class = TheClass::find( $request->class );
+        $sortNumber =  1 ;
 
         if( $class ){
 
-          $sort = $class->students()->orderBy('sort','desc')->first()->sort;
+          $sort = $class->students()->orderBy('sort','desc')->first();
 
           if( $sort ){
-            $array["sort"] = $sort +1 ;
-          }else{
-            $array["sort"] = 1 ;
+
+            if( $sort->sort ){
+
+              $sortNumber =  $sort->sort +1 ;
+
+            }
+
           }
 
         }
 
-    	$student = User::create($array);
+        $array["sort"] = $sortNumber ;
+
+    	   $student = User::create($array);
 
 
 	    if ($student) {

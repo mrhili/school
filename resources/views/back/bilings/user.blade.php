@@ -38,7 +38,7 @@ L'année selectionée est {{ Session::get('yearId') }}
 
 
 
-  @component('back.components.table',['columns' => ['Service', 'Prix','Prise','Payé','Refusé'] ])
+  @component('back.components.table',['columns' =>  $columns ])
 
   @endcomponent
 
@@ -78,7 +78,10 @@ $(function() {
             { data: 'price', name: '' },
             { data: 'toke', name: '' },
             { data: 'payed', name: '' },
-            { data: 'refused', name: '' }
+            @if( Auth::user()->role == 2 || Auth::user()->role > 3 )
+              { data: 'refused', name: '' }
+            @endif
+
         ]
     });
 });

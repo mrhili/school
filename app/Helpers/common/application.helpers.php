@@ -109,7 +109,7 @@ class Application{
       $walletArr = [
         'history_id' => $history->id,
         'amount' => $amount,
-        'mines' => ( $amount > 0 )
+        'mines' => ( $amount < 0 )
       ];
 
       $wallet = Wallet::create( $walletArr );
@@ -147,7 +147,7 @@ class Application{
       $transparancy = [
         'user_id' => Auth::id(),
         'amount' => abs( $amount ),
-        'mines' => ( $amount > 0 )
+        'mines' => ( $amount < 0 )
       ];
 
       $transparancy = Transparancy::create( $transparancy );
@@ -160,7 +160,7 @@ class Application{
             'by_admin' => Auth::id()
         ];
 
-        if($amount> 0){
+        if($amount > 0){
 
           $transHist['category_history_id'] = 43;
           $transHist['class'] = 'warning';
@@ -175,7 +175,6 @@ class Application{
 
           $transHist['info'] = '<strong>'. $amount .' </strong> doit arriver à <strong>'.
           Auth::user()->name.' '.Auth::user()->last_name .' </strong>.';
-
 
         }
 

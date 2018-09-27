@@ -40,7 +40,7 @@ return $model_name::find(1)->name;
 /*GAMES*/
 Route::get('/game', 'GameController@index')->name('games.index');
 Route::get('/games/g2048', 'GameController@g2048')->name('games.g2048');
-Route::get('/games/3dchess', 'GameController@chess3d')->name('games.3dchess');
+Route::get('/games/chess3d', 'GameController@chess3d')->name('games.3dchess');
 Route::get('/games/gridgarden', 'GameController@gridgarden')->name('games.gridgarden');
 Route::get('/games/flexfrog', 'GameController@flexfrog')->name('games.flexfrog');
 

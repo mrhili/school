@@ -38,7 +38,7 @@
 
 
             <div class="nav-tabs-custom">
-          @if( $selected )
+          @if( $selected != null )
               <ul class="nav nav-tabs">
                 @foreach( $array['links'][$selected]["panels"] as $x => $item )
 
@@ -61,16 +61,17 @@
                     <div class="post">
                       <div class="user-block">
                             <span>
-                              <a>{{ $video["title"] }}</a>
+                              <h4>{{ $video["title"] }}</h4>
                             </span>
                       </div>
                       <!-- /.user-block -->
                       <p>
+
                         <iframe width="100%" height="315" src="{{ $video["href"] }}"
 
                          frameborder="0"
 
-                         allow="autoplay;encrypted-media"
+                         allow="encrypted-media"
 
                          allowfullscreen></iframe>
                         <hr />
