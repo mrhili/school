@@ -8,7 +8,8 @@ use App\{
   User,
   History,
   Categoryship,
-  Relashionship
+  Relashionship,
+  Rule
 };
 use Auth;
 
@@ -245,13 +246,15 @@ class ParentController extends Controller
 
     public function home(){
 
+      $rules = Rule::where('active', true)->get()
+
         $user = Auth::user();
 
         $childs = $user->relashionshipsStudentsParent;
 
         $year = Session::get('yearId');
 
-        return view('back.parents.home',compact('childs', 'year'));
+        return view('back.parents.home',compact('childs', 'year', 'rules'));
     }
 
 }

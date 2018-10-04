@@ -163,6 +163,8 @@ class TestController extends Controller
 
     public function store(Request $request ){
 
+
+
         $test = Test::create(['body' => $request->body, 'title' => $request->title, 'notes' => $request->notes, 'time_minutes' => $request->time_minutes]);
 
         return redirect()->route('tests.get-answers', $test->id);

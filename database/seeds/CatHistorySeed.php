@@ -374,7 +374,7 @@ class CatHistorySeed extends Seeder
             'name' => 'switch de prise de biling :',
             'model' => 'Biling',
             'icon' => 'hand-lizard-o',
-            'kind' => 0,
+            'kind' => 1,
             'role' => 2
         ]);//45
 
@@ -382,7 +382,7 @@ class CatHistorySeed extends Seeder
             'name' => 'Linkage course dans matiere class :',
             'model' => 'Courseyearsubclass',
             'icon' => 'hand-lizard-o',
-            'kind' => 0,
+            'kind' => 1,
             'role' => 4
         ]);//46
         DB::table('history_categories')->insert([
@@ -397,9 +397,52 @@ class CatHistorySeed extends Seeder
             'name' => 'Nouveau ordering dun eleve :',
             'model' => 'User',
             'icon' => 'random',
-            'kind' => 0,
+            'kind' => 1,
             'role' => 4
         ]);//48
+
+        DB::table('history_categories')->insert([
+            'name' => 'Ajout dun loi :',
+            'model' => 'Rule',
+            'icon' => 'list',
+            'kind' => 1,
+            'role' => 4
+        ]);//49
+
+        DB::table('history_categories')->insert([
+            'name' => 'Prise dune loi :',
+            'model' => 'Ruleholder',
+            'icon' => 'list',
+            'kind' => 1,
+            'role' => 4
+        ]);//50
+
+        DB::table('history_categories')->insert([
+            'name' => 'Supression dune prise de loi :',
+            'model' => 'Ruleholder',
+            'icon' => 'list',
+            'kind' => 1,
+            'role' => 4
+        ]);//51
+
+        DB::table('history_categories')->insert([
+            'name' => 'Supression dune loi et une rejection de la prise :',
+            'model' => 'Rule',
+            'icon' => 'list',
+            'kind' => 1,
+            'role' => 4
+        ]);//52
+
+
+        /*****************/
+
+        DB::table('history_categories')->insert([
+            'name' => 'Envoi dun message :',
+            'model' => 'Contact',
+            'icon' => 'envelope',
+            'kind' => 1,
+            'role' => 4
+        ]);//53
 
 
     }

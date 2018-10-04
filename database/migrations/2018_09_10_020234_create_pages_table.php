@@ -16,13 +16,18 @@ class CreatePagesTable extends Migration
         Schema::create('pages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('is_blog');
-            $table->integer('cms_id')->unsigned()->index();
+            $table->boolean('is_blog')->default(false);
+
+            $table->text('style')->nullable();
+
+            $table->text('script')->nullable();
+
+            $table->integer('cms_id')->unsigned()->index()->nullable();
             $table->foreign('cms_id')
               ->references('id')
-              ->on('c_m_s')
+              ->on('c_m_s_s')
               ->onDelete('cascade');
-              
+
             $table->timestamps();
         });
     }

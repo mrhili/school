@@ -16,7 +16,8 @@ class CreateCMSTable extends Migration
         Schema::create('c_m_s_s', function (Blueprint $table) {
             $table->increments('id');
             $table->string('txt');
-            $table->string('slug');
+            $table->string('slug')->unique();
+            $table->boolean('show')->default(true);
             $table->nestedSet();
 
             $table->timestamps();

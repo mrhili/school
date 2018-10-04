@@ -27,7 +27,9 @@ use App\{
     Calendar as Calendinar,
     Calendarteatchification,
     Biling,
-    Wallet
+    Wallet,
+    Rule,
+    Ruleholder
 };
 
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
@@ -75,17 +77,98 @@ class Application{
 
   }
 
+  public static function fillActiveButton(Rule $model){
+
+      $existArray = [];
+
+      //dd($model);
+
+      $ifTrue = $model->active;
+
+      if( $ifTrue ){
+
+          //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+          $existArray[ 'icon' ] = 'Activé';
+          $existArray[ 'class' ] = 'success';
+
+      }else{
+
+          //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+          $existArray[ 'icon' ] = 'Non Activé';
+          $existArray[ 'class' ] = 'danger';
+
+      }
+
+
+      return $existArray;
+  }
+
+
+  public static function storeRule(Request $request, $getHolder = false){
+
+    $request->validate([
+            'rule' => 'required|unique:rules|max:255'
+        ]);
+
+    $array = [];
+    $activated;
+    $class;
+    $array['rule'] = $request->rule;
+
+    if( Auth::id() >= 5 ){
+
+      $array['active'] = true;
+      $activated = 'Activé';
+      $class = 'success';
+
+    }else{
+      $activated = 'Doit etre Activé';
+      $class = 'info';
+    }
+    $rule = Rule::create($array);
+
+    $info = $rule->rule.' est elle est ' .$activated.' dans lecole';
+
+    if( $rule ){
+      Application::toHistory($rule, [
+        49,
+        $class,
+        $info
+      ], $request );
+
+      if($request->take){
+
+        $ruleHolder = Relation::linkRule($rule , Auth::user() );
+
+      }
+
+    }
+
+    if($getHolder){
+      return $ruleHolder;
+    }
+
+    return $rule;
+
+
+  }
+
 
 
   public static function toHistory($model, $info ,$request = null){
     $histArr = [
 
         'id_link' => $model->id,
-        'by_admin' => Auth::id(),
         'category_history_id' => $info[0],
         'class' => $info[1],
         'info' => $info[2]
     ];
+
+    if(Auth::check()){
+      $histArr['by_admin'] = Auth::id();
+    }else{
+      $histArr['by_exterior_name'] = $info[3];
+    }
 
     if(!$request){
 

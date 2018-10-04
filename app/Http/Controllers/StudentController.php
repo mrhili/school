@@ -19,6 +19,7 @@ use App\{
     Categoryship,
     Catcher,
     Relashionship,
+    Rule,
     Testyearsubclass,
     Subjectclass,
     Test,
@@ -778,6 +779,8 @@ class StudentController extends Controller
 
     public function home(){
 
+        $rules = Rule::where('active', true)->get();
+
         $user = Auth::user();
 
         $year = Session::get('yearId');
@@ -806,7 +809,8 @@ class StudentController extends Controller
 
         return view('back.students.home',compact('mytests', 'teatchifications',
          'calendar', 'scTeatchifications',
-         'myExercises'
+         'myExercises',
+         'rules'
        ));
     }
 

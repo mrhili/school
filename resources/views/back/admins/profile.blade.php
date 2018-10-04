@@ -60,12 +60,19 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
+              <li class="active"><a href="#rules" data-toggle="tab">Ses Lois</a></li>
+
               @if ($passChangeInfo)
               <li><a href="#settings" data-toggle="tab">Settings</a></li>
               @endif
             </ul>
             <div class="tab-content">
+              <div class="active tab-pane" id="rules">
 
+                @component('back.components.rules',['holders' => $holders ])
+
+                @endcomponent
+              </div>
               <!-- /.tab-pane -->
 
               <div class="tab-pane" id="settings">

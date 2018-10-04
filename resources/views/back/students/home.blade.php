@@ -447,8 +447,6 @@ Examins
 
 
 
-
-
 @component('back.components.plain')
 
   @slot('titlePlain')
@@ -545,7 +543,20 @@ Exercices
 
 
 
+@component('back.components.plain')
 
+  @slot('titlePlain')
+
+    Les lois de lecole
+
+  @endslot
+
+  @component('back.components.school_rules',['rules' => $rules])
+
+  @endcomponent
+
+
+@endcomponent
 
 
 

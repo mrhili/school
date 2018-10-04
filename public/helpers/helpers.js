@@ -17,6 +17,19 @@ function randombgcolor(){
 	return backgroundcolors[Math.floor(Math.random()*backgroundcolors.length)];
 }
 
+
+function random_bootstrap_bgcolor(){
+	var backgroundcolors = [
+            'active',
+            'success',
+            'info',
+            'warning',
+            'danger'
+	];
+
+	return backgroundcolors[Math.floor(Math.random()*backgroundcolors.length)];
+}
+
 /*function toString(value) {
   return value.toString();
 }*/

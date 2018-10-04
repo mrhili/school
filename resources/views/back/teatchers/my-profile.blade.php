@@ -62,12 +62,19 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
+              <li class="active"><a href="#rules" data-toggle="tab">Lois</a></li>
 
-              <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+              <li class=""><a href="#settings" data-toggle="tab">Settings</a></li>
             </ul>
             <div class="tab-content">
 
-              <!-- /.tab-pane -->
+              <div class="active tab-pane" id="rules">
+
+                @component('back.components.rules',['holders' => $holders ])
+
+                @endcomponent
+              </div>
+
 
               <div class="active tab-pane" id="settings">
 

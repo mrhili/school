@@ -16,15 +16,7 @@ class CreateComponentsTable extends Migration
         Schema::create('components', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->text('html');
-            $table->text('javascript');
-
-            $table->integer('partial_id')->unsigned()->index();
-            $table->foreign('partial_id')
-              ->references('id')
-              ->on('partials')
-              ->onDelete('set null');
-
+            $table->string('slug');
 
             $table->timestamps();
         });

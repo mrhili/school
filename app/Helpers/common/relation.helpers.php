@@ -30,7 +30,9 @@ use App\{
     Subcourse,
     Testyearsubclass,
     Note,
-    Subject
+    Subject,
+    Rule,
+    Ruleholder
 
 };
 
@@ -41,8 +43,34 @@ use Carbon;
 use Auth;
 
 use ArrayHolder;
-
+use Application;
 class Relation {
+
+  public static function linkRule(Rule $rule, User $user){
+
+
+    $ruleHolder = Ruleholder::firstOrCreate([
+      'rule_id' => $rule->id,
+      'user_id' => $user->id,
+    ]);
+
+    $info2;
+
+    if($ruleHolder){
+      $info2 = $ruleHolder->rule->rule.' a etait prise par '.Auth::user()->name.' '.Auth::user()->last_name;
+
+
+      Application::toHistory($ruleHolder, [
+        50,
+        'success',
+        $info2
+      ] );
+
+
+      return $ruleHolder;
+    }
+
+  }
 
   public static function modelOf($type, $model){
 

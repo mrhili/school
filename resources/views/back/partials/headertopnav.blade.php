@@ -15,7 +15,10 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
+            @foreach (\App\CMS::descendantsOf(\App\CMS::where('slug', 'navigation')->first()->id ) as $key => $link)
+              <li class=""><a href="{{ route('pages.facade', $link->id ) }}">{{ $link->txt }} <span class="sr-only">(current)</span></a></li>
 
+            @endforeach
           </ul>
 
         </div>

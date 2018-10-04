@@ -24,12 +24,16 @@ Route::get('/transportation-list', 'TransportingController@list')->name('transpo
 
 Route::post('/transportation-post', 'TransportingController@store')->name('transportings.post');
 
+/*Rule*/
+
+Route::post('/switch-active-rule/{rule}', 'RuleController@switchActive')->name('rules.switch');
+
+Route::post('/delete-rule/{rule}', 'RuleController@delete')->name('rules.delete');
+
 /*BILING*/
 
 Route::get('/bils-manage', 'BilController@manage')->name('bils.manage');
 Route::post('/bils-post', 'BilController@post')->name('bils.post');
-
-
 
 Route::get('/bilan/{date?}', 'WalletController@bilan')->name('wallets.bilan');
 

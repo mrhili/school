@@ -56,6 +56,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getFullNameAttribute() {
+    		return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
     public function payments()
     {
         return $this->hasMany('App\StudentsPayment');
@@ -174,6 +178,8 @@ class User extends Authenticatable
         ;
     }
 
+
+
     public function meetings_created()
     {
         return $this->hasMany('App\Meetingpopulating', 'creator_id' );
@@ -225,6 +231,20 @@ class User extends Authenticatable
         return $this->hasMany('App\Transparancy');
     }
 
+    public function rulesHolder()
+    {
+        return $this->belongsToMany('App\Ruleholder', 'ruleholders', 'user_id', 'rule_id');
+    }
+
+
+    public function rule_holders()
+    {
+        return $this->hasMany('App\RuleHolder');
+    }
+
+    public function messages(){
+      return $this->hasMany('App\Contact');
+    }
 
 
 }

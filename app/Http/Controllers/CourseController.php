@@ -10,7 +10,7 @@ use App\{
 	TheClass,
 	Subject,
 	Courseyearsubclass,
-	SubjectClass,
+	Subjectclass,
 	Teatchification
 };
 use Auth;
@@ -29,7 +29,7 @@ class CourseController extends Controller
 
 			$sc_ids = Teatchification::where('user_id', $teatcher->id)->get(['subject_the_class_id']);
 
-			$c_ids = SubjectClass::whereIn('id', $sc_ids )->get(['the_class_id'])->toArray();
+			$c_ids = Subjectclass::whereIn('id', $sc_ids )->get(['the_class_id'])->toArray();
 
 			$classes = TheClass::find( $c_ids );
 
@@ -49,11 +49,11 @@ class CourseController extends Controller
 			$year = Session::get('yearId');
 
 
-				$subjectClass = SubjectClass::where('the_class_id', $class->id )
+				$Subjectclass = Subjectclass::where('the_class_id', $class->id )
 					->where('subject_id', $subject->id )
 					->where('year_id' , $year)->first();
 
-				if($subjectClass){
+				if($Subjectclass){
 
 					$publish;
 					if( $request->publish ){
@@ -68,7 +68,7 @@ class CourseController extends Controller
 					}
 
 					$courseYSC = Courseyearsubclass::create([
-						'subject_the_class_id' => $subjectClass->id,
+						'subject_the_class_id' => $Subjectclass->id,
 						'subject_id' => $subject->id,
 						'the_class_id' => $class->id,
 						'course_id' => $course->id,
@@ -123,7 +123,7 @@ class CourseController extends Controller
 
 					}else{
 
-						return response()->json(['error' => 'cant create courseyearsubjectclass'], 403);
+						return response()->json(['error' => 'cant create courseyearSubjectclass'], 403);
 
 					}
 
@@ -234,11 +234,11 @@ class CourseController extends Controller
 
 			if( $course ){
 
-				$subjectClass = SubjectClass::where('the_class_id', $class->id )
+				$Subjectclass = Subjectclass::where('the_class_id', $class->id )
 					->where('subject_id', $subject->id )
 					->where('year_id' , $year)->first();
 
-				if($subjectClass){
+				if($Subjectclass){
 
 					$publish;
 					if( $request->publish ){
@@ -254,7 +254,7 @@ class CourseController extends Controller
 
 
 					$courseYSC = Courseyearsubclass::create([
-						'subject_the_class_id' => $subjectClass->id,
+						'subject_the_class_id' => $Subjectclass->id,
 						'subject_id' => $subject->id,
 						'the_class_id' => $class->id,
 						'course_id' => $course->id,
@@ -308,7 +308,7 @@ class CourseController extends Controller
 
 					}else{
 
-						return response()->json(['error' => 'cant create courseyearsubjectclass'], 403);
+						return response()->json(['error' => 'cant create courseyearSubjectclass'], 403);
 
 					}
 

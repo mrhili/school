@@ -207,59 +207,86 @@ function func(e){
     chovalues = [];
     var json = fb.actions.getData('json');
 
-    jsonfield.val( json );
-    var js = JSON.parse( json );
-  js.map(function(i) {
-      if (i.type == 'header' || i.type == 'paragraph') {
-          return i;
-      } else {
 
-          values.append('<div class="form-group col-xs-12"><div class="text-center">' + i.label + '<div/><label for="' + i.name + '" class="col-sm-2">' + i.name + '</label><div class="col-sm-10"><input type="number" data-name="' + i.name + '" required="required" id="'+ i.name +'" class="form-control value" /></div></div>');
-          return i;
+    if( ! JSON.parse(json) ){
 
-      }
+      alert('ERROR');
 
-  });
+    }else{
 
-  values.append('<div class="form-group col-xs-12"><label class="col-sm-2">Total Notes collecté</label><div class="col-sm-10"><h3><span id="total"></span> / 100</h3></div></div>');
 
-  var total = $('#total');
+      jsonfield.val( json );
+      var js = JSON.parse( json );
+    js.map(function(i) {
+        if (i.type == 'header' || i.type == 'paragraph') {
+            return i;
+        } else {
 
-  values.append('<div class="form-group col-xs-12"><a href="#" class="btn btn-lg btn-block btn-success" id="save">Confirmer les notes</a></div>');
+            values.append('<div class="form-group col-xs-12"><div class="text-center">' + i.label + '<div/><label for="' + i.name + '" class="col-sm-2">' + i.name + '</label><div class="col-sm-10"><input type="number" data-name="' + i.name + '" required="required" id="'+ i.name +'" class="form-control value" /></div></div>');
+            return i;
 
-  var save = $('#save');
-  var valueClasses = $('.value');
-  var valuefields = $('.value');
-    function updateField() {
-      items = 0;
+        }
 
-      $.each(valuefields, function($field) {
-        if (valuefields[$field].value.length > 0) { items += Number( valuefields[$field].value ); }
-      });
-      total.text(items);
-    }
-
-  values.on("keyup", function() {
-
-      updateField();
     });
 
-  save.click(function(e) {
-      e.preventDefault();
-      sendform.show();
-      if (values.valid()) {
-          valuefields.each(function() {
-              chovalues.push({
-                  'name': $(this).attr('data-name'),
-                  'note': $(this).val()
-              });
 
-          });
-          notesfield.val(JSON.stringify(chovalues));
-      } else {
-          alert('la form des  note doit etre complete');
+    values.append('<div class="form-group col-xs-12"><label class="col-sm-2">Total Notes collecté</label><div class="col-sm-10"><h3><span id="total"></span> / 100</h3></div></div>');
+
+    var total = $('#total');
+
+    values.append('<div class="form-group col-xs-12"><a href="#" class="btn btn-lg btn-block btn-success" id="save">Confirmer les notes</a></div>');
+
+    var save = $('#save');
+    var valueClasses = $('.value');
+    var valuefields = $('.value');
+      function updateField() {
+        items = 0;
+
+        $.each(valuefields, function($field) {
+          if (valuefields[$field].value.length > 0) { items += Number( valuefields[$field].value ); }
+        });
+        total.text(items);
       }
-  });
+
+    values.on("keyup", function() {
+
+        updateField();
+      });
+
+
+
+
+
+      save.click(function(e) {
+          e.preventDefault();
+          sendform.show();
+          if (values.valid()) {
+              valuefields.each(function() {
+                  chovalues.push({
+                      'name': $(this).attr('data-name'),
+                      'note': $(this).val()
+                  });
+
+              });
+              notesfield.val(JSON.stringify(chovalues));
+          } else {
+              alert('la form des  note doit etre complete');
+          }
+      });
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
 
 
   }

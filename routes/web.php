@@ -36,6 +36,11 @@ $model_name = 'App\User';
 return $model_name::find(1)->name;
 });
 
+Route::get('/facade/{cms}', 'PageController@facade')->name('pages.facade');
+
+/*Contact*/
+
+Route::post('/post-message', 'ContactController@send')->name('contacts.send');
 
 /*GAMES*/
 Route::get('/game', 'GameController@index')->name('games.index');

@@ -232,7 +232,19 @@
         </div>
 
 
-
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>M R</h3>
+              <p>...</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('rules.mine' ) }}" class="small-box-footer">Mes loi preferer <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
 
 
 </div>
@@ -628,6 +640,42 @@
                             <a href="{{ route('tests.language') }}" class="small-box-footer">Ajouter un test maintenent <i class="fa fa-arrow-circle-right"></i></a>
                           </div>
                         </div>
+
+
+
+
+
+
+
+                      </div>
+
+                    </div>
+
+
+
+                    <div class="col-xs-12">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <h3 class="text-center">Loi</h3>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-xs-6">
+                          <!-- small box -->
+                          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+                            <div class="inner">
+                              <h3L</h3>
+                              <p>..</p>
+                            </div>
+                            <div class="icon">
+                              <i class="fa fa-file"></i>
+                            </div>
+                            <a href="{{ route('rules.list') }}" class="small-box-footer">Loi<i class="fa fa-arrow-circle-right"></i></a>
+                          </div>
+                        </div>
+
+
+
 
 
 

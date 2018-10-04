@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\{
-  User
+  User,
+  Ruleholder
 };
 use Illuminate\Http\Request;
 use Auth;
@@ -14,6 +15,7 @@ class AdminController extends Controller
   public function profile(User $user){
 
     $year = Session::get('yearId');
+    $holders = Ruleholder::where('user_id', Auth::id())->get();
 
 
     /****************/
@@ -36,7 +38,7 @@ class AdminController extends Controller
 
     /*****************/
 
-    return view('back.admins.profile', compact('passInfo', 'user', 'passChangeInfo'));
+    return view('back.admins.profile', compact('passInfo', 'user', 'passChangeInfo', 'ruleholder'));
 
 
   }
@@ -105,6 +107,8 @@ class AdminController extends Controller
         $passInfo = true;
         /*****************/
         $user = Auth::user();
-        return view('back.admins.my-profile',compact('passInfo', 'user'));
+
+        $holders = Ruleholder::where('user_id', Auth::id())->get();
+        return view('back.admins.my-profile',compact('passInfo', 'user', 'holders'));
     }
 }

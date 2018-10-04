@@ -70,7 +70,8 @@ class SecretariaController extends Controller
         $passInfo = true;
         /*****************/
         $user = Auth::user();
-        return view('back.secretarias.my-profile',compact('passInfo', 'user'));
+        $holders = Ruleholder::where('user_id', Auth::id())->get();
+        return view('back.secretarias.my-profile',compact('passInfo', 'user', 'holders'));
     }
 
 }

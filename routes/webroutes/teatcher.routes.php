@@ -15,12 +15,26 @@ Route::get('/teatcher-home', 'TeatcherController@home')->name('teatchers.home');
 Route::get('/my-profile-as-teatcher', 'TeatcherController@myProfile')->name('teatchers.my-profile');
 
 
+/***********************RULE****************************************/
+
+Route::get('/rules', 'RuleController@list')->name('rules.list');
+Route::get('/data-rules', 'RuleController@listData')->name('rules.data-list');
+Route::post('/store-rule', 'RuleController@post')->name('rules.post');
+Route::post('/link-rule/{rule}', 'RuleController@link')->name('rules.link');
+Route::post('/delete-ruleholder/{ruleholder}', 'RuleholderController@delete')->name('ruleholders.delete');
+
+Route::get('/my-rules', 'RuleController@myRules')->name('rules.mine');
+Route::get('/data-my-rules/{teatcher}', 'RuleController@dataMyRules')->name('rules.data-mine');
+
+/*************************COURSE************************************/
+
 Route::get('/courses-teatcher/{teatcher}', 'CourseController@list4teatcher')->name('courses.list-4-teatcher');
 Route::post('/store-course', 'CourseController@store')->name('courses.store');
 //ading and linking sub course
 Route::get('/add-subcourse/{course}', 'SubcourseController@addSubCourse2Course')->name('subcourses.add-link');
 Route::post('/add-subcourse/{course}', 'SubcourseController@storeSubCourse2Course')->name('subcourses.store-link');
 Route::post('/link-subcourse/{course}/{subcourse}', 'SubcourseController@linkSubCourse2Course')->name('subcourses.link-course');
+
 
 //Before
 Route::post('/add-subcourse-before/{course}/{subcourse}', 'SubcourseController@storeSubCourse2CourseBefore')->name('subcourses.store-link-before');

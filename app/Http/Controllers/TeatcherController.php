@@ -97,12 +97,12 @@ class TeatcherController extends Controller
 
       }
 
-
+              $holders = Ruleholder::where('user_id', Auth::id())->get();
 
 
       /*****************/
 
-      return view('back.teatchers.profile', compact('passInfo', 'user', 'passChangeInfo'));
+      return view('back.teatchers.profile', compact('passInfo', 'user', 'passChangeInfo', 'holders'));
 
 
     }
@@ -142,14 +142,15 @@ class TeatcherController extends Controller
 
     public function myProfile(){
 
-
         $passChangeInfo = false;
         /****************/
         $passInfo = true;
         /*****************/
         $user = Auth::user();
 
-        return view('back.teatchers.my-profile',compact('passInfo','passChangeInfo', 'user'));
+        $holders = Ruleholder::where('user_id', Auth::id())->get();
+
+        return view('back.teatchers.my-profile',compact('passInfo','passChangeInfo', 'user', 'holders'));
     }
 
     public function add(){

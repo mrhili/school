@@ -16,6 +16,8 @@
 
 
               @component('back.components.idcard',['user' => $user])
+
+
                 @slot('placement')
                     students
                 @endslot
@@ -60,13 +62,19 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-
-              <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+              <li class="active"><a href="#rules" data-toggle="tab">Lois</a></li>
+              <li class=""><a href="#settings" data-toggle="tab">Settings</a></li>
             </ul>
             <div class="tab-content">
 
+              <div class="active tab-pane" id="rules">
 
-              <div class="active tab-pane" id="settings">
+                @component('back.components.rules',['holders' => $holders ])
+
+                @endcomponent
+              </div>
+
+              <div class="tab-pane" id="settings">
 
                 @component('back.components.change_info',['user' => $user])
 

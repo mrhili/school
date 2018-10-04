@@ -30,6 +30,27 @@ use Carbon;
 use Auth;
 class Holder {
 
+
+  public static function bootstrapClasses( ){
+
+      $backgrounds = [
+          'active',
+          'primary',
+          'info',
+          'success',
+          'warning',
+          'danger'
+      ];
+
+
+      return $backgrounds[array_rand($backgrounds)];
+
+  }
+
+
+
+
+
     public static function deficiteTypes( $item = null ){
 
         $types = [

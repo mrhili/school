@@ -15,15 +15,7 @@ class CreatePartialsTable extends Migration
     {
         Schema::create('partials', function (Blueprint $table) {
             $table->increments('id');
-
-            $table->string('title');
-
-            $table->integer('page_id')->unsigned()->index();
-            $table->foreign('page_id')
-              ->references('id')
-              ->on('pages')
-              ->onDelete('set null');
-
+            $table->string('slug');
 
             $table->timestamps();
         });
