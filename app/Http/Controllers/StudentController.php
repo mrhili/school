@@ -27,7 +27,8 @@ use App\{
     Fournituration,
     Teatchification,
     Meetingpopulatingrating,
-    Meetingpopulating
+    Meetingpopulating,
+    Preperfication
 
 };
 
@@ -144,7 +145,7 @@ class StudentController extends Controller
 
     if($request->hidden == 'do'){
 
-
+      Preperfication::where('user_id', $user->id)->delete();
       Catcher::where('user_id', $user->id)->delete();
       Biling::where('user_id', $user->id)->delete();
       Demandefourniture::where('student_id', $user->id)->where('done', false)->delete();
@@ -1321,6 +1322,12 @@ class StudentController extends Controller
       return Datatables::of(
         Relation::studentsFromTeatcher($year, $teatcher)
          )
+
+         ->editColumn('class', function( $model ){
+
+           //return link_to_route( 'students.profile' , $model->name.' '.$model->last_name, [ $model->id ], ['class' => 'btn btn-danger btn-circle']);
+           return $model->the_class->name;
+         })
 
          ->editColumn('img', function( $model ){
 

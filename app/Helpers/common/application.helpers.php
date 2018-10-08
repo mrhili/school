@@ -77,6 +77,39 @@ class Application{
 
   }
 
+  public static function fillDynamicButton($model, $dynamic, $array = null){
+
+      $existArray = [];
+
+      $ifTrue = $model->{$dynamic};
+
+      if( $ifTrue ){
+
+        if( $array != null){
+          $existArray[ 'icon' ] = $array[1]['icon'];
+          $existArray[ 'class' ] = ( array_key_exists('class',$array[1]) ? $array[1]['class'] : 'success');
+        }else{
+          $existArray[ 'icon' ] = 'Exist';
+          $existArray[ 'class' ] = 'success';
+        }
+
+          //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+      }else{
+
+          //$existArray[ 'icon' ] = '<i class="fa fa-check"></i>';
+          if( $array != null){
+            $existArray[ 'icon' ] = $array[0]['icon'];
+            $existArray[ 'class' ] = ( array_key_exists('class',$array[0]) ? $array[0]['class'] : 'danger');
+          }else{
+            $existArray[ 'icon' ] = 'Nexist pas';
+            $existArray[ 'class' ] = 'danger';
+          }
+      }
+
+
+      return $existArray;
+  }
+
   public static function fillActiveButton(Rule $model){
 
       $existArray = [];

@@ -420,7 +420,7 @@ class CatHistorySeed extends Seeder
         DB::table('history_categories')->insert([
             'name' => 'Supression dune prise de loi :',
             'model' => 'Ruleholder',
-            'icon' => 'list',
+            'icon' => 'trash',
             'kind' => 1,
             'role' => 4
         ]);//51
@@ -443,6 +443,33 @@ class CatHistorySeed extends Seeder
             'kind' => 1,
             'role' => 4
         ]);//53
+
+
+        /*********************/
+
+        DB::table('history_categories')->insert([
+            'name' => 'Creation dun preperfication :',
+            'model' => 'Preperfication',
+            'icon' => 'question',
+            'kind' => 1,
+            'role' => 1
+        ]);//54
+
+        DB::table('history_categories')->insert([
+            'name' => 'Management dune preperfication :',
+            'model' => 'Preperfication',
+            'icon' => 'question',
+            'kind' => 1,
+            'role' => 1
+        ]);//55
+
+        DB::table('history_categories')->insert([
+            'name' => 'Supression dune preperfication :',
+            'model' => 'Preperfication',
+            'icon' => 'trash',
+            'kind' => 1,
+            'role' => 1
+        ]);//56
 
 
     }

@@ -14,6 +14,21 @@ Route::get('/data-students-by-teatcher/{teatcher}', 'StudentController@dataByTea
 Route::get('/teatcher-home', 'TeatcherController@home')->name('teatchers.home');
 Route::get('/my-profile-as-teatcher', 'TeatcherController@myProfile')->name('teatchers.my-profile');
 
+/***********************Preperfication*********************************/
+
+Route::get('/preperfications/{class}/{subject}', 'PreperficationController@mineBySubClass')->name('preperfications.mine-by-sub-class');
+
+Route::get('/data-preperfications/{teatchification}', 'PreperficationController@byTeatchificationData')->name('preperfications.by-teatchification');
+
+
+Route::post('/new-preperfication/{teatchification}', 'PreperficationController@new')->name('preperfications.new');
+Route::get('/manage-preperfication/{title}', 'PreperficationController@manage')->name('preperfications.manage');
+Route::get('/data-manage-preperfication/{title}', 'PreperficationController@manageData')->name('preperfications.manage-data');
+
+Route::post('/delete-preperfication', 'PreperficationController@delete')->name('preperfications.delete');
+
+Route::post('/preperfication-switch-present/{preperfication}', 'PreperficationController@switchPresent')->name('preperfications.switch-present');
+Route::post('/preperfication-switch-get-it/{preperfication}', 'PreperficationController@switchGetIt')->name('preperfications.switch-get-it');
 
 /***********************RULE****************************************/
 
@@ -76,6 +91,9 @@ Route::post('/post-answers/{test}', 'TestController@postAnswers')->name('tests.s
 Route::get('/tests', 'TestController@index')->name('tests.index');
 
 Route::get('/data-check-fournitures/{class}', 'FourniturationController@dataCheck')->name('fournitures.data-check-by-class');
+/***********************SUBJECT*********************/
+
+Route::get('/teatcher-subjects-by-class/{class}', 'SubjectController@teatcherSubjectsByClass')->name('subjects.teatcher-by-class');
 
 
 /**********************************Subject and course linking******************************************************/

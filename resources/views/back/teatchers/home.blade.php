@@ -250,31 +250,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="col-lg-3 col-xs-6">
       <!-- small box -->
       <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
@@ -328,6 +303,43 @@
 
 
 
+  @component('back.components.plain')
+
+    @slot('titlePlain')
+
+      Les matiéres
+
+    @endslot
+
+
+    @foreach(Relation::my_related_classes( Auth::user() )  as $class)
+
+      <div class="col-lg-4 col-xs-6">
+            <div class="info-box bg-white ">
+              <span class="info-box-icon"><i class="fa fa-hashtag"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">{{ $class->name }}</span>
+                <span class="info-box-number">5,200</span>
+
+                <div class="progress">
+                  <div class="progress-bar" style="width: 50%"></div>
+                </div>
+                <span class="progress-description">
+                      <a href="{{ route('subjects.teatcher-by-class', $class->id) }}" >lister les Matiers <i class="fa fa-arrow-circle-right"></i></a>
+                    </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+
+      </div>
+
+    @endforeach
+
+
+
+  @endcomponent
+
 
   @component('back.components.plain')
 
@@ -342,7 +354,7 @@
 
 
 
-      @component('back.components.table',['id' => 'students','columns' => ['img', 'namecomplet', 'dahboard'] ])
+      @component('back.components.table',['id' => 'students','columns' => ['class', 'img', 'namecomplet', 'dahboard'] ])
 
       @endcomponent
 
@@ -384,7 +396,7 @@
           serverSide: true,
           ajax: "{!! route('students.by-teatcher', Auth::id() ) !!}",
           columns: [
-
+              { data: 'class', name: '' },
               { data: 'img', name: '' },
               { data: 'namecomplet', name: '' },
               { data: 'dashboard', name: '' }

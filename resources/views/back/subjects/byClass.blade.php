@@ -98,6 +98,11 @@
                 <li><a href="{{ route('courses.language-linked',[$class->id,$subject->id]) }}">Click pour ajouter un Coure <span class="pull-right badge bg-aqua">+</span></a></li>
 
                 <li><a href="{{ route('courses.add-linked-linking',[$class->id,$subject->id]) }}">Clicker ici pour linker un Coure <span class="pull-right badge bg-green">V</span></a></li>
+                
+                @if(Relation::if_teatcher_responsable($class,$subject, Auth::user() )  )
+                  <li><a href="{{ route('preperfications.mine-by-sub-class',[$class->id,$subject->id]) }}">Ajouter une preperfication <span class="pull-right badge bg-green">+</span></a></li>
+
+                @endif
               </ul>
 
 

@@ -31,4 +31,10 @@ class Teatchification extends Model
     {
         return $this->belongsToMany('App\Calendar')->withPivot('year_id');
     }
+
+
+    public function preperfications(){
+      return $this->hasMany('App\Preperfication');
+    }
+
 }

@@ -58,3 +58,6 @@ Route::post('/ajouter-membre-famille-post/{student}', 'StudentController@addPare
     Route::get('/subcourse-show/{course}/{subcourse}', 'SubcourseController@show')->name('subcourses.show');
 
     Route::get('/course-show/{course}', 'CourseyearsubclassController@show')->name('courses.show');
+/*********************************PREPERFICATION*******************************/
+    Route::get('/preperfications-etudiant/{student?}', 'PreperficationController@student')->name('preperfications.student');
+    Route::get('/data-preperfications-etudiant/{student}', 'PreperficationController@studentData')->name('preperfications.data-student');

@@ -46,6 +46,60 @@ use ArrayHolder;
 use Application;
 class Relation {
 
+
+
+    public static function my_related_classes(User $teatcher){
+
+      $year_id = Session::get('yearId');
+
+      $subject_classesArray = $teatcher->teatchifications
+        ->where('year_id', $year_id)
+        ->pluck('subject_the_class_id')
+        ->toArray();
+
+      $classes_id = SubjectClass::whereIn('id', $subject_classesArray )
+        ->where('year_id',$year_id)
+        ->distinct()->get(['the_class_id'])
+        ->pluck('the_class_id')->toArray();
+
+      return TheClass::whereIn('id', $classes_id)->get();
+
+
+
+    }
+
+  public static function if_teatcher_responsable(TheClass $class, Subject $subject, User $teatcher){
+
+    $year = Session::get('yearId');
+
+    $subCourse = Subjectclass::where('subject_id', $subject->id)
+      ->where('the_class_id', $class->id )
+      ->where('year_id', $year )
+      ->first();
+
+    if( $subCourse){
+
+
+      $teatchification = Teatchification::where('subject_the_class_id', $subCourse->id)
+        ->where('year_id', $year )
+        ->where('user_id', $teatcher->id )
+        ->first();
+
+        if($teatchification){
+
+          return true;
+
+        }else{
+          return false;
+        }
+
+
+    }
+
+
+
+  }
+
   public static function linkRule(Rule $rule, User $user){
 
 
@@ -428,7 +482,10 @@ class Relation {
 
     $subject_classesArray = $teatcher->teatchifications->where('year_id', $year_id)->pluck('subject_the_class_id')->toArray();
 
-    $classes = SubjectClass::whereIn('id', $subject_classesArray )->where('year_id',$year_id)->distinct()->get(['the_class_id'])->pluck('the_class_id'
+    $classes = SubjectClass::whereIn('id', $subject_classesArray )
+    ->where('year_id',$year_id)
+    ->distinct()->get(['the_class_id'])
+    ->pluck('the_class_id'
 )->toArray();
 
     return User::whereIn('the_class_id', $classes )->get();

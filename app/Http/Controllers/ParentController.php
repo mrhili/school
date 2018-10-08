@@ -246,7 +246,7 @@ class ParentController extends Controller
 
     public function home(){
 
-      $rules = Rule::where('active', true)->get()
+        $rules = Rule::where('active', true)->get();
 
         $user = Auth::user();
 

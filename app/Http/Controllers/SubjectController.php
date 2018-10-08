@@ -6,7 +6,9 @@ use App\{
         History,
         User,
         Subject,
-        TheClass
+        TheClass,
+        Teatchification,
+        Subjectclass
 };
 use Illuminate\Http\Request;
 use Auth;
@@ -16,7 +18,17 @@ use Session;
 class SubjectController extends Controller
 {
 
+  public function teatcherSubjectsByClass(TheClass $class){
 
+      $teatchification_ids = Teatchification::where('user_id', Auth::id() )
+        ->get(['subject_the_class_id'])->toArray();
+
+      $subjectclass = Subjectclass::whereIn('id', $teatchification_ids)
+        ->where('the_class_id', $class->id )->get();
+
+      return view('back.subjects.teatcherByClass', compact('subjectclass', 'class'));
+
+  }
 
     public function byClass($class){
 

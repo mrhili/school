@@ -185,6 +185,19 @@
                         </div>
                       </div>
 
+                      <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+                          <div class="inner">
+                            <h3>Ses Preperfications</h3>
+                            <p>...</p>
+                          </div>
+                          <div class="icon">
+                            <i class="fa fa-graduation-cap"></i>
+                          </div>
+                          <a href="{{ route('preperfications.student', $child->id) }}" class="small-box-footer"> Ses Preperfications<i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                      </div>
 
 
                     </div>
