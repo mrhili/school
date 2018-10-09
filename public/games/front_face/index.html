@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html><!-- manifest="offline.appcache"-->
+<head>
+	<meta charset="utf-8" />
+	<title>Front-Face</title>
+	<meta name="author" content="end3r" />
+	<meta name="description" content="Front-Face is an HTML5 game made for Front-Trends 2012 conference." />
+	<link rel="stylesheet" type="text/css" href="/games/front_face/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="/games/front_face/css/3d.css" />
+	<link rel="shortcut icon" href="/games/front_face/img/favicon.png" />
+	<script src="/games/front_face/js/init.js"></script>
+	<script src="/games/front_face/js/data.js"></script>
+	<script src="/games/front_face/js/game.js"></script>
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+</head>
+<body>
+	<div class="container">
+		<h1><a class="logo" href=""><img src="/games/front_face/img/frontface.png" alt="Front-Face logo" /> Front-Face</a></h1>
+		<div class="panel">
+			<div class="box">
+				<h2>Time</h2>
+				<p id="time">00:00</p>
+			</div>
+			<div class="box">
+				<h2>Points</h2>
+				<p id="points">0</p>
+			</div>
+			<div class="box">
+				<h2>Trials</h2>
+				<p id="trials">0</p>
+			</div>
+			<div class="box">
+				<h2>Questions</h2>
+				<p><span id="questions">0</span> &frasl; 20</p>
+			</div>
+			<div class="links">
+				<p id="howto">How to play</p>
+				<p id="about">About the game</p>
+			</div>
+			<div class="links sublinks">
+				<p id="geo">Show me the way</p>
+				<p id="ticket">How to win a ticket</p>
+				<p id="score"></p>
+				<p><a target="_blank" href="http://dev.end3r.com/2012/04/front-face-play-to-win-a-ticket-for-the-front-trends-2012-conference/">Read 'the making of' blog post</a></p>
+			</div>
+		</div>
+		<div class="board intro" id="board">
+			<span class="start" id="start">Play</span>
+		</div>
+		<div class="pages">
+			<div id="page-howto">
+				<div class="howto collect">Find the same photos</div>
+				<div class="howto answer">Answer the questions</div>
+				<div class="howto score">Score points if correct</div>
+				<div class="howto time">...and remember: be quick and beat the clock!</div>
+			</div>
+			<div id="page-about">
+				<h2>The game</h2>
+				<div><strong>Front-Face</strong> is a simple HTML5 game,<br />a mix of memory-like style game and trivia about the speakers,<br />made to promote Front-Trends 2012 conference.</div>
+				<h2 id="conf">The conference</h2>
+				<div><a target="_blank" href="http://2012.front-trends.com/">Front-Trends 2012</a> is a gathering for <strong>Front-End lovers</strong><br />to discover the current trends to build a professional career<br />out of innovative front-end development.</div>
+				<div>The conference will take place in SOHO Factory (Warsaw, Poland)<br />on 26-27 April 2012.</div>
+				<h2>The authors</h2>
+				<div><a target="_blank" href="http://end3r.com/">Andrzej Mazur</a> - coding</div>
+				<div><a target="_blank" href="http://mypoint.13k.pl/">Ewa Adach</a> - graphics</div>
+			</div>
+		</div>
+		<footer>
+			<p><span class="score"></span></p>
+			<div class="social">
+				<span><g:plusone size="medium" href="http://end3r.com/games/frontface/"></g:plusone></span>
+				<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fend3r.com%2Fgames%2Ffrontface%2F&amp;send=false&amp;layout=button_count&amp;width=110&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=segoe+ui&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:110px; height:21px;" allowTransparency="true"></iframe>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://end3r.com/games/frontface/" data-text="Front-Face" data-count="horizontal">Tweet</a>
+			</div>
+		</footer>
+	</div>
+	<div id="modalBg"></div>
+	<div id="formBg"></div>
+	<script>GAME.Init();</script>
+	<script src="https://apis.google.com/js/plusone.js"></script>
+	<script src="http://platform.twitter.com/widgets.js"></script>
+</body>
+</html>

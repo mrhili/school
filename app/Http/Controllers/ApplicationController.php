@@ -18,5 +18,29 @@ class ApplicationController extends Controller
       return view('applications.quran');
 
     }
+    
+    public function morse(){
+
+      return view('applications.morse');
+
+    }
+
+    public function triangle(){
+
+      return view('applications.triangle');
+
+    }
+
+    public function quiz(){
+
+      return view('applications.quiz');
+
+    }
+
+    public function math_quiz(){
+
+      return view('applications.math_quiz');
+
+    }
 
 }

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Tik tak toe</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+        .body{
+          font-size: 16px;
+          line-height: 1.8;
+        }
+
+        .game-page{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #fdfdfd;
+          overflow: hidden;
+        }
+
+        .game-table{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 650px;
+          transform: translate(-50%, -50%);
+          text-align: center;
+          background-color: #fff;
+          z-index: 99;
+          padding: 35px 10px;
+          border: 1px solid #9bcef7;
+          box-shadow: 0px 0px 1px 1px #ccc;
+        }
+
+        .game-table h1{
+          font-family: panama;
+          color: #727477;
+          margin-bottom: 25px;
+        }
+
+        .players-box{
+          overflow: hidden;
+          width: 80%;
+          margin: 20px auto;
+
+        }
+        .player-one,
+        .computer{
+          width: 50%;
+          display: inline-block;
+          position: relative;
+        }
+
+        .player-one{
+          float: left;
+          text-align: left;
+        }
+
+        .computer{
+          float: left;
+          text-align: right;
+        }
+
+        .computer .thumbnails{
+          background: #b196e0;
+        }
+
+        .players-box .thumbnails{
+          width: 64px;
+          border-radius: 50%;
+        }
+
+        .player-name{
+          color: #a2a7ab;
+          font-size: 15px;
+          display: inline-block;
+          padding: 5px 10px;
+          border: 1px solid #a2a7ab;
+          width: 120px;
+          text-align: center;
+          margin: 0 10px;
+        }
+
+
+
+        .game{
+          width: 55%;
+          margin: 35px auto;
+        }
+        .game-row {
+          display: flex;
+        }
+        .game-row:not(:last-child){
+          border-bottom: 3px solid #ececec;
+        }
+
+        .game .game-row .game-col:not(:last-child){
+          border-right: 3px solid #ececec;
+        }
+
+        .game-col{
+          width: 33.33%;
+          height: 120px;
+          display: inline-flex;
+          cursor: pointer;
+        }
+
+        .game-col .play{
+          height: 100%;
+          width: 100%;
+          line-height: 1.7;
+          font-size: 70px;
+        }
+        .game-col .one{
+          color: #ffa055;;
+        }
+
+        .game-col .two{
+          color: #b196e0;
+        }
+
+
+        .game-page  .icons{
+          color: #ececec;;
+          position: absolute;
+        }
+
+        footer{
+          color: #7d7272;
+        }
+
+        footer a{
+          color: #ff5722;
+        }
+
+        .msg-page{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, .4);
+          display: none;
+        }
+
+        .msg{
+          background: #fff;
+          width: 70%;
+          padding: 20px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border: 1px solid #2196F3;
+        }
+
+        .msg p{
+          font-size: 17px;
+          color: #636262;
+          margin-bottom: 20px;
+          text-transform: uppercase;
+          word-spacing: 4px;
+        }
+
+        .msg button{
+          border: none;
+          padding: 9px 20px;
+          color: #fff;
+          background-color: #2495ef;
+          border-radius: 25px;
+          font-size: 15px;
+          cursor: pointer;
+          width: 200px;
+        }
+
+        .icon-1{
+          font-size: 5rem;
+          top: 3%;
+          left: 10%;
+        }
+
+        .icon-2{
+          font-size: 3rem;
+          top: -1%;
+          left: 30%;
+          transform: rotate(15deg);
+        }
+
+        .icon-3{
+          font-size: 7rem;
+          top: 3%;
+          left: 48%;
+          transform: rotate(25deg);
+        }
+
+        .icon-4{
+          font-size: 3rem;
+          top: -2%;
+          left: 70%;
+        }
+
+        .icon-5{
+          font-size: 3rem;
+          top: 35%;
+          left: 3%;
+        }
+
+        .icon-6{
+          font-size: 4rem;
+          top: 48%;
+          left: 20%;
+        }
+
+        .icon-7{
+          font-size: 5rem;
+          top: 30%;
+          left: 84%;
+        }
+
+        .icon-8{
+          font-size: 2rem;
+          top: 80%;
+          left: 8%;
+        }
+
+        .icon-9{
+          font-size: 5rem;
+          top: 94%;
+          left: 25%;
+          transform: rotate(20deg);
+        }
+
+        .icon-10{
+          font-size: 4rem;
+          top: 87%;
+          left: 76%;
+        }
+
+        .icon-11{
+          font-size: 3rem;
+          top: 93%;
+          left: 57%;
+          transform: rotate(45deg);
+        }
+
+        .icon-12{
+          font-size: 2rem;
+          top: 60%;
+          left: 81%;
+          transform: rotate(31deg);
+        }
+
+
+        </style>
+
+    </head>
+    <body>
+
+      <section class="game-page">
+        <div class="container">
+          <div class="game-table">
+            <h1>Tic Tac Toe</h1>
+            <div class="players-box">
+              <div class="player-one">
+                <img class="img-fluid thumbnails" src="http://www14.0zz0.com/2018/09/06/01/737650752.png" alt="avatar">
+                <h2 class="player-name">Player 1</h2>
+              </div>
+              <div class="computer">
+                <h2 class="player-name">Computer</h2>
+                <img class="img-fluid thumbnails" src="http://www14.0zz0.com/2018/09/06/01/176250477.png" alt="avatar">
+              </div>
+            </div>
+
+            <div class="game">
+              <div class="game-row">
+                <div class="game-col" id="0"></div>
+                <div class="game-col" id="1"></div>
+                <div class="game-col" id="2"></div>
+              </div>
+              <div class="game-row">
+                <div class="game-col" id="3"></div>
+                <div class="game-col" id="4"></div>
+                <div class="game-col" id="5"></div>
+              </div>
+              <div class="game-row">
+                <div class="game-col" id="6"></div>
+                <div class="game-col" id="7"></div>
+                <div class="game-col" id="8"></div>
+              </div>
+            </div>
+            <footer>Allcopyrights are reserved &copy; 2018 by <a href="https://www.facebook.com/jaouadi7">Eljaouadi</a></footer>
+
+            <div class="msg-page">
+              <div class="msg">
+                <div class="msg-p"></div>
+                <button class="rest-game" onclick="startGame()">Want to play again</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="geometric">
+          <i class="fa fa-circle-o icons icon-1"></i>
+          <i class="fa fa-close icons icon-2"></i>
+          <i class="fa fa-gamepad icons icon-3"></i>
+          <i class="fa fa-circle-o icons icon-4"></i>
+          <i class="fa fa-close icons icon-5"></i>
+          <i class="fa fa-gamepad icons icon-6"></i>
+          <i class="fa fa-circle-o icons icon-7"></i>
+          <i class="fa fa-close icons icon-8"></i>
+          <i class="fa fa-gamepad icons icon-9"></i>
+          <i class="fa fa-circle-o icons icon-10"></i>
+          <i class="fa fa-close icons icon-11"></i>
+          <i class="fa fa-gamepad icons icon-12"></i>
+        </div>
+      </section>
+
+	<script>
+
+
+  var origBoard;
+  const huPlayer = '<i class="fa fa-close play one"></i>';
+  const aiPlayer = '<i class="fa fa-circle-o play two"></i>';
+  const winCombos = [
+  	[0, 1, 2],
+  	[3, 4, 5],
+  	[6, 7, 8],
+  	[0, 3, 6],
+  	[1, 4, 7],
+  	[2, 5, 8],
+  	[0, 4, 8],
+  	[6, 4, 2]
+  ]
+
+  const squares = document.querySelectorAll('.game-col');
+  startGame();
+
+  function startGame() {
+  	document.querySelector(".msg-page").style.display = "none";
+  	origBoard = Array.from(Array(9).keys());
+  	for (var i = 0; i < squares.length; i++) {
+  		squares[i].innerText = '';
+  		squares[i].style.removeProperty('background-color');
+  		squares[i].addEventListener('click', turnClick, false);
+  	}
+  }
+
+  function turnClick(square) {
+  	if (typeof origBoard[square.target.id] == 'number') {
+  		turn(square.target.id, huPlayer)
+  		if (!checkWin(origBoard, huPlayer) && !checkTie()) turn(bestSpot(), aiPlayer);
+  	}
+  }
+
+  function turn(squareId, player) {
+  	origBoard[squareId] = player;
+  	document.getElementById(squareId).innerHTML = player;
+  	let gameWon = checkWin(origBoard, player)
+  	if (gameWon) gameOver(gameWon)
+  }
+
+  function checkWin(board, player) {
+  	let plays = board.reduce((a, e, i) =>
+  		(e === player) ? a.concat(i) : a, []);
+  	let gameWon = null;
+  	for (let [index, win] of winCombos.entries()) {
+  		if (win.every(elem => plays.indexOf(elem) > -1)) {
+  			gameWon = {index: index, player: player};
+  			break;
+  		}
+  	}
+  	return gameWon;
+  }
+
+  function gameOver(gameWon) {
+  	for (let index of winCombos[gameWon.index]) {
+  		document.getElementById(index).style.backgroundColor =
+  			gameWon.player == huPlayer ? "#d7f5d7" : "#ffd2e1";
+  	}
+  	for (var i = 0; i < squares.length; i++) {
+  		squares[i].removeEventListener('click', turnClick, false);
+  	}
+  	declareWinner(gameWon.player == huPlayer ? "<p>Congrats! you win the game.</p>" : "<p>Sorry! you lose the game.</p>");
+  }
+
+  function declareWinner(who) {
+  	document.querySelector(".msg-page").style.display = "block";
+  	document.querySelector(".msg-p").innerHTML = who;
+  }
+
+  function emptySquares() {
+  	return origBoard.filter(s => typeof s == 'number');
+  }
+
+  function bestSpot() {
+  	return minimax(origBoard, aiPlayer).index;
+  }
+
+  function checkTie() {
+  	if (emptySquares().length == 0) {
+  		for (var i = 0; i < squares.length; i++) {
+  			squares[i].style.backgroundColor = "d7f5d7";
+  			squares[i].removeEventListener('click', turnClick, false);
+  		}
+  		declareWinner("<p>Tie Game!</p>")
+  		return true;
+  	}
+  	return false;
+  }
+
+  function minimax(newBoard, player) {
+  	var availSpots = emptySquares();
+
+  	if (checkWin(newBoard, huPlayer)) {
+  		return {score: -10};
+  	} else if (checkWin(newBoard, aiPlayer)) {
+  		return {score: 10};
+  	} else if (availSpots.length === 0) {
+  		return {score: 0};
+  	}
+  	var moves = [];
+  	for (var i = 0; i < availSpots.length; i++) {
+  		var move = {};
+  		move.index = newBoard[availSpots[i]];
+  		newBoard[availSpots[i]] = player;
+
+  		if (player == aiPlayer) {
+  			var result = minimax(newBoard, huPlayer);
+  			move.score = result.score;
+  		} else {
+  			var result = minimax(newBoard, aiPlayer);
+  			move.score = result.score;
+  		}
+
+  		newBoard[availSpots[i]] = move.index;
+
+  		moves.push(move);
+  	}
+
+  	var bestMove;
+  	if(player === aiPlayer) {
+  		var bestScore = -10000;
+  		for(var i = 0; i < moves.length; i++) {
+  			if (moves[i].score > bestScore) {
+  				bestScore = moves[i].score;
+  				bestMove = i;
+  			}
+  		}
+  	} else {
+  		var bestScore = 10000;
+  		for(var i = 0; i < moves.length; i++) {
+  			if (moves[i].score < bestScore) {
+  				bestScore = moves[i].score;
+  				bestMove = i;
+  			}
+  		}
+  	}
+
+  	return moves[bestMove];
+  }
+
+
+
+  </script>
+
+    </body>
+</html>

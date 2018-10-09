@@ -48,13 +48,30 @@ Route::get('/games/g2048', 'GameController@g2048')->name('games.g2048');
 Route::get('/games/chess3d', 'GameController@chess3d')->name('games.3dchess');
 Route::get('/games/gridgarden', 'GameController@gridgarden')->name('games.gridgarden');
 Route::get('/games/flexfrog', 'GameController@flexfrog')->name('games.flexfrog');
+Route::get('/games/sudoku', 'GameController@sudoku')->name('games.sudoku');
+Route::get('/games/ttt', 'GameController@ttt')->name('games.ttt');
+Route::get('/games/typing', 'GameController@typing')->name('games.typing');
+Route::get('/games/fast_typing', 'GameController@fast_typing')->name('games.fast_typing');
+Route::get('/games/bubble_typing', 'GameController@bubble_typing')->name('games.bubble_typing');
+Route::get('/games/world_maps', 'GameController@world_maps')->name('games.world_maps');
+Route::get('/games/marche_verbe', 'GameController@marche_verbe')->name('games.marche_verbe');
+Route::get('/games/math', 'GameController@math')->name('games.math');
+Route::get('/games/letters', 'GameController@letters')->name('games.letters');
+Route::get('/games/front_face', 'GameController@front_face')->name('games.front_face');
+Route::get('/games/js_quiz', 'GameController@js_quiz')->name('games.js_quiz');
+Route::get('/games/quiz_collector', 'GameController@quiz_collector')->name('games.quiz_collector');
+Route::get('/games/simple_quiz', 'GameController@simple_quiz')->name('games.simple_quiz');
+
 
 /***************/
 
 /*Applications*/
 Route::get('/apps', 'ApplicationController@index')->name('applications.index');
-Route::get('/apps/quran', 'ApplicationController@quran')->name('applications.quran');
-
+Route::get('/app/quran', 'ApplicationController@quran')->name('applications.quran');
+Route::get('/app/morse', 'ApplicationController@morse')->name('applications.morse');
+Route::get('/app/triangle', 'ApplicationController@triangle')->name('applications.triangle');
+Route::get('/app/quiz', 'ApplicationController@quiz')->name('applications.quiz');
+Route::get('/app/math_quiz', 'ApplicationController@math_quiz')->name('applications.math_quiz');
 
 /***************/
 

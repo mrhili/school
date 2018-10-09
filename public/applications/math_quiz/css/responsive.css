@@ -1,0 +1,133 @@
+@media all and (max-width: 650px) {
+
+	#math-quiz-wrapper {
+			width: 65%;
+	}
+
+	#timer-wrapper {
+			width: 35%;
+			left: 65%;
+	}
+
+	#timer {
+  		font-size: x-large;
+	}
+
+	#counter-wrapper {
+			width: 35%;
+			left: 65%;
+	}
+
+	#counter {
+		font-size: x-large;
+	}
+
+	.answer-wrapper {
+		width: 210px;
+		height: 210px;
+		top: calc((100% - 210px)/2);
+		left: calc((100% - 210px)/2);
+		border: 2px solid black;
+		box-shadow: 4px 5px 0px white;
+	}
+
+	.answer-wrapper:active {
+	  box-shadow: 2px 2px 0px white;	
+	}
+
+}
+
+
+@media all and (max-width: 550px) {
+	.answer-wrapper {
+		width: 120px;
+		height: 120px;
+		top: calc((100% - 130px)/2);
+		left: calc((100% - 130px)/2);
+		border: 2px solid black;
+		font-size: x-large;
+		box-shadow: 4px 5px 0px white;
+	}
+
+	#math-quiz {
+		font-size: x-large;
+	}
+
+	.score {
+		font-size: x-large;
+	}
+
+	.maintext {
+		font-size: 2.5em;
+	}
+}
+
+@media all and (max-width: 450px) {
+	#math-quiz {
+		font-size: large;
+	}
+}
+
+@media all and (max-width: 350px) {
+	#math-quiz {
+		font-size: medium;
+	}
+}
+
+@media all and (max-height: 550px) {
+	#counter {
+		font-size: large;
+	}
+
+	#timer {
+		font-size: large;
+	}
+
+	#math-quiz {
+		font-size: x-large;
+	}
+
+	.answer-wrapper {
+		width: 175px;
+		height: 175px;
+		top: calc((100% - 175px)/2);
+		left: calc((100% - 175px)/2);
+		border: 2px solid black;
+		font-size: x-large;
+		box-shadow: 4px 5px 0px white;
+	}
+}
+
+@media all and (max-height: 450px) {
+	#counter {
+		font-size: small;
+	}
+
+	#timer {
+		font-size: small;
+	}
+}
+
+@media all and (max-height: 300px) {
+	#counter p {
+		float: left;
+	}
+
+	#timer p {
+		float: left;
+	}
+
+	#math-quiz p {
+		display: none;
+	}
+
+	.answer-wrapper {
+		width: 75px;
+		height: 75px;
+		top: calc((100% - 75px)/2);
+		left: calc((100% - 75px)/2);
+		border: 2px solid black;
+		font-size: x-large;
+		box-shadow: 4px 5px 0px white;
+	}
+}

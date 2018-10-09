@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Typing Game</title>
+    <style>
+    header{
+        text-align: center;
+        color: white;
+        background-color: midnightblue;
+        padding: 30px;
+    }
+    .lead{
+        text-align: center;
+        font-weight: 600;
+        margin-top: 20px;
+    }
+    h2{
+        text-align: center;
+        padding: 0 0 20px 0;
+    }
+    .jumbotron{
+        text-align: center;
+    }
+  h3{
+        text-align: center;
+        float: initial;
+    }
+    #message{
+        color: red;
+        text-align: center;
+        font-size: 50px;
+        font-weight: 700;
+        padding: 20px;
+    }
+
+    </style>
+</head>
+<body>
+    <header><h1>Typing Game</h1></header>
+
+    <div class="container">
+        <!-- Word And Input -->
+        <div class="row">
+            <div class="col">
+                <p class="lead">Type The Given Word Within in
+                <span class="text-success" id="seconds">5 Seconds:</span></p>
+                <h2 class="display-2" id="current-word">Hello</h2>
+                <input type="text" class="form-control form-control-lg" placeholder="Start Typing..." id="word-input" autofocus>
+                <h4 class="mt-3" id="message"></h4>
+                <div class="row">
+                    <div class="col-s12-m4">
+                        <h3>Time Left:
+                            <span id="time">0</span>
+                        </h3>
+                    </div>
+                    <div class="col">
+                        <h3>Score:
+                            <span id="score">0</span>
+                        </h3>
+                    </div>
+                </div>
+                <br>
+                <div class="jumbotron col-s12">
+                    <h4>Instructions</h4>
+                    <p>Type each word in the given amount to score. To play again just type the current word. your score will reset</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+
+    window.addEventListener('load', init);
+
+    // Global Variables
+
+    let time = 5;
+    let score = 0;
+    let isPlaying;
+
+    // Levels
+
+    const levels = {
+        easy : 5,
+        medium : 3,
+        hard : 2
+    }
+
+    // Change Levels
+
+    const currentLevel = levels.medium;
+
+    // DOM Elements
+
+    const wordInput = document.getElementById('word-input');
+    const currentWord = document.getElementById('current-word');
+    const scoreDisplay = document.getElementById('score');
+    const timeDisplay = document.getElementById('time');
+    const messageDisplay = document.getElementById('message');
+    const seconds = document.getElementById('seconds');
+
+    const words = [
+    'land',
+    'Javascript',
+    'sneeze',
+    'battle',
+    'plan',
+    'tongue',
+    'shocking',
+    'kitty',
+    'sisters',
+    'Batman',
+    'oceanic',
+    'school',
+    'cent',
+    'oranges',
+    'tense',
+    'sail',
+    'war',
+    'dam',
+    'poor',
+    'trace',
+    'jellyfish',
+    'parsimonious',
+    'jittery',
+    'alert',
+    'pest',
+    'thing',
+    'berserk',
+    'glossy',
+    'houses',
+    'man',
+    'charming',
+    'pale',
+    'glass',
+    'reflect',
+    'dusty',
+    'attach',
+    'auspicious',
+    'illustrious',
+    'drum',
+    'insidious',
+    'correct',
+    'bury',
+    'repulsive',
+    'handsomely',
+    'snore',
+    'power',
+    'exercise',
+    'flap',
+    'materialistic',
+    'repair'
+    ];
+
+    // Initialize Game
+
+    function init(){
+        // Show number of seconds on ui
+        seconds.innerHTML = currentLevel + ' seconds';
+        // Load a word From array
+        showWord(words);
+        // Match Words
+        wordInput.addEventListener('input', startMatch);
+        // Call countddown timer
+        setInterval(countdown, 1000);
+        // check status
+        setInterval(checkStatus, 50);
+    }
+    // Start Match
+
+    function startMatch(){
+        if(matchWords()){
+            isPlaying = true;
+            time = currentLevel +1;
+            showWord(words);
+            wordInput.value = '';
+            score++;
+        }
+        // if score is -1, display 0
+        if(score === -1){
+            scoreDisplay.innerHTML = 0;
+        } else{
+        scoreDisplay.innerHTML = score;
+    }
+    }
+
+    // Match Current word to the input
+
+    function matchWords(){
+        if(wordInput.value === currentWord.innerHTML){
+            messageDisplay.innerHTML = 'Correct!!!';
+            messageDisplay.style.color = 'green';
+            return true;
+        }else {
+            messageDisplay.innerHTML = '';
+            return false;
+        }
+    }
+
+
+
+    // Pick a random word
+
+    function showWord(words){
+        // Generate Random Word From Array
+        const randIndex = Math.floor(Math.random() * words.length);
+        // Show that word
+        currentWord.innerHTML = words[randIndex];
+
+    }
+    // Countdown timer
+
+    function countdown(){
+        // Make sure time hasn't run out
+        if(time > 0){
+            // Decrement
+            time--;
+        }
+        else if(time === 0){
+            isPlaying = false;
+        }
+        timeDisplay.innerHTML = time;
+    }
+    // check status
+
+    function checkStatus(){
+        if(!isPlaying && time===0){
+            messageDisplay.innerHTML = 'Game Over !!!';
+            score = 0;
+            messageDisplay.style.color = 'red';
+        }
+    }
+
+    </script>
+</body>
+</html>

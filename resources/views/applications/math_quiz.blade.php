@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+		<title>Math Quiz</title>
+
+		<link rel="stylesheet" href="/applications/math_quiz/css/style.css">
+		<link rel="stylesheet" href="/applications/math_quiz/css/responsive.css">
+
+		<script src="/applications/math_quiz/lib/jquery-1.11.3.min.js"></script>
+		<script src="/applications/math_quiz/lib/jquery.mobile-1.4.5.min.js"></script>
+		<script src="/applications/math_quiz/lib/parser.js"></script>
+		<script src="/applications/math_quiz/js/helpers.js"></script>
+		<script src="/applications/math_quiz/js/main.js"></script>
+	</head>
+
+	<body>
+		<div id="game-container" class="hidden">
+			<div id="math-quiz-wrapper">
+				<div id="math-quiz">
+				</div>
+			</div>
+
+			<div id="timer-wrapper">
+				<div id="timer">
+				</div>
+			</div>
+			<div id="counter-wrapper">
+				<div id="counter">
+				</div>
+			</div>
+			<div id="answers">
+				<div id="a-area" class="area">
+					<div id="a-wrapper" class="answer-wrapper">
+						<div id="a" class="answer">
+						</div>
+					</div>
+				</div>
+				<div id="b-area" class="area">
+					<div id="b-wrapper" class="answer-wrapper">
+						<div id="b" class="answer">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="menu-container" class="hidden">
+			<div id="bestscore-wrapper" class="score-wrapper">
+				<div id="bestscore" class="score">
+					<span>MEJOR PUNTUACION:</span>
+					100
+				</div>
+			</div>
+			<div id="playbutton-wrapper" class="maintext-wrapper">
+				<div id="playbutton" class="maintext">
+					JUGAR!
+				</div>
+			</div>
+		</div>
+		<div id="end-container" class="hidden">
+			<div id="actualscore-wrapper" class="score-wrapper">
+				<div id="actualscore" class="score">
+					<span>PUNTUACION:</span>
+					100
+				</div>
+			</div>
+			<div id="end-wrapper" class="maintext-wrapper">
+				<div id="end" class="maintext">
+					TIEMPO AGOTADO!
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
