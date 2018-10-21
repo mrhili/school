@@ -342,7 +342,7 @@
 
 
 
-
+{{--
 
 @component('back.components.plain')
 
@@ -362,65 +362,80 @@ Examins
 
 
   @forelse($mytests as $test)
-
-              <div class="col-lg-6 col-xs-12 bg-green-gradient">
-                @php
-                  $note = $test->notes->where('student_id', Auth::id() )->first();
-                @endphp
-
-                <h3>{{ $test->test->title }}</h3>
-                <div class="media">
-
-                            <div class="media-body">
-                                <div class="clearfix">
-                                    <p class="pull-right">
-                                        @if (!$note->test_passed_fine )
-                                        <a href="{{ route('tests.pass-test',$test->id ) }}"
-                                          class="btn btn-success btn-sm ad-click-event">
-                                            Passé le test
-                                        </a>
-                                      @endif
-                                    </p>
-
-                                    <h4>Matiére: {{ $test->subjectclass->subject->name }}</h4>
-
-                                    <p>By : {{ $test->teatcher->name }} {{ $test->teatcher->last_name }}</p>
-                                    @if ($test->navigator)
-                                      <p><i class="fa fa-search margin-r5"></i>
-                                        Tu peux rechercher tant que tu veux</p>
-                                    @else
-                                      <p>
-                                        Tu peux pas rechercher</p>
-                                    @endif
-                                    <hr />
-                                    <p>
-                                        <i class="fa fa-clock-o margin-r5"></i> Date de fin:  {{ Carbon::parse($test->end)->diffForHumans() }}
-                                    </p>
+    @php
+      $note = $test->test->notes->where('student_id', Auth::id() )->first();
+    @endphp
 
 
-                                    @if ($note->test_passed_fine )
-                                      <p>
-                                          Note: {{ $note->note }} / 100
-                                      </p>
-                                    @else
-                                      <p>
-                                          Tu a pas encore passé le test
-                                      </p>
-                                    @endif
+
+    @if($note)
 
 
-                                </div>
 
-                            </div>
-                            <hr />
-                            @if($test->course_id)
-                            <div>
-                              a étudié avant le test: <a class="pull-right btn btn-default btn-md"
-                              href="{{ route('courses.show', $test->course_id) }}">{{ $test->course->name }}</a>
-                            </div>
-                            @endif
-                        </div>
-              </div>
+
+                    <div class="col-lg-6 col-xs-12 bg-green-gradient">
+
+
+                      <h3>{{ $test->test->title }}</h3>
+                      <div class="media">
+
+                                  <div class="media-body">
+                                      <div class="clearfix">
+                                          <p class="pull-right">
+                                              @if (!$note->test_passed_fine )
+                                              <a href="{{ route('tests.pass-test',$test->id ) }}"
+                                                class="btn btn-success btn-sm ad-click-event">
+                                                  Passé le test
+                                              </a>
+                                            @endif
+                                          </p>
+
+                                          <h4>Matiére: {{ $test->subjectclass->subject->name }}</h4>
+
+                                          <p>By : {{ $test->teatcher->name }} {{ $test->teatcher->last_name }}</p>
+                                          @if ($test->navigator)
+                                            <p><i class="fa fa-search margin-r5"></i>
+                                              Tu peux rechercher tant que tu veux</p>
+                                          @else
+                                            <p>
+                                              Tu peux pas rechercher</p>
+                                          @endif
+                                          <hr />
+                                          <p>
+                                              <i class="fa fa-clock-o margin-r5"></i> Date de fin:  {{ Carbon::parse($test->end)->diffForHumans() }}
+                                          </p>
+
+
+                                          @if ($note->test_passed_fine )
+                                            <p>
+                                                Note: {{ $note->note }} / 100
+                                            </p>
+                                          @else
+                                            <p>
+                                                Tu a pas encore passé le test
+                                            </p>
+                                          @endif
+
+
+                                      </div>
+
+                                  </div>
+                                  <hr />
+                                  @if($test->course_id)
+                                  <div>
+                                    a étudié avant le test: <a class="pull-right btn btn-default btn-md"
+                                    href="{{ route('courses.show', $test->course_id) }}">{{ $test->course->name }}</a>
+                                  </div>
+                                  @endif
+                              </div>
+                    </div>
+
+
+
+
+
+    @endif
+
           <!-- ./col -->
 
   @empty
@@ -445,7 +460,7 @@ Examins
 @endcomponent
 
 
-
+--}}
 
 
 

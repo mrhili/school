@@ -20,7 +20,15 @@ use Math;
 class NoteController extends Controller
 {
     protected $finalResult = [];
+/*
+    public function addBySubectclass(Subject $subject, TheClass $class){
 
+
+
+      return view( 'back.notes.add-by-subjectclass' );
+
+    }
+*/
     public function databyClass(TheClass $class){
 
       $columns = [];

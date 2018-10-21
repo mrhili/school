@@ -104,7 +104,7 @@ return [
     |
     */
 
-    'locales' => ['fr_FR' => 'Français', 'ar' => 'العربية', 'en' => 'English'],
+    'locales' => ['fr_FR' => 'Français', 'ar_TN' => 'العربية', 'en_US' => 'English'],
 
     'key' => env('APP_KEY'),
 
@@ -169,6 +169,8 @@ return [
         /*
          * Package Service Providers...
          */
+
+         Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -250,10 +252,15 @@ return [
 
         'Carbon' => 'Carbon\Carbon',
 
+        'Image' => Intervention\Image\Facades\Image::class,
+
         //HELPERS
 
 
         'CommonPics' => App\Helpers\Common\Pics::class,
+        'CommonPdfs' => App\Helpers\Common\Pdfs::class,
+        'CommonDocs' => App\Helpers\Common\Documents::class,
+
         'ArrayHolder' => App\Helpers\Common\Holder::class,
         'Timing' => App\Helpers\Common\Timing::class,
         'Application' => App\Helpers\Common\Application::class,
@@ -262,9 +269,6 @@ return [
 
         'GetSetting' => App\Helpers\Config\Setting::class,
         'GetSchoolSetting' => App\Helpers\Schoolconfig\Setting::class,
-
-
-
 
 
 

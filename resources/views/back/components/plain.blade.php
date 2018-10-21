@@ -5,9 +5,13 @@
   @php $sectionPlain = ''; @endphp
 @endif
 
+@if(empty( $class ))
+  @php $class = ''; @endphp
+@endif
+
 
       <!-- Default box -->
-      <div class="box">
+      <div class="box {{ $class }}">
         <div class="box-header with-border">
           <h3 class="box-title">{{ $titlePlain }}</h3>
 

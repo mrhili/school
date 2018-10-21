@@ -73,7 +73,7 @@
                   <div class="col-xs-12">
 
 
-                  @include('back.partials.formG', ['name' => 'is_exercise', 'type' => 'checkbox', 'text' => 'Esque cest just Un Exercice  ?', 'class'=>'', 'required' => false, 'checked' => true,'additionalInfo' => ['id' =>  'is_exercicefield']])
+                  @include('back.partials.formG', ['name' => 'is_exercise', 'type' => 'checkbox', 'text' => 'Esque cest just Un Exercice  ?', 'class'=>'', 'required' => false, 'checked' => false,'additionalInfo' => ['id' =>  'is_exercicefield']])
 
                   </div>
 
@@ -176,7 +176,6 @@ isexercicefield.change(function() {
     endfield.show().prop('required', true);
 
   }
-
 });
 /********/
 

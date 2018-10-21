@@ -193,7 +193,7 @@ var comment, hidden_note, name;
                         })
                         .catch(function (error) {
                         add.attr('disabled', false);
-                        alert(error);
+
                         swal(
                           'Error',
                           error,

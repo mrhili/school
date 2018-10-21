@@ -7,18 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Test extends Model
 {
     //
+    protected $casts = [
+        'body' => 'array',
+        'notes' => 'array',
+        'answers' => 'array'
 
+    ];
 
-        protected $casts = [
-            'body' => 'array',
-            'notes' => 'array',
-            'answers' => 'array',
-
-        ];
-
-        protected $fillable= [
-            'title', 'img','body', 'notes', 'answers', 'time_minutes', 'ready'
-        ];
+    protected $fillable= [
+        'kind', 'title','body', 'notes', 'answers', 'time_minutes', 'ready'
+    ];
 
 
     public function testyearsubclasses()

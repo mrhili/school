@@ -61,3 +61,12 @@ Route::post('/ajouter-membre-famille-post/{student}', 'StudentController@addPare
 /*********************************PREPERFICATION*******************************/
     Route::get('/preperfications-etudiant/{student?}', 'PreperficationController@student')->name('preperfications.student');
     Route::get('/data-preperfications-etudiant/{student}', 'PreperficationController@studentData')->name('preperfications.data-student');
+
+
+/********************TEST**********************/
+
+Route::get('/show-test-link-no-answers/{test}', 'TestController@showLinkNoAnswers')->name('tests.show-link-no-answers');
+Route::get('/show-test-image-no-answers/{test}', 'TestController@showImageNoAnswers')->name('tests.show-image-no-answers');
+Route::get('/show-test-pdf-no-answers/{test}', 'TestController@showPdfNoAnswers')->name('tests.show-pdf-no-answers');
+Route::get('/show-test-doc-no-answers/{test}', 'TestController@showDocNoAnswers')->name('tests.show-doc-no-answers');
+Route::get('/show-test-editor-no-answers/{test}', 'TestController@showEditorNoAnswers')->name('tests.show-editor-no-answers');

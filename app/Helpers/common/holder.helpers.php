@@ -48,7 +48,53 @@ class Holder {
   }
 
 
+  public static function modelTypes4file( $item = null ){
 
+      $types = [
+          ['model' => 'Test', 'folder' => 'tests']
+      ];
+
+      if( $item === null){
+          return $types;
+      }else{
+          return $types[$item];
+      }
+  }
+
+  public static function fileTypes( $item = null ){
+
+      $types = [
+          'Image',
+          'Pdf',
+          'Documents'
+      ];
+
+      if( $item === null){
+          return $types;
+      }else{
+          return $types[$item];
+      }
+
+  }
+
+
+  public static function testTypes( $item = null ){
+
+      $types = [
+          ['link','Link'],
+          ['picture-o','Images'],
+          ['internet-explorer','Online'],
+          ['file-pdf-o','PDF'],
+          ['file-text','Document'],
+          ['indent','Editor']
+      ];
+
+      if( $item === null){
+          return $types;
+      }else{
+          return $types[$item];
+      }
+  }
 
 
     public static function deficiteTypes( $item = null ){

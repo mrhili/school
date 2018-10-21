@@ -796,6 +796,8 @@ class StudentController extends Controller
         ->where('is_exercise', false)
         ->get();
 
+        //$myOnlinetests = $mytests->
+
         $myExercises = Testyearsubclass::whereIn('subject_the_class_id', $ids )
         ->where('publish', true)
         ->where('year_id', $year)
@@ -987,6 +989,8 @@ class StudentController extends Controller
         $array['the_class_id'] = $request->class;
 
         $sortNumber =  1 ;
+
+        $class= TheClass::find( $request->class );
 
         if( $class ){
 

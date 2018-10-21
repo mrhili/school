@@ -180,13 +180,21 @@
 
                         @endphp
 
+
+
                     	{!! Form::file($name, null , $output) !!}
+                      @if (isset($no_img) && !empty($no_img))
+                      @else
 
                         <div class="text-center">
 
                                 <img src="{{ \App\Helpers\Config\Setting::ifImg( $name ) }}" class="img-responsive" width="30%"/>
 
                         </div>
+
+                      @endif
+
+
 
 
 

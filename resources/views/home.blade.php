@@ -637,7 +637,7 @@
                             <div class="icon">
                               <i class="fa fa-file"></i>
                             </div>
-                            <a href="{{ route('tests.language') }}" class="small-box-footer">Ajouter un test maintenent <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="{{ route('tests.types') }}" class="small-box-footer">Ajouter un test maintenent <i class="fa fa-arrow-circle-right"></i></a>
                           </div>
                         </div>
 

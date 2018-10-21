@@ -56,7 +56,7 @@ class SubjectController extends Controller
 
         $year = Session::get('yearId');
 
-        Relation::linkClass2Subj($class, $subject, $request );
+        Relation::linkClass2Subj($the_class, $subject, $request );
 
         if( $subject ){
             return response()->json(['id' => $subject->id, 'name' => $subject->name, 'parameter' => $request->parameter ]);

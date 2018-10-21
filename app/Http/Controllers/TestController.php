@@ -17,19 +17,794 @@ use Session;
 use Auth;
 use GetSetting;
 use Relation;
+use ArrayHolder;
 use Carbon;
+use App\Helpers\Common\Pdfs as CommonPdfs;
+use App\Helpers\Common\Documents as CommonDocs;
+
 class TestController extends Controller
 {
 
 
 
-  public function teatcherTests(User $teatcher){
 
+    public function addEditorLinked($language, Subjectclass $subclass){
+
+        $courses = Courseyearsubclass::where('subject_the_class_id', $subclass->id)
+          ->where('year_id', $this->selected_year )
+          ->where('publish', true)
+          ->get();
+
+        $courseArray = [];
+
+        foreach($courses as $course){
+          $courseArray[ $course->id ] = $course->course->name.' by '.$course->teatcher->name.' '.$course->teatcher->last_name;
+        }
+
+
+        return view('back.tests.add-editor-linked',compact('subclass','language', 'courseArray'));
+    }
+
+
+        public function storeEditorLinked(Request $request, Subjectclass $subclass ){
+
+            $test = Test::create([
+              'kind' => 5,
+              'body' => json_encode( $request->body  ),
+              'title' => $request->title,
+              'time_minutes' => $request->time_minutes,
+              'notes' => $request->notes,
+              'answers' => json_encode( $request->answers  ),
+              'ready' => ( json_encode( $request->answers  ) ? true : false  )
+            ]);
+
+
+
+
+            if($test){
+
+              if($test->ready){
+
+
+                $publish;
+                if( $request->publish ){
+
+                    $publish = true;
+
+
+                }else{
+
+                    $publish = false;
+
+                }
+
+                $navigation;
+                if( $request->navigation ){
+
+                    $navigation = true;
+
+                }else{
+
+                    $navigation = false;
+
+                }
+
+                $isexercise;
+                if( $request->is_exercise ){
+
+                    $isexercise = true;
+
+                }else{
+
+                    $isexercise = false;
+
+                }
+
+                $testYSC = Testyearsubclass::create([
+                    'year_id' => Session::get('yearId'),
+                    'test_id' => $test->id,
+                    'subject_the_class_id' => $subclass->id,
+                    'subject_id' => $subclass->subject->id,
+                    'the_class_id' => $subclass->the_class->id,
+                    'teatcher_id' => Auth::id(),
+                    'publish' => $publish,
+                    'is_exercise' => $isexercise,
+                    'end' => $request->end,
+                    'navigator' => $navigation,
+                    'course_id' => $request->beforeTest
+
+                    ]);
+
+
+                if( $testYSC ){
+
+                  if($publish){
+
+                    Relation::beginNoteCollections($testYSC);
+                  }
+
+
+                  return redirect()->route('tests.show-editor-with-answers', $test->id);
+                }else{
+                  return back()->withInput();
+                }
+
+
+
+
+              }
+
+
+
+
+
+
+
+
+            }
+
+        }
+
+
+
+
+
+  /////////////////
+
+  public function showEditorWithAnswers(Test $test){
+
+    if($test->kind == 5){
+
+      $answers = true;
+
+      return view('back.tests.show-editor', compact('test', 'answers'));
+
+    }else{
+      return 'Kind Error';
+    }
+
+  }
+
+  public function storeEditor(Request $request){
+    $test = Test::create([
+      'kind' => 5,
+      'body' => json_encode( $request->body  ),
+      'title' => $request->title,
+      'answers' => json_encode( $request->answers  ),
+      'time_minutes' => $request->time_minutes,
+      'ready' => ( json_encode( $request->answers  ) ? true : false  )
+    ]);
+
+    return redirect()->route('tests.show-editor-with-answers', $test->id);
+  }
+
+  public function addEditor($language = null){
+
+      return view('back.tests.add-editor', compact('language'));
+  }
+
+  public function showDocWithAnswers(Test $test){
+
+    if($test->kind == 3){
+
+      $answers = true;
+
+      $body = json_decode( $test->body ,true);
+      $answers_pdfs = json_decode( $test->answers ,true);
+
+      return view('back.tests.show-doc',compact('test','body','answers', 'answers_pdfs'));
+
+    }else{
+      return 'Kind Error';
+    }
+
+  }
+
+
+    public function addDoc($language = null){
+
+        return view('back.tests.add-doc', compact('language'));
+    }
+
+    public function storeDoc(Request $request ){
+
+        $test = Test::create([
+          'kind' => 3,
+          'title' => $request->title,
+          'time_minutes' => $request->time_minutes
+        ]);
+
+        if($test){
+          CommonDocs::storeDocs( $request , 0, $test , 'questions' );
+          CommonDocs::storeDocs( $request , 0, $test , 'answers' );
+        }
+
+        if( $test->body != "[]"  && $test->answers != "[]"  ){
+          $test->ready = true;
+          $test->save();
+        }
+
+        return redirect()->route( 'tests.show-doc-with-answers', $test->id );
+    }
+
+
+
+
+  public function storePdfLinked(Request $request, Subjectclass $subclass ){
+
+      $test = Test::create([
+        'kind' => 3,
+        'title' => $request->title,
+        'time_minutes' => $request->time_minutes
+      ]);
+
+      if($test){
+        CommonPdfs::storePdfs( $request , 0, $test , 'questions' );
+        CommonPdfs::storePdfs( $request , 0, $test , 'answers' );
+
+        if( $test->body != "[]"  && $test->answers != "[]"  ){
+
+          $test->ready = true;
+          $test->save();
+
+
+            $publish;
+            if( $request->publish ){
+
+                $publish = true;
+
+
+            }else{
+
+                $publish = false;
+
+            }
+
+            $navigation;
+            if( $request->navigation ){
+
+                $navigation = true;
+
+            }else{
+
+                $navigation = false;
+
+            }
+
+            $isexercise;
+            if( $request->is_exercise ){
+
+                $isexercise = true;
+
+            }else{
+
+                $isexercise = false;
+
+            }
+
+            $testYSC = Testyearsubclass::create([
+                'year_id' => Session::get('yearId'),
+                'test_id' => $test->id,
+                'subject_the_class_id' => $subclass->id,
+                'subject_id' => $subclass->subject->id,
+                'the_class_id' => $subclass->the_class->id,
+                'teatcher_id' => Auth::id(),
+                'publish' => $publish,
+                'is_exercise' => $isexercise,
+                'end' => $request->end,
+                'navigator' => $navigation,
+                'course_id' => $request->beforeTest
+
+                ]);
+
+
+            if( $testYSC ){
+
+              if($publish){
+
+                Relation::beginNoteCollections($testYSC);
+              }
+
+
+
+            }
+
+
+        }
+
+        return redirect()->route( 'tests.show-pdf-with-answers', $test->id );
+
+
+
+      }else{
+
+        return back()->withInput();
+
+      }
+
+
+  }
+
+
+
+  public function addPdfLinked($language = null, SubjectClass $subclass ){
+
+
+    $courses = Courseyearsubclass::where('subject_the_class_id', $subclass->id)
+      ->where('year_id', $this->selected_year )
+      ->where('publish', true)
+      ->get();
+
+    $courseArray = [];
+
+    foreach($courses as $course){
+      $courseArray[ $course->id ] = $course->course->name.' by '.$course->teatcher->name.' '.$course->teatcher->last_name;
+    }
+
+      return view('back.tests.add-pdf-linked', compact('language', 'subclass' , 'courseArray'));
+  }
+
+  public function showPdfWithAnswers(Test $test){
+
+    if($test->kind == 3){
+
+      $answers = true;
+
+      $body = json_decode( $test->body ,true);
+      $answers_pdfs = json_decode( $test->answers ,true);
+
+      return view('back.tests.show-pdf',compact('test','body','answers', 'answers_pdfs'));
+
+    }else{
+      return 'Kind Error';
+    }
+
+  }
+
+  public function addPdf($language = null){
+
+      return view('back.tests.add-pdf', compact('language'));
+  }
+
+  public function storePdf(Request $request ){
+
+      $test = Test::create([
+        'kind' => 3,
+        'title' => $request->title,
+        'time_minutes' => $request->time_minutes
+      ]);
+
+      if($test){
+        CommonPdfs::storePdfs( $request , 0, $test , 'questions' );
+        CommonPdfs::storePdfs( $request , 0, $test , 'answers' );
+      }
+
+      if( $test->body != "[]"  && $test->answers != "[]"  ){
+        $test->ready = true;
+        $test->save();
+      }
+
+      return redirect()->route( 'tests.show-pdf-with-answers', $test->id );
+  }
+
+
+
+
+
+  public function confirmLinked(Request $request, Test $test, Subjectclass $subclass){
+
+    if($test->kind == 1 ){
+
+      $test->title = $request->title;
+      $test->time_minutes = $request->time_minutes;
+
+
+
+      if( $test->body != "[]"  && $test->answers != "[]"  ){
+
+
+        $test->ready = true;
+
+
+
+      }
+
+      $test->save();
+
+
+
+
+
+///////////////
+///////////////
+      if( $test->ready ){
+
+        $publish;
+        if( $request->publish ){
+
+            $publish = true;
+
+
+        }else{
+
+            $publish = false;
+
+        }
+
+        $navigation;
+        if( $request->navigation ){
+
+            $navigation = true;
+
+        }else{
+
+            $navigation = false;
+
+        }
+
+        $isexercise;
+        if( $request->is_exercise ){
+
+            $isexercise = true;
+
+        }else{
+
+            $isexercise = false;
+
+        }
+
+
+
+        $testYSC = Testyearsubclass::create([
+            'year_id' => Session::get('yearId'),
+            'test_id' => $test->id,
+            'subject_the_class_id' => $subclass->id,
+            'subject_id' => $subclass->subject->id,
+            'the_class_id' => $subclass->the_class->id,
+            'teatcher_id' => Auth::id(),
+            'publish' => $publish,
+            'is_exercise' => $isexercise,
+            'end' => $request->end,
+            'navigator' => $navigation,
+            'course_id' => $request->beforeTest
+
+            ]);
+
+
+        if( $testYSC ){
+
+          if($publish){
+
+            Relation::beginNoteCollections($testYSC);
+          }
+
+        }
+
+      }
+
+///////////////
+
+
+      return redirect()->route('tests.show-images-with-answers', $test->id);
+
+    }else{
+      return 'We can not confirm that kind';
+    }
+
+  }
+
+
+
+
+  public function addImagesLinked($language, Subjectclass $subclass){
+
+
+      $courses = Courseyearsubclass::where('subject_the_class_id', $subclass->id)
+        ->where('year_id', $this->selected_year )
+        ->where('publish', true)
+        ->get();
+
+      $courseArray = [];
+
+      foreach($courses as $course){
+        $courseArray[ $course->id ] = $course->course->name.' by '.$course->teatcher->name.' '.$course->teatcher->last_name;
+      }
+
+
+      return view('back.tests.add-images-linked',compact('subclass','language', 'courseArray'));
+  }
+
+
+
+
+
+
+  public function showImagesWithAnswers(Test $test){
+
+    if($test->kind == 1){
+
+      $answers = true;
+
+      $body = json_decode( $test->body ,true);
+      $answers_images = json_decode( $test->answers ,true);
+
+      return view('back.tests.show-images',compact('test','body','answers', 'answers_images'));
+
+    }else{
+      return 'Kind Error';
+    }
+
+  }
+
+
+
+  public function confirm(Request $request, Test $test){
+
+    if($test->kind == 1 ){
+
+      $test->title = $request->title;
+      $test->time_minutes = $request->time_minutes;
+
+
+      if( $test->body != "[]"  && $test->answers != "[]"  ){
+
+        $test->ready = true;
+
+      }
+
+      $test->save();
+
+      return redirect()->route('tests.show-images-with-answers', $test->id);
+
+    }else{
+      return 'We can not confirm that kind';
+    }
+
+  }
+
+  public function init($type){
+
+    $test = Test::create([
+      'kind' => $type,
+      'body' => json_encode( []  ),
+      'title' => 'random'.str_random(15),
+      'answers' => json_encode( []  ),
+      'time_minutes' => 60
+    ]);
+
+    if( $test ){
+      return response()->json($test->toArray());
+    }else{
+      return response()->json(['message' => 'cant initialize test'], 500);
+    }
+
+
+
+  }
+
+  public function addImages($language = null){
+
+      return view('back.tests.add-images', compact('language'));
+  }
+
+  public function addLinkLinked($language, Subjectclass $subclass){
+
+
+      $courses = Courseyearsubclass::where('subject_the_class_id', $subclass->id)
+        ->where('year_id', $this->selected_year )
+        ->where('publish', true)
+        ->get();
+
+      $courseArray = [];
+
+      foreach($courses as $course){
+        $courseArray[ $course->id ] = $course->course->name.' by '.$course->teatcher->name.' '.$course->teatcher->last_name;
+      }
+
+
+      return view('back.tests.add-link-linked',compact('subclass','language', 'courseArray'));
+  }
+
+
+
+
+      public function storeLinkLinked(Request $request, Subjectclass $subclass ){
+
+          $test = Test::create([
+            'kind' => 0,
+            'body' => json_encode( $request->body  ),
+            'title' => $request->title,
+            'time_minutes' => $request->time_minutes,
+            'notes' => $request->notes,
+            'answers' => json_encode( $request->answers  ),
+            'ready' => (json_encode( $request->answers  ) ? true: false )
+          ]);
+
+
+
+
+          if($test){
+
+            if( $test->ready ){
+
+                                $publish;
+                                if( $request->publish ){
+
+                                    $publish = true;
+
+
+                                }else{
+
+                                    $publish = false;
+
+                                }
+
+                                $navigation;
+                                if( $request->navigation ){
+
+                                    $navigation = true;
+
+                                }else{
+
+                                    $navigation = false;
+
+                                }
+
+                                $isexercise;
+                                if( $request->is_exercise ){
+
+                                    $isexercise = true;
+
+                                }else{
+
+                                    $isexercise = false;
+
+                                }
+
+                                $testYSC = Testyearsubclass::create([
+                                    'year_id' => Session::get('yearId'),
+                                    'test_id' => $test->id,
+                                    'subject_the_class_id' => $subclass->id,
+                                    'subject_id' => $subclass->subject->id,
+                                    'the_class_id' => $subclass->the_class->id,
+                                    'teatcher_id' => Auth::id(),
+                                    'publish' => $publish,
+                                    'is_exercise' => $isexercise,
+                                    'end' => $request->end,
+                                    'navigator' => $navigation,
+                                    'course_id' => $request->beforeTest
+
+                                    ]);
+
+
+
+
+                      if( $testYSC ){
+
+                        if($publish){
+
+                          Relation::beginNoteCollections($testYSC);
+                        }
+
+
+
+                      }
+
+            }
+
+
+
+
+            return redirect()->route('tests.show-link-with-answers', $test->id);
+
+          }else{
+            return back()->withInput();
+          }
+
+      }
+
+
+
+
+
+
+
+  public function addLink($language = null){
+
+      return view('back.tests.add-link', compact('language'));
+  }
+
+  public function storeLink(Request $request ){
+
+      $test = Test::create([
+        'kind' => 0,
+        'body' => json_encode( $request->body  ),
+        'title' => $request->title,
+        'answers' => json_encode( $request->answers  ),
+        'time_minutes' => $request->time_minutes,
+        'ready' => (json_encode( $request->answers  ) ? true: false )
+      ]);
+
+      return redirect()->route('tests.show-link-with-answers', $test->id);
+
+  }
+
+
+
+  public function showLinkWithAnswers(Test $test){
+
+    if($test->kind == 0){
+
+      $answers = true;
+
+      return view('back.tests.show-link', compact('test', 'answers'));
+
+    }else{
+      return 'Kind Error';
+    }
+
+  }
+
+  public function types( $class = null,  $subject = null){
+
+      return view('back.tests.types',compact('class', 'subject'));
+  }
+
+  public function type($type, $language , $class = null,  $subject = null ){
+
+
+    if($class != null && $subject != null){
+
+      $subclass = Subjectclass::where('the_class_id', $class )
+        ->where('subject_id', $subject )->first();
+
+      if($subclass){
+        $subclass = $subclass->id;
+      }
+
+      if($type == 0 ){
+        return redirect()->route('tests.add-link-linked',compact('language','subclass') );
+      }elseif( $type == 1 ){
+        return redirect()->route('tests.add-images-linked',compact('language','subclass') );
+      }elseif( $type == 2 ){
+        return redirect()->route('tests.add-online-linked',compact('language','subclass') );
+      }elseif( $type == 3 ){
+        return redirect()->route('tests.add-pdf-linked',compact('language','subclass') );
+      }elseif( $type == 4 ){
+        return redirect()->route('tests.add-doc-linked',compact('language','subclass') );
+      }elseif( $type == 5 ){
+        return redirect()->route('tests.add-editor-linked',compact('language','subclass') );
+      }else{
+        return 'notExisted Yet';
+      }
+
+    }else{
+
+      if($type == 0 ){
+        return redirect()->route('tests.add-link',compact('language') );
+      }elseif( $type == 1 ){
+        return redirect()->route('tests.add-images',compact('language') );
+      }elseif($type == 2 ){
+        return redirect()->route('tests.add-online',compact('language') );
+      }elseif( $type == 3 ){
+        return redirect()->route('tests.add-pdf',compact('language') );
+      }elseif( $type == 4 ){
+        return redirect()->route('tests.add-doc',compact('language') );
+      }elseif( $type == 5 ){
+        return redirect()->route('tests.add-editor',compact('language') );
+      }else{
+        return 'notExisted Yet';
+      }
+
+    }
+
+  }
+
+  public function teatcherTests(User $teatcher){
 
     //dd( $this->selected_year );
 
     $year = Session::get('yearId');
-
 
     $testYSC = Testyearsubclass::where('teatcher_id', $teatcher->id )
     ->where('year_id', $year)
@@ -44,7 +819,18 @@ class TestController extends Controller
 
     public function show(Test $test){
 
-        return view('back.tests.show',compact('test'));
+      if( $test->kind == 1){
+        $body = json_decode( $test->body ,true);
+        $answers = json_decode( $test->answers ,true);
+        return view('back.tests.show-images',compact('test','body', 'answers'));
+
+      }elseif( $test->kind == 2){
+        return view('back.tests.show-online',compact('test'));
+      }else{
+        return 'we can not show';
+      }
+
+
     }
 
     public function language(){
@@ -151,47 +937,37 @@ class TestController extends Controller
 
     }
 
-    public function add($language = null){
+    public function addOnline($language = null){
 
         if( $language == null ){
 
             $language = GetSetting::getConfig('test-language');
         }
 
-        return view('back.tests.add', compact('language'));
+        return view('back.tests.add-online', compact('language'));
     }
 
-    public function store(Request $request ){
+    public function storeOnline(Request $request ){
 
 
 
-        $test = Test::create(['body' => $request->body, 'title' => $request->title, 'notes' => $request->notes, 'time_minutes' => $request->time_minutes]);
+        $test = Test::create(['kind' => 2,
+        'body' => $request->body,
+        'title' => $request->title,
+        'notes' => $request->notes,
+        'time_minutes' => $request->time_minutes]);
 
-        return redirect()->route('tests.get-answers', $test->id);
+        return redirect()->route('tests.get-online-answers', $test->id);
 
     }
 
-    public function languageLinked($class_id,  $subject_id){
-        return view('back.tests.language-linked', compact('class_id', 'subject_id'));
-    }
 
-    public function addLinked($class_id,  $subject_id, $language = null){
-/*
-        if( $language == null ){
+    public function addOnlineLinked($language, Subjectclass $subclass){
 
-            $language = GetSetting::getConfig('test-language');
-        }
-*/
-        $year = Session::get('yearId');
 
-        if( $language == null ){
 
-            $language = 'fr-FR';
-        }
-
-        $courses = Courseyearsubclass::where('the_class_id', $class_id)
-          ->where('subject_id', $subject_id)
-          ->where('year_id', $year)
+        $courses = Courseyearsubclass::where('subject_the_class_id', $subclass->id)
+          ->where('year_id', $this->selected_year )
           ->where('publish', true)
           ->get();
 
@@ -201,14 +977,14 @@ class TestController extends Controller
           $courseArray[ $course->id ] = $course->course->name.' by '.$course->teatcher->name.' '.$course->teatcher->last_name;
         }
 
-        $class = TheClass::find($class_id);
-        $subject = Subject::find($subject_id);
-        return view('back.tests.add-linked',compact('subject', 'class','language', 'courseArray'));
+
+        return view('back.tests.add-online-linked',compact('subclass','language', 'courseArray'));
     }
 
-    public function storeLinked(Request $request, $class_id,  $subject_id ){
+    public function storeOnlineLinked(Request $request, Subjectclass $subclass ){
 
         $test = Test::create([
+          'kind' => 2,
           'body' => $request->body,
           'title' => $request->title,
           'notes' => $request->notes,
@@ -217,14 +993,8 @@ class TestController extends Controller
         ]);
 
 
-
-
-
         if($test){
 
-            $subject_class = Subjectclass::where('the_class_id', $class_id)->where('subject_id', $subject_id)->first();
-
-            if( $subject_class ){
                 $publish;
                 if( $request->publish ){
 
@@ -262,9 +1032,9 @@ class TestController extends Controller
                 $testYSC = Testyearsubclass::create([
                     'year_id' => Session::get('yearId'),
                     'test_id' => $test->id,
-                    'subject_the_class_id' => $subject_class->id,
-                    'subject_id' => $subject_id,
-                    'the_class_id' => $class_id,
+                    'subject_the_class_id' => $subclass->id,
+                    'subject_id' => $subclass->subject->id,
+                    'the_class_id' => $subclass->the_class->id,
                     'teatcher_id' => Auth::id(),
                     'publish' => $publish,
                     'is_exercise' => $isexercise,
@@ -283,14 +1053,14 @@ class TestController extends Controller
                   }
 
 
-                  return redirect()->route('tests.get-answers', $test->id);
+                  return redirect()->route('tests.get-online-answers', $test->id);
                 }else{
                   return back()->withInput();
                 }
 
 
 
-            }
+
 
 
         }
@@ -298,6 +1068,7 @@ class TestController extends Controller
     }
 
     public function addLinkedLinking($class_id,  $subject_id){
+
         $year = Session::get('yearId');
         $class = TheClass::find($class_id);
         $subject = Subject::find($subject_id);
@@ -309,7 +1080,12 @@ class TestController extends Controller
 
         $tests = Test::find( $testsMines );
 
-        $testsArray = Test::whereNotIn('id',  $testsMines )->pluck('title', 'id')->toArray();
+        $testsArray = [];
+
+        foreach(Test::whereNotIn('id',  $testsMines )->get() as $test ){
+          $testsArray[ $test->id ] = $test->title.' [ '. ArrayHolder::testTypes( $test->kind )[1] . '] ';
+        }
+
 
         $courses = Courseyearsubclass::where('the_class_id', $class_id)
           ->where('subject_id', $subject_id)
@@ -392,12 +1168,12 @@ class TestController extends Controller
 
     }
 
-    public function getAnswers(Test $test){
+    public function getOnlineAnswers(Test $test){
 
-        return view('back.tests.get-answers',compact('test'));
+        return view('back.tests.get-online-answers',compact('test'));
     }
 
-    public function postAnswers(Request $request, Test $test){
+    public function postOnlineAnswers(Request $request, Test $test){
 
         $rArray = $request->all();
 

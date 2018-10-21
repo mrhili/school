@@ -13,15 +13,17 @@ class CreateTestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tests', function (Blueprint $table) {
+        Schema::create('tests', function (Blueprint $table){
             $table->increments('id');
+            $table->tinyInteger('kind');
             $table->string('title')->unique();
-            $table->string('img')->nullable();
-            $table->json('body')->nullable();
-            $table->json('notes')->nullable();
-            $table->json('answers')->nullable();
             $table->boolean('ready')->default(false);
             $table->integer('time_minutes')->default(60)->unsigned();
+            $table->text('answers')->nullable();
+
+            $table->text('body')->nullable();
+            $table->text('notes')->nullable();
+
             $table->timestamps();
         });
     }

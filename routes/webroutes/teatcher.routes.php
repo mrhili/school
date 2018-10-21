@@ -71,23 +71,89 @@ Route::post('/request-valid-course/{course}', 'CourseyearsubclassController@requ
 Route::post('/request-valid-test/{test}', 'TestyearsubclassController@requestValidation')->name('tests.request-validation');
 //--------------------------------//
 
+
 Route::get('/classes', 'TheClassController@list')->name('classes.list');
 
-Route::get('/test-language/', 'TestController@language')->name('tests.language');
-Route::get('/add-test/{language?}', 'TestController@add')->name('tests.add');
-Route::post('/post-test/', 'TestController@store')->name('tests.store');
+Route::post('/init-test/{type}', 'TestController@init')->name('tests.init');
+Route::post('/confirm-test/{test}', 'TestController@confirm')->name('tests.confirm');
 
-Route::get('/test-language-linked/{class_id}/{subject_id}', 'TestController@languageLinked')->name('tests.language-linked');
-Route::get('/add-test-linked/{class_id}/{subject_id}/{language?}', 'TestController@addLinked')->name('tests.add-linked');
-Route::post('/post-test-linked/{class_id}/{subject_id}', 'TestController@storeLinked')->name('tests.store-linked');
+Route::post('/confirm-test-linked/{test}/{subclass}', 'TestController@confirmLinked')->name('tests.confirm-linked');
+
+
+
+Route::get('/test-types/{class?}/{subject?}', 'TestController@types')->name('tests.types');
+Route::get('/test-type/{type}/{language}/{class?}/{subject?}', 'TestController@type')->name('tests.type');
+
+Route::get('/test-language/{class?}/{subject?}', 'TestController@language')->name('tests.language');
+
+/*TEST POST*/
+
+/*Link TEST*/
+Route::get('/add-test-link/{language?}', 'TestController@addLink')->name('tests.add-link');
+Route::post('/store-test-link', 'TestController@storeLink')->name('tests.store-link');
+Route::get('/show-test-link-with-answers/{test}', 'TestController@showLinkWithAnswers')->name('tests.show-link-with-answers');
+
+
+
+
+
+/*ONLINE TEST*/
+Route::get('/add-online-test/{language}', 'TestController@addOnline')->name('tests.add-online');
+Route::post('/post-online-test', 'TestController@storeOnline')->name('tests.store-online');
+
+/*TEST ONLINE LINKED*/
+Route::get('/add-test-online-linked/{language}/{subclass}', 'TestController@addOnlineLinked')->name('tests.add-online-linked');
+Route::post('/post-test-online-linked/{subclass}', 'TestController@storeOnlineLinked')->name('tests.store-online-linked');
+/* Test Images */
+Route::get('/add-images-test/{language}', 'TestController@addImages')->name('tests.add-images');
+Route::get('/show-test-images-with-answers/{test}', 'TestController@showImagesWithAnswers')->name('tests.show-images-with-answers');
+/*TEST PDF*/
+Route::get('/add-pdf-test/{language}', 'TestController@addPdf')->name('tests.add-pdf');
+Route::post('/store-test-pdf', 'TestController@storePdf')->name('tests.store-pdf');
+Route::get('/show-test-pdf-with-answers/{test}', 'TestController@showPdfWithAnswers')->name('tests.show-pdf-with-answers');
+///IMAGE
+Route::post('/test-store-images/{test}/{qa}', 'FileController@storeTestImages')->name('files.store-test-images');
+Route::post('/test-drop-image/{test}/{qa}', 'FileController@dropTestImage')->name('files.drop-test-image');
+
+///////DOCS
+Route::get('/add-doc-test/{language}', 'TestController@addDoc')->name('tests.add-doc');
+Route::post('/store-test-doc', 'TestController@storeDoc')->name('tests.store-doc');
+Route::get('/show-test-doc-with-answers/{test}', 'TestController@showDocWithAnswers')->name('tests.show-doc-with-answers');
+//Editor
+Route::get('/add-editor-test/{language}', 'TestController@addEditor')->name('tests.add-editor');
+Route::post('/store-test-editor', 'TestController@storeEditor')->name('tests.store-editor');
+Route::get('/show-test-editor-with-answers/{test}', 'TestController@showEditorWithAnswers')->name('tests.show-editor-with-answers');
+
+/*TEST PDF LINKED*/
+Route::get('/add-pdf-test-linked/{language}/{subclass}', 'TestController@addPdfLinked')->name('tests.add-pdf-linked');
+Route::post('/store-test-pdf-linked/{subclass}', 'TestController@storePdfLinked')->name('tests.store-pdf-linked');
+
+
+///
+
+Route::get('/add-test-editor-linked/{language}/{subclass}', 'TestController@addEditorLinked')->name('tests.add-editor-linked');
+
+Route::post('/store-test-editor-linked/{subclass}', 'TestController@storeEditorLinked')->name('tests.store-editor-linked');
+
+///
+
+/**************TEST LINK LINKED**************/
+
+Route::get('/add-test-link-linked/{language}/{subclass}', 'TestController@addLinkLinked')->name('tests.add-link-linked');
+
+Route::post('/store-test-link-linked/{subclass}', 'TestController@storeLinkLinked')->name('tests.store-link-linked');
+
+/////////TEST IMAGES LINKED////////////
+
+Route::get('/add-images-test-linking/{language}/{subclass}', 'TestController@addImagesLinked')->name('tests.add-images-linked');
 
 Route::get('/add-test-linked-linking/{class_id}/{subject_id}', 'TestController@addLinkedLinking')->name('tests.add-linked-linking');
 Route::post('/post-test-linked-linking/{test}/{class_id}/{subject_id}', 'TestController@storeLinkedLinking')->name('tests.store-linked-linking');
 
 Route::get('/test-show/{test}', 'TestController@show')->name('tests.show');
 
-Route::get('/get-answers/{test}', 'TestController@getAnswers')->name('tests.get-answers');
-Route::post('/post-answers/{test}', 'TestController@postAnswers')->name('tests.store-answers');
+Route::get('/get-online-answers/{test}', 'TestController@getOnlineAnswers')->name('tests.get-online-answers');
+Route::post('/post-online-answers/{test}', 'TestController@postOnlineAnswers')->name('tests.store-online-answers');
 Route::get('/tests', 'TestController@index')->name('tests.index');
 
 Route::get('/data-check-fournitures/{class}', 'FourniturationController@dataCheck')->name('fournitures.data-check-by-class');
@@ -110,4 +176,4 @@ Route::get('/teatcher-courses/{teatcher}', 'CourseController@teatcherCourses')->
 
 Route::get('/teatcher-tests/{teatcher}', 'TestController@teatcherTests')->name('tests.teatcher-tests');
 
-Route::get('/choose-subject-class/', 'CourseController@choose')->name('courses.choose');
+Route::get('/choose-subject-class', 'CourseController@choose')->name('courses.choose');
