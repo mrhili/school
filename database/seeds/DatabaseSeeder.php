@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoryshipSeed::class);
         $this->call(FournitureSeeder::class);
         $this->call(UsersTableSeeder::class);
-        $this->call(SubjectSeeder::class);
+        $this->call(UnitySubunitySeeder::class);
 
 
         $this->call(CMSeeder::class);

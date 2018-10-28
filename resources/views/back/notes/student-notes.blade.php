@@ -23,7 +23,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            <i class="fa fa-globe"></i> Mes notes
+            <i class="fa fa-globe"></i> Notes
           </h2>
         </div>
         <!-- /.col -->
@@ -43,6 +43,7 @@
                     <th>Recherche</th>
                     <th>Durée passé done_minutes / time_minutes</th>
 			              <th>Note</th>
+                    <th>Plus d'info</th>
 			            </tr>
 			        </thead>
 			    </table>
@@ -58,77 +59,6 @@
 
     </section>
 
-
-        <section class="invoice">
-          <!-- title row -->
-          <div class="row">
-            <div class="col-xs-12">
-              <h2 class="page-header">
-                <i class="fa fa-globe"></i> Resultat
-              </h2>
-            </div>
-            <!-- /.col -->
-          </div>
-
-          <!-- Table row -->
-
-          <!-- /.row -->
-
-          <div class="row">
-            <!-- accepted payments column -->
-            <div class="col-xs-6">
-              <p class="lead">Payment Methods:</p>
-              <img src="../../dist/img/credit/visa.png" alt="Visa">
-              <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-              <img src="../../dist/img/credit/american-express.png" alt="American Express">
-              <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
-
-              <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
-                dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-              </p>
-            </div>
-            <!-- /.col -->
-            <div class="col-xs-6">
-              <p class="lead">Amount Due 2/22/2014</p>
-
-              <div class="table-responsive">
-                <table class="table">
-                  <tr>
-                    <th style="width:50%">Subtotal:</th>
-                    <td>$250.30</td>
-                  </tr>
-                  <tr>
-                    <th>Tax (9.3%)</th>
-                    <td>$10.34</td>
-                  </tr>
-                  <tr>
-                    <th>Shipping:</th>
-                    <td>$5.80</td>
-                  </tr>
-                  <tr>
-                    <th>Total:</th>
-                    <td>$265.24</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-            <!-- /.col -->
-          </div>
-          <!-- /.row -->
-
-          <!-- this row will not appear when printing -->
-          <div class="row no-print">
-            <div class="col-xs-12">
-              <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-              <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
-              </button>
-              <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-                <i class="fa fa-download"></i> Generate PDF
-              </button>
-            </div>
-          </div>
-        </section>
 
 @endsection
 
@@ -166,7 +96,8 @@ $(function() {
             { data: 'test_title', name: '' },
             { data: 'navigator', name: '' },
             { data: 'minutes', name: '' },
-            { data: 'note', name: '' }
+            { data: 'note', name: '' },
+            { data: 'info', name: '' }
 
         ]
     });

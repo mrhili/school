@@ -17,7 +17,6 @@ class Course extends Model
 	            'teaser_text',
 	            'teaser_video',
               'created_by'
-
     ];
 
     public function populating()

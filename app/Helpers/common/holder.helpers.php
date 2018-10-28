@@ -51,7 +51,8 @@ class Holder {
   public static function modelTypes4file( $item = null ){
 
       $types = [
-          ['model' => 'Test', 'folder' => 'tests']
+          ['model' => 'Test', 'folder' => 'tests'],
+          ['model' => 'Note', 'folder' => 'notes']
       ];
 
       if( $item === null){

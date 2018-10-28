@@ -30,6 +30,8 @@ use Carbon;
 use Auth;
 class Math {
 
+
+
   //for 1 subject (notesofAlltests/ numberTests) * %param = ( paraemeter / Total parameters )
   // for final = Total of subjects result
     public static function countFinalResult( User $student ){

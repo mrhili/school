@@ -77,6 +77,70 @@ class Application{
 
   }
 
+
+  public static function dropSort($array , $item){
+/*
+
+ksort($fill);
+
+if(in_array($file->id, $fill) ){
+
+  $sliced_item = array_search ( $file->id , $fill );
+
+  if( array_key_exists($sliced_item, $fill) ){
+
+    unset( $fill[ $sliced_item ] );
+
+  }
+
+  foreach ($fill as $key => $value) {
+    // code...
+    if( $key > $sliced_item ){
+
+      $fill[ $key -1 ] = $value;
+
+    }
+
+  }
+
+  ksort($fill);
+
+
+}
+
+
+
+ */
+    ksort($array);
+
+    if(in_array($item, $array) ){
+
+      $sliced_item = array_search ( $item , $array );
+
+      if( array_key_exists($sliced_item, $array) ){
+
+        unset( $array[ $sliced_item ] );
+
+      }
+
+      foreach ($array as $key => $value) {
+        // code...
+        if( $key > $sliced_item ){
+
+          $array[ $key -1 ] = $value;
+
+        }
+
+      }
+
+      ksort($array);
+
+    }
+
+  }
+
+
+
   public static function fillDynamicButton($model, $dynamic, $array = null){
 
       $existArray = [];

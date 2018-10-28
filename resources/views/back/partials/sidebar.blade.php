@@ -4,21 +4,23 @@
     <section class="sidebar">
 
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          {!! Html::image(CommonPics::ifImg( ArrayHolder::roles_routing( Auth::user()->role ) ,  Auth::user()->img ),'User Image', ['class' => 'img-circle'] ) !!}
-        </div>
-        <div class="pull-left info">
-          @if(Auth::check())
-            <p> {{ Auth::user()->name }} {{ Auth::user()->last_name }} </p>
-          @else
+      @if(Auth::check())
+        <div class="user-panel">
+          <div class="pull-left image">
+            {!! Html::image(CommonPics::ifImg( ArrayHolder::roles_routing( Auth::user()->role ) ,  Auth::user()->img ),'User Image', ['class' => 'img-circle'] ) !!}
+          </div>
+          <div class="pull-left info">
+            @if(Auth::check())
+              <p> {{ Auth::user()->name }} {{ Auth::user()->last_name }} </p>
+            @else
 
-          @endif
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-          <br />
+            @endif
+            <!-- Status -->
+            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            <br />
+          </div>
         </div>
-      </div>
+      @endif
 
 
       <!-- Sidebar Menu -->

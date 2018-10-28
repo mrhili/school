@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubjectsTable extends Migration
+class CreateSubunitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreateSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('subunities', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->unique();
 
-            $table->string('name');
-
-            $table->integer('subunity_id')->unsigned()->index()->nullable();
-            $table->foreign('subunity_id')
+            $table->integer('unity_id')->unsigned()->index()->nullable();
+            $table->foreign('unity_id')
               ->references('id')
-              ->on('subunities')
+              ->on('unities')
               ->onDelete('set null');
-
 
             $table->timestamps();
         });
@@ -36,6 +34,6 @@ class CreateSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('subunities');
     }
 }

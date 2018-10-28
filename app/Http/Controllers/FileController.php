@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use App\{
   File,
-  Test
+  Test,
+  Note
 };
 use Image;
 use ArrayHolder;
@@ -21,6 +22,24 @@ class FileController extends Controller
     {
         $this->files_path = public_path('/images');
     }
+
+
+    public function storeNoteImages(Request $request, Note $note ){
+
+        CommonPics::storeAdvImages($request, 1 , $note );
+
+    }
+
+
+
+    public function dropNoteImage(Request $request, Note $note )
+    {
+
+      CommonPics::dropAdvImage($request, 1 , $note);
+
+    }
+
+
 
     public function storeTestImages(Request $request, Test $test , $qa ){
 

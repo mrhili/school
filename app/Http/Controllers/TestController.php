@@ -25,6 +25,29 @@ use App\Helpers\Common\Documents as CommonDocs;
 class TestController extends Controller
 {
 
+  //
+
+  ublic function showAnyNoAnswers( Test $test ){
+
+
+
+    if($test->type == 0 ){
+      return redirect()->route('tests.show-link-no-answers', $test->id ) );
+    }elseif( $test->type == 1 ){
+      return redirect()->route('tests.show-images-no-answers', $test->id ) );
+    }elseif( $test->type == 2 ){
+      return redirect()->route('tests.show-online-no-answers', $test->id ) );
+    }elseif( $test->type == 3 ){
+      return redirect()->route('tests.show-pdf-no-answers', $test->id ) );
+    }elseif( $test->type == 4 ){
+      return redirect()->route('tests.show-doc-no-answers', $test->id ) );
+    }elseif( $test->type == 5 ){
+      return redirect()->route('tests.show-editor-no-answers', $test->id ) );
+    }else{
+      return view('outils.message')->with('message_array', ['message' => 'type Not exist']);
+    }
+  }
+
 
 
 
@@ -615,10 +638,11 @@ class TestController extends Controller
             'body' => json_encode( $request->body  ),
             'title' => $request->title,
             'time_minutes' => $request->time_minutes,
-            'notes' => $request->notes,
             'answers' => json_encode( $request->answers  ),
             'ready' => (json_encode( $request->answers  ) ? true: false )
           ]);
+
+
 
 
 

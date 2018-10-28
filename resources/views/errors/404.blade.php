@@ -1,1 +1,18 @@
-<h2>{{ $exception->getMessage() }}</h2>
+
+
+
+@extends('back.layouts.app')
+
+
+
+@section('content')
+
+
+  @component('back.components.message', [
+    'message' => $exception->getMessage()
+    ] )
+
+  @endcomponent
+
+
+@endsection

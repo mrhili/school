@@ -8,7 +8,9 @@ use App\{
         Subject,
         TheClass,
         Teatchification,
-        Subjectclass
+        Subjectclass,
+        Unity,
+        Subunity
 };
 use Illuminate\Http\Request;
 use Auth;
@@ -17,6 +19,15 @@ use Session;
 
 class SubjectController extends Controller
 {
+
+
+  public function showLinked(TheClass $class, Subject $subject){
+
+    $subclass = Subjectclass::where('the_class_id', $class->id )->where('subject_id', $subject->id )->first();
+
+    return view('back.subjects.show-linked', compact('subclass'));
+
+  }
 
   public function teatcherSubjectsByClass(TheClass $class){
 
@@ -70,7 +81,10 @@ class SubjectController extends Controller
 
         $subjectsArray = Subject::pluck('name', 'id')->toArray();
 
-        return view('back.subjects.list', compact('subjects', 'subjectsArray'));
+
+        $unities = Unity::pluck('name', 'id')->toArray();
+
+        return view('back.subjects.list', compact('subjects', 'subjectsArray', 'unities'));
 
     }
 
@@ -80,36 +94,43 @@ class SubjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Subunity $subunity)
     {
         //
-        $subject = Subject::create(  ['name' => $request->name] );
+        $subject = Subject::create(  ['name' => $request->namefield, 'subunity_id' => $subunity->id ] );
 
 
-        $admin = User::find( Auth::id() );
-
-        $creation = [
-
-            'id_link' => $subject->id,
-            'comment' => $request->comment,
-            //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
-            'info' => 'just talk',
-            'hidden_note' => $request->hidden_note,
-            'by_admin' => $admin->id,
-
-            'category_history_id' => 12,
-            'class' => 'success',
-            //'id_link' => $request->id_link,
-
-            ];
-
-        $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name .'</strong> a ajouté une matier qui porte le nom <strong>'.$request->name.' </strong> .'  ;
-
-        History::create( $creation );
 
 
 
         if( $subject ){
+
+          $admin = User::find( Auth::id() );
+
+          $creation = [
+
+              'id_link' => $subject->id,
+              'comment' => $request->comment,
+              //lhomme a payeé un montant 500 dh de pour letudiant qui est dans la class 6  sur le payement du mois 6 sur lanée 2017/2018 et ila remplie le charge parsquil avait rien sur ce mois et il falait quil pay 700dh
+              'info' => 'just talk',
+              'hidden_note' => $request->hidden_note,
+              'by_admin' => $admin->id,
+
+              'category_history_id' => 12,
+              'class' => 'success',
+              //'id_link' => $request->id_link,
+
+              ];
+
+          $creation['info'] = 'Ladmin : <strong>'.$admin->name .' '. $admin->last_name
+          .' </strong> a ajouté une matier qui porte le nom <strong>'.$request->name.
+          ' </strong> et sont subunité cest '. $subject->subunity->name .
+          ' </strong> et sont unité cest '. $subject->subunity->unity->name .' .'  ;
+
+          History::create( $creation );
+
+
+
             return response()->json(['id' => $subject->id, 'name' => $subject->name ]);
         }
 

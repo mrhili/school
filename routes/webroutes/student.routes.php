@@ -32,7 +32,11 @@ Route::post('/ajouter-membre-famille-post/{student}', 'StudentController@addPare
 	Route::post('/reporte-obs/{o}', 'ObservationController@switchReported')->name('observations.switch-reported-obs');
 	Route::post('/delete-obs', 'ObservationController@deleteObs')->name('observations.delete-obs');
 
+/****************NOTE*********************/
 
+Route::get('/voire-note/{note}', 'NoteController@see')->name('notes.see');
+
+/******************************************/
 
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
     Route::get('/change-year/{id}', 'YearController@changeYear')->name('years.change');
@@ -64,6 +68,8 @@ Route::post('/ajouter-membre-famille-post/{student}', 'StudentController@addPare
 
 
 /********************TEST**********************/
+
+Route::get('/show-test-any-no-answers/{test}', 'TestController@showAnyNoAnswers')->name('tests.show-any-no-answers');
 
 Route::get('/show-test-link-no-answers/{test}', 'TestController@showLinkNoAnswers')->name('tests.show-link-no-answers');
 Route::get('/show-test-image-no-answers/{test}', 'TestController@showImageNoAnswers')->name('tests.show-image-no-answers');

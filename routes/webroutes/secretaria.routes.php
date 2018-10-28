@@ -183,15 +183,25 @@ Route::post('/add-payment-user/{id}/{payment}/{month}/{year}', 'UserspaymentCont
 
 Route::get('/students/{class}', 'StudentController@byClass')->name('students.by-class');
 Route::get('/students-data-by-class/{class}', 'StudentController@dataByClass')->name('students.data-by-class');
+/******************************UNITIES***************************/
+
+Route::get('/unities', 'UnityController@list')->name('unities.list');
+Route::post('/store-unity', 'UnityController@store')->name('unities.store');
+
+/******************************SUB UNITIES***************************/
+
+Route::get('/subunities', 'SubunityController@list')->name('subunities.list');
+Route::post('/store-subunity/{unity}', 'SubunityController@store')->name('subunities.store');
 
 /**********************SUBJECT*****************/
 
 Route::get('/subjects/{class}', 'SubjectController@byClass')->name('subjects.by-class');
 Route::post('/link-subject-class/{class}/{subject_id}', 'SubjectController@linkClass')->name('subjects.link-class');
 
-Route::get('/subjects', 'SubjectController@list')->name('subjects.list');
-Route::post('/store-subject', 'SubjectController@store')->name('subjects.store');
 
+
+Route::get('/subjects', 'SubjectController@list')->name('subjects.list');
+Route::post('/store-subject/{subunity}', 'SubjectController@store')->name('subjects.store');
 
 /*********************CLASS MULTIPLE SUBJECTS *************/
 

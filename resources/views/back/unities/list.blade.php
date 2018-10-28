@@ -18,7 +18,7 @@
 
             <div class="box box-default collapsed-box">
               <div class="box-header with-border">
-                <h3 class="box-title">Ajouter un type de chambre</h3>
+                <h3 class="box-title">Ajouté une unité</h3>
 
                 <div class="box-tools pull-right">
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
@@ -38,28 +38,9 @@
 
                       <div class="col-xs-12">
 
-                      @include('back.partials.formG', ['name' => 'etage_id', 'type' => 'select', 'selected' => null,'text' => 'Numero detage ', 'class'=>'', 'required' => true, 'array' => $etages  ,'additionalInfo' => [ 'id' =>  'etagefield' ]])
+                        @include('back.partials.formG', ['name' => 'name', 'type' => 'text', 'text' => 'Nom dunité', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'namefield'] ])
                       </div>
 
-                      <div class="col-xs-12">
-
-                      @include('back.partials.formG', ['name' => 'roomtype_id', 'type' => 'select', 'selected' => null,'text' => 'Type de chambre', 'class'=>'', 'required' => true, 'array' => $roomtypes  ,'additionalInfo' => [ 'id' =>  'roomtypefield' ]])
-                      </div>
-
-                      <div class="col-xs-12">
-
-                      @include('back.partials.formG', ['name' => 'name', 'type' => 'text', 'text' => 'Type de chambre', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'namefield'] ])
-                      </div>
-
-                      <div class="col-xs-12">
-
-                      @include('back.partials.formG', ['name' => 'space', 'type' => 'text', 'text' => 'Espace', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'spacefield'] ])
-                      </div>
-
-                      <div class="col-xs-12">
-
-                      @include('back.partials.formG', ['name' => 'desription', 'type' => 'textarea', 'text' => 'Description', 'class'=>'', 'required' => true, 'additionalInfo' => ['id' =>  'descriptionfield'] ])
-                      </div>
 
 
                       <div class="col-xs-12">
@@ -91,7 +72,7 @@
 <div class="row" id="rooms">
 
 
-    @foreach( $rooms as $room  )
+    @foreach( $unities as $unity  )
 
 
         <div class="col-md-4">
@@ -103,13 +84,12 @@
                 {!! Html::image( 'images/config/'. GetSetting::getConfig('no-image') ,'No-Image', ['class' => 'img-circle'] ) !!}
               </div>
               <!-- /.widget-user-image -->
-              <h3 class="widget-user-username">{{ $room->name }}</h3>
-              <h5 class="widget-user-desc">espace: {{ $room->space }}</h5>
-              <p class="widget-user-desc">Desciption: {{ $room->description }}</p>
+              <h3 class="widget-user-username">{{ $unity->name }}</h3>
+              <p class="widget-user-desc">...</p>
             </div>
             <div class="box-footer no-padding">
               <ul class="nav nav-stacked">
-                <li><a href="#">Projects <span class="pull-right badge bg-blue">31</span></a></li>
+                <li><a href="#"><span class="pull-right badge bg-blue">...</span></a></li>
               </ul>
             </div>
           </div>
@@ -122,39 +102,9 @@
 
 
 
-
-@component('back.components.plain')
-
-  @slot('titlePlain')
-
-The Main Configuration Of the web application
-
-  @endslot
-
-
-  @slot('sectionPlain')
-
-
-  @endslot
-
-
-  @slot('footerPlain')
-
-
-
-  @endslot
-
-
-@endcomponent
-
-
 @endsection
 
-@section('datatableScript')
 
-
-
-@endsection
 
 @section('scripts')
 
@@ -183,25 +133,15 @@ var comment, hidden_note, name;
 
               comment = $('#commentfield').val();
               hidden_note = $('#hiddennotefield').val();
-              namefield = $('#namefield').val();
-              etagefield = $('#etagefield').val();
-              roomtypefield = $('#roomtypefield').val();
-              space = $('#spacefield').val();
-              description = $('#descriptionfield').val();
 
 
-
-
-
-                    axios.post('/store-room/'+etagefield+'/'+roomtypefield,{
+                    axios.post('/store-unity',{
                         headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         comment: comment,
                         hidden_note: hidden_note,
-                        namefield: namefield,
-                        space:space,
-                        description:description
+                        namefield: $('#namefield').val()
 
                     })
                         .then(function (response) {
@@ -209,9 +149,7 @@ var comment, hidden_note, name;
                         var returnedArray = response.data;
 
                         add.attr('disabled', false);
-
-
-                        rooms.append('<div class="col-md-4"><!--Widget:userwidgetstyle1--><div class="box box-widget widget-user-2"><!--Addthebgcolortotheheaderusinganyofthebg-*classes--><div class="widget-user-header bg-'+ randombgcolor() +'"><div class="widget-user-image"><img class="img-circle" src="'+schoolLink+'/'+imgLink+'" alt="UserAvatar"></div><!--/.widget-user-image--><h3 class="widget-user-username">'+ returnedArray['name']+'</h3><h5 class="widget-user-desc">'+ returnedArray['space']+'</h5><p class="widget-user-desc">'+ returnedArray['description']+'</p></div><div class="box-footer no-padding"><ul class="nav nav-stacked"><li><a href="#">Projects<span class="pull-right badge bg-blue">31</span></a></li></ul></div></div><!--/.widget-user--></div>');
+                        rooms.append('<div class="col-md-4"><div class="box box-widget widget-user-2"><div class="widget-user-header bg-'+ randombgcolor() +'"><div class="widget-user-image"><img class="img-circle" src="'+schoolLink+'/'+imgLink+'" alt="UserAvatar"></div><!--/.widget-user-image--><h3 class="widget-user-username">'+ returnedArray['name']+'</h3><h5 class="widget-user-desc">'+ returnedArray['space']+'</h5><p class="widget-user-desc">'+ returnedArray['description']+'</p></div><div class="box-footer no-padding"><ul class="nav nav-stacked"><li><a href="#">Projects<span class="pull-right badge bg-blue">31</span></a></li></ul></div></div><!--/.widget-user--></div>');
 
                         })
                         .catch(function (error) {

@@ -528,6 +528,8 @@
                         </div>
                       </div>
 
+
+
                     </div>
 
 
@@ -537,7 +539,40 @@
                           <h3 class="text-center">Matiére</h3>
                         </div>
                       </div>
+
+
                       <div class="row">
+                        <div class="col-lg-3 col-xs-6">
+                          <!-- small box -->
+                          <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+                            <div class="inner">
+                              <h3>U</h3>
+                              <p><a href="{{ route('unities.list') }}">Unities</a></p>
+                            </div>
+                            <div class="icon">
+                              <i class="fa fa-list-ol"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">Unity <i class="fa fa-arrow-circle-right"></i></a>
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">
+                              <div class="inner">
+                                <h3>U</h3>
+                                <p><a href="{{ route('subunities.list') }}">Subnities</a></p>
+                              </div>
+                              <div class="icon">
+                                <i class="fa fa-list-ol"></i>
+                              </div>
+                              <a href="#" class="small-box-footer">Unity <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                          </div>
+
+
                         <div class="col-lg-3 col-xs-6">
                           <!-- small box -->
                           <div class="small-box bg-{{ ArrayHolder::backgroundColors()  }}">

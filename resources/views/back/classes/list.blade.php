@@ -166,6 +166,53 @@ The Main Configuration Of the web application
 
 
 
+
+
+    <div class="row">
+      <div class="col-xs-12">
+              <h3>Notes Avec unité</h3>
+
+              @foreach($classes as $class)
+
+                      <div class="col-lg-4 col-xs-6">
+                            <div class="info-box bg-yellow ">
+                              <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+
+                              <div class="info-box-content">
+                                <span class="info-box-text">{{ $class->name }}</span>
+                                <span class="info-box-number">5,200</span>
+
+                                <div class="progress">
+                                  <div class="progress-bar" style="width: 50%"></div>
+                                </div>
+                                <span class="progress-description">
+                                      <a href="{{ route('notes.final-by-class', $class->id ) }}" >Notes<i class="fa fa-arrow-circle-right"></i></a>
+                                    </span>
+                              </div>
+                              <!-- /.info-box-content -->
+                            </div>
+                      </div>
+
+              @endforeach
+      </div>
+    </div>
+    <hr />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="row">
 <div class="col-xs-12">
         <h3>Notes</h3>

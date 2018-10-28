@@ -17,8 +17,10 @@ class Note extends Model
     	"teatcher_id",
     	"student_id",
     	"seen",
+      "test_passed_fine",
     	"note",
-    	'done_minutes'
+    	'done_minutes',
+      'answers'
     ];
 
     public function testyearsubclass()
@@ -29,6 +31,11 @@ class Note extends Model
     public function teatcher()
     {
         return $this->belongsTo('App\User', 'teatcher_id');
+    }
+
+    public function student()
+    {
+        return $this->belongsTo('App\User', 'student_id');
     }
 
     public function subject()

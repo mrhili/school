@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model
 {
     //
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'subunity_id'];
 
     public function the_classes()
     {
@@ -25,5 +25,12 @@ class Subject extends Model
     }
 
     //foreach($s->the_classes as $t){echo $t->pivot->parameter;  }
+
+
+    public function subunity()
+    {
+        return $this->belongsTo('App\Subunity');
+    }
+
 
 }

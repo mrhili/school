@@ -77,7 +77,7 @@ The Main Configuration Of the web application
                 <p>roof category: <span class="cat_roof"></span></p>
                 <p>discription: <span class="disc"></span></p>
                 <p>number vues: <span class="vue"></span></p>
-                <div>status: 
+                <div>status:
                 <select class="status">
                   <option value="1">Valide</option>
                   <option value="2">Not valide</option>
@@ -209,9 +209,9 @@ $(function() {
                   console.log(error);
                 });
 
-            
 
-            
+
+
           });
         },
         ajax: '{!! route('ads.datatable') !!}',

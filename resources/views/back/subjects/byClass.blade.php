@@ -90,6 +90,8 @@
             </div>
             <div class="box-footer no-padding">
               <ul class="nav nav-stacked">
+                <li><a href="{{ route('subjects.show-linked',[$class->id,$subject->id]) }}">Voire</a></li>
+
                 <li><a href="{{ route('tests.types', [$class->id,$subject->id]) }}">Click pour ajouter un test <span class="pull-right badge bg-aqua">+</span></a></li>
 
                 <li><a href="{{ route('tests.add-linked-linking',[$class->id,$subject->id]) }}">Clicker ici pour linker un test <span class="pull-right badge bg-green">V</span></a></li>
@@ -102,6 +104,8 @@
                   <li><a href="{{ route('preperfications.mine-by-sub-class',[$class->id,$subject->id]) }}">Ajouter une preperfication <span class="pull-right badge bg-green">+</span></a></li>
                   <li><a href="{{ route('preperfications.mine-by-sub-class',[$class->id,$subject->id]) }}">Ajouter des Notes <span class="pull-right badge bg-green">+</span></a></li>
                 @endif
+
+
               </ul>
 
 

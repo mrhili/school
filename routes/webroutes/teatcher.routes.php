@@ -4,8 +4,35 @@ Route::get('/profile-students/{class}', 'StudentController@profileByClass')->nam
 
 Route::get('/docs-teatcher/{selected?}', 'TeatcherController@docs')->name('teatchers.docs');
 
+/*******************************NOTE***********************************/
+
+
+Route::get('/notes-final-by-class/{class}', 'NoteController@finalByClass')->name('notes.final-by-class');
+Route::get('/data-notes-final-by-class/{class}', 'NoteController@finalByClassData')->name('notes.final-data-by-class');
+
+Route::get('/notes-by-student/{student}', 'NoteController@byStudent')->name('notes.by-student');
+
+Route::get('/notes-by-unity/{student}/{unity}', 'NoteController@byunity')->name('notes.by-unity');
+
+Route::get('/notes-by-subunity/{student}/{subunity}', 'NoteController@bysubunity')->name('notes.by-subunity');
+Route::get('/notes-by-subject/{student}/{subject}', 'NoteController@bysubject')->name('notes.by-subject');
+
+
 Route::get('/notes-by-class/{class}', 'NoteController@byClass')->name('notes.by-class');
 Route::get('/data-notes-by-class/{class}', 'NoteController@databyClass')->name('notes.data-by-class');
+
+Route::get('/notes-by-tysc/{tysc}', 'NoteController@byTYSC')->name('notes.by-tysc');
+Route::get('/data-notes-by-tysc/{tysc}', 'NoteController@byTYSCData')->name('notes.data-by-tysc');
+
+
+Route::get('/modify-note/{note}', 'NoteController@modify')->name('notes.modify');
+Route::post('/store-info/{note}', 'NoteController@storeInfo')->name('notes.store-info');
+//STORE IMAGES
+Route::post('/note-store-images/{note}', 'FileController@storeNoteImages')->name('files.store-note-images');
+Route::post('/note-drop-image/{note}', 'FileController@dropNoteImage')->name('files.drop-note-image');
+
+
+
 
 Route::get('/data-students-by-teatcher/{teatcher}', 'StudentController@dataByTeatcher')->name('students.by-teatcher');
 
@@ -29,6 +56,13 @@ Route::post('/delete-preperfication', 'PreperficationController@delete')->name('
 
 Route::post('/preperfication-switch-present/{preperfication}', 'PreperficationController@switchPresent')->name('preperfications.switch-present');
 Route::post('/preperfication-switch-get-it/{preperfication}', 'PreperficationController@switchGetIt')->name('preperfications.switch-get-it');
+
+
+/***********************Unity_Subunities*****************/
+
+Route::get('/get-subunities-from/{unity}', 'SubunityController@getFromUnity')->name('subunities.get-from-unity');
+
+
 
 /***********************RULE****************************************/
 
@@ -160,6 +194,13 @@ Route::get('/data-check-fournitures/{class}', 'FourniturationController@dataChec
 /***********************SUBJECT*********************/
 
 Route::get('/teatcher-subjects-by-class/{class}', 'SubjectController@teatcherSubjectsByClass')->name('subjects.teatcher-by-class');
+
+/*******************************SUBJECT LINKED********************/
+
+Route::get('/show-linked-subject/{class}/{subject}', 'SubjectController@showLinked')->name('subjects.show-linked');
+
+Route::get('/data-tests-in-subclass/{subclass}', 'SubjectclassController@tests')->name('subjectclasses.tests');
+Route::get('/data-classes-in-subclass/{subclass}', 'SubjectController@courses')->name('subjectclasses.courses');
 
 
 /**********************************Subject and course linking******************************************************/

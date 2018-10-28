@@ -11,7 +11,7 @@
 
 @section('content')
 
-{!! Form::open(['route' => 'tests.store-editor', 'files' => true, 'method' => 'post' ,'class' => 'form-horizontal']) !!}
+{!! Form::open(['route' => 'tests.store-editor', 'method' => 'post' ,'class' => 'form-horizontal']) !!}
 
 @component('back.components.plain')
 

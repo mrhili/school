@@ -426,6 +426,8 @@ class Relation {
     $year = Session::get('yearId');
 
     $students = User::where('the_class_id', $test->subjectclass->the_class->id )->where('role', 1)->get();
+
+    //dd( $students );
     foreach( $students as $student){
 
       Note::create([

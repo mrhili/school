@@ -64,7 +64,9 @@ class CreateNotesTable extends Migration
 
             $table->float('note')->nullable();
 
-            $table->string('done_minutes');
+            $table->string('done_minutes')->nullable();
+
+            $table->text('answers')->nullable();
 
             $table->timestamps();
         });

@@ -59,16 +59,19 @@ class Pics {
 
             }
 
-            if( file_exists( $path.$img->name.'.'.$img->ext ) ){
-
-              return asset( $asset_path.$img->name.'.'.$img->ext );
-
-            }else{
-
-              return asset('/images/config/'. Setting::getConfig( 'no-image' ) );
-            }
 
 
+
+          }
+
+
+          if( file_exists( $path.$img->name.'.'.$img->ext ) ){
+
+            return asset( $asset_path.$img->name.'.'.$img->ext );
+
+          }else{
+
+            return asset('/images/config/'. Setting::getConfig( 'no-image' ) );
           }
 
 
@@ -92,14 +95,9 @@ class Pics {
 
               $path.= 'questions/';
 
-              $fill = json_decode( $model->body , true);
-
             }elseif( $add_info == 'answers' ){
 
-
               $path.= 'answers/';
-
-              $fill = json_decode( $model->answers , true);
 
             }
           }
@@ -125,42 +123,13 @@ class Pics {
                   $fill = json_decode( $model->body , true);
 
 
-                }elseif( $add_info == 'answers' ){
-
+                }elseif($add_info == 'answers'){
 
                   $fill = json_decode( $model->answers , true);
 
                 }
 
-                ksort($fill);
-
-                if(in_array($file->id, $fill) ){
-
-                  $sliced_item = array_search ( $file->id , $fill );
-
-                  if( array_key_exists($sliced_item, $fill) ){
-
-                    unset( $fill[ $sliced_item ] );
-
-                  }
-
-                  foreach ($fill as $key => $value) {
-                    // code...
-                    if( $key > $sliced_item ){
-
-                      $fill[ $key -1 ] = $value;
-
-                    }
-
-                  }
-
-                  ksort($fill);
-
-
-                }
-
-
-
+                Application::dropSort($fill , $file->id );
 
 
                 if($add_info == 'questions'){
@@ -179,6 +148,13 @@ class Pics {
                 $model->save();
 
                 return response()->json(['message' => 'File successfully delete'], 200);
+
+
+              }elseif($model_type == 1){
+
+                $fill = json_decode( $model->answers , true)? [] :  json_decode( $model->answers , true) ;
+
+                Application::dropSort($fill , $file->id );
 
 
               }
@@ -225,6 +201,10 @@ class Pics {
             $fill = json_decode( $model->answers , true);
 
           }
+        }elseif( $model_type == 1 ){
+
+          $fill = is_array ( json_decode( $model->answers , true) )? json_decode( $model->answers , true) : []   ;
+
         }
 
 
@@ -285,9 +265,14 @@ class Pics {
 
                   }
 
-                  $model->save();
+
+                }elseif( $model_type == 1 ){
+
+                  $model->answers = json_encode( $fill );
+
                 }
-                /////////////////
+
+                $model->save();
 
 
 
