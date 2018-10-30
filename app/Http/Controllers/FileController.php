@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 use App\{
   File,
   Test,
-  Note
+  Note,
+  Post
 };
 use Image;
 use ArrayHolder;
 use CommonPics;
+use Auth;
 
 class FileController extends Controller
 {
@@ -23,6 +25,30 @@ class FileController extends Controller
         $this->files_path = public_path('/images');
     }
 
+    public function storePostImages(Request $request, $post = null ){
+
+        if($post != null){
+
+          $post = Post::find( $post );
+
+          CommonPics::storeAdvImages($request, 2 , $post );
+
+        }else{
+
+          $post = Post::create([
+            'title' => 'Titre',
+            'body' => 'Text',
+            'type' => 2,
+            'role' => 6,
+            'user_id' => Auth::id(),
+          ]);
+
+          CommonPics::storeAdvImages($request, 2 , $post );
+        }
+
+
+
+    }
 
     public function storeNoteImages(Request $request, Note $note ){
 

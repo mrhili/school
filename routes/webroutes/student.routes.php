@@ -6,7 +6,12 @@ Route::get('/ajouter-membre-famille/{student?}', 'StudentController@addParent')-
 Route::post('/ajouter-membre-famille-post/{student}', 'StudentController@addParentPost')->name('students.add-parent-post');
 /************************************************/
 
+Route::get('/new-post', 'PostController@create')->name('posts.create');
+Route::post('/post-store-images/{post?}', 'FileController@storePostImages')->name('files.store-post-image');
+Route::post('/confirm-post/{post}', 'PostController@confirm')->name('posts.confirm');
 
+
+///////////////////////////////////////////////
   Route::post('/change-info/{user}', 'UserController@changeInfo')->name('users.change-info');
 
   Route::get('/my-profile-as-student', 'StudentController@myProfile')->name('students.my-profile');

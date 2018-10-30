@@ -249,5 +249,19 @@ class User extends Authenticatable
       return $this->hasMany('App\Preperfication', 'student_id');
     }
 
+    public function teams()
+    {
+        return $this->belongsToMany('App\Team')->withPivot('capitan');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+
+    public function appears()
+    {
+        return $this->belongsToMany('App\Post');
+    }
 
 }

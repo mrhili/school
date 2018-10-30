@@ -30,6 +30,48 @@ use Carbon;
 use Auth;
 class Holder {
 
+  public static function post_types($item = null ){
+
+      $types = [
+          'Pas confirmé',
+          'Rien attaché',
+          'Images',
+          'Video online',
+          'Lien'
+
+      ];
+
+
+      if( $item === null){
+          return $types;
+      }else{
+          return $types[$item];
+      }
+
+  }
+
+  public static function competition_types($item = null ){
+
+      $types = [
+          'KO',
+          //leag is when everyone debate with everyone and how many he will beat
+          //maybe it turn to knocout in  equal situation
+          'League',
+          'Jujed',
+          //rab7in kayb9aw f jiha w lkhasrin f jiha wrab7 flkhasrin hasou yghlab rab7 jouj
+          'Double',
+          'Triple'
+      ];
+
+
+      if( $item === null){
+          return $types;
+      }else{
+          return $types[$item];
+      }
+
+  }
+
 
   public static function bootstrapClasses( ){
 
@@ -52,7 +94,8 @@ class Holder {
 
       $types = [
           ['model' => 'Test', 'folder' => 'tests'],
-          ['model' => 'Note', 'folder' => 'notes']
+          ['model' => 'Note', 'folder' => 'notes'],
+          ['model' => 'Post', 'folder' => 'posts']
       ];
 
       if( $item === null){

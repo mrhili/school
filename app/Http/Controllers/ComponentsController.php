@@ -7,4 +7,10 @@ use Illuminate\Http\Request;
 class ComponentsController extends Controller
 {
     //
+
+
+
+
+
+
 }

@@ -84,7 +84,7 @@ class HomeController extends Controller
 
             Alert::html('<i>Bienvenue</i>',"
                 <b>Tu peut voire le documentaire</b> <a class='btn btn-success' href='". route(ArrayHolder::roles_routing($user->role).'.docs') ."'>ICI</a></b>.",
-                'success')->autoClose(500000);
+                'success')->autoClose(6000);
 
 
             return redirect()->route(  ArrayHolder::roles_routing($user->role).'.home');

@@ -12,6 +12,21 @@ Route::get('/secretaria-home', 'SecretariaController@home')->name('secretarias.h
 Route::get('/printable-sheet-new-student-with-parent/{student}/{parent}', 'PrintableController@printableSheeNewStudentWithParent')->name('printables.new-student-with-parent');
 
 Route::get('/printable-sheet-new-worker/{worker}', 'PrintableController@printableSheeNewWorker')->name('printables.new-worker');
+
+/*******************************disciplineS******************************/
+Route::get('/disciplines', 'disciplineController@list')->name('disciplines.list');
+Route::post('/store-discipline', 'disciplineController@store')->name('disciplines.store');
+
+
+/*******************************Competitions******************************/
+Route::get('/competitions', 'CompetitionController@list')->name('competitions.list');
+Route::post('/store-competition/{discipline}', 'CompetitionController@store')->name('competitions.store');
+
+/*******************************Teams******************************/
+Route::get('/teams', 'TeamController@list')->name('teams.list');
+Route::post('/store-team', 'TeamController@store')->name('teams.store');
+
+
 /*********************************CLASSES*************************************************************/
 
 /**************************BILING******************************/

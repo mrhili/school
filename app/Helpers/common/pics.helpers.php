@@ -205,6 +205,10 @@ class Pics {
 
           $fill = is_array ( json_decode( $model->answers , true) )? json_decode( $model->answers , true) : []   ;
 
+        }elseif( $model_type == 2 ){
+
+          $fill = is_array ( json_decode( $model->images , true) )? json_decode( $model->images , true) : []   ;
+
         }
 
 
@@ -222,10 +226,19 @@ class Pics {
             $name = ArrayHolder::modelTypes4file( $model_type )['model'] . sha1( date('YmdHis') ) . str_random(15);
 
             $save_name = $name . '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file);
 
-            $img = Image::make($file)
-                ->resize(2481, 3507)
-                ->save( $path . $save_name);
+            if($model_type == 0 || $model_type == 1 ){
+              $img->resize(2481, 3507);
+            }else{
+              $img->resize(800, null, function ($constraint) {
+                  $constraint->aspectRatio();
+              });
+            }
+
+            $img->save( $path . $save_name);
+
+
 
             if( $img ){
 
@@ -270,10 +283,13 @@ class Pics {
 
                   $model->answers = json_encode( $fill );
 
+                }elseif( $model_type == 2 ){
+
+                  $model->images = json_encode( $fill );
+
                 }
 
                 $model->save();
-
 
 
                 return response()->json([

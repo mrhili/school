@@ -194,6 +194,8 @@
   </div>
 
 
+
+
 <h2 class="text-center">Personelle</h2>
 
 
@@ -250,6 +252,106 @@
 </div>
 
 <hr>
+
+
+
+
+<h2 class="text-center">Partager avec le monde</h2>
+
+
+<div class="row">
+
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>D</h3>
+              <p><a href="{{ route('posts.create') }}">create post</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('posts.index') }}" class="small-box-footer">posts <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+</div>
+
+<hr>
+
+
+
+
+<h2 class="text-center">Entertenement</h2>
+
+
+<div class="row">
+
+
+
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>D</h3>
+              <p><a href="{{ route('disciplines.list') }}">disciplines</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('disciplines.list') }}" class="small-box-footer">disciplines <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>C</h3>
+              <p><a href="{{ route('competitions.list') }}">Competitions</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('competitions.list') }}" class="small-box-footer">Competitions <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>T</h3>
+              <p><a href="{{ route('teams.list') }}">Teams</a></p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a href="{{ route('teams.list') }}" class="small-box-footer">Teams <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+
+
+
+
+</div>
+
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
 <h2 class="text-center">Les gens</h2>
       <!-- Small boxes (Stat box) -->
 

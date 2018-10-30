@@ -4,35 +4,42 @@
     <section class="sidebar">
 
       <!-- Sidebar user panel (optional) -->
-      @if(Auth::check())
+
         <div class="user-panel">
+        @if(Auth::check())
           <div class="pull-left image">
             {!! Html::image(CommonPics::ifImg( ArrayHolder::roles_routing( Auth::user()->role ) ,  Auth::user()->img ),'User Image', ['class' => 'img-circle'] ) !!}
           </div>
           <div class="pull-left info">
-            @if(Auth::check())
-              <p> {{ Auth::user()->name }} {{ Auth::user()->last_name }} </p>
-            @else
-
-            @endif
-            <!-- Status -->
-            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-            <br />
+            <p> {{ Auth::user()->name }} {{ Auth::user()->last_name }} </p>
           </div>
+        @endif
+      </div>
+
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
         </div>
-      @endif
+      </form>
+
 
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
+        <li class="header">LINKS</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="{{ (Route::is('home')? 'active': '') }}"><a href="{{route('home')}}"><i class="fa fa-link"></i> <span>Home</span></a></li>
-        <li><a href="{{ route('my-profile') }}"><i class="fa fa-link"></i> <span>Mon profile</span></a></li>
+        <li><a href="{{ route('posts.index') }}"><i class="fa fa-newspaper-o"></i> <span>Nouvauté</span></a></li>
+        <li class="{{ (Route::is('home')? 'active': '') }}"><a href="{{route('home')}}"><i class="fa fa-tachometer"></i> <span>Home</span></a></li>
+        <li><a href="{{ route('my-profile') }}"><i class="fa fa-user"></i> <span>Mon profile</span></a></li>
 
-        <li><a href="{{ route('docs') }}"><i class="fa fa-link"></i> <span>Documentaire</span></a></li>
-        <li><a href="{{ route('games.index') }}"><i class="fa fa-link"></i> <span>Jeux</span></a></li>
-        <li><a href="{{ route('applications.index') }}"><i class="fa fa-link"></i> <span>Application</span></a></li>
+        <li><a href="{{ route('docs') }}"><i class="fa fa-video-camera"></i> <span>Documentaire</span></a></li>
+        <li><a href="{{ route('games.index') }}"><i class="fa fa-gamepad"></i> <span>Jeux</span></a></li>
+        <li><a href="{{ route('applications.index') }}"><i class="fa fa-android"></i> <span>Application</span></a></li>
 
       </ul>
       <!-- /.sidebar-menu -->

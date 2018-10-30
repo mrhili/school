@@ -10,3 +10,14 @@ Route::get('/user-profile/{user}', 'UserController@profile')->name('users.profil
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/user-home', 'UserController@home')->name('users.home');
+
+
+
+Route::get('/docs-user/{selected?}', 'UserController@docs')->name('users.docs');
+
+
+
+/***************POST******************************/
+
+
+Route::get('/posts', 'PostController@index')->name('posts.index');
