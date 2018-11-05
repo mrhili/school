@@ -30,6 +30,8 @@ class CreatePostsTable extends Migration
 
             $table->text('images')->nullable();
 
+            $table->boolean('confirmed')->default(false);
+
             $table->timestamps();
         });
     }

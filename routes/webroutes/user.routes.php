@@ -1,5 +1,12 @@
 <?php
 
+
+
+
+Route::post('/add-comment/{type}/{id}', 'CommentController@add')->name('comments.add');
+
+
+///////////////////////////
 Route::get('/profile', 'HomeController@profile')->name('profile');
 Route::get('/my-profile', 'HomeController@myProfile')->name('my-profile');
 Route::get('/docs/{selected?}', 'HomeController@docs')->name('docs');

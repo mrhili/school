@@ -25,28 +25,17 @@ class FileController extends Controller
         $this->files_path = public_path('/images');
     }
 
-    public function storePostImages(Request $request, $post = null ){
+    public function storePostImages(Request $request, Post $post ){
 
-        if($post != null){
+        CommonPics::storeAdvImages($request, 2 , $post );
 
-          $post = Post::find( $post );
-
-          CommonPics::storeAdvImages($request, 2 , $post );
-
-        }else{
-
-          $post = Post::create([
-            'title' => 'Titre',
-            'body' => 'Text',
-            'type' => 2,
-            'role' => 6,
-            'user_id' => Auth::id(),
-          ]);
-
-          CommonPics::storeAdvImages($request, 2 , $post );
-        }
+    }
 
 
+    public function dropPostImage(Request $request, Post $post )
+    {
+
+      CommonPics::dropAdvImage($request, 2 , $post);
 
     }
 

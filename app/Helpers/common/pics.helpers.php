@@ -157,6 +157,11 @@ class Pics {
                 Application::dropSort($fill , $file->id );
 
 
+              }elseif( $model_type == 2 ){
+                $fill = json_decode( $model->images , true)? [] :  json_decode( $model->images , true) ;
+
+                Application::dropSort($fill , $file->id );
+
               }
 
 

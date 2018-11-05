@@ -267,7 +267,7 @@
           <div class="small-box bg-green">
             <div class="inner">
               <h3>D</h3>
-              <p><a href="{{ route('posts.create') }}">create post</a></p>
+              <p><a href="{{ route('posts.types') }}">create post</a></p>
             </div>
             <div class="icon">
               <i class="fa fa-file"></i>

@@ -12,6 +12,7 @@
         "caouecs/laravel-lang": "~3.0",
         "ckeditor/ckeditor": "^4.10",
         "cyber-duck/laravel-excel": "^1.2",
+        "faustbrian/laravel-commentable": "^3.1",
         "fideloper/proxy": "~3.3",
         "intervention/image": "^2.4",
         "kalnoy/nestedset": "^4.3",

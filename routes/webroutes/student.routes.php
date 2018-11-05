@@ -5,9 +5,22 @@ Route::get('/docs-student/{selected?}', 'StudentController@docs')->name('student
 Route::get('/ajouter-membre-famille/{student?}', 'StudentController@addParent')->name('students.add-parent');
 Route::post('/ajouter-membre-famille-post/{student}', 'StudentController@addParentPost')->name('students.add-parent-post');
 /************************************************/
+Route::post('/init-post/{type}', 'PostController@init')->name('posts.init');
+Route::post('/confirm-post/{post}', 'PostController@confirm')->name('posts.confirm');
 
-Route::get('/new-post', 'PostController@create')->name('posts.create');
-Route::post('/post-store-images/{post?}', 'FileController@storePostImages')->name('files.store-post-image');
+Route::get('/new-post/{type}', 'PostController@create')->name('posts.create');
+Route::get('/new-text-post', 'PostController@createText')->name('posts.create-text');
+Route::post('/store-text-post', 'PostController@postText')->name('posts.post-text');
+Route::get('/new-image-post', 'PostController@createImage')->name('posts.create-image');
+Route::post('/post-store-images/{post}', 'FileController@storePostImages')->name('files.store-post-images');
+Route::post('/post-drop-image/{post}', 'FileController@dropPostImage')->name('files.drop-post-image');
+Route::get('/new-video-post', 'PostController@createVideo')->name('posts.create-video');
+Route::post('/store-video-post', 'PostController@postVideo')->name('posts.post-video');
+Route::get('/new-link-post', 'PostController@createLink')->name('posts.create-link');
+Route::post('/store-link-post', 'PostController@postLink')->name('posts.post-link');
+
+Route::get('/post-types', 'PostController@types')->name('posts.types');
+
 Route::post('/confirm-post/{post}', 'PostController@confirm')->name('posts.confirm');
 
 

@@ -30,19 +30,39 @@ use Carbon;
 use Auth;
 class Holder {
 
-  public static function post_types($item = null ){
+  public static function post_roles( $item = null ){
 
       $types = [
-          'Pas confirmé',
-          'Rien attaché',
-          'Images',
-          'Video online',
-          'Lien'
+          'Tout',
+          'Les eleves et leurs parent et plus',
+          'Les parents et les cadres',
+          'Les maitre',
+          'La secretaria',
+          'Les directeurs',
+          'Les masters'
+      ];
+
+
+      if( $item == null){
+          return $types;
+      }else{
+          return $types[$item];
+      }
+
+  }
+
+  public static function post_types( $item = null ){
+
+      $types = [
+          [ 'font', 'Rien attaché'],
+          [ 'picture-o', 'Images'],
+          [ 'video-camera', 'Video online'],
+          [ 'link', 'Lien']
 
       ];
 
 
-      if( $item === null){
+      if( $item == null){
           return $types;
       }else{
           return $types[$item];
