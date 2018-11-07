@@ -596,6 +596,9 @@ Exercices
 
 
 
+
+
+
 @endsection
 
 @section('datatableScript')

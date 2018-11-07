@@ -37,7 +37,7 @@
         <li class="{{ (Route::is('home')? 'active': '') }}"><a href="{{route('home')}}"><i class="fa fa-tachometer"></i> <span>Home</span></a></li>
         <li><a href="{{ route('my-profile') }}"><i class="fa fa-user"></i> <span>Mon profile</span></a></li>
 
-        <li><a href="{{ route('docs') }}"><i class="fa fa-video-camera"></i> <span>Documentaire</span></a></li>
+        <li><a href="{{ route('docs') }}"><i class="fa fa-video-camera"></i> <span>Videos</span></a></li>
         <li><a href="{{ route('games.index') }}"><i class="fa fa-gamepad"></i> <span>Jeux</span></a></li>
         <li><a href="{{ route('applications.index') }}"><i class="fa fa-android"></i> <span>Application</span></a></li>
 

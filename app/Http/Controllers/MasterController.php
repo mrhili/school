@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 
-use App\{Ruleholder};
+use App\{Ruleholder, User};
 
 class MasterController extends Controller
 {
@@ -75,7 +75,9 @@ class MasterController extends Controller
 
         $holders = Ruleholder::where('user_id', Auth::id())->get();
 
-        return view('back.masters.my-profile',compact('holders', 'passInfo', 'user', 'passChangeInfo'));
+        $posts = Auth::user()->appears()->paginate(10);
+
+        return view('back.masters.my-profile',compact('holders', 'passInfo', 'user', 'passChangeInfo', 'posts'));
     }
 
 
@@ -100,10 +102,12 @@ class MasterController extends Controller
 
       $holders = Ruleholder::where('user_id', Auth::id())->get();
 
+      $posts = $user->appears()->paginate(10);
+
 
       /*****************/
 
-      return view('back.masters.profile', compact('holders', 'passInfo', 'user', 'passChangeInfo'));
+      return view('back.masters.profile', compact('posts','holders', 'passInfo', 'user', 'passChangeInfo'));
 
     }
 }

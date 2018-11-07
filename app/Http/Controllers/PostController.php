@@ -15,7 +15,11 @@ class PostController extends Controller
 {
 
   public function createImage(){
-    return view('back.posts.create-images');
+
+      $users = User::get(['name', 'id'])->pluck('name', 'id')->toArray();
+
+
+    return view('back.posts.create-images', compact('users') );
   }
 
   public function confirm(Request $request, Post $post){
@@ -29,6 +33,8 @@ class PostController extends Controller
       $post->confirmed = true;
 
       $post->save();
+
+      $post->appears()->attach( $request->users );
 
       return redirect()->route('posts.index');
 
@@ -59,7 +65,11 @@ class PostController extends Controller
 
 
   public function createLink(){
-    return view('back.posts.create-video');
+
+    $users = User::get(['name', 'id'])->pluck('name', 'id')->toArray();
+
+
+    return view('back.posts.create-link', compact('users') );
   }
 
   public function postLink(Request $request){
@@ -79,6 +89,8 @@ class PostController extends Controller
 
     if($post){
 
+      $post->appears()->attach( $request->users );
+
       return redirect()->route('posts.index');
 
     }
@@ -91,7 +103,11 @@ class PostController extends Controller
 
 
     public function createVideo(){
-      return view('back.posts.create-video');
+
+      $users = User::get(['name', 'id'])->pluck('name', 'id')->toArray();
+
+
+      return view('back.posts.create-video', compact('users'));
     }
 
     public function postVideo(Request $request){
@@ -111,6 +127,8 @@ class PostController extends Controller
 
       if($post){
 
+        $post->appears()->attach( $request->users );
+
         return redirect()->route('posts.index');
 
       }
@@ -118,7 +136,10 @@ class PostController extends Controller
     }
 
     public function createText(){
-      return view('back.posts.create-text');
+
+      $users = User::get(['name', 'id'])->pluck('name', 'id')->toArray();
+
+      return view('back.posts.create-text', compact('users') );
     }
     public function postText(Request $request){
 
@@ -135,6 +156,8 @@ class PostController extends Controller
 
 
       if($post){
+
+        $post->appears()->attach( $request->users );
 
         return redirect()->route('posts.index');
 
@@ -174,7 +197,7 @@ class PostController extends Controller
     public function index(){
 
       $posts = Post::whereConfirmed(true)
-        ->where('role' , '<=' , Auth::user()->role )->get();
+        ->where('role' , '<=' , Auth::user()->role )->orderBy('created_at', 'DESC')->paginate(10);
 
       return view('back.posts.index', compact('posts'));
 

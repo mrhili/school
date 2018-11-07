@@ -10,89 +10,33 @@
 
 @section('content')
 
-  @foreach($posts as $post)
 
-      @component('back.components.plain', ['class' => ''])
 
-        @slot('titlePlain')
-          {{$post->title}}
-        @endslot
+  @component('back.components.plain')
 
-        @if($post->type == 1)
-          <div class="row margin-bottom">
-            <div class="lightgallery" id="lightgallery-{{ $post->id }}">
-              @foreach( json_decode( $post->images ) as $img )
-                @php
-                  $src = CommonPics::getAdvImage( 2 , $img, 'questions' );
-                @endphp
+    @slot('titlePlain')
+      Ajouter un post
+    @endslot
 
-                <a class="col-md-6" href="{{ $src }}">
-                    <img class="img-responsive lazy" src="{{ $src }}" />
-                </a>
-              @endforeach
+    @if(Auth::check())
 
-            </div>
-          </div>
+      @if(Auth::user()->role > 0)
+        <a class="btn btn-primary" href="{{ route('posts.types')}}"><i class="fa fa-plus"></i> Ajouter un post</a>
+      @endif
+
+    @endif
 
 
 
-
-        @elseif($post->type == 2)
-          <div class="video" data-video="{{ $post->link }}">
-
-          </div>
+  @endcomponent
 
 
-        @elseif($post->type == 3)
-          <a class="btn btn-info" href="{{ $post->link }}">Voire lien</a>
-        @endif
 
-        <div>
-          {{$post->body}}
-        </div>
+  @component('back.components.posts', compact('posts'))
 
-        <hr />
-          @foreach( $post->comments as $kc => $comment )
-            <blockquote>
-              {{ $comment->body }}
-            </blockquote>
-
-            <hr />
-          @endforeach
-
-        @slot('footerPlain')
-          <div class="user-block">
-            <img class="img-circle img-bordered-sm" src="{{ CommonPics::ifImg( ArrayHolder::roles_routing( $post->created_by->role ) ,  $post->created_by->img ) }}" alt="User Image">
-            <span class="username">
-              <a href="#">{{ $post->created_by->full_name   }}</a>
-
-            </span>
-            <span class="description">{{ $post->created_at   }}</span>
-          </div>
-
-          <ul class="list-inline">
-            <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-            </li>
-            <li class="pull-right">
-              <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                (5)</a></li>
-          </ul>
-          <form class="form-horizontal" data-id="{{ $post->id }}" id="form-{{ $post->id }}">
-            <div class="form-group margin-bottom-none">
-              <div class="col-sm-9">
-                <input class="form-control input-sm comment" placeholder="Reponse" data-id="{{ $post->id }}" id="comment-{{ $post->id }}">
-              </div>
-              <div class="col-sm-3">
-                <button type="submit" class="btn btn-primary pull-right btn-block btn-sm btn-comment"  data-id="{{ $post->id }}" id="btn-comment-{{ $post->id }}">Send</button>
-              </div>
-            </div>
-          </form>
-        @endslot
+  @endcomponent
 
 
-      @endcomponent
-
-  @endforeach
 
 @endsection
 
@@ -139,34 +83,12 @@ $('.video').each(function( index, elem ) {
   }
 });
 
-
-$(document).ready(function() {
-  $('.btn-comment').on('click', function( e ){
-    e.preventDefault();
-    var $element = $(this);
-    var $input = $('#comment-'+$(this).data('id'));
-    var $inputValue = $input.val();
-
-    if($inputValue.length > 0){
-      axios.post('/add-comment/post/'+ $(this).data('id'),{
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        title : $inputValue,
-        body: $inputValue
-      })
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log( error );
-      })
-    }else{
-      swal('empty', 'empty', 'error')
-    }
-
-  });
-});
-
 </script>
+
+
+@component('back.components.comment_system4posts')
+
+@endcomponent
+
+
 @endsection

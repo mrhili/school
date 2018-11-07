@@ -388,10 +388,52 @@
     </div>
 
 
+    <div class="col-md-6">
+      @component('back.components.plain')
 
+        @slot('titlePlain')
+
+          Hangman
+
+        @endslot
+
+        <a href ="{{ route('games.hangman') }}">
+          <img src="{{ asset('games/hangman/hangman.jpg') }}" class="img-responsive" alt="Cinque Terre">
+        </a>
+        @slot('footerPlain')
+
+          <a class="btn btn-primary pull-right" href="{{ route('games.hangman') }}">Jouer</a>
+
+        @endslot
+
+
+      @endcomponent
+    </div>
 
   </div>
 
+  <div class="col-md-6">
+    @component('back.components.plain')
 
+      @slot('titlePlain')
+
+        Batleship table
+
+      @endslot
+
+      <a href ="{{ route('games.battleship_table') }}">
+        <img src="{{ asset('games/battleship_table/battleship_table.jpg') }}" class="img-responsive" alt="Cinque Terre">
+      </a>
+      @slot('footerPlain')
+
+        <a class="btn btn-primary pull-right" href="{{ route('games.battleship_table') }}">Jouer</a>
+
+      @endslot
+
+
+    @endcomponent
+  </div>
+
+</div>
 
 @endsection

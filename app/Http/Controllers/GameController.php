@@ -112,6 +112,16 @@ class GameController extends Controller
 
     }
 
+    public function hangman(){
 
+      return view('games.hangman');
+
+    }
+
+    public function battleship_table(){
+
+      return view('games.battleship_table');
+
+    }
 
 }

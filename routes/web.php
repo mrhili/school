@@ -61,6 +61,9 @@ Route::get('/games/front_face', 'GameController@front_face')->name('games.front_
 Route::get('/games/js_quiz', 'GameController@js_quiz')->name('games.js_quiz');
 Route::get('/games/quiz_collector', 'GameController@quiz_collector')->name('games.quiz_collector');
 Route::get('/games/simple_quiz', 'GameController@simple_quiz')->name('games.simple_quiz');
+Route::get('/games/hangman', 'GameController@hangman')->name('games.hangman');
+Route::get('/games/battleship_table', 'GameController@battleship_table')->name('games.battleship_table');
+
 
 
 /***************/
@@ -72,6 +75,12 @@ Route::get('/app/morse', 'ApplicationController@morse')->name('applications.mors
 Route::get('/app/triangle', 'ApplicationController@triangle')->name('applications.triangle');
 Route::get('/app/quiz', 'ApplicationController@quiz')->name('applications.quiz');
 Route::get('/app/math_quiz', 'ApplicationController@math_quiz')->name('applications.math_quiz');
+Route::get('/app/periodic_table', 'ApplicationController@periodic_table')->name('applications.periodic_table');
+Route::get('/app/atmospher', 'ApplicationController@atmospher')->name('applications.atmospher');
+Route::get('/app/colors', 'ApplicationController@colors')->name('applications.colors');
+Route::get('/app/multi', 'ApplicationController@multi')->name('applications.multi');
+Route::get('/app/universe', 'ApplicationController@universe')->name('applications.universe');
+
 
 /***************/
 

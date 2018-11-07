@@ -18,7 +18,7 @@ class ApplicationController extends Controller
       return view('applications.quran');
 
     }
-    
+
     public function morse(){
 
       return view('applications.morse');
@@ -40,6 +40,35 @@ class ApplicationController extends Controller
     public function math_quiz(){
 
       return view('applications.math_quiz');
+
+    }
+
+    public function periodic_table(){
+
+      return view('applications.periodic_table');
+
+    }
+    public function atmospher(){
+
+      return view('applications.atmospher');
+
+    }
+
+    public function colors(){
+
+      return view('applications.colors');
+
+    }
+
+    public function multi(){
+
+      return view('applications.multi');
+
+    }
+
+    public function universe(){
+
+      return view('applications.universe');
 
     }
 

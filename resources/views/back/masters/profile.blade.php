@@ -86,6 +86,16 @@
             <!-- /.tab-content -->
           </div>
           <!-- /.nav-tabs-custom -->
+
+
+          <h2 class="text-center">Ses apparences</h2>
+
+
+          @component('back.components.posts', compact('posts'))
+
+          @endcomponent
+
+
         </div>
         <!-- /.col -->
       </div>
@@ -103,6 +113,8 @@
 
 
 
+    <script src="{!! asset('axios/axios.min.js') !!}"></script>
+    <script src="{!! asset('validate/jquery.validate.min.js') !!}"></script>
 <script type="text/javascript">
 
 
@@ -110,4 +122,8 @@
 
 
 </script>
+
+@component('back.components.comment_system4posts')
+
+@endcomponent
 @endsection
