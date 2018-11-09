@@ -142,4 +142,10 @@
 @component('back.components.comment_system4posts')
 
 @endcomponent
+
+  @component('back.components.lovesystem4posts')
+
+  @endcomponent
+
+
 @endsection

@@ -4,9 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use BrianFaust\Commentable\Traits\HasComments;
-class Post extends Model
+
+use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
+use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
+
+class Post extends Model implements LikeableContract
 {
       use HasComments;
+
+      use Likeable;
+
     //
     //
     protected $fillable = [

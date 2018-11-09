@@ -90,5 +90,9 @@ $('.video').each(function( index, elem ) {
 
 @endcomponent
 
+@component('back.components.lovesystem4posts')
+
+@endcomponent
+
 
 @endsection

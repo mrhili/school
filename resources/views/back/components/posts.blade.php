@@ -1,4 +1,16 @@
+<style>
+  .love{
+    color: #ff7772;
+  }
+  .love:hover{
+    color: #ff4800;
+  }
 
+  .black{
+    color: #000000;
+  }
+
+</style>
 
   @forelse($posts as $post)
 
@@ -68,6 +80,8 @@
 
             <blockquote class="" id="comment-text-{{ $comment->id }}-post-{{$post->id}}">
               {{ $comment->body }}
+              <br />
+              <div class="text-secondary pull-right">{{ $comment->creator->full_name }}</div>
             </blockquote>
 
             <hr />
@@ -94,7 +108,11 @@
           </div>
 
           <ul class="list-inline">
-            <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
+            <li><a href="#" class="link-black text-sm btn-love {{  Auth::user()->hasLiked($post)? 'love': 'black'  }}" id="love-{{  $post->id }}" data-id="{{  $post->id }}"><i class="fa fa-heart margin-r-5"></i> Like
+                @if( $post->likesCount > 0 )
+                    ( {{ $post->likesCount  }} )
+                @endif
+              </a>
             </li>
 
           </ul>

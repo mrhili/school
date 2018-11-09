@@ -28,3 +28,5 @@ Route::get('/docs-user/{selected?}', 'UserController@docs')->name('users.docs');
 
 
 Route::get('/posts', 'PostController@index')->name('posts.index');
+
+Route::post('/like-post/{post}', 'LaravelloveController@switch')->name('laravelloves.switch');
