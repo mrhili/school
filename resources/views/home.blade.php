@@ -251,6 +251,61 @@
 
 </div>
 
+  <h2 class="text-center">Videos</h2>
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-green">
+        <div class="inner">
+          <h3>V</h3>
+          <p><a href="{{ route('videopages.list') }}">Video pages</a></p>
+        </div>
+        <div class="icon">
+          <i class="fa fa-file"></i>
+        </div>
+        <a href="{{ route('videopages.list') }}" class="small-box-footer">Video pages <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+
+
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-green">
+        <div class="inner">
+          <h3>V</h3>
+          <p><a href="{{ route('videotabs.list') }}">Video tabes</a></p>
+        </div>
+        <div class="icon">
+          <i class="fa fa-file"></i>
+        </div>
+        <a href="{{ route('videotabs.list') }}" class="small-box-footer">Video tabes <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+
+
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-green">
+        <div class="inner">
+          <h3>V</h3>
+          <p><a href="{{ route('videos.list') }}">Videos </a></p>
+        </div>
+        <div class="icon">
+          <i class="fa fa-file"></i>
+        </div>
+        <a href="{{ route('videos.list') }}" class="small-box-footer">Videos <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+
+
+  </div>
+
 <hr>
 
 
@@ -921,6 +976,8 @@
 
 
       </div>
+
+
 
 
 

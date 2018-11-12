@@ -11,6 +11,7 @@
         "bestmomo/laravel5-artisan-language": "^0.1.3",
         "caouecs/laravel-lang": "~3.0",
         "ckeditor/ckeditor": "^4.10",
+        "cohensive/embed": "^5.5",
         "cyber-duck/laravel-excel": "^1.2",
         "cybercog/laravel-love": "^5.2",
         "faustbrian/laravel-commentable": "^3.1",

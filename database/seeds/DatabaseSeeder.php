@@ -33,5 +33,7 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call(CMSeeder::class);
+
+        $this->call(VideoSeeder::class);
     }
 }

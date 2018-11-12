@@ -1,10 +1,4 @@
 
-/**
- * Created by PhpStorm.
- * User: hp
- * Date: 08/11/2018
- * Time: 13:33
- */
 
 {{--
 

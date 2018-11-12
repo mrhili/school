@@ -22,6 +22,8 @@ Route::get('/user-home', 'UserController@home')->name('users.home');
 
 Route::get('/docs-user/{selected?}', 'UserController@docs')->name('users.docs');
 
+Route::get('/videos/{page?}/{tab?}', 'VideopageController@display')->name('videos.display');
+
 
 
 /***************POST******************************/

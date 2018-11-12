@@ -171,6 +171,7 @@ return [
          */
 
          Intervention\Image\ImageServiceProvider::class,
+        'Cohensive\Embed\EmbedServiceProvider',
 
         /*
          * Application Service Providers...
@@ -269,6 +270,7 @@ return [
 
         'GetSetting' => App\Helpers\Config\Setting::class,
         'GetSchoolSetting' => App\Helpers\Schoolconfig\Setting::class,
+        'Embed' => 'Cohensive\Embed\Facades\Embed'
 
 
 

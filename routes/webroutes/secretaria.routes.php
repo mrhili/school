@@ -6,7 +6,16 @@ Route::get('/docs-secretaria/{selected?}', 'SecretariaController@docs')->name('s
 Route::get('/my-profile-as-secretaria', 'SecretariaController@myProfile')->name('secretarias.my-profile');
 
 Route::get('/secretaria-home', 'SecretariaController@home')->name('secretarias.home');
+//VIDEOS
+Route::get('/videos-list', 'VideoController@list')->name('videos.list');
+Route::post('/videos-store/{tab}', 'VideoController@store')->name('videos.store');
+//VIDEOSTAB
+Route::get('/videotabs-list', 'VideotabController@list')->name('videotabs.list');
+Route::post('/videotabs-store/{page}', 'VideotabController@store')->name('videotabs.store');
 
+//VideosPage
+Route::get('/videopages-list', 'VideopageController@list')->name('videopages.list');
+Route::post('/videopages-store', 'VideopageController@store')->name('videopages.store');
 /*Printables*/
 
 Route::get('/printable-sheet-new-student-with-parent/{student}/{parent}', 'PrintableController@printableSheeNewStudentWithParent')->name('printables.new-student-with-parent');
