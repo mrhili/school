@@ -91,7 +91,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'fr',
 
     /*
     |--------------------------------------------------------------------------
@@ -104,7 +104,7 @@ return [
     |
     */
 
-    'locales' => ['fr_FR' => 'Français', 'ar_TN' => 'العربية', 'en_US' => 'English'],
+    'locales' => ['fr' => 'Français', 'ar' => 'العربية', 'en' => 'English'],
 
     'key' => env('APP_KEY'),
 

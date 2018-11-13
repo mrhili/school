@@ -109,6 +109,59 @@
 
           --}}
           <!-- User Account Menu -->
+
+          <li class="dropdown tasks-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-language"></i>
+              <span class="label label-info">{{ session('locale') }}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">Changer le language</li>
+              <li>
+                <!-- Inner menu: contains the tasks -->
+                <ul class="menu">
+
+
+                @foreach(config('app.locales') as $l => $locale)
+
+                  @if($l != Session::get('locale') )
+
+                  
+
+                  <li><!-- Task item -->
+                    <a href="{{ route('locals.change', $l) }}">
+                      <!-- Task title and progress text -->
+                      <h3>
+                        {{ $locale }}
+                        <small class="pull-right">{{ $l }}</small>
+                      </h3>
+                      <!-- The progress bar -->
+                    </a>
+                  </li>
+
+                  @endif
+
+
+                @endforeach
+
+
+
+
+
+
+
+
+
+                  <!-- end task item -->
+                </ul>
+              </li>
+
+            </ul>
+          </li>
+
+
+
           @guest
 
           @else
@@ -143,7 +196,7 @@
 
                   @if($locale != session('locale'))
                       <div class="col-xs-4 text-center">
-                        <a href="{{ route('language', $locale) }}">{{ session('locale') }}</a>
+                        <a href="{{ route('locals.change', $locale) }}">{{ $locale }}</a>
                       </div>
                   @endif
 

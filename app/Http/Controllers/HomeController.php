@@ -157,21 +157,4 @@ class HomeController extends Controller
     }
 
 
-
-
-    public function language(String $locale)
-    {
-        //App::setLocale($locale);
-        Session::put('locale', $locale);
-        return redirect()->back();
-        /*
-        $locale = in_array($locale, config('app.locales')) ? $locale : config('app.fallback_locale');
-        session(['locale' => $locale]);
-        return back();
-        */
-    }
-    public function getLanguage()
-    {
-        App::getLocale();
-    }
 }

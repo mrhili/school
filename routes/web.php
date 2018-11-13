@@ -120,8 +120,10 @@ Route::get('demos/loaddata','HistoryController@loadData');
 Route::post('demos/loaddata','HistoryController@loadDataAjax' );
 
 
-Route::name('language')->get('language/{lang}', 'HomeController@language');
-Route::name('language')->get('language', 'HomeController@getLanguage');
+
+
+require __DIR__.'/webroutes/application_public.routes.php';
+
 
 Route::group(['middleware' => ['cors']], function () {
 
