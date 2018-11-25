@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class History extends Model
 {
-    //
+
     protected $fillable = [
 
     'id_link',
@@ -23,11 +23,11 @@ class History extends Model
 
     'by_admin',
 
-    'by_user',
+    'for_user',
 
-    'by_exterior_name',
+    'for_exterior_name',
 
-    'by_exterior_info',
+    'for_exterior_info',
 
     'payment'
 
@@ -36,7 +36,12 @@ class History extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'for_user');
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo('App\User','by_admin');
     }
 
     public function category()

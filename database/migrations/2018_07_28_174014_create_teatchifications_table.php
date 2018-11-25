@@ -16,10 +16,10 @@ class CreateTeatchificationsTable extends Migration
         Schema::create('teatchifications', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('subject_the_class_id')->unsigned()->index();
-            $table->foreign('subject_the_class_id')
+            $table->integer('the_class_unity_id')->unsigned()->index();
+            $table->foreign('the_class_unity_id')
               ->references('id')
-              ->on('subject_the_class')
+              ->on('the_class_unity')
               ->onDelete('cascade');
 
             $table->integer('user_id')->unsigned()->index();

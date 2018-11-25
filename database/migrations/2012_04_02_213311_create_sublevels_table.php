@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTheClassesTable extends Migration
+class CreateSublevelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateTheClassesTable extends Migration
      */
     public function up()
     {
-        Schema::create('the_classes', function (Blueprint $table) {
+        Schema::create('sublevels', function (Blueprint $table) {
             $table->increments('id');
-
             $table->string('name');
-
+            $table->integer('level_id')->unsigned()->index();
+            $table->foreign('level_id')
+              ->references('id')
+              ->on('levels')
+              ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateTheClassesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('the_classes');
+        Schema::dropIfExists('sublevels');
     }
 }

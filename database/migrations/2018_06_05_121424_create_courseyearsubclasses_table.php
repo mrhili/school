@@ -16,10 +16,10 @@ class CreateCourseyearsubclassesTable extends Migration
         Schema::create('courseyearsubclasses', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('subject_the_class_id')->unsigned()->index()->nullable();
-            $table->foreign('subject_the_class_id')
+            $table->integer('subsubunity_the_class_id')->unsigned()->index()->nullable();
+            $table->foreign('subsubunity_the_class_id')
               ->references('id')
-              ->on('subject_the_class')
+              ->on('subsubunity_the_class')
               ->onDelete('set null');
 
             $table->integer('subject_id')->unsigned()->index()->nullable();

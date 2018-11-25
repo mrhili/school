@@ -6,9 +6,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cog\Contracts\Love\Liker\Models\Liker as LikerContract;
 use Cog\Laravel\Love\Liker\Models\Traits\Liker;
-
+use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable implements LikerContract
 {
+
+    use HasApiTokens;
     use Notifiable;
     use Liker;
 
@@ -32,7 +34,7 @@ class User extends Authenticatable implements LikerContract
         'city','zip_code',
         'adress',
         'phone',
-        'img','role',
+        'img','role', 'subrole'
         'transport',
         'additional_classes',
         'fill_payment',
@@ -49,6 +51,10 @@ class User extends Authenticatable implements LikerContract
 
     ];
 
+
+
+
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -58,9 +64,55 @@ class User extends Authenticatable implements LikerContract
         'password', 'remember_token',
     ];
 
+
+
+
+
+
+
+    ////////I WILL NEED IT IN V2
+    ///
     public function getFullNameAttribute() {
-    		return ucfirst($this->name) . ' ' . ucfirst($this->last_name);
+            return ucfirst($this->name) . ' ' . ucfirst($this->last_name);
     }
+
+    public function add_classes()
+    {
+        return $this->belongsToMany('App\Addclass')->withPivot('unity_id');
+    }
+
+    public function add_classes_unities()
+    {
+        return $this->belongsToMany('App\Unity')->withPivot('addclass_id');
+    }
+
+    public function the_class()
+    {
+        return $this->belongsTo('App\TheClass', 'the_class_id');
+    }
+
+
+    public function inputings()
+    {
+        return $this->hasMany('App\Inputing');
+    }
+
+    public function outputings()
+    {
+        return $this->hasMany('App\Outputing');
+    }
+
+    public function tests()
+    {
+        return $this->hasMany('App\Test');
+    }
+
+
+
+
+    //////////////I MIGHT WILL NOT NEEDIT IN V2
+
+
 
     public function payments()
     {
@@ -107,10 +159,7 @@ class User extends Authenticatable implements LikerContract
         return $this->hasMany('App\Course', 'created_by');
     }
 
-    public function the_class()
-    {
-        return $this->belongsTo('App\TheClass', 'the_class_id');
-    }
+    
 
     public function fourniturations()
     {

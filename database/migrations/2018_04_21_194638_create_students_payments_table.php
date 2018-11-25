@@ -14,6 +14,8 @@ class CreateStudentsPaymentsTable extends Migration
     public function up()
     {
         Schema::create('students_payments', function (Blueprint $table) {
+
+          /*ANNULED
             
             $table->increments('id');
 
@@ -40,16 +42,21 @@ class CreateStudentsPaymentsTable extends Migration
               ->references('id')
               ->on('months')
               ->onDelete('cascade');
-
-            $table->integer('should_pay')->default(350);
-            $table->integer('transport_pay')->default(0);
-            $table->integer('add_classes_pay')->default(0);
+            
+            //$table->integer('add_classes_pay')->default(0);
 
             $table->integer('payment')->default(0);
+
+            $table->integer('should_pay')->default(350);
+
+            $table->integer('transport_pay')->default(0);
+            $table->integer('month_pay')->default(0);
 
             $table->boolean('payment_complete')->default(false);
 
             $table->timestamps();
+
+            */
         });
     }
 

@@ -57,10 +57,18 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\User::class,
 
         ],
+        'user_api' => [
+            \App\Http\Middleware\UserApiMiddleware::class,
+
+        ],
 
         'student' => [
             \Illuminate\Auth\Middleware\Authenticate::class,
             \App\Http\Middleware\Student::class,
+
+        ],
+        'student_api' => [
+            \App\Http\Middleware\StudentApiMiddleware::class,
 
         ],
 
@@ -70,9 +78,21 @@ class Kernel extends HttpKernel
 
         ],
 
+        'parent_api' => [
+            \App\Http\Middleware\ParentApiMiddleware::class,
+
+        ],
+
+
+
         'teatcher' => [
             \Illuminate\Auth\Middleware\Authenticate::class,
             \App\Http\Middleware\Teatcher::class,
+
+        ],
+
+        'teatcher_api' => [
+            \App\Http\Middleware\TeatcherApiMiddleware::class,
 
         ],
 
@@ -82,9 +102,19 @@ class Kernel extends HttpKernel
 
         ],
 
+        'secretaria_api' => [
+            \App\Http\Middleware\SecretariaApiMiddleware::class,
+
+        ],
+
         'admin' => [
             \Illuminate\Auth\Middleware\Authenticate::class,
             \App\Http\Middleware\Admin::class,
+
+        ],
+
+        'admin_api' => [
+            \App\Http\Middleware\AdminApiMiddleware::class,
 
         ],
 
@@ -95,7 +125,21 @@ class Kernel extends HttpKernel
 
         ],
 
+        'master_api' => [
+            \App\Http\Middleware\MasterApiMiddleware::class,
 
+        ],
+
+        'grandmaster' => [
+            \Illuminate\Auth\Middleware\Authenticate::class,
+            \App\Http\Middleware\GrandmasterMiddleware::class,
+
+        ],
+
+        'grandmaster_api' => [
+            \App\Http\Middleware\GrandmasterApiMiddleware::class,
+
+        ],
 
         'api' => [
             'throttle:60,1',
@@ -118,7 +162,6 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-
         'cors' => \Barryvdh\Cors\HandleCors::class
     ];
 }

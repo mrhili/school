@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRatingsTable extends Migration
+class CreateMonthlypaysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,17 @@ class CreateRatingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ratings', function (Blueprint $table) {
+        Schema::create('monthlypays', function (Blueprint $table) {
             $table->increments('id');
-            $table->float('star')->unique();
+            $table->increments('name');
+            $table->increments('type');
+            $table->integer('month_id')->unsigned()->index();
+            $table->foreign('month_id')
+              ->references('id')
+              ->on('months')
+              ->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }
@@ -27,6 +35,6 @@ class CreateRatingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ratings');
+        Schema::dropIfExists('monthlypays');
     }
 }

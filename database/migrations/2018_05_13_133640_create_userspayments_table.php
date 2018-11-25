@@ -13,6 +13,8 @@ class CreateUserspaymentsTable extends Migration
      */
     public function up()
     {
+/*
+      //for courses
         Schema::create('userspayments', function (Blueprint $table) {
             $table->increments('id');
 
@@ -42,6 +44,8 @@ class CreateUserspaymentsTable extends Migration
             $table->boolean('payment_complete')->default(false);
 
             $table->timestamps();
+
+*/
         });
     }
 

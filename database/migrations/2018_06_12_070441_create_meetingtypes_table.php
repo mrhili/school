@@ -16,7 +16,7 @@ class CreateMeetingtypesTable extends Migration
         Schema::create('meetingtypes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->json('roles');
+            $table->text('roles');
             $table->timestamps();
         });
     }

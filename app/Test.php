@@ -15,21 +15,32 @@ class Test extends Model
     ];
 
     protected $fillable= [
-        'kind', 'title','body', 'notes', 'answers', 'time_minutes', 'ready'
+        'kind', 'title','info','body', 'notes', 'answers', 'time_minutes', 'ready', 'subunity_id'
     ];
 
 
-    public function testyearsubclasses()
+
+
+
+
+    public function school()
     {
-        return $this->hasMany('App\Testyearsubclass');
+        return $this->hasMany('App\School');
     }
 
+    public function subunity()
+    {
+        return $this->belongsTo('App\Subunity');
+    }
+
+//////////////////////
     public function notes()
     {
         return $this->hasMany('App\Note', 'testyearsubclass_id');
     }
-
-
-
-
+    
+    public function testyearsubclasses()
+    {
+        return $this->hasMany('App\Testyearsubclass');
+    }
 }

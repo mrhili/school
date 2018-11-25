@@ -12,6 +12,29 @@ class Year extends Model
         'name', 'min', 'max'
     ];
 
+
+
+    public function inputings()
+    {
+        return $this->hasMany('App\Inputing');
+    }
+
+    public function outputings()
+    {
+        return $this->hasMany('App\Outputing');
+    }
+
+
+
+
+
+
+
+
+
+
+    ////IMIGHT NOT USE
+
     public function payments()
     {
         return $this->hasMany('App\StudentsPayment');

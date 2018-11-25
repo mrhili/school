@@ -39,7 +39,8 @@ class Holder {
           'Les maitre',
           'La secretaria',
           'Les directeurs',
-          'Les masters'
+          'Les masters',
+          'Les grand masters'
       ];
 
 
@@ -263,7 +264,8 @@ class Holder {
             'teatchers',
             'secretarias',
             'admins',
-            'masters'
+            'masters',
+            'grandmasters'
         ];
 
         if( $item === null){
@@ -283,7 +285,8 @@ class Holder {
             'Maitre',
             'Secraitaire',
             'Administrateur',
-            'Master'
+            'Master',
+            'Grand Master'
         ];
 
         if( $item === null){

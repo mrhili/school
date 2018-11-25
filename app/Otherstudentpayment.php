@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rating extends Model
+class Otherstudentpayment extends Model
 {
     //
-    protected $fillable = ['star'];
 }

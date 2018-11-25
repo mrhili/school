@@ -34,16 +34,16 @@ class CreateNotesTable extends Migration
               ->on('the_classes')
               ->onDelete('set null');
 
-            $table->integer('subject_id')->unsigned()->index()->nullable();
+            $table->integer('unity_id')->unsigned()->index()->nullable();
             $table->foreign('subject_id')
               ->references('id')
-              ->on('subjects')
+              ->on('unities')
               ->onDelete('set null');
 
-            $table->integer('subject_the_class_id')->nullable()->unsigned()->index();
-            $table->foreign('subject_the_class_id')
+            $table->integer('unity_the_class_id')->nullable()->unsigned()->index();
+            $table->foreign('unity_the_class_id')
               ->references('id')
-              ->on('subject_the_class')
+              ->on('unity_the_class')
               ->onDelete('set null');
 
             $table->integer('teatcher_id')->unsigned()->index()->nullable();

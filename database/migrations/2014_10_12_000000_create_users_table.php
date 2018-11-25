@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->integer('num')->nullable()->unique()->unsigned();
 
 
-
             $table->string('name');
             $table->string('last_name')->nullable();
             $table->string('arabic_name')->nullable();
@@ -42,6 +41,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('img')->nullable();
             $table->float('role')->default(0);
+            $table->float('subrole')->default(0);
 
             /* student */
             $table->string('massarid')->nullable()->unique();

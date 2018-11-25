@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubunitiesTable extends Migration
+class CreateSublevelSubunityTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,18 @@ class CreateSubunitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('subunities', function (Blueprint $table) {
+        Schema::create('sublevel_subunity', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
 
-            $table->integer('unity_id')->unsigned()->index()->nullable();
-            $table->foreign('unity_id')
+            $table->foreign('subunity_id')
               ->references('id')
-              ->on('unities')
-              ->onDelete('set null');
+              ->on('subunities')
+              ->onDelete('cascade');
+
+            $table->foreign('sublevel_id')
+              ->references('id')
+              ->on('sublevels')
+              ->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -34,6 +37,6 @@ class CreateSubunitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subunities');
+        Schema::dropIfExists('sublevel_subunity');
     }
 }

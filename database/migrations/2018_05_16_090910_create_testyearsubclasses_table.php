@@ -16,22 +16,10 @@ class CreateTestyearsubclassesTable extends Migration
         Schema::create('testyearsubclasses', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('subject_the_class_id')->unsigned()->index()->nullable();
-            $table->foreign('subject_the_class_id')
+            $table->integer('subunity_the_class_id')->unsigned()->index()->nullable();
+            $table->foreign('subunity_the_class_id')
               ->references('id')
-              ->on('subject_the_class')
-              ->onDelete('set null');
-
-            $table->integer('subject_id')->unsigned()->index()->nullable();
-            $table->foreign('subject_id')
-              ->references('id')
-              ->on('subjects')
-              ->onDelete('set null');
-
-            $table->integer('the_class_id')->unsigned()->index()->nullable();
-            $table->foreign('the_class_id')
-              ->references('id')
-              ->on('the_classes')
+              ->on('subunity_the_class')
               ->onDelete('set null');
 
 
@@ -53,11 +41,8 @@ class CreateTestyearsubclassesTable extends Migration
               ->on('users')
               ->onDelete('set null');
 
-              $table->integer('course_id')->unsigned()->index()->nullable();
-              $table->foreign('course_id')
-                ->references('id')
-                ->on('courses')
-                ->onDelete('set null');
+              $table->text('before_test')nullable();
+
 
             $table->boolean('publish')->default(false);
 

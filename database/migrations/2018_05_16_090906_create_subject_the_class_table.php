@@ -34,7 +34,7 @@ class CreateSubjectTheClassTable extends Migration
                 ->on('years')
                 ->onDelete('cascade');
 
-            $table->tinyInteger('parameter')->unsigned();
+            
 
             $table->timestamps();
         });

@@ -22,9 +22,11 @@ class CreateHistoriesTable extends Migration
 
             $table->text('comment');
 
-            $table->text('info');
+            
 
             $table->text('hidden_note')->nullable();
+
+            $table->text('info');
 
             $table->integer('by_admin')->unsigned()->index()->nullable();
             $table->foreign('by_admin')
@@ -32,15 +34,15 @@ class CreateHistoriesTable extends Migration
               ->on('users')
               ->onDelete('set null');
 
-            $table->integer('by_user')->unsigned()->index()->nullable();
-            $table->foreign('by_user')
+            $table->integer('for_user')->unsigned()->index()->nullable();
+            $table->foreign('for_user')
               ->references('id')
               ->on('users')
               ->onDelete('set null');
 
-            $table->string('by_exterior_name')->nullable();
+            $table->string('for_exterior_name')->nullable();
 
-            $table->string('by_exterior_info')->nullable();
+            $table->string('for_exterior_info')->nullable();
 
             $table->integer('payment')->nullable();
 

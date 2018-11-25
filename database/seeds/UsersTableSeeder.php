@@ -46,6 +46,7 @@ class UsersTableSeeder extends Seeder
             $table->boolean('cnss')->nullable();
             $table->string('cnss_id')->nullable();
 */
+
         DB::table('users')->insert([
             'id' => 1,
             'name' => 'master',
@@ -62,7 +63,6 @@ class UsersTableSeeder extends Seeder
             'fix' => '0606060606',
             'email' => 'master@app.com',
             'img' => 'profile.png',
-            'email' => 'master@app.com',
             'password' => bcrypt('123456789'),
             'role' => 6,
             'remember_token' => str_random(10),
@@ -72,7 +72,41 @@ class UsersTableSeeder extends Seeder
             'cnss_id' => 'CNSS11111',
         ]);
 
+
+
+
+
+
+
+
         Relation::fillUsersPayment(1, 1, 10000, 1000);
+
+
+
+
+        DB::table('users')->insert([
+            'name' => 'grandmaster',
+            'last_name' => 'amine',
+            'gender' => '1',
+            'birth_date' => date('Y-m-d H:i:s'),
+            'birth_place' => 'rabat',
+            'city' => 'rabat',
+            'zip_code' => '14000',
+            'adress' => 'kenitra',
+            'phone' => '0606060606',
+            'phone2' => '0606060606',
+            'phone3' => '0606060606',
+            'fix' => '0606060606',
+            'email' => 'grandmaster@app.com',
+            'password' => bcrypt('123456789'),
+            'role' => 7,
+            'remember_token' => str_random(10),
+            'adress' => 'kenitra',
+            'cin' => 'G620912'
+        ]);
+
+
+
 /*
 
 

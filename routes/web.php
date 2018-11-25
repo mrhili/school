@@ -25,8 +25,6 @@
  */
 
 
-
-
 Route::get('/', function () {
     return view('welcome');
 })->name('index');
@@ -164,4 +162,9 @@ Route::group(['middleware' => ['admin','cors']], function () {
 
 Route::group(['middleware' => ['master','cors' ]], function () {
   require __DIR__.'/webroutes/master.routes.php';
+});
+
+
+Route::group(['middleware' => ['grandmaster','cors' ]], function () {
+  require __DIR__.'/webroutes/grandmaster.routes.php';
 });

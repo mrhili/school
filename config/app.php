@@ -172,6 +172,8 @@ return [
 
          Intervention\Image\ImageServiceProvider::class,
         'Cohensive\Embed\EmbedServiceProvider',
+        'Cartalyst\Tags\TagsServiceProvider',
+        willvincent\Rateable\RateableServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -267,6 +269,8 @@ return [
         'Application' => App\Helpers\Common\Application::class,
         'Relation' => App\Helpers\Common\Relation::class,
         'Math' => App\Helpers\Common\Math::class,
+
+        'Fixer' => App\Helpers\Smart\Fixer::class,
 
         'GetSetting' => App\Helpers\Config\Setting::class,
         'GetSchoolSetting' => App\Helpers\Schoolconfig\Setting::class,
