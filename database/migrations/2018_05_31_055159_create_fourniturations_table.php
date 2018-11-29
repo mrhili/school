@@ -16,12 +16,6 @@ class CreateFourniturationsTable extends Migration
         Schema::create('fourniturations', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('the_class_id')->unsigned()->index();
-            $table->foreign('the_class_id')
-              ->references('id')
-              ->on('the_classes')
-              ->onDelete('cascade');
-
             $table->integer('year_id')->unsigned()->index();
             $table->foreign('year_id')
               ->references('id')

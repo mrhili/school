@@ -34,6 +34,12 @@ class Sublevel extends Model
 
     }
 
+    public function tests(){
+
+        return $this->belongsToMany('App\Test');
+
+    }
+
     //maybe you will read
 
     public function subunities(){

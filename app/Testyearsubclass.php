@@ -14,6 +14,13 @@ class Testyearsubclass extends Model
         'end', 'course_id'
     ];
 
+    public function notes()
+    {
+        return $this->hasMany('App\Note', 'testyearsubclass_id');
+    }
+
+//MAY NOT USE
+
     public function course()
     {
         return $this->belongsTo('App\Course', 'course_id');
@@ -40,10 +47,7 @@ class Testyearsubclass extends Model
         return $this->belongsTo('App\User', 'teatcher_id');
     }
 
-    public function notes()
-    {
-        return $this->hasMany('App\Note', 'testyearsubclass_id');
-    }
+
 
 
 }

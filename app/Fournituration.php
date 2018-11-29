@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Fournituration extends Model
 {
     //
-    protected $fillable = ['student_id', 'teatcher_id', 'fourniture_id', 'year_id', 'the_class_id', 'confirmed', 'rejected', 'exist'];
+    protected $fillable = ['student_id', 'teatcher_id', 'fourniture_id', 'year_id', 'confirmed', 'rejected', 'exist'];
 
     public function fourniture()
     {

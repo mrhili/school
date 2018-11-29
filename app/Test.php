@@ -33,12 +33,17 @@ class Test extends Model
         return $this->belongsTo('App\Subunity');
     }
 
+    public function sublevels()
+    {
+        return $this->belongsToMany('App\Sublevel');
+    }
+
 //////////////////////
     public function notes()
     {
         return $this->hasMany('App\Note', 'testyearsubclass_id');
     }
-    
+
     public function testyearsubclasses()
     {
         return $this->hasMany('App\Testyearsubclass');

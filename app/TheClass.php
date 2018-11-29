@@ -38,6 +38,11 @@ class TheClass extends Model
         return $this->hasMany('App\User');
     }
 
+    public function fournitures()
+    {
+        return $this->belongsToMany('App\Fourniture')->pivot('howmany');
+    }
+
     /*
 
     public function payments()
@@ -50,10 +55,7 @@ class TheClass extends Model
         return $this->belongsToMany('App\Subject')->withPivot('parameter');
     }
 
-    public function fournitures()
-    {
-        return $this->belongsToMany('App\Fourniture');
-    }
+    
 
     
 

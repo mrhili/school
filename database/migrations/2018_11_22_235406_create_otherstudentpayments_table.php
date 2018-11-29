@@ -14,6 +14,8 @@ class CreateOtherstudentpaymentsTable extends Migration
     public function up()
     {
         Schema::create('otherstudentpayments', function (Blueprint $table) {
+
+          /*
             $table->increments('id');
 
 
@@ -48,6 +50,8 @@ class CreateOtherstudentpaymentsTable extends Migration
             $table->boolean('payment_complete')->default(false);
 
             $table->timestamps();
+
+            */
         });
     }
 

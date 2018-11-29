@@ -14,7 +14,7 @@ class Fourniture extends Model
 
     public function the_classes()
     {
-        return $this->belongsToMany('App\TheClass');
+        return $this->belongsToMany('App\TheClass')->pivot('howmany');
     }
 
     public function fourniturations()

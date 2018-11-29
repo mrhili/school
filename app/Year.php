@@ -24,6 +24,11 @@ class Year extends Model
         return $this->hasMany('App\Outputing');
     }
 
+    public function notes()
+    {
+        return $this->hasMany('App\Note');
+    }
+
 
 
 

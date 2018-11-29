@@ -26,7 +26,10 @@ class CreateFournitureTheClassTable extends Migration
             $table->foreign('the_class_id')
               ->references('id')
               ->on('the_classes')
-              ->onDelete('cascade'); 
+              ->onDelete('cascade');
+
+
+            $table->tinyInteger('howmany')->default(0);
 
 
             $table->timestamps();

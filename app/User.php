@@ -34,7 +34,7 @@ class User extends Authenticatable implements LikerContract
         'city','zip_code',
         'adress',
         'phone',
-        'img','role', 'subrole'
+        'img','role', 'subrole',
         'transport',
         'additional_classes',
         'fill_payment',
@@ -105,6 +105,11 @@ class User extends Authenticatable implements LikerContract
     public function tests()
     {
         return $this->hasMany('App\Test');
+    }
+
+    public function notes()
+    {
+        return $this->hasMany('App\Note');
     }
 
 

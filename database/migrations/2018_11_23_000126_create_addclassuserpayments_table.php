@@ -14,6 +14,8 @@ class CreateAddclassuserpaymentsTable extends Migration
     public function up()
     {
         Schema::create('addclassuserpayments', function (Blueprint $table) {
+
+          /*
             $table->increments('id');
 
 
@@ -55,6 +57,8 @@ class CreateAddclassuserpaymentsTable extends Migration
 
 
             $table->timestamps();
+
+            */
         });
     }
 

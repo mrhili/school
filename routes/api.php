@@ -18,11 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:api'],function (Request $request) {
-    Route::post('/get-details', 'API\PassportController@getDetails');
+    Route::get('/get-details', 'API\PassportController@getDetails');
 });
 
 
-Route::post('/login', 'API\PassportApiController@login');
+Route::post('/login', 'API\PassportApiController@login')->name('apiusers.login');
 
 
 Route::group(['middleware' => ['cors' ], 'prefix' => '/register' ],function(){

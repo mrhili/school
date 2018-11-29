@@ -28,30 +28,6 @@ class CreateNotesTable extends Migration
               ->on('years')
               ->onDelete('cascade');
 
-            $table->integer('the_class_id')->unsigned()->index()->nullable();
-            $table->foreign('the_class_id')
-              ->references('id')
-              ->on('the_classes')
-              ->onDelete('set null');
-
-            $table->integer('unity_id')->unsigned()->index()->nullable();
-            $table->foreign('subject_id')
-              ->references('id')
-              ->on('unities')
-              ->onDelete('set null');
-
-            $table->integer('unity_the_class_id')->nullable()->unsigned()->index();
-            $table->foreign('unity_the_class_id')
-              ->references('id')
-              ->on('unity_the_class')
-              ->onDelete('set null');
-
-            $table->integer('teatcher_id')->unsigned()->index()->nullable();
-            $table->foreign('teatcher_id')
-              ->references('id')
-              ->on('users')
-              ->onDelete('set null');
-
             $table->integer('student_id')->unsigned()->index();
             $table->foreign('student_id')
               ->references('id')
@@ -65,6 +41,8 @@ class CreateNotesTable extends Migration
             $table->float('note')->nullable();
 
             $table->string('done_minutes')->nullable();
+
+            $table->text('moreinfo')->nullable();
 
             $table->text('answers')->nullable();
 

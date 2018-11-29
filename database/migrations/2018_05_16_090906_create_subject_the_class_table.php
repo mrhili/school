@@ -28,11 +28,11 @@ class CreateSubjectTheClassTable extends Migration
               ->on('the_classes')
               ->onDelete('cascade');
 
-              $table->integer('year_id')->unsigned()->index();
-              $table->foreign('year_id')
-                ->references('id')
-                ->on('years')
-                ->onDelete('cascade');
+            $table->integer('year_id')->unsigned()->index();
+            $table->foreign('year_id')
+              ->references('id')
+              ->on('years')
+              ->onDelete('cascade');
 
             
 

@@ -11,16 +11,13 @@ class Note extends Model
     protected $fillable = [
     	"testyearsubclass_id",
     	"year_id",
-    	"the_class_id",
-    	"subject_id",
-    	"subject_the_class_id",
-    	"teatcher_id",
     	"student_id",
     	"seen",
       "test_passed_fine",
     	"note",
     	'done_minutes',
-      'answers'
+      'answers',
+      'moreinfo'
     ];
 
     public function testyearsubclass()
@@ -28,18 +25,17 @@ class Note extends Model
         return $this->belongsTo('App\Testyearsubclass', 'testyearsubclass_id');
     }
 
-    public function teatcher()
+    public function year()
     {
-        return $this->belongsTo('App\User', 'teatcher_id');
+        return $this->belongsTo('App\Year');
     }
 
     public function student()
     {
-        return $this->belongsTo('App\User', 'student_id');
+        return $this->belongsTo('App\User');
     }
 
-    public function subject()
-    {
-        return $this->belongsTo('App\Subject');
-    }
+//MAY NOT USE
+
+
 }

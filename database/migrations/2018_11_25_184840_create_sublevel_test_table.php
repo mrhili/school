@@ -15,6 +15,20 @@ class CreateSublevelTestTable extends Migration
     {
         Schema::create('sublevel_test', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('sublevel_id')->unsigned()->index();
+            $table->foreign('sublevel_id')
+              ->references('id')
+              ->on('sublevels')
+              ->onDelete('cascade');
+
+            $table->integer('test_id')->unsigned()->index();
+            $table->foreign('test_id')
+              ->references('id')
+              ->on('tests')
+              ->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }

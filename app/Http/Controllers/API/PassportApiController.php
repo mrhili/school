@@ -53,7 +53,7 @@ class PassportApiController extends Controller
 
     }
 
-    public function getDetails(Request $request ){
+    public function getDetails(){
     	return response()->json(['message' => 'detail'], 200);
     }
 

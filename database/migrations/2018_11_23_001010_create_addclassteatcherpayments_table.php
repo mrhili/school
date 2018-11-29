@@ -14,6 +14,8 @@ class CreateAddclassteatcherpaymentsTable extends Migration
     public function up()
     {
         Schema::create('addclassteatcherpayments', function (Blueprint $table) {
+
+          /*
             $table->increments('id');
 
             $table->integer('teatcher_id')->unsigned()->index();
@@ -50,6 +52,8 @@ class CreateAddclassteatcherpaymentsTable extends Migration
 
 
             $table->timestamps();
+
+            */
         });
     }
 
