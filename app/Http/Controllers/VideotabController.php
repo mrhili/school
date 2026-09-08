@@ -36,7 +36,7 @@ class VideotabController extends Controller
 
         $videotab = Videotab::create([
             'title' => $request->title,
-            'slug' => str_slug( $request->title ),
+            'slug' => \Illuminate\Support\Str::slug( $request->title ),
             'icon' => $matches[1] ,
             'roles' => json_encode($request->roles),
             'videopage_id' => json_encode($request->videopage_id),

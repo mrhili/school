@@ -20,7 +20,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
         \App\Http\Middleware\SetYear::class,
-        \Barryvdh\Cors\HandleCors::class,
+        \Illuminate\Http\Middleware\HandleCors::class,
         //\Spatie\Cors\Cors::class
 
         //\App\Http\Middleware\Mycors::class
@@ -40,7 +40,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \Barryvdh\Cors\HandleCors::class,
+            \Illuminate\Http\Middleware\HandleCors::class,
 /**************/
             \App\Http\Middleware\Locale::class,
 
@@ -48,7 +48,7 @@ class Kernel extends HttpKernel
 
         ],
         'cors' => [
-            \Barryvdh\Cors\HandleCors::class,
+            \Illuminate\Http\Middleware\HandleCors::class,
 
         ],
 
@@ -100,7 +100,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
-            \Barryvdh\Cors\HandleCors::class,
+            \Illuminate\Http\Middleware\HandleCors::class,
         ],
     ];
 
@@ -119,6 +119,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
-        'cors' => \Barryvdh\Cors\HandleCors::class
+        'cors' => \Illuminate\Http\Middleware\HandleCors::class
     ];
 }

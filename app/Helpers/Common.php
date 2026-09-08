@@ -29,10 +29,7 @@ use App\{
 use Session;
 use Carbon;
 use Auth;
-//TODO
 /*
-Add the Transport field to students
-Add the Year life cycle
 
 */
   require __DIR__.'/common/documents.helpers.php';

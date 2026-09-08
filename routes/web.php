@@ -104,7 +104,6 @@ Route::get('/testprintable-sheet-worker', 'TestoController@printableSheetWorker'
 
 
 
-Auth::routes();
 /*
 Route::get('/cal-test', 'CalendarController@test')->name('cal');
 Route::get('/cal-test2', 'CalendarController@test2')->name('cal2');
@@ -163,3 +162,7 @@ Route::group(['middleware' => ['admin','cors']], function () {
 Route::group(['middleware' => ['master','cors' ]], function () {
   require __DIR__.'/webroutes/master.routes.php';
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

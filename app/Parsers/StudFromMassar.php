@@ -13,7 +13,7 @@ class StudFromMassar implements ParserInterface
       $model = new User();
 
 
-      $pretendedEmail = str_slug( $row[3].'-'.$row[4] , '-');
+      $pretendedEmail = \Illuminate\Support\Str::slug( $row[3].'-'.$row[4] , '-');
       $bones = '@fa.com';
 
       while( User::where('email', $pretendedEmail.$bones )->first() ){

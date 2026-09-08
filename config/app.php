@@ -170,7 +170,7 @@ return [
          * Package Service Providers...
          */
 
-         Intervention\Image\ImageServiceProvider::class,
+         // Intervention\Image\ImageServiceProvider::class,
         'Cohensive\Embed\EmbedServiceProvider',
 
         /*
@@ -253,7 +253,7 @@ return [
 
         'Carbon' => 'Carbon\Carbon',
 
-        'Image' => Intervention\Image\Facades\Image::class,
+        // 'Image' => Intervention\Image\Facades\Image::class,
 
         //HELPERS
 
