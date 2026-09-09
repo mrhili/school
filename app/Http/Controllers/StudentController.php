@@ -458,7 +458,7 @@ class StudentController extends Controller
 
         foreach($stds as $s){
 
-          $pretendedEmail = \Illuminate\Support\Str::slug( $s->name.'-'. $s->last_name , '-');
+          $pretendedEmail = str_slug( $s->name.'-'. $s->last_name , '-');
           $bones = '@fa.com';
 
           while( !User::where('email', $pretendedEmail.$bones ) ){

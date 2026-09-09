@@ -191,7 +191,7 @@ desired effect
 <script src="{!! asset('application/js/common.js') !!}"></script>
 
 <script src="{!! asset('sa2/sweetalert2.all.js') !!}"></script>
-@include('sweetalert::alert')
+
 
 
 

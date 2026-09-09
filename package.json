@@ -2,23 +2,16 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
-        "watch": "vite",
-        "watch-poll": "vite",
-        "hot": "vite",
-        "prod": "vite build",
-        "production": "vite build"
+        "build": "vite build"
     },
     "devDependencies": {
-        "@popperjs/core": "^2.11.6",
-        "@vitejs/plugin-vue": "^6.0.8",
-        "axios": "^0.17",
-        "bootstrap": "^5.3.8",
-        "jquery": "^3.2",
-        "laravel-vite-plugin": "^3.2.0",
-        "lodash": "^4.17.4",
-        "sass": "^1.56.1",
-        "vite": "^8.2.2",
-        "vue": "^3.5.42"
+        "@vitejs/plugin-vue": "^5.1.4",
+        "axios": "^1.7.4",
+        "bootstrap": "^5.3.3",
+        "laravel-vite-plugin": "^1.0.5",
+        "lodash": "^4.17.21",
+        "sass": "^1.77.8",
+        "vite": "^5.4.1",
+        "vue": "^3.4.38"
     }
 }

@@ -45,7 +45,7 @@ class VideoController extends Controller
             'title' => $request->title,
             'url' => $request->url,
             'text' => $request->text,
-           // 'slug' => \Illuminate\Support\Str::slug( $request->title ),
+           // 'slug' => str_slug( $request->title ),
             'roles' => json_encode( $request->roles ),
             'videotab_id' => $tab->id,
         ]);

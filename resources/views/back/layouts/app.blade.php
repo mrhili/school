@@ -23,7 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>{{ GetSetting::getConfig('site-name') }} | @yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="{!! asset('adminl/bower_components/bootstrap/dist/css/bootstrap.min.css') !!}">
+  @vite(['resources/sass/app.scss'])
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{!! asset('adminl/bower_components/font-awesome/css/font-awesome.min.css') !!}">
   <!-- Ionicons -->
@@ -143,7 +143,7 @@ desired effect
 
 @yield('beforeBootstrap')
 <!-- Bootstrap 3.3.7 -->
-<script src="{!! asset('adminl/bower_components/bootstrap/dist/js/bootstrap.min.js') !!}"></script>
+@vite(['resources/js/app.js'])
 
 @yield('datatableScript')
 
@@ -181,7 +181,7 @@ desired effect
 <script src="{!! asset('application/js/common.js') !!}"></script>
 
 
-@include('sweetalert::alert')
+
 
 
 

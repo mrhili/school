@@ -114,7 +114,7 @@ desired effect
 
 <script src="{!! asset('application/js/common.js') !!}"></script>
 
-@include('sweetalert::alert')
+
 
 
 

@@ -231,7 +231,7 @@ class Pics {
             $name = ArrayHolder::modelTypes4file( $model_type )['model'] . sha1( date('YmdHis') ) . str_random(15);
 
             $save_name = $name . '.' . $file->getClientOriginalExtension();
-            $img = \Intervention\Image\ImageManager::imagick()->read($file);
+            $img = Image::make($file);
 
             if($model_type == 0 || $model_type == 1 ){
               $img->resize(2481, 3507);

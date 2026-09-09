@@ -65,7 +65,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'master@app.com',
             'password' => bcrypt('123456789'),
             'role' => 6,
-            'remember_token' => \Illuminate\Support\Str::random(10),
+            'remember_token' => str_random(10),
             'adress' => 'kenitra',
             'cin' => 'G620912',
             'cnss' => true,
@@ -83,7 +83,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@app.com',
             'password' => bcrypt('123456789'),
             'role' => 5,
-            'remember_token' => \Illuminate\Support\Str::random(10),
+            'remember_token' => str_random(10),
         ]);
 
 
@@ -95,7 +95,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'secretaria@app.com',
             'password' => bcrypt('123456789'),
             'role' => 4,
-        'remember_token' => \Illuminate\Support\Str::random(10),
+        'remember_token' => str_random(10),
         ]);
 
         DB::table('users')->insert([
@@ -105,7 +105,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'teatcher@app.com',
             'password' => bcrypt('123456789'),
             'role' => 3,
-        'remember_token' => \Illuminate\Support\Str::random(10),
+        'remember_token' => str_random(10),
         ]);
 
         DB::table('users')->insert([
@@ -115,7 +115,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'parent@app.com',
             'password' => bcrypt('123456789'),
             'role' => 2,
-        'remember_token' => \Illuminate\Support\Str::random(10),
+        'remember_token' => str_random(10),
         ]);
         */
 
@@ -127,7 +127,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'student@app.com',
             'password' => bcrypt('123456789'),
             'role' => 1,
-        'remember_token' => \Illuminate\Support\Str::random(10),
+        'remember_token' => str_random(10),
         ]);
 */
         DB::table('users')->insert([
@@ -137,7 +137,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'user@app.com',
             'password' => bcrypt('123456789'),
             'role' => 0,
-        'remember_token' => \Illuminate\Support\Str::random(10),
+        'remember_token' => str_random(10),
         ]);
 
 
