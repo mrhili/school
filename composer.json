@@ -5,15 +5,32 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.0.0",
-        "laravel/framework": "^13.0",
-        "laravel/ui": "^4.0",
-        "nesbot/carbon": "^3.0"
+        "php": "^8.2",
+        "barryvdh/laravel-dompdf": "^3.0",
+        "ckeditor/ckeditor": "^4.22",
+        "cohensive/embed": "^5.6",
+        "cybercog/laravel-love": "^10.2",
+        "inertiajs/inertia-laravel": "^3.4",
+        "intervention/image": "^3.0",
+        "kalnoy/nestedset": "^6.0",
+        "laravel/framework": "^11.0",
+        "laravel/tinker": "^2.9",
+        "laravel/ui": "^4.6",
+        "nesbot/carbon": "^3.0",
+        "realrashid/sweet-alert": "^7.2",
+        "spatie/laravel-html": "^3.13",
+        "yajra/laravel-datatables-oracle": "^11.0"
     },
     "require-dev": {
-        "nunomaduro/collision": "^8.0",
-        "phpunit/phpunit": "^11.0",
-        "spatie/laravel-ignition": "^2.0"
+        "barryvdh/laravel-debugbar": "^3.1",
+        "fakerphp/faker": "^1.23",
+        "filp/whoops": "~2.0",
+        "laravel/breeze": "^2.4",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.1",
+        "phpunit/phpunit": "^10.5",
+        "spatie/laravel-ignition": "^2.4",
+        "symfony/thanks": "^1.0"
     },
     "autoload": {
         "classmap": [
@@ -53,6 +70,13 @@
         "optimize-autoloader": true,
         "audit": {
             "block-insecure": false
+        },
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true,
+            "symfony/thanks": true
+        },
+        "platform": {
+            "php": "8.3.6"
         }
     }
 }

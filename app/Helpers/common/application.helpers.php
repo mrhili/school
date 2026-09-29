@@ -510,10 +510,10 @@ if(in_array($file->id, $fill) ){
 
     }else{
 
-      $thisYear = date("Y");
-      $year;
+      $thisYear = (int)date("Y");
+      $year = null;
 
-      if( date('n') < 8 ){
+      if( (int)date('n') < 8 ){
 
         $year = Year::firstOrCreate(['max' => $thisYear ], [
           'max' => $thisYear ,
@@ -530,8 +530,11 @@ if(in_array($file->id, $fill) ){
         ]);
 
       }
+
+      if ($year) {
         Session::put('yearName', $year->name );
         Session::put('yearId', $year->id );
+      }
     }
   }
 
